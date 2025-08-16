@@ -1,4 +1,25 @@
 site_name: EasyRunner
 site_url: https://docs.easyrunner.xyz
+site_description: EasyRunner Content
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: custom
+      accent: green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  custom_dir: docs/stylesheets
+  favicon: images/favicon.svg
+extra_css:
+  - stylesheets/extra.css
+plugins:
+  - search
+  - blog
