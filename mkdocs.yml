@@ -1,0 +1,4 @@
+site_name: EasyRunner
+site_url: https://docs.easyrunner.xyz
+theme:
+  name: material
