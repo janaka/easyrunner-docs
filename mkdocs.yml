@@ -22,4 +22,12 @@ extra_css:
   - stylesheets/extra.css
 plugins:
   - search
-  - blog
+  - social
+  - blog:
+      blog_dir: blog
+      post_dir: blog/posts
+      post_excerpt: required
+      blog_toc: true
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
