@@ -2,6 +2,11 @@
 
 [https://docs.easyrunner.xyz](https://docs.easyrunner.xyz)
 
+## Local Development
+
+- `poetry install`
+- `poetry run mkdocs serve`
+
 ## Licence
 
 Code Example: MIT License
