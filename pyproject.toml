@@ -11,6 +11,8 @@ dependencies = [
     "mkdocs-material (>=9.6.17,<10.0.0)"
 ]
 
+[tool.poetry]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
