@@ -4,7 +4,7 @@ Own your stack. No surprise bills.
 
 EasyRunner is a simple, self-managed single-server app hosting solution for solopreneurs and indie hackers who want predictable costs and full control. You provide an Ubuntu server; EasyRunner configures it and deploys your apps securely over SSH. No control plane, no managed backend, no agent — just your server and the EasyRunner CLI.
 
-Why people choose EasyRunner
+Why you should choose EasyRunner
 
 - Predictable pricing: you run your own server, so there are no unexpected hosting fees.
 - Self-hosted, agent-less: EasyRunner connects via SSH from the CLI and configures your server — no persistent agents or third-party control planes.
@@ -14,8 +14,12 @@ Why people choose EasyRunner
 How it works
 
 1. You provide an Ubuntu server (cloud VM, VPS, or bare metal).
-2. Use the EasyRunner CLI to connect over SSH.
+2. Install the EasyRunner CLI on your laptop.
 3. EasyRunner configures the server and deploys your app securely.
+
+!!! Note
+
+    EasyRunner is still an alpha version, meaning it's being rapidly developed therefore unstable.
 
 Read more
 
