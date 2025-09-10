@@ -15,3 +15,25 @@ body {
 .md-typeset h2 {
   font-weight: 500; /* normal bold */
 }
+
+.md-md-header__title {
+  font-family: 'Sarpanch';
+  font-weight: 700 !important; /* Optional: control font weight */
+}
+
+/* Background image for main container */
+.md-container {
+  background-image: linear-gradient(to top, rgba(31,31,31,0.851), rgba(31,31,31,0.851)), url('/images/bg.jpg?v=1a6d4164');
+}
+
+/* Grid cards solid background
+.md-typeset .grid.cards > ul > li {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+} */
+
+/* Different background for dark mode
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+    background-color: #1d1d1dff !important;
+    border: 1px solid #404040 !important;
+} */

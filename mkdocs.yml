@@ -1,11 +1,14 @@
 site_name: EasyRunner
 site_url: https://docs.easyrunner.xyz
 site_description: EasyRunner Content
+copyright: Copyright &copy; 2025 Janaka Abeywardhana
 theme:
   name: material
+  features:
+    - navigation.footer  
   font:
     text: Roboto Mono
-    code: Roboto Mono  
+    code: Roboto Mono
   palette:
     - scheme: default
       primary: custom
@@ -43,3 +46,9 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.tabbed:
       alternate_style: true
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/janaka
+    - icon: fontawesome/brands/square-x-twitter
+      link: https://x.com/janaka_a
