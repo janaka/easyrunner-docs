@@ -1,6 +1,6 @@
 ---
 title: EasyRunner Secure Network Architecture
-date: 2024-09-09
+date: 2025-09-09
 authors:
   - janaka
 categories:
