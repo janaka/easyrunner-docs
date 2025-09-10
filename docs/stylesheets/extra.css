@@ -3,3 +3,15 @@
   --md-primary-fg-color--light: #4ade80;
   --md-primary-fg-color--dark: #16a34a;
 }
+
+body {
+  font-weight: 100;
+}
+
+.md-typeset h1 {
+  font-weight: 600; /* normal bold */
+}
+
+.md-typeset h2 {
+  font-weight: 500; /* normal bold */
+}
