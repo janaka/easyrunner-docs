@@ -22,8 +22,12 @@ body {
 }
 
 /* Background image for main container */
-.md-container {
+[data-md-color-scheme="slate"] .md-container {
   background-image: linear-gradient(to top, rgba(31,31,31,0.851), rgba(31,31,31,0.851)), url('/images/bg.jpg?v=1a6d4164');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;  
 }
 
 /* Grid cards solid background
@@ -32,8 +36,7 @@ body {
     border: 1px solid #e0e0e0 !important;
 } */
 
-/* Different background for dark mode
+/* Different background for dark mode */
 [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
     background-color: #1d1d1dff !important;
-    border: 1px solid #404040 !important;
-} */
+}
