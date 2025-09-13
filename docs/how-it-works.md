@@ -20,4 +20,4 @@
 
 Read more : [Why Behind EasyRunner](https://janaka.dev/side-project-intro-easyrunner/)
 
-![EasyRunner Architecture Diagram](https://easyrunner.xyz/assets/images/image01.jpg?v=cc54c26d)
+![EasyRunner Architecture Diagram](/images/easyrunner-arch-diag.jpg?v=cc54c26d)
