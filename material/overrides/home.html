@@ -1,0 +1,224 @@
+{% extends "main.html" %}
+{% block extrahead %}
+{{ super() }}
+<script src="https://getlaunchlist.com/js/widget.js" defer></script>
+<script src="https://getlaunchlist.com/js/popup.js" defer></script>
+{% endblock %}
+
+{% block tabs %}
+{{ super() }}
+<style>
+  .md-header {
+    position: initial
+  }
+
+  .md-main__inner {
+    margin: 0
+  }
+
+  .md-content {
+    display: none
+  }
+
+  @media screen and (min-width:60em) {
+    .md-sidebar--secondary {
+      display: none
+    }
+  }
+
+  @media screen and (min-width:76.25em) {
+    .md-sidebar--primary {
+      display: none
+    }
+  }
+
+  .md-container {
+    text-align: center;
+  }
+
+  .mdx-container {
+    color: #fff;
+    margin: 0 auto;
+  }
+
+  .mdx-hero__content {
+    /* Material's responsive padding system */
+    padding-left: var(--md-grid-padding-x, 1.2rem);
+    padding-right: var(--md-grid-padding-x, 1.2rem);
+    padding-top: var(--padding-vertical);
+    padding-bottom: var(--padding-vertical);
+  }
+
+  /* Override only for desktop */
+  @media screen and (min-width: 60em) {
+    .mdx-hero__content {
+      padding-left: 3.5rem;  /* Your custom desktop value */
+      padding-right: 3.5rem; /* Your custom desktop value */
+      width: 40rem;  /* Your custom desktop width */
+      max-width: 40rem;      
+    }
+  }
+
+  /* .mdx-hero__content h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  } */
+  h1 span.p,
+  h2 span.p,
+  h3 span.p,
+  p span.p {
+    display: block;
+    position: relative;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  .md-typeset mark {
+    --md-typeset-mark-color: rgba(144, 144, 144, 0.25);
+    background-color: var(--md-typeset-mark-color);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    color: inherit;
+    word-break: break-word;
+  }
+
+  #text01:not(:last-child) {
+    margin-bottom: 3.625rem !important;
+  }
+
+  #text01:not(:first-child) {
+    margin-top: 3.625rem !important;
+  }
+
+  #text05:not(:last-child) {
+    margin-bottom: 1.875rem !important;
+  }
+
+  #text05:not(:first-child) {
+    margin-top: 1.875rem !important;
+  }
+
+  #text01 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.565em;
+    line-height: 1.5;
+    font-weight: 400;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* -webkit-text-stroke: 0.01em #AD00FF; */
+  }
+
+  #text01 span.p {
+    background-image: linear-gradient(132deg, rgba(255, 153, 0, 0.988) 7%, #eabefe 69%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  #text01 span.p:nth-child(n + 2) {
+    margin-top: 1.75rem;
+    -webkit-text-fill-color: currentcolor;
+  }
+
+  #text02 {
+    color: var(--md-typeset-color);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1em;
+    line-height: 1.75;
+    font-weight: 100;
+  }
+
+  #text02 span.p:nth-child(n + 2) {
+    margin-top: 1rem;
+  }
+
+  /* Base form styling */
+  form.launchlist-form-popup {
+    margin-top: 4.5rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .md-form__group {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Mobile: Stack elements vertically with custom spacing */
+  @media screen and (max-width: 44.9375em) {
+    form.launchlist-form-popup {
+      margin-top: 2rem; /* Reduce top margin on mobile */
+      margin-bottom: 2rem; /* Reduce bottom margin on mobile */
+    }
+    
+    .md-form__group {
+      flex-direction: column;
+      gap: 1rem; /* Space between stacked input and button */
+    }
+    
+    .md-form__group .md-input {
+      width: 100%;
+      max-width: 280px;
+    }
+    
+    .md-form__group .md-button {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+
+  .scroll-indicator {
+    margin-top: 1rem;
+    font-size: 3rem;
+    color: #22c563;
+  }
+</style>
+<section class="mdx-container">
+  <div class="md-grid md-typeset">
+    <div class="mdx-hero">
+      <div class="mdx-hero__image">
+        <!-- Logo/Title would go here -->
+      </div>
+      <div class="mdx-hero__content">
+        <h2 id="text01">
+          <span class="p">Own your stack, no surprise bills!</span>
+          <span class="p">Simple self-managed single server app hosting.</span>
+        </h2>
+
+        <form action="https://getlaunchlist.com/s/Lm0O45" method="POST" class="md-form launchlist-form-popup"
+          target="_blank">
+          <div class="md-form__group">
+            <input type="email" name="email" placeholder="Your email" required class="md-input">
+            <button type="submit" class="md-button md-button--primary">Join Waitlist</button>
+          </div>
+        </form>
+
+        <h3 class="description" id="text02">
+          <span class="p">For <mark>Solopreneurs and Indie Hackers</mark> that want predictable costs.<br>
+            No surprises or rug-pulls.</span>
+
+          <span class="p">You bring any Ubuntu server.</span>
+
+          <span class="p">EasyRunner configures it for deploying and hosting your apps securely.</span>
+
+          <span class="p">EasyRunner CLI --> your server over SSH. No control plane backend dependency to manage.
+            Agent-less.</span>
+
+          <span class="p">Built on 100% open source dependencies.</span>
+        </h3>
+
+        <div class="scroll-indicator">
+          <a href="/welcome/">⌄</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}

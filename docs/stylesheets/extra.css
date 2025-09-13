@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarpanch:wght@400;700&display=swap');
+
 :root > * {
   --md-primary-fg-color: #22c563;
   --md-primary-fg-color--light: #4ade80;
@@ -16,18 +18,19 @@ body {
   font-weight: 500; /* normal bold */
 }
 
-.md-md-header__title {
+div.md-header__title > div > div:nth-child(1) > span {
   font-family: 'Sarpanch';
-  font-weight: 700 !important; /* Optional: control font weight */
+  font-weight: 600 !important; /* Optional: control font weight */
+  letter-spacing: 0.125em; /* Optional: adjust letter spacing */
 }
 
 /* Background image for main container */
 [data-md-color-scheme="slate"] .md-container {
   background-image: linear-gradient(to top, rgba(31,31,31,0.851), rgba(31,31,31,0.851)), url('/images/bg.jpg?v=1a6d4164');
-  background-attachment: fixed;
+  background-attachment: var(--md-bg-attachment, fixed);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;  
+  background-repeat: no-repeat;
 }
 
 /* Grid cards solid background
