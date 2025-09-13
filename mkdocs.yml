@@ -39,11 +39,14 @@ plugins:
       post_excerpt: required
       blog_toc: true
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
   - attr_list
   - md_in_html
+  - admonition
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -58,7 +61,7 @@ extra:
 
 nav:
   - Home: index.md
-  - Welcome: welcome.md
+  - How It Works: how-it-works.md
   - Install: install.md
   - Features: features.md
   - Blog:

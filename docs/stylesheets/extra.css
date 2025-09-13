@@ -10,6 +10,10 @@ body {
   font-weight: 100;
 }
 
+.md-typeset mark {
+  --md-typeset-mark-color: rgba(144, 144, 144, 0.25);
+}
+
 .md-typeset h1 {
   font-weight: 600; /* normal bold */
 }
