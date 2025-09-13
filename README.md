@@ -1,11 +1,11 @@
-# EasyRunner Docs
+# EasyRunner Marketing and Docs site
 
-[https://docs.easyrunner.xyz](https://docs.easyrunner.xyz)
+[https://docs.easyrunner.xyz](https://easyrunner.xyz)
 
 ## Local Development
 
 - `poetry install`
-- `poetry run mkdocs serve`
+- `poetry run mkdocs serve --watch-theme`
 
 ## Licence
 
