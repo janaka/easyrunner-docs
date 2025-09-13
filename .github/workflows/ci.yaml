@@ -26,4 +26,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install mkdocs-material[imaging]
-      - run: mkdocs gh-deploy --force
+      - run: mkdocs build  # Build static site (creates ./site folder)
+      - run: echo "easyrunner.xyz" > site/CNAME  # Create CNAME file in output folder
+      - run: mkdocs gh-deploy --force  # Deploy from site folder, CNAME included
