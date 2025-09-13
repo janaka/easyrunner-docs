@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarpanch:wght@400;700&display=swap');
+
+:root > * {
+  --md-primary-fg-color: #22c563;
+  --md-primary-fg-color--light: #4ade80;
+  --md-primary-fg-color--dark: #16a34a;
+}
+
+body {
+  font-weight: 100;
+}
+
+.md-typeset mark {
+  --md-typeset-mark-color: rgba(144, 144, 144, 0.25);
+}
+
+.md-typeset h1 {
+  font-weight: 600; /* normal bold */
+}
+
+.md-typeset h2 {
+  font-weight: 500; /* normal bold */
+}
+
+div.md-header__title > div > div:nth-child(1) > span {
+  font-family: 'Sarpanch';
+  font-weight: 600 !important; /* Optional: control font weight */
+  letter-spacing: 0.125em; /* Optional: adjust letter spacing */
+}
+
+/* Background image for main container */
+[data-md-color-scheme="slate"] .md-container {
+  background-image: linear-gradient(to top, rgba(31,31,31,0.851), rgba(31,31,31,0.851)), url('/images/bg.jpg?v=1a6d4164');
+  background-attachment: var(--md-bg-attachment, fixed);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Grid cards solid background
+.md-typeset .grid.cards > ul > li {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+} */
+
+/* Different background for dark mode */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+    background-color: #1d1d1dff !important;
+}
