@@ -58,6 +58,9 @@ extra:
       link: https://github.com/janaka
     - icon: fontawesome/brands/square-x-twitter
       link: https://x.com/janaka_a
+  analytics:
+    provider: google
+    property: G-ZR0DQEXRPH
 
 nav:
   - Home: index.md
