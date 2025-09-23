@@ -434,6 +434,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -441,24 +442,24 @@
   }
 
   /* Staggered fade-in for individual elements */
-  .mdx-hero__content > * {
+  .mdx-hero__content>* {
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
   }
 
-  .mdx-hero__content > *:nth-child(1) {
+  .mdx-hero__content>*:nth-child(1) {
     animation-delay: 0.2s;
   }
 
-  .mdx-hero__content > *:nth-child(2) {
+  .mdx-hero__content>*:nth-child(2) {
     animation-delay: 0.4s;
   }
 
-  .mdx-hero__content > *:nth-child(3) {
+  .mdx-hero__content>*:nth-child(3) {
     animation-delay: 0.6s;
   }
 
-  .mdx-hero__content > *:nth-child(4) {
+  .mdx-hero__content>*:nth-child(4) {
     animation-delay: 0.8s;
   }
 
@@ -474,11 +475,14 @@
   /* Override only for desktop */
   @media screen and (min-width: 60em) {
     .mdx-hero__content {
-      padding-left: 3.5rem;  /* Your custom desktop value */
-      padding-right: 3.5rem; /* Your custom desktop value */
-      width: 40rem;  /* Your custom desktop width */
+      padding-left: 3.5rem;
+      /* Your custom desktop value */
+      padding-right: 3.5rem;
+      /* Your custom desktop value */
+      width: 40rem;
+      /* Your custom desktop width */
       max-width: 40rem;
-      text-align: center;      
+      text-align: center;
     }
   }
 
@@ -520,7 +524,7 @@
 
   #text01 {
     font-family: 'Roboto Mono', monospace;
-    font-size: 1.565em;
+    font-size: 1.965em;
     line-height: 1.5;
     font-weight: 400;
     -webkit-background-clip: text;
@@ -553,11 +557,6 @@
   }
 
   /* Base form styling */
-  form.launchlist-form-popup {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 4.5rem;
-  }
 
   .md-form__group {
     display: flex;
@@ -569,24 +568,32 @@
   /* Mobile: Stack elements vertically with custom spacing */
   @media screen and (max-width: 44.9375em) {
     form.launchlist-form-popup {
-      margin-top: 2rem; /* Reduce top margin on mobile */
-      margin-bottom: 2rem; /* Reduce bottom margin on mobile */
+      margin-top: 2rem;
+      /* Reduce top margin on mobile */
+      margin-bottom: 2rem;
+      /* Reduce bottom margin on mobile */
     }
-    
+
     .md-form__group {
       flex-direction: column;
-      gap: 1rem; /* Space between stacked input and button */
+      gap: 1rem;
+      /* Space between stacked input and button */
     }
-    
+
     .md-form__group .md-input {
       width: 100%;
       max-width: 280px;
     }
-    
+
     .md-form__group .md-button {
       width: 100%;
       max-width: 280px;
     }
+
+    .logos-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
   }
 
   .scroll-indicator {
@@ -603,6 +610,83 @@
     margin-top: 0.5rem;
     margin-bottom: 2rem;
   }
+
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Single column on very small screens */
+  @media screen and (max-width: 30em) {
+    .logos-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem !important;
+      margin-bottom: 2.5rem !important;
+    }
+
+    .stack-logo {
+      width: 40px !important;
+      height: 40px !important;
+    }
+
+    .nextjs-logo {
+      width: 65px !important;
+    }
+
+    #text01 {
+      font-size: 1.565em !important;
+    }
+
+  }
+
+  form.launchlist-form-popup {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stack-logo {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+
+
+  /* Individual logo colors */
+  .react-logo svg path {
+    stroke: #61DAFB !important;
+  }
+
+
+  .nextjs-logo {
+    width: 100px !important;
+  }
+
+  .nextjs-logo svg path,
+  .nextjs-logo svg g {
+    fill: #000 !important;
+  }
+
+  .nodejs-logo svg path {
+    fill: #8CC84B !important;
+  }
+
+  /* Dark mode adjustments */
+  [data-md-color-scheme="slate"] .nextjs-logo svg path,
+  [data-md-color-scheme="slate"] .nextjs-logo svg g {
+    fill: #fff !important;
+  }
 </style>
 <section class="mdx-container">
   <div class="md-grid md-typeset">
@@ -612,9 +696,86 @@
       </div>
       <div class="mdx-hero__content">
         <h2 id="text01">
-          <span class="p">Simple self-managed secure single server app hosting.</span>
-          <span class="p">Control your costs, no billing surprises!</span>
+          <span class="p">Self-managed single server app hosting.</span>
+          <span class="p">For Solopreneurs and Indie Hackers!</span>
         </h2>
+        <div class="logos-grid">
+          <div class="stack-logo react-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 101 100">
+              <path fill="#61DAFB" d="M50.307 58.816a8.816 8.816 0 1 0 0-17.632 8.816 8.816 0 0 0 0 17.632" />
+              <path stroke="#61DAFB" stroke-width="5"
+                d="M50.307 68.063c26.126 0 47.306-8.087 47.306-18.063s-21.18-18.062-47.306-18.062C24.18 31.938 3 40.024 3 50s21.18 18.063 47.307 18.063Z" />
+              <path stroke="#61DAFB" stroke-width="5"
+                d="M34.664 59.031C47.727 81.658 65.321 95.957 73.96 90.97c8.64-4.988 5.053-27.374-8.01-50C52.885 18.342 35.291 4.043 26.652 9.03s-5.052 27.374 8.011 50Z" />
+              <path stroke="#61DAFB" stroke-width="5"
+                d="M34.664 40.969c-13.063 22.626-16.65 45.012-8.01 50 8.638 4.988 26.232-9.311 39.295-31.938s16.65-45.012 8.01-50c-8.638-4.988-26.232 9.311-39.295 31.938Z" />
+            </svg>
+          </div>
+          <div class="stack-logo nextjs-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+              <g fill="#000" clip-path="url(#a)">
+                <path
+                  d="M66.477 40.008h17.418v3.215h-6.91v16.914H73.53V43.223h-7.053zm-28.647 0v3.215H23.87v5.172h11.228v3.215H23.869v5.312H37.83v3.215H20.414V43.223h-.002v-3.215zm8.698.009h-4.521L58.2 60.145h4.535l-8.099-10.057 8.086-10.056-4.522.007-5.827 7.238zm4.64 14.378-2.265-2.816-6.91 8.581h4.535z" />
+                <path fill-rule="evenodd" d="M20.535 60.137 4.319 40H0v20.128h3.455V44.302l12.74 15.835z" clip-rule="evenodd" />
+                <path
+                  d="M84.672 60.014a.9.9 0 0 1-.649-.263.85.85 0 0 1-.267-.639.84.84 0 0 1 .267-.63.9.9 0 0 1 .649-.263q.365 0 .636.263a.854.854 0 0 1 .148 1.084.93.93 0 0 1-.335.326.86.86 0 0 1-.45.122m5.898-8.48h1.53v5.899q-.004.812-.348 1.395-.347.584-.965.898-.616.312-1.435.313-.746-.001-1.343-.265a2.16 2.16 0 0 1-.946-.784q-.35-.52-.349-1.294h1.534q.004.34.151.586a1 1 0 0 0 .408.376q.263.13.604.131.37.001.627-.154a1 1 0 0 0 .393-.457q.135-.301.138-.745zm7.83 2.307a1.11 1.11 0 0 0-.487-.835q-.432-.3-1.117-.3-.481.001-.826.143-.345.145-.53.39a.95.95 0 0 0-.186.56q0 .264.124.455.122.195.334.325.211.135.469.224.26.09.52.152l.797.196q.483.11.93.3.447.188.803.475.354.287.562.692t.208.95q.001.738-.382 1.297-.381.557-1.105.872-.719.313-1.744.314c-.66 0-1.236-.102-1.72-.305a2.54 2.54 0 0 1-1.14-.883q-.41-.582-.443-1.416h1.518c.02.29.114.532.273.728q.243.29.63.434.39.143.87.143.503 0 .886-.15.379-.148.594-.417a.98.98 0 0 0 .22-.628.8.8 0 0 0-.194-.544 1.5 1.5 0 0 0-.534-.36 5.5 5.5 0 0 0-.8-.26l-.97-.245q-1.05-.267-1.66-.81-.608-.542-.608-1.444 0-.74.41-1.298.408-.558 1.114-.865.71-.311 1.601-.31.905-.001 1.59.31.685.307 1.074.855.391.547.403 1.255z" />
+              </g>
+              <defs>
+                <clipPath id="a">
+                  <path fill="#fff" d="M0 40h100v20.305H0z" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div class="stack-logo nodejs-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+              <path fill="#8CC84B"
+                d="M46.279 1.067c2.479-1.42 5.709-1.426 8.186 0 12.464 7.042 24.931 14.074 37.393 21.12 2.343 1.321 3.911 3.93 3.887 6.63v42.371c.018 2.813-1.705 5.483-4.178 6.774-12.422 7.004-24.838 14.016-37.259 21.02-2.53 1.447-5.825 1.335-8.277-.23-3.724-2.16-7.455-4.308-11.18-6.465-.76-.453-1.619-.815-2.156-1.552.475-.64 1.324-.72 2.015-1 1.554-.495 2.982-1.288 4.41-2.058.361-.247.802-.152 1.148.069 3.185 1.826 6.342 3.705 9.537 5.513.682.394 1.372-.129 1.955-.453 12.19-6.89 24.396-13.754 36.584-20.646a1.21 1.21 0 0 0 .664-1.191c.009-13.977.002-27.957.005-41.934a1.31 1.31 0 0 0-.781-1.308C75.852 20.756 63.479 13.773 51.102 6.8a1.29 1.29 0 0 0-1.458-.002c-12.378 6.975-24.749 13.964-37.126 20.935-.506.23-.845.738-.785 1.302q.002 20.966 0 41.936a1.19 1.19 0 0 0 .673 1.176c3.303 1.873 6.61 3.733 9.916 5.6 1.861 1.002 4.148 1.597 6.199.83 1.81-.65 3.08-2.497 3.045-4.42.017-13.895-.009-27.793.013-41.686-.046-.617.54-1.127 1.14-1.069 1.586-.01 3.175-.021 4.762.005.663-.015 1.119.649 1.037 1.27-.007 13.984.017 27.968-.01 41.952.003 3.726-1.528 7.781-4.975 9.605-4.247 2.2-9.496 1.733-13.691-.376-3.632-1.813-7.098-3.952-10.666-5.894C6.697 76.68 4.983 73.999 5 71.189V28.817c-.026-2.756 1.604-5.412 4.021-6.713Q27.651 11.588 46.28 1.067" />
+              <path fill="#8CC84B"
+                d="M57.114 30.417c5.417-.348 11.216-.206 16.091 2.462 3.774 2.046 5.867 6.338 5.933 10.53-.105.566-.696.878-1.236.84-1.572-.003-3.144.02-4.716-.011-.667.025-1.054-.59-1.138-1.179-.451-2.006-1.545-3.993-3.434-4.96-2.898-1.452-6.26-1.38-9.42-1.349-2.308.123-4.79.322-6.744 1.68-1.5 1.027-1.957 3.102-1.421 4.773.505 1.2 1.89 1.587 3.023 1.944 6.529 1.708 13.447 1.538 19.85 3.785 2.651.916 5.245 2.697 6.152 5.472 1.187 3.72.667 8.168-1.98 11.154-2.146 2.458-5.273 3.796-8.39 4.522-4.149.925-8.454.949-12.666.538-3.962-.451-8.084-1.492-11.142-4.191-2.614-2.27-3.892-5.808-3.765-9.223.03-.576.605-.978 1.157-.93 1.583-.014 3.165-.018 4.748.001.632-.045 1.101.501 1.133 1.097.292 1.912 1.01 3.918 2.678 5.051 3.216 2.075 7.253 1.933 10.936 1.991 3.052-.135 6.477-.176 8.967-2.193 1.314-1.15 1.703-3.075 1.348-4.73-.384-1.398-1.847-2.05-3.103-2.476-6.444-2.038-13.44-1.299-19.822-3.604-2.59-.916-5.096-2.647-6.092-5.309-1.389-3.767-.752-8.427 2.172-11.313 2.852-2.87 6.968-3.976 10.881-4.372" />
+            </svg>
+          </div>
+          <div class="stack-logo python-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+              <path fill="url(#aa)"
+                d="M49.64 0C24.254 0 25.839 11.009 25.839 11.009l.028 11.406h24.225v3.424H16.245S0 23.997 0 49.61c0 25.615 14.179 24.707 14.179 24.707h8.462V62.432s-.457-14.18 13.952-14.18H60.62s13.5.219 13.5-13.046V13.273S76.17 0 49.64 0M36.282 7.67a4.354 4.354 0 0 1 4.358 4.358 4.356 4.356 0 0 1-6.027 4.028 4.35 4.35 0 0 1-2.69-4.028 4.355 4.355 0 0 1 4.359-4.358" />
+              <path fill="url(#bb)"
+                d="M50.36 99.48c25.387 0 23.802-11.009 23.802-11.009l-.028-11.405H49.908V73.64h33.847S100 75.485 100 49.869c0-25.615-14.179-24.706-14.179-24.706H77.36v11.886s.457 14.179-13.952 14.179H39.38s-13.5-.218-13.5 13.047v21.933S23.83 99.48 50.36 99.48m13.359-7.67a4.355 4.355 0 0 1-4.028-6.026 4.35 4.35 0 0 1 4.028-2.69 4.355 4.355 0 0 1 4.027 6.027 4.355 4.355 0 0 1-4.027 2.69" />
+              <defs>
+                <linearGradient id="aa" x1="9.61" x2="59.167" y1="8.948" y2="58.01" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#387EB8" />
+                  <stop offset="1" stop-color="#366994" />
+                </linearGradient>
+                <linearGradient id="bb" x1="40.028" x2="93.247" y1="40.453" y2="90.762" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFE052" />
+                  <stop offset="1" stop-color="#FFC331" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="stack-logo django-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+              <path fill="#2BA977"
+                d="M46.206 0h16.342v74.898c-8.37 1.583-14.533 2.206-21.2 2.206C21.39 77.084 11 68.167 11 51.042c0-16.5 11.02-27.209 28.098-27.209 2.65 0 4.669.209 7.108.834zm.573 38.164c-1.914-.625-3.491-.833-5.51-.833-8.265 0-13.04 5.041-13.04 13.877 0 8.602 4.565 13.352 12.935 13.352 1.808 0 3.28-.102 5.615-.415z" />
+              <path fill="#2BA977"
+                d="M89.27 25.844v37.5c0 12.915-.967 19.125-3.806 24.48-2.65 5.147-6.141 8.393-13.355 11.979l-15.163-7.146c7.213-3.352 10.704-6.315 12.934-10.835 2.334-4.623 3.07-9.978 3.07-24.061V25.844zM71.304 0h16.342v16.604H71.303z" />
+            </svg>
+          </div>
+          <div class="stack-logo php-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+              <path fill="#6E81B6" fill-rule="evenodd"
+                d="M50 75.677c27.614 0 50-11.345 50-25.338S77.614 25 50 25 0 36.345 0 50.339s22.386 25.338 50 25.338"
+                clip-rule="evenodd" />
+              <path fill="#fff" fill-rule="evenodd"
+                d="m60.133 58.528 2.48-12.764c.56-2.881.095-5.03-1.383-6.388-1.43-1.314-3.86-1.953-7.426-1.953H49.51l1.228-6.324a.814.814 0 0 0-.797-.969h-5.928a.81.81 0 0 0-.798.659l-2.634 13.55c-.24-1.524-.83-2.835-1.774-3.916-1.74-1.99-4.49-3-8.176-3H19.14a.81.81 0 0 0-.798.658l-5.33 27.43a.81.81 0 0 0 .798.968h5.974c.39 0 .724-.276.798-.66l1.29-6.634h4.447c2.334 0 4.295-.252 5.826-.75 1.566-.51 3.006-1.373 4.276-2.562a13.1 13.1 0 0 0 2.526-3.136l-1.065 5.48a.81.81 0 0 0 .798.968h5.929a.814.814 0 0 0 .798-.658l2.925-15.056H52.4c1.734 0 2.242.345 2.38.493.125.135.385.612.093 2.116l-2.358 12.136a.815.815 0 0 0 .798.968h6.023a.81.81 0 0 0 .797-.656M32.65 47.981c-.373 1.914-1.074 3.279-2.086 4.057-1.028.793-2.672 1.194-4.887 1.194h-2.648l1.915-9.854h3.424c2.515 0 3.528.538 3.935.988.565.625.684 1.876.347 3.615m52.455-7.558c-1.738-1.99-4.489-3-8.175-3H65.44a.81.81 0 0 0-.798.658l-5.33 27.43a.814.814 0 0 0 .797.968h5.975c.39 0 .724-.276.798-.66l1.29-6.634h4.448c2.334 0 4.294-.252 5.825-.75 1.566-.51 3.007-1.373 4.276-2.562a13.1 13.1 0 0 0 2.59-3.247 13.2 13.2 0 0 0 1.41-3.915c.68-3.495.136-6.283-1.616-8.288m-5.817 7.558c-.373 1.914-1.074 3.279-2.085 4.057-1.029.793-2.672 1.194-4.887 1.194h-2.648l1.914-9.854h3.424c2.516 0 3.529.538 3.936.988.563.625.683 1.876.346 3.615"
+                clip-rule="evenodd" />
+              <path fill="#000" fill-rule="evenodd"
+                d="M28.197 42.565q3.405 0 4.54 1.257 1.133 1.258.54 4.315-.621 3.184-2.388 4.546-1.77 1.362-5.382 1.362H21.87l2.232-11.48zm-14.558 23.1h5.974l1.418-7.291h5.118q3.387 0 5.575-.713 2.187-.712 3.977-2.386a12.2 12.2 0 0 0 2.432-3.045q.93-1.665 1.32-3.674.949-4.877-1.43-7.598-2.377-2.721-7.563-2.721H18.97zm30.201-34.72h5.929l-1.418 7.293h5.282q4.984 0 6.876 1.738t1.135 5.634l-2.48 12.765h-6.022L55.5 46.237q.403-2.072-.297-2.825t-2.974-.753h-4.738l-3.054 15.715H38.51zm30.994 11.621q3.405 0 4.54 1.257 1.133 1.258.54 4.315-.619 3.184-2.388 4.546t-5.38 1.362H68.51l2.23-11.48zm-14.56 23.1h5.976l1.417-7.291h5.118q3.389 0 5.576-.713 2.187-.712 3.977-2.386a12.2 12.2 0 0 0 2.43-3.045q.93-1.665 1.322-3.674.948-4.877-1.43-7.598-2.377-2.721-7.563-2.721h-11.49z"
+                clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+
 
         <form action="https://getlaunchlist.com/s/Lm0O45" method="POST" class="md-form launchlist-form-popup"
           target="_blank">
@@ -625,7 +786,7 @@
         </form>
 
         <img src="/images/demos/render1757870349861.gif" alt="EasyRunner CLI Server Init Config Demo" class="demo-animations">
-        
+
         <div class="scroll-indicator">
           <a href="#text02">⌄</a>
         </div>
@@ -644,7 +805,8 @@
           <span class="p">Built on 100% open source dependencies.</span>
         </h3>
 
-        <button class="md-button md-button--primary" onclick="window.location.href='/how-it-works/'">How It Works</button>
+        <button class="md-button md-button--primary" onclick="window.location.href='/how-it-works/'">How It
+          Works</button>
       </div>
     </div>
   </div>
