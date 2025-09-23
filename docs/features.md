@@ -9,7 +9,7 @@
     Launch an Ubuntu VPS/VM in _your_ cloud provider account with a single `er server create` command.
 
 
--   #### onfigure a Server as a Web Host
+-   #### Configure a Server as a Web Host
 
     ---
 
@@ -48,7 +48,7 @@
 
     ---
 
-    Define your application's composition using as a Dockercompose file. You can define your UI and public API containers as public. Internal service containers will be on the internal network only.
+    Define your application's composition using as a Docker compose file. You can define your UI and public API containers as public. Internal service containers will be on the internal network only.
 
 
 -   #### Predictable Cost
