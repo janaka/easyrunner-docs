@@ -6,17 +6,27 @@
 
     ---
 
-    Launch an Ubuntu VPS/VM in _your_ cloud provider account with a single `er server create` command.
+    Launch an Ubuntu 24.04 VPS/VM in _your_ cloud provider account with a single `er server create` command. 
+
+    Current support for: Hetzner. More providers coming soon.
 
 
 -   #### Configure a Server as a Web Host
 
     ---
 
-    A single `er server init` command config _your_ Ubuntu VPS/VM as a secure web host.
+    A single `er server init` command configures _your_ Ubuntu VPS/VM as a secure web host.
+
+-   #### CIS Level 1 Server Hardening
+
+    ---
+
+    Your Ubuntu server hardened to CIS Level 1 Server [benchmark](https://www.cisecurity.org/cis-benchmarks-overview) profile.
+
+    Involves 100s of configurations to provide a solid security foundation.
 
 
--   #### Container Based Hosting
+-   #### Container Based App Hosting
 
     ---
 
@@ -36,8 +46,14 @@
 
     Gives you the option the host multiple apps on a large server.
 
+-   #### Custom domains + HTTPS always
 
--   #### Manage Multiple Web Hosts
+    ---
+
+    Configure your apps with custom domains. HTTPS is the default and configured automatically. TLS certs issued by Let's Encrypt and automatically renewed.
+
+
+-   #### Manage Multiple Web Host Servers
 
     ---
 
