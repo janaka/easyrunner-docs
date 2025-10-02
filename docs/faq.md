@@ -22,6 +22,12 @@ Yes. EasyRunner is exactly for you. It simplifies server management so you don't
 
 Never the less it's recommended that you learn the concepts over time so you aren't blindly trusting tools.
 
+### Why is EasyRunner a CLI? Does EasyRunner have a web UI?
+
+EasyRunner is a CLI by design for two key reasons: first, it makes setup and usage straightforward without complex dependencies. Second, you don't have to depend on hosting a web UI or rely on us to host one for you, keeping your infrastructure truly independent. In the future, we may provide a web UI as an optional add-on for those who prefer a graphical interface.
+
+Think of the CLI as your escape hatch for independence by design.
+
 ## Pricing & Costs
 
 ### How much does EasyRunner cost?
