@@ -9,7 +9,8 @@ tags:
   - progress-update
 slug: update-october-2025
 ---
-
+Progress update for Sept and Oct 2025.
+<!-- more -->
 I've been a bit quiet with outward communication recently, but that doesn't mean zero progress. This is really a September and October update combined. If you're wondering where the other updates are, they're not on the blog—in the past, they've been tweets from my account. Going forward I'm aiming for a monthly update post.
 
 - **Getting ready for alpha testing** — A lot of work has gone into getting the tool published so users can install it using Homebrew (sorry, no official Windows and Linux support yet). I've never published a tool for Homebrew, and it was challenging to get the CI/CD setup right. There have been some fixes along the way, so end-to-end testing is required before we release. Alpha testing will be a small closed list of people who will give me feedback. If you'd like to get involved, drop me a line at [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz).
