@@ -22,6 +22,8 @@ Let's get started\!
 
 ## Step 1: Install EasyRunner
 
+**What's happening?** We're installing the EasyRunner command-line tool on your computer.
+
 Open your terminal and run these commands:
 
 `brew tap janaka/easyrunner`
@@ -46,15 +48,16 @@ You should see something like `EasyRunner CLI version 0.0.7b0`.
 
 Add `--help` to the end of any command to discover available options and explanations.
 
-**What's happening?** We're installing the EasyRunner command-line tool on your computer. This tool helps you configure Ubuntu servers as secure web hosts and deploy applications. You execute the tool using `er` or `easy` ( the former is easier to type).
-
 ## Step 2: Set Up a Server
 
-You have two options: create a new Ubuntu server or use any existing Ubuntu server.
+You have two options:
 
-### Option A: Create a New Server on Hetzner Cloud
+- Create a new Ubuntu server on Hetzner
+- Use any existing Ubuntu server you've created manually.
 
-If you don't have a server yet, EasyRunner can create one for you on Hetzner Cloud (a reliable and affordable hosting provider).
+### Option A: Create a New Server on Hetzner Cloud Using EasyRunner
+
+> **What's happening?** Link EasyRunner to your Hetzner project, then spin up a new server + firewall, and register it in EasyRunner.
 
 **Prerequisites:**
 
@@ -63,37 +66,37 @@ If you don't have a server yet, EasyRunner can create one for you on Hetzner Clo
   - Create a project your Hetzner console.
   - Create an API key. Name is EasyRunner
 - Link EasyRunner to your Hetzner project (securely stores the api key in your macOS keychain)
-  - `er link hetzner my-hetzner-project-name --api-key <api key from the above step>`
+  - `er link hetzner --api-key <api key from the above step>  my-hetzner-project-name`
 
 **Create the server:**
 
 ```bash
-er server create my-first-server hetzner
+er server create my-first-easy-server hetzner
 ```
 
-Replace `my-first-server` with any name you like (e.g., `blog-server`, `app-host`).
+Replace `my-first-easy-server` with any name you like (e.g., `blog-server`, `app-host`).
 
-> **What's happening?**
+```bash
+er server list
+```
 
-- Creates a new server with a firewall in the hetzner project you linked.
-- Setup root user SSH access and config the keys on your laptop
-- Registers it with EasyRunner.
-- Return the server's IP address
+This should show basic details of your new server.
 
 ### Option B: Use an Existing Server
 
-If you already have a Linux server (like an Azure VM, DigitalOcean droplet, or Hetzner server), you can use it.
+If you already have a Ubuntu server (like an Azure VM, DigitalOcean droplet, AWS EC2, GCP Compute Engine, or Hetzner server), you can use it.
 
 **Requirements:**
 
 - Ubuntu 24.04 or newer
-- Root user SSH access
+- Root user with SSH access
+- SSH port 22 open
 - Public IP address
 
-**Add your server to EasyRunner:**
+**Register your server to EasyRunner:**
 
 ```bash
-er server add my-server YOUR_SERVER_IP
+er server add my-first-easy-server YOUR_SERVER_IP
 ```
 
 Replace `YOUR_SERVER_IP` with your server's actual IP address (e.g., `192.0.2.1`).
@@ -104,65 +107,68 @@ Replace `YOUR_SERVER_IP` with your server's actual IP address (e.g., `192.0.2.1`
 
 ## Step 3: Initialize Your Server
 
-Now we'll install the web hosting software on your server and configure it:
+> **What's happening?** We're turning your server into a secure web hosting platform. EasyRunner installs and configures web server and container management software. At the end of this step the server will be ready to host your application.
 
 ```bash
-er server init my-server --username root
+er server init my-first-easy-server --username root
 ```
 
-Replace `my-server` with the name you used in Step 2, and change `--username` if needed:
+Replace `my-first-easy-server` with the name you used in Step 2, and change `--username` if needed:
 
 - Use `root` for Hetzner servers or servers where you have root access
-- Use your actual root username for other cloud providers (e.g., `azureuser` for Azure)
+- Other cloud providers may use a deferent naming convention (e.g., `azureuser` for Azure VMs)
 
 This process takes 5-10 minutes. EasyRunner will:
 
 - Install essential software (Podman for containers, Caddy for HTTPS)
-- Configure the firewall
-- Prepare the server for deployments
+- Configure the OS firewall
+- Prepare the server for deployment automation
 
-> **What's happening?** We're turning your server into a secure web hosting platform. Think of it like installing a management system for your applications.
+ROADMAP: CIS Level 1 Server hardening will be added in the future.
 
 ---
 
 ## Step 4: Add Your Application
 
-Tell EasyRunner about your application:
+> **What's happening?** EasyRunner is saving information about your application and which server it should run on. This enables you to reference the application using it's short name in other commands.
 
 ```bash
-er app add my-app my-server git@github.com:yourusername/your-repo.git --custom-domain your-domain.com
+er app add my-app my-first-easy-server git@github.com:yourusername/your-repo.git --custom-domain your-domain.com
 ```
 
 Replace:
 
 - `my-app` with a name for your application
-- `my-server` with your server name
+- `my-first-easy-server` with your server name
 - The GitHub URL with your actual repository URL (use the SSH format: `git@github.com:...`)
 - `your-domain.com` replace with the domain you want your app accessible on like `app.easyrunner.xyz`
 
-> **What's happening?** EasyRunner is saving information about your application and which server it should run on.
-
 ---
 
-## Step 5: Configure You Application Repo for Deployment on Your EasyRunner Server
+## Step 5: Configure You Application Repo for Deployment to Your EasyRunner Server
+
+> **What's happening?** EasyRunner uses Docker container technology to build and run your application. The configuration for this process is managed in each applications code repo as it's application specific. This approach is called GitOps.
 
 There are two things you need to drop into your repo:
 
-- A docker compose file into `.easyrunner/docker-compose-app.yaml`. EasyRunner users this to configure app hosting.
-- A `Dockerfile` or `Containerfile` for your application. EasyRunner uses this to build container image for your app and deploy it.
+- A `Dockerfile` or `Containerfile` for your application. EasyRunner uses this to build a container image for your app.
+- A docker compose file into `.easyrunner/docker-compose-app.yaml`. EasyRunner uses this configuration to run your application container image.
+
 - Make sure you commit and push/merge to main.
 
-These repos have examples you can copy and use as a starting point:
+These repos have examples of these files you can copy and use as a starting point:
 
-<https://github.com/janaka/django-helloworld-app>
-<https://github.com/janaka/ts-helloworld-api>
-<https://github.com/janaka/next-helloworld-app>
+- Python Django: <https://github.com/janaka/django-helloworld-app>
+- Node TypeScript: <https://github.com/janaka/ts-helloworld-api>
+- NextJS: <https://github.com/janaka/next-helloworld-app>
 
-ROADMAP: considering adding a command you can run to add the template files in.
+ROADMAP: considering adding a command you can run to add the template files into your repo
 
 ---
 
-## Step 6: Config Your Domain Name
+## Step 6: Configure Your Domain Name
+
+> **What's happening?** You'll be configuring a DNS record like www.my-easy-app.com for you application that you will be deploying to the server.
 
 Add an A record pointing to the IP address of your EasyRunner web server.
 
@@ -180,17 +186,18 @@ ROADMAP: CloudFlare integration is coming which will automate domain name record
 
 Now for the exciting part — deploy your application!
 
+> **What's happening?** EasyRunner will:
+>
+>1. Download your code to the server
+>2. Build the container image using the dockerfile in the repo
+>3. Read your `docker-compose.yaml` file
+>4. Configure your app container image
+>5. Configure automatic HTTPS for the custom domain you setup
+>6. Start your application
+
 ```bash
 er app deploy my-app my-server
 ```
-
-EasyRunner will:
-
-1. Download your code to the server
-2. Read your `docker-compose.yaml` file
-3. Set up your application's containers
-4. Configure automatic HTTPS for the custom domain you setup
-5. Start your application
 
 **Your application is now live!** 🎉
 
@@ -228,6 +235,10 @@ er app --help
 - Wait 5-10 minutes for DNS propagation
 - Check that ports 80 and 443 are open in your firewall
 
+### Still Stuck
+
+Email me at <janaka@easyrunner.xyz>
+
 ---
 
 ## What's Next?
@@ -240,11 +251,11 @@ Now that you have your first application running:
 
 ## We Want Your Feedback
 
-As a alpha tester, your feedback is invaluable. Please let us know:
+As a alpha tester, your feedback is invaluable. Please email <janaka@easyrunner.xyz> to let me know:
 
 - What worked well
 - What was confusing
 - What features you'd like to see
 - Any bugs or issues you encountered
 
-Thank you for being part of the EasyRunner alpa! 🚀
+Thank you for being part of the EasyRunner alpha! 🚀

@@ -1,6 +1,6 @@
 # EasyRunner Marketing and Docs site
 
-[https://docs.easyrunner.xyz](https://easyrunner.xyz)
+[https://easyrunner.xyz](https://easyrunner.xyz)
 
 ## Local Development
 
