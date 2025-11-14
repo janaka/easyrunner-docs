@@ -75,6 +75,7 @@ er server create my-first-easy-server hetzner
 ```
 
 Replace `my-first-easy-server` with any name you like (e.g., `blog-server`, `app-host`).
+This command can take 10-15mins if you have a poor Internet connection.
 
 ```bash
 er server list
