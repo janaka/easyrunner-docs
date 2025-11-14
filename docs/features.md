@@ -17,13 +17,13 @@
 
     A single `er server init` command configures _your_ Ubuntu VPS/VM as a secure web host.
 
--   #### CIS Level 1 Server Hardening
+-   #### CIS Level 1 Server Hardening OTB [Coming]
 
     ---
 
-    Your Ubuntu server hardened to CIS Level 1 Server [benchmark](https://www.cisecurity.org/cis-benchmarks-overview) profile.
+    Your Ubuntu server hardened to CIS Level 1 Server [benchmark](https://www.cisecurity.org/cis-benchmarks-overview) profile out-of-the-box.
 
-    Involves 100s of configurations to provide a solid security foundation.
+    Involves 100s of configurations to provide a solid server security foundation.
 
 
 -   #### Container Based App Hosting
@@ -38,6 +38,10 @@
     ---
 
     Several CI/CD flows to securely deploy you application.
+
+    CLI command trigger + web host build
+    Git push trigger + web host build (coming)
+    Git push trigger + Github Action build (coming)
 
 
 -   #### Host Multiple Apps on a Single Server
@@ -81,5 +85,13 @@
     The freedom to switch cloud server provider. As easy as launching a server with the new provider. Run `er server init` and `er app deploy`. Finally cut over your DNS.
 
     Don't want to use EasyRunner any longer. No problem, you can still manually manage your servers.
+
+
+-   #### Integrations
+
+    ---
+
+    Github: for automated secure CI/CD setup
+    CloudFlare: for secure DNS record setup (coming)
 
 </div>
