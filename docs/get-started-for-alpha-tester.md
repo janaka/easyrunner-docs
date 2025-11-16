@@ -10,13 +10,15 @@ Welcome to EasyRunner! This guide will help you deploy your first web applicatio
 
 ## Overview
 
-EasyRunner makes it simple to host web applications on your own server. Here's what we'll do:
+EasyRunner makes it simple to host web applications on your own server. Here's what you would have achieved by the end of this guide:
 
-1. **Install EasyRunner** on your computer  
-2. **Set up a server** in the cloud (or use one you already have)  
-3. **Deploy your application** to the server
+1. **Installed EasyRunner** on your computer.
+2. **Set up a server** in the cloud (or use one you already have) as a secure web host using EasyRunner.
+3. **Deploy your application** to the server using EasyRunner.
 
-Let's get started\!
+Let's get started!
+
+NOTE: the macOS key chain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like a Github access token, in your keychain for safe keeping. So when accessing it you need to authenticate to authorise it.
 
 ---
 
@@ -137,6 +139,13 @@ ROADMAP: CIS Level 1 Server hardening will be added in the future.
 er app add my-app my-first-easy-server git@github.com:yourusername/your-repo.git --custom-domain your-domain.com
 ```
 
+or you can use one of our demo app repos
+
+```bash
+er app add my-first-easy-app my-first-easy-server git@github.com:janaka/next-helloworld-app.git --custom-domain next-hello2.yourdomain.com
+```
+
+
 Replace:
 
 - `my-app` with a name for your application
@@ -169,15 +178,20 @@ ROADMAP: considering adding a command you can run to add the template files into
 
 ## Step 6: Configure Your Domain Name
 
-> **What's happening?** You'll be configuring a DNS record like www.my-easy-app.com for you application that you will be deploying to the server.
+> **What's happening?** You'll be creating a DNS recording that points at your new server IP address
 
-Add an A record pointing to the IP address of your EasyRunner web server.
-
-You can view the server IP address by running:
+You can view the server IP address and the domain name for your app by running:
 
 ```bash
-er server list
+er app show-details my-first-easy-app my-first-easy-server
 ```
+
+Then login to your domain host like CloudFlare. Navigate to 'yourdomain.com'
+
+- add an A Record
+- Name: "next-hello2" from our example
+- IP: you server IP from the show-details command
+
 
 ROADMAP: CloudFlare integration is coming which will automate domain name record setup.
 
@@ -185,7 +199,7 @@ ROADMAP: CloudFlare integration is coming which will automate domain name record
 
 ## Step 7: Deploy Your Application
 
-Now for the exciting part — deploy your application!
+Now for the exciting part — deploy your application to your server!
 
 > **What's happening?** EasyRunner will:
 >
@@ -197,12 +211,12 @@ Now for the exciting part — deploy your application!
 >6. Start your application
 
 ```bash
-er app deploy my-app my-server
+er app deploy my-first-easy-app my-first-easy-server
 ```
 
 **Your application is now live!** 🎉
 
-Browse to <https://your-domain.com>
+Browse to <https://next-hello2.your-domain.com>
 
 ---
 
