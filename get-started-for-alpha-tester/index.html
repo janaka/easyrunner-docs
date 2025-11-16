@@ -1083,13 +1083,14 @@
 <li>A Github repo with your web app code.</li>
 </ul>
 <h2 id="overview">Overview</h2>
-<p>EasyRunner makes it simple to host web applications on your own server. Here's what we'll do:</p>
+<p>EasyRunner makes it simple to host web applications on your own server. Here's what you would have achieved by the end of this guide:</p>
 <ol>
-<li><strong>Install EasyRunner</strong> on your computer  </li>
-<li><strong>Set up a server</strong> in the cloud (or use one you already have)  </li>
-<li><strong>Deploy your application</strong> to the server</li>
+<li><strong>Installed EasyRunner</strong> on your computer.</li>
+<li><strong>Set up a server</strong> in the cloud (or use one you already have) as a secure web host using EasyRunner.</li>
+<li><strong>Deploy your application</strong> to the server using EasyRunner.</li>
 </ol>
 <p>Let's get started!</p>
+<p>NOTE: the macOS key chain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like a Github access token, in your keychain for safe keeping. So when accessing it you need to authenticate to authorise it.</p>
 <hr />
 <h2 id="step-1-install-easyrunner">Step 1: Install EasyRunner</h2>
 <p><strong>What's happening?</strong> We're installing the EasyRunner command-line tool on your computer.</p>
@@ -1174,6 +1175,9 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-first-easy-server<span class="w"> </span>git@github.com:yourusername/your-repo.git<span class="w"> </span>--custom-domain<span class="w"> </span>your-domain.com
 </code></pre></div>
+<p>or you can use one of our demo app repos</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-first-easy-app<span class="w"> </span>my-first-easy-server<span class="w"> </span>git@github.com:janaka/next-helloworld-app.git<span class="w"> </span>--custom-domain<span class="w"> </span>next-hello2.yourdomain.com
+</code></pre></div>
 <p>Replace:</p>
 <ul>
 <li><code>my-app</code> with a name for your application</li>
@@ -1206,16 +1210,21 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <hr />
 <h2 id="step-6-configure-your-domain-name">Step 6: Configure Your Domain Name</h2>
 <blockquote>
-<p><strong>What's happening?</strong> You'll be configuring a DNS record like www.my-easy-app.com for you application that you will be deploying to the server.</p>
+<p><strong>What's happening?</strong> You'll be creating a DNS recording that points at your new server IP address</p>
 </blockquote>
-<p>Add an A record pointing to the IP address of your EasyRunner web server.</p>
-<p>You can view the server IP address by running:</p>
-<div class="highlight"><pre><span></span><code>er<span class="w"> </span>server<span class="w"> </span>list
+<p>You can view the server IP address and the domain name for your app by running:</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-first-easy-app<span class="w"> </span>my-first-easy-server
 </code></pre></div>
+<p>Then login to your domain host like CloudFlare. Navigate to 'yourdomain.com'</p>
+<ul>
+<li>add an A Record</li>
+<li>Name: "next-hello2" from our example</li>
+<li>IP: you server IP from the show-details command</li>
+</ul>
 <p>ROADMAP: CloudFlare integration is coming which will automate domain name record setup.</p>
 <hr />
 <h2 id="step-7-deploy-your-application">Step 7: Deploy Your Application</h2>
-<p>Now for the exciting part — deploy your application!</p>
+<p>Now for the exciting part — deploy your application to your server!</p>
 <blockquote>
 <p><strong>What's happening?</strong> EasyRunner will:</p>
 <ol>
@@ -1227,10 +1236,10 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <li>Start your application</li>
 </ol>
 </blockquote>
-<div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-first-easy-app<span class="w"> </span>my-first-easy-server
 </code></pre></div>
 <p><strong>Your application is now live!</strong> 🎉</p>
-<p>Browse to <a href="https://your-domain.com">https://your-domain.com</a></p>
+<p>Browse to <a href="https://next-hello2.your-domain.com">https://next-hello2.your-domain.com</a></p>
 <hr />
 <h2 id="getting-help">Getting Help</h2>
 <h3 id="built-in-help">Built-in Help</h3>
