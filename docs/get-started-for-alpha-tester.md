@@ -1,6 +1,6 @@
 # Getting Started with EasyRunner (Alpha)
 
-Welcome to EasyRunner! This guide will help you deploy your first web application to your own server.
+Welcome to EasyRunner! This guide will help you deploy your first web application to your own server on Hetzner.
 
 ## What You'll Need
 
