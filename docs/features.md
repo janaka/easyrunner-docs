@@ -32,6 +32,14 @@
 
     Your applications run in containers. Podman is the container runtime.
 
+-   #### Intrusion Prevention. OOTB
+
+    ---
+
+    Fail2Ban installed and configured OOTB.
+
+    Ability to add your own policies (coming)
+
 
 -   #### CI/CD - Deploy Easily
 
@@ -92,6 +100,7 @@
     ---
 
     Github: for automated secure CI/CD setup
-    CloudFlare: for secure DNS record setup (coming)
+
+    CloudFlare: for secure DNS record setup
 
 </div>
