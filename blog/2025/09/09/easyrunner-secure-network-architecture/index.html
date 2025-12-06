@@ -896,6 +896,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#intrusion-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intrusion Prevention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#app-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1031,6 +1042,17 @@
 <li>Configured to always redirect HTTP -&gt; HTTPS (ensures HTTPS always)</li>
 <li>TLS certificated are automatically setup for every application with certs issued by <a href="https://letsencrypt.org/">Let's Encrypt</a>.</li>
 <li>Minimise information leaking that can be used by bad actors to identify vulnerable system. For example: remove X-Powered header.</li>
+</ul>
+<h2 id="intrusion-prevention">Intrusion Prevention</h2>
+<p><em>Introduced in v0.14.b1 - Nov 2025</em></p>
+<p><img alt="EasyRunner Fail2Ban integration" src="../../../../er-fail2ban-status-command-output.png" /></p>
+<ul>
+<li>Implemented using Fail2Ban — a popular OSS intrusion prevention system (<a href="https://github.com/fail2ban/fail2ban">https://github.com/fail2ban/fail2ban</a>) that monitors log files and bans IPs showing malicious behaviour.</li>
+<li>Runs on the server with no external dependency.</li>
+<li>Basic policy for SSH failed connection attempt jail. More OOTB policies will be added.</li>
+<li>IPs with 5 failed SSH connection attempts within 10mins get's banned for 1hr. 3 fails within 1 day gets a 7 day ban.</li>
+<li>Fail2Ban enforces bans by adding block rules to the OS Firewall.</li>
+<li>Management commands integrated into EasyRunner for convenience. Custom policy management commands will be added in the future.</li>
 </ul>
 <h2 id="app-containers">App Containers</h2>
 <ul>
