@@ -1438,7 +1438,7 @@
 <!-- more -->
 
 <p>This guide covers deploying OpenClaw to a server managed by <a href="https://easyrunner.xyz">EasyRunner</a>, a self-hosted PaaS that uses Podman containers with Caddy as a reverse proxy.</p>
-<p>Email janaka@easyrunner.xyz if you want to alpha test using EasyRunner to install OpenClaw on a VPS.</p>
+<p>Email <a href="mailto:janaka@easyrunner.xyz">janaka@easyrunner.xyz</a> if you want to alpha test using EasyRunner to install OpenClaw on a VPS.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>EasyRunner CLI installed (<code>pip install easyrunner</code>)</li>
@@ -1492,8 +1492,8 @@
 </code></pre></div>
 <p>Update <code>OPENCLAW_GATEWAY_TOKEN</code> in your compose file with the generated token.</p>
 <h3 id="4-register-and-deploy">4. Register and Deploy</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Register the app with EasyRunner</span>
-er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>openclaw<span class="w"> </span>.<span class="w"> </span>--server<span class="w"> </span>your-server-name
+<div class="highlight"><pre><span></span><code><span class="c1"># Register the app with EasyRunner (include your custom domain)</span>
+er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>openclaw<span class="w"> </span>.<span class="w"> </span>--server<span class="w"> </span>your-server-name<span class="w"> </span>--domain<span class="w"> </span>your-domain.com
 
 <span class="c1"># Deploy</span>
 er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>openclaw<span class="w"> </span>your-server-name
