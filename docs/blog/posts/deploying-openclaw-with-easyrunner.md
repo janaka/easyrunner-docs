@@ -1,5 +1,5 @@
 ---
-title: Deploying OpenClaw on EasyRunner
+title: Deploying OpenClaw with EasyRunner on a Hetzner VPS
 date: 2026-02-02
 authors:
   - janaka
