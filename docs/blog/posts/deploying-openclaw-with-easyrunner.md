@@ -16,7 +16,7 @@ An experiment deploying OpenClaw to a Hetzner server managed by EasyRunner.
 
 This guide covers deploying OpenClaw to a server managed by [EasyRunner](https://easyrunner.xyz), a self-hosted PaaS that uses Podman containers with Caddy as a reverse proxy.
 
-Email janaka@easyrunner.xyz if you want to alpha test using EasyRunner to install OpenClaw on a VPS.
+Email [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz) if you want to alpha test using EasyRunner to install OpenClaw on a VPS.
 
 ## Prerequisites
 
@@ -87,8 +87,8 @@ Update `OPENCLAW_GATEWAY_TOKEN` in your compose file with the generated token.
 ### 4. Register and Deploy
 
 ```bash
-# Register the app with EasyRunner
-er app add openclaw . --server your-server-name
+# Register the app with EasyRunner (include your custom domain)
+er app add openclaw . --server your-server-name --domain your-domain.com
 
 # Deploy
 er app deploy openclaw your-server-name
