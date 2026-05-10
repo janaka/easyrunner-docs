@@ -38,6 +38,19 @@ The goal with the network setup is to reduce the surface area to a minimum. We e
 - TLS certificated are automatically setup for every application with certs issued by [Let's Encrypt](https://letsencrypt.org/).
 - Minimise information leaking that can be used by bad actors to identify vulnerable system. For example: remove X-Powered header.
 
+## Intrusion Prevention
+
+_Introduced in v0.14.b1 - Nov 2025_
+
+![EasyRunner Fail2Ban integration](er-fail2ban-status-command-output.png)
+
+- Implemented using Fail2Ban — a popular OSS intrusion prevention system (<https://github.com/fail2ban/fail2ban>) that monitors log files and bans IPs showing malicious behaviour.
+- Runs on the server with no external dependency.
+- Basic policy for SSH failed connection attempt jail. More OOTB policies will be added.
+- IPs with 5 failed SSH connection attempts within 10mins get's banned for 1hr. 3 fails within 1 day gets a 7 day ban.
+- Fail2Ban enforces bans by adding block rules to the OS Firewall.
+- Management commands integrated into EasyRunner for convenience. Custom policy management commands will be added in the future.
+
 ## App Containers
 
 - Containers in each app stack run in the context of a dedicated OS user account. One per stack.
