@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.easyrunner.xyz/blog/2025/11/05/update-october-2025/">
+        <link rel="canonical" href="https://docs.easyrunner.xyz/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting/">
       
       
-        <link rel="prev" href="../manually-setup-hetzner-vps-for-self-hosting/">
+        <link rel="prev" href="../manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/">
       
       
-        <link rel="next" href="../../../12/05/update-november-2025/">
+        <link rel="next" href="../update-october-2025/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>EasyRunner October 2025 Update - EasyRunner</title>
+        <title>Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host - EasyRunner</title>
       
     
     
@@ -73,17 +73,17 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="EasyRunner October 2025 Update - EasyRunner" />
+<meta property="og:title" content="Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host - EasyRunner" />
 <meta property="og:description" content="EasyRunner Content" />
-<meta property="og:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/update-october-2025.png" />
+<meta property="og:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://docs.easyrunner.xyz/blog/2025/11/05/update-october-2025/" />
+<meta property="og:url" content="https://docs.easyrunner.xyz/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="EasyRunner October 2025 Update - EasyRunner" />
+<meta property="twitter:title" content="Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host - EasyRunner" />
 <meta property="twitter:description" content="EasyRunner Content" />
-<meta property="twitter:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/update-october-2025.png" />
+<meta property="twitter:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting.png" />
 </head>
   
   
@@ -101,6 +101,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -133,7 +138,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              EasyRunner October 2025 Update
+              Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host
             
           </span>
         </div>
@@ -922,6 +927,229 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-have-at-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Will Have At The End
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-or-reuse-an-ssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Create Or Reuse An SSH Key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-a-small-hetzner-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create A Small Hetzner Firewall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-the-server-in-hetzner-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create The Server In Hetzner Cloud
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-do-first-boot-housekeeping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Do First-Boot Housekeeping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-point-your-domain-at-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Point Your Domain At The Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-install-podman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Install Podman
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-install-caddy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Install Caddy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-run-a-tiny-test-app-in-podman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Run A Tiny Test App In Podman
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-put-caddy-in-front-of-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Put Caddy In Front Of It
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-what-we-deliberately-did-not-do-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. What We Deliberately Did Not Do Yet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caddy-does-not-get-a-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caddy Does Not Get A Certificate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-works-for-root-but-not-for-the-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Works For Root But Not For The New User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-container-works-on-1270018080-but-the-domain-returns-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Container Works On 127.0.0.1:8080 But The Domain Returns 502
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrap Up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -987,7 +1215,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/news/">news</a></span>
+                              <a href="../../../../category/guides/">guides</a></span>
                         </div>
                       </li>
                     
@@ -998,7 +1226,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              2 min read
+                              6 min read
                             
                           </span>
                         </div>
@@ -1022,25 +1250,266 @@
 
 
 
-  <h1>EasyRunner October 2025 Update</h1>
+  <h1>Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host</h1>
 
-<p>Progress update for Sept and Oct 2025.</p>
+<p>A slightly opinionated guide to turning a small Hetzner VPS into a clean base host for self-hosted apps. In this first part we will create the server, point a domain at it, install Podman and Caddy, and get a test app online over HTTPS.</p>
 <!-- more -->
-<p>I've been a bit quiet with outward communication recently, but that doesn't mean zero progress. This is really a September and October update combined. If you're wondering where the other updates are, they're not on the blog—in the past, they've been tweets from my account. Going forward I'm aiming for a monthly update post.</p>
+
+<p>If you plan to use EasyRunner, this is a useful exercise because it shows the moving parts EasyRunner is managing for you.</p>
+<p>This post is about building a solid starting point, not fully locking the server down. <a href="../manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/">Part 2</a> will cover automated deployment, and Part 3 will cover security hardening.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We will make a few sensible choices here, like using a non-root user and keeping the public surface area small. We are intentionally leaving stricter SSH policy, intrusion protection, update strategy, backup policy, and deeper hardening for Part 3.</p>
+</div>
+<h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>
-<p><strong>Getting ready for alpha testing</strong> — A lot of work has gone into getting the tool published so users can install it using Homebrew (sorry, no official Windows and Linux support yet). I've never published a tool for Homebrew, and it was challenging to get the CI/CD setup right. There have been some fixes along the way, so end-to-end testing is required before we release. Alpha testing will be a small closed list of people who will give me feedback. If you'd like to get involved, drop me a line at <a href="mailto:janaka@easyrunner.xyz">janaka@easyrunner.xyz</a>.</p>
-</li>
-<li>
-<p><strong>R&amp;D on hardening Ubuntu</strong> — There was a bit of digging required to figure out how best to integrate Ubuntu CIS Level 1 server benchmark reporting and hardening. The Ubuntu 22.04 Benchmark profile (checks/fixes spec) is still in draft and not available on the easy path. In any case, you need an Ubuntu Pro subscription and to learn their tools to run it on a server—that's a lot of work. All the more reason to integrate it into EasyRunner so you get a hardened server out of the box. The core architecture for how to build the benchmark profiles from source and ship them to the right place so the server can be evaluated and patched is complete. In a future release, this needs to be integrated into the <code>init</code> command.</p>
-</li>
-<li>
-<p><strong>GitHub auth switched to device flow</strong> — EasyRunner has the concept of <em>linking</em> with certain tools and service providers like GitHub for repos and Cloudflare for DNS. I originally integrated GitHub OAuth using web flow, which isn't suitable for a CLI tool because a secret gets exposed on the client. I switched to device flow, which is the correct approach for a CLI. We use this authorization to automatically set up GitHub deploy keys for each of your repos that correspond to the apps you want to deploy. We use deploy keys for the default EasyRunner CI/CD flow that pulls and builds your app container on the host server itself.</p>
-</li>
-<li>
-<p><strong>UI/UX polish</strong> — The look and feel of commands has been improved with formatted and colored output. It's a lot better but has room for improvement.</p>
-</li>
+<li>Hetzner account</li>
+<li>A domain name you control</li>
+<li>An SSH key on your laptop or workstation</li>
+<li>About 30 to 45 minutes</li>
 </ul>
+<h2 id="what-you-will-have-at-the-end">What You Will Have At The End</h2>
+<ul>
+<li>A Hetzner Cloud VPS running Ubuntu LTS</li>
+<li>A simple Hetzner firewall in front of it</li>
+<li>A non-root user for day-to-day admin work</li>
+<li>Podman installed for running containers</li>
+<li>Caddy installed as a reverse proxy with automatic HTTPS</li>
+<li>A small test app reachable at your domain</li>
+</ul>
+<p>That is enough for a small self-hosted app, a side project API, or a static frontend backed by containers.</p>
+<h2 id="architecture">Architecture</h2>
+<ul>
+<li>DNS points your domain to the VPS</li>
+<li>Hetzner Firewall allows only the traffic you actually need</li>
+<li>Ubuntu runs Caddy and Podman</li>
+<li>Caddy terminates HTTPS and forwards traffic to containers on localhost</li>
+</ul>
+<p>In plain English, the request flow looks like this:</p>
+<div class="highlight"><pre><span></span><code>Browser -&gt; DNS -&gt; Hetzner Firewall -&gt; Caddy -&gt; Container on 127.0.0.1:8080
+</code></pre></div>
+<p>That separation matters because it keeps your app container off the public internet. Only Caddy is exposed.</p>
+<h2 id="1-create-or-reuse-an-ssh-key">1. Create Or Reuse An SSH Key</h2>
+<p>If you already use SSH keys for GitHub or other servers, you can usually reuse an existing key pair.</p>
+<p>If not, generate one on your machine:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your-email@example.com&quot;</span>
+</code></pre></div>
+<p>This will usually create:</p>
+<ul>
+<li><code>~/.ssh/id_ed25519</code> as your private key</li>
+<li><code>~/.ssh/id_ed25519.pub</code> as your public key</li>
+</ul>
+<p>Keep the private key private. You will upload only the <code>.pub</code> file to Hetzner.</p>
+<h2 id="2-create-a-small-hetzner-firewall">2. Create A Small Hetzner Firewall</h2>
+<p>Before you create the server, create a firewall in Hetzner Cloud and attach it during provisioning.</p>
+<p>Use rules like these:</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Protocol</th>
+<th>Port</th>
+<th>Source</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inbound</td>
+<td>TCP</td>
+<td>22</td>
+<td>Your current public IP</td>
+<td>SSH access</td>
+</tr>
+<tr>
+<td>Inbound</td>
+<td>TCP</td>
+<td>80</td>
+<td>0.0.0.0/0</td>
+<td>HTTP for redirects and ACME challenges</td>
+</tr>
+<tr>
+<td>Inbound</td>
+<td>TCP</td>
+<td>443</td>
+<td>0.0.0.0/0</td>
+<td>HTTPS traffic</td>
+</tr>
+<tr>
+<td>Outbound</td>
+<td>Any</td>
+<td>Any</td>
+<td>0.0.0.0/0</td>
+<td>Package installs, DNS, image pulls</td>
+</tr>
+</tbody>
+</table>
+<p>If your home IP changes often, start with a temporary wider SSH rule, then tighten it later. We will revisit that in Part 3.</p>
+<h2 id="3-create-the-server-in-hetzner-cloud">3. Create The Server In Hetzner Cloud</h2>
+<p>In the Hetzner Cloud console:</p>
+<ol>
+<li>Create a new project if you do not already have one.</li>
+<li>Create a new server.</li>
+<li>Choose the latest Ubuntu LTS image.</li>
+<li>Pick a small shared instance to start. For many side projects, a basic 2 vCPU box is enough.</li>
+<li>Add the SSH public key from the previous step.</li>
+<li>Attach the firewall you just created.</li>
+<li>Give the server a clear name such as <code>app-prod-1</code>.</li>
+</ol>
+<p>Once the server is created, note its public IPv4 address.</p>
+<p>Connect as root for the very first bootstrapping steps:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>root@your_server_ip
+</code></pre></div>
+<h2 id="4-do-first-boot-housekeeping">4. Do First-Boot Housekeeping</h2>
+<p>Update the box first. On a brand new server, this is the fastest way to avoid working against stale packages.</p>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</code></pre></div>
+<p>Set a hostname that makes sense when you see it in logs or your prompt:</p>
+<div class="highlight"><pre><span></span><code>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>app-prod-1
+</code></pre></div>
+<p>Now create a normal admin user. I will call it <code>deploy</code>, but use any name you like.</p>
+<div class="highlight"><pre><span></span><code>adduser<span class="w"> </span>deploy
+usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>deploy
+install<span class="w"> </span>-d<span class="w"> </span>-m<span class="w"> </span><span class="m">700</span><span class="w"> </span>-o<span class="w"> </span>deploy<span class="w"> </span>-g<span class="w"> </span>deploy<span class="w"> </span>/home/deploy/.ssh
+cp<span class="w"> </span>/root/.ssh/authorized_keys<span class="w"> </span>/home/deploy/.ssh/authorized_keys
+chown<span class="w"> </span>deploy:deploy<span class="w"> </span>/home/deploy/.ssh/authorized_keys
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/deploy/.ssh/authorized_keys
+</code></pre></div>
+<p>Open a second terminal and make sure that new user can log in before you end the root session:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>deploy@your_server_ip
+</code></pre></div>
+<p>For now, keep root access available until you are sure your normal admin flow works. We will tighten that in Part 3.</p>
+<h2 id="5-point-your-domain-at-the-server">5. Point Your Domain At The Server</h2>
+<p>In your DNS provider:</p>
+<ul>
+<li>Create an <code>A</code> record for the root domain, such as <code>example.com</code>, pointing to the server IPv4 address</li>
+<li>Create a <code>CNAME</code> for <code>www</code> pointing to the root domain, if you want both names to work</li>
+</ul>
+<p>Give DNS a few minutes, then verify from your machine:</p>
+<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>+short<span class="w"> </span>example.com
+dig<span class="w"> </span>+short<span class="w"> </span>www.example.com
+</code></pre></div>
+<p>If those commands return the server IP, you are ready for HTTPS setup.</p>
+<h2 id="6-install-podman">6. Install Podman</h2>
+<p>Log in as your normal user and install Podman:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>podman
+podman<span class="w"> </span>--version
+</code></pre></div>
+<p>Why Podman?</p>
+<ul>
+<li>It runs containers without requiring a long-running daemon</li>
+<li>It works well for small self-hosted setups</li>
+<li>Running containers as your normal user is a good default</li>
+</ul>
+<p>Pull a small image now so you know container networking works:</p>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>pull<span class="w"> </span>docker.io/library/nginx:alpine
+</code></pre></div>
+<h2 id="7-install-caddy">7. Install Caddy</h2>
+<p>Caddy is a very nice fit for self-hosting because it handles HTTPS automatically and keeps the config small.</p>
+<p>Install the official package:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>gnupg<span class="w"> </span>debian-keyring<span class="w"> </span>debian-archive-keyring<span class="w"> </span>apt-transport-https
+curl<span class="w"> </span>-1sLf<span class="w"> </span><span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/stable/gpg.key&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl<span class="w"> </span>-1sLf<span class="w"> </span><span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/caddy-stable.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>caddy
+</code></pre></div>
+<p>Check that the service is running:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>caddy
+</code></pre></div>
+<p>You do not need to configure certificates manually. Once DNS is correct and ports <code>80</code> and <code>443</code> are reachable, Caddy will request and renew certificates for you.</p>
+<h2 id="8-run-a-tiny-test-app-in-podman">8. Run A Tiny Test App In Podman</h2>
+<p>Before you deploy a real project, prove the plumbing with something very small.</p>
+<p>Create a basic static page:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/hello/html&quot;</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/hello/html/index.html&quot;</span><span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">&lt;!doctype html&gt;</span>
+<span class="s">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s">  &lt;head&gt;</span>
+<span class="s">    &lt;meta charset=&quot;utf-8&quot;&gt;</span>
+<span class="s">    &lt;title&gt;Hello from Hetzner&lt;/title&gt;</span>
+<span class="s">  &lt;/head&gt;</span>
+<span class="s">  &lt;body&gt;</span>
+<span class="s">    &lt;h1&gt;Hello from Hetzner&lt;/h1&gt;</span>
+<span class="s">    &lt;p&gt;If you can read this, Podman and Caddy are wired correctly.&lt;/p&gt;</span>
+<span class="s">  &lt;/body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Run Nginx behind localhost-only port <code>8080</code>:</p>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>hello-site<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8080:80<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/hello/html:/usr/share/nginx/html:ro&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>docker.io/library/nginx:alpine
+</code></pre></div>
+<p>Check it locally on the server:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://127.0.0.1:8080
+</code></pre></div>
+<p>If you get the HTML back, the container side is working.</p>
+<h2 id="9-put-caddy-in-front-of-it">9. Put Caddy In Front Of It</h2>
+<p>Replace the default Caddy config with a simple reverse proxy:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/caddy/Caddyfile<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">example.com, www.example.com {</span>
+<span class="s">    encode zstd gzip</span>
+<span class="s">    reverse_proxy 127.0.0.1:8080</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Validate the config and reload Caddy:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>caddy
+</code></pre></div>
+<p>Now test from your machine:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-I<span class="w"> </span>https://example.com
+</code></pre></div>
+<p>If everything is lined up, Caddy will obtain a certificate automatically and you should see an HTTP <code>200</code> or <code>301</code> style response over HTTPS.</p>
+<p>Open the domain in your browser as well. A browser test catches a surprising number of mistakes quickly.</p>
+<h2 id="10-what-we-deliberately-did-not-do-yet">10. What We Deliberately Did Not Do Yet</h2>
+<p>At this point you have a working base host, but it is still just that: a base host.</p>
+<p>We have not yet covered:</p>
+<ul>
+<li>SSH hardening and disabling root login</li>
+<li>Automatic security updates and patch policy</li>
+<li>Backups and restore testing</li>
+<li>Monitoring and alerting</li>
+<li>Container restart policy and automated deploys</li>
+</ul>
+<p>That is intentional.</p>
+<p><a href="../manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/">Part 2</a> will turn this into a repeatable deployment flow. Part 3 will focus on hardening the server once the happy path is already working.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="caddy-does-not-get-a-certificate">Caddy Does Not Get A Certificate</h3>
+<p>Usually one of these is wrong:</p>
+<ul>
+<li>DNS has not propagated yet</li>
+<li>Port <code>80</code> or <code>443</code> is blocked by the Hetzner firewall</li>
+<li>The domain is pointing to a different server than the one running Caddy</li>
+</ul>
+<h3 id="ssh-works-for-root-but-not-for-the-new-user">SSH Works For Root But Not For The New User</h3>
+<p>Check these first:</p>
+<ul>
+<li><code>/home/deploy/.ssh</code> is <code>700</code></li>
+<li><code>/home/deploy/.ssh/authorized_keys</code> is <code>600</code></li>
+<li>The file is owned by <code>deploy:deploy</code></li>
+</ul>
+<h3 id="the-container-works-on-1270018080-but-the-domain-returns-502">The Container Works On <code>127.0.0.1:8080</code> But The Domain Returns <code>502</code></h3>
+<p>That usually means Caddy is fine, but the backend target is wrong or the container is not running.</p>
+<p>Useful checks:</p>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>ps
+curl<span class="w"> </span>http://127.0.0.1:8080
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+</code></pre></div>
+<h2 id="wrap-up">Wrap Up</h2>
+<p>You now have a clean, understandable baseline for self-hosting on Hetzner:</p>
+<ul>
+<li>a small VPS</li>
+<li>a narrow firewall</li>
+<li>a normal admin user</li>
+<li>Podman for containers</li>
+<li>Caddy for HTTPS and reverse proxying</li>
+</ul>
+<p>This is exactly the point where manual infrastructure starts to become repetitive. That is why the next step is automation, not more clicking around in dashboards.</p>
+<p>Continue with <a href="../manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/">Part 2</a> when you are ready to automate deployments. We will come back for hardening in Part 3.</p>
+<h2 id="setup-steps">Setup steps</h2>
 
 
 
@@ -1085,7 +1554,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../manually-setup-hetzner-vps-for-self-hosting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host">
+          <a href="../manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1095,20 +1564,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host
+                Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../../12/05/update-november-2025/" class="md-footer__link md-footer__link--next" aria-label="Next: EasyRunner November 2025 Update">
+          <a href="../update-october-2025/" class="md-footer__link md-footer__link--next" aria-label="Next: EasyRunner October 2025 Update">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                EasyRunner November 2025 Update
+                EasyRunner October 2025 Update
               </div>
             </div>
             <div class="md-footer__button md-icon">

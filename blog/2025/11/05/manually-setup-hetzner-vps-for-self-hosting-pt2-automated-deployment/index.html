@@ -1,0 +1,1727 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="EasyRunner Content">
+      
+      
+      
+        <link rel="canonical" href="https://docs.easyrunner.xyz/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/">
+      
+      
+        <link rel="prev" href="../../../09/09/easyrunner-secure-network-architecture/">
+      
+      
+        <link rel="next" href="../manually-setup-hetzner-vps-for-self-hosting/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment - EasyRunner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Mono";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-ZR0DQEXRPH"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-ZR0DQEXRPH",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-ZR0DQEXRPH",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment - EasyRunner" />
+<meta property="og:description" content="EasyRunner Content" />
+<meta property="og:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://docs.easyrunner.xyz/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment - EasyRunner" />
+<meta property="twitter:description" content="EasyRunner Content" />
+<meta property="twitter:image" content="https://docs.easyrunner.xyz/assets/images/social/blog/2025/11/05/manually-setup-hetzner-vps-for-self-hosting-pt2-automated-deployment.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="EasyRunner" class="md-header__button md-logo" aria-label="EasyRunner" data-md-component="logo">
+      
+  <img src="../../../../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EasyRunner
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../how-it-works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How It Works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Install
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../features/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Features
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="EasyRunner" class="md-nav__button md-logo" aria-label="EasyRunner" data-md-component="logo">
+      
+  <img src="../../../../../images/logo.png" alt="logo">
+
+    </a>
+    EasyRunner
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog Posts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/behind-the-scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    behind-the-scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/guides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    guides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    news
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-have-at-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Will Have At The End
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-decide-on-the-deployment-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Decide On The Deployment Shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-prepare-a-home-for-the-app-on-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Prepare A Home For The App On The Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-put-runtime-configuration-on-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Put Runtime Configuration On The Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-create-a-systemd-user-service-for-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Create A systemd User Service For The App
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-create-the-server-side-deploy-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Create The Server-Side Deploy Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-point-caddy-at-the-real-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Point Caddy At The Real App
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-add-deployment-secrets-in-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Add Deployment Secrets In GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-add-a-github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Add A GitHub Actions Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-test-the-whole-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Test The Whole Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-roll-back-if-you-need-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Roll Back If You Need To
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-what-we-are-deliberately-not-doing-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. What We Are Deliberately Not Doing Yet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-github-action-cannot-ssh-into-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The GitHub Action Cannot SSH Into The Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-deploy-job-passes-but-the-site-returns-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Deploy Job Passes But The Site Returns 502
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-service-restarts-but-the-container-fails-immediately" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Service Restarts But The Container Fails Immediately
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrap Up
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/janaka.png" alt="Janaka Abeywardhana">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="https://twitter.com/janaka_a">Janaka Abeywardhana</a>
+                        
+                      </strong>
+                      <br>
+                      Creator of EasyRunner
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2025-11-05 00:00:00+00:00" class="md-ellipsis">November 5, 2025</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/guides/">guides</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              8 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+  <h1>Manually Set Up a Hetzner VPS for Self-Hosting, Pt 2: Automated Deployment</h1>
+
+<p>In <a href="../manually-setup-hetzner-vps-for-self-hosting/">Part 1</a> we built the base host: Ubuntu, Podman, Caddy, and a domain serving traffic over HTTPS. In this part we will automate deployments so a merge to <code>main</code> pushes your latest code onto the server and restarts the app.</p>
+<!-- more -->
+
+<p>This is intentionally a simple pipeline. GitHub Actions will upload the source code to the server over SSH, the server will build the container locally with Podman, and systemd will keep the app running. It is not the fanciest setup, but it is very easy to understand and debug.</p>
+<p>If you plan to use EasyRunner, this is useful background because it shows the kind of deploy flow a tool like EasyRunner is abstracting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are still not doing the full security pass here. We will make a few good choices, like keeping runtime secrets on the server and pinning the SSH host key in GitHub Actions, but the broader hardening pass is for Part 3.</p>
+</div>
+<p>Before we start, I will use <code>myapp</code> as the app name and <code>3000</code> as the application port. Replace those with your real values.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>A server configured from <a href="../manually-setup-hetzner-vps-for-self-hosting/">Part 1</a></li>
+<li>A GitHub repository for your app</li>
+<li>A <code>Containerfile</code> or <code>Dockerfile</code> in that repo</li>
+<li>An app that listens on a known port inside the container</li>
+<li>A non-root deploy user on the server, such as <code>deploy</code></li>
+</ul>
+<h2 id="what-you-will-have-at-the-end">What You Will Have At The End</h2>
+<ul>
+<li>A GitHub Actions workflow that runs CI on branches and pull requests</li>
+<li>A deployment workflow that runs only on pushes to <code>main</code></li>
+<li>Runtime environment variables stored on the server instead of in the repo</li>
+<li>A systemd user service that keeps your container running across restarts</li>
+<li>A simple rollback path based on previous release directories</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<ul>
+<li>Your app code lives in GitHub</li>
+<li>GitHub Actions runs CI on every branch push and pull request</li>
+<li>A push to <code>main</code> uploads a release bundle to the server over SSH</li>
+<li>The server builds the image with Podman and restarts the app service</li>
+<li>Caddy keeps handling HTTPS and reverse proxying</li>
+</ul>
+<p>In plain English, the deploy flow looks like this:</p>
+<div class="highlight"><pre><span></span><code>git push -&gt; GitHub Actions -&gt; upload release over SSH -&gt; Podman build -&gt; systemd restart -&gt; Caddy -&gt; browser
+</code></pre></div>
+<p>That gives you a workflow that is easy to reason about with only one trust boundary in the middle: GitHub Actions talking to your server over SSH.</p>
+<h2 id="1-decide-on-the-deployment-shape">1. Decide On The Deployment Shape</h2>
+<p>There are many ways to automate deployment. You could build images in CI, push them to a registry, and then pull them on the server. That is a good pattern, but it adds a registry and more credentials.</p>
+<p>For a single VPS, a simpler approach is often better:</p>
+<ul>
+<li>GitHub Actions uploads the source code to the server</li>
+<li>The server builds the image locally with Podman</li>
+<li>systemd restarts the container</li>
+</ul>
+<p>This is slower than prebuilding an image in CI, but it is much easier to inspect when something breaks.</p>
+<h2 id="2-prepare-a-home-for-the-app-on-the-server">2. Prepare A Home For The App On The Server</h2>
+<p>Log in as your normal deploy user and create a small directory layout:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/myapp/releases&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/myapp/shared&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.config/systemd/user&quot;</span>
+</code></pre></div>
+<p>I like this layout because it separates concerns cleanly:</p>
+<ul>
+<li><code>releases/</code> holds each uploaded version of the app</li>
+<li><code>shared/</code> holds runtime data that should survive deployments, like <code>.env</code></li>
+<li>the systemd service lives in the user config directory</li>
+</ul>
+<p>One more setup step makes user services survive reboots:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>loginctl<span class="w"> </span>enable-linger<span class="w"> </span>deploy
+</code></pre></div>
+<p>Run that once, replacing <code>deploy</code> with your actual username if needed.</p>
+<h2 id="3-put-runtime-configuration-on-the-server">3. Put Runtime Configuration On The Server</h2>
+<p>Keep runtime secrets on the server, not in GitHub Actions and not in the repo.</p>
+<p>Create an environment file:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/myapp/shared/.env&quot;</span><span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">APP_ENV=production</span>
+<span class="s">PORT=3000</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Add whatever your app really needs here, for example:</p>
+<ul>
+<li><code>DATABASE_URL</code></li>
+<li><code>REDIS_URL</code></li>
+<li><code>JWT_SECRET</code></li>
+<li>third-party API keys</li>
+</ul>
+<p>This is a small but important separation. GitHub Actions is responsible for shipping code. The server is responsible for holding runtime secrets.</p>
+<h2 id="4-create-a-systemd-user-service-for-the-app">4. Create A systemd User Service For The App</h2>
+<p>We want the app to come back after a reboot and to restart cleanly after each deployment. systemd is the simplest reliable way to do that.</p>
+<p>Create <code>~/.config/systemd/user/myapp.service</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">MyApp container</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">RestartSec</span><span class="o">=</span><span class="s">5</span>
+<span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">20</span>
+<span class="na">ExecStartPre</span><span class="o">=</span><span class="s">-/usr/bin/podman rm -f myapp</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/podman run --name myapp --env-file /home/deploy/apps/myapp/shared/.env -p 127.0.0.1:3000:3000 localhost/myapp:latest</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/bin/podman stop -t 10 myapp</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">default.target</span>
+</code></pre></div>
+<p>Why run the app this way?</p>
+<ul>
+<li>systemd gives you restart behavior and logs</li>
+<li>Podman still runs the actual container</li>
+<li>the app stays bound to <code>127.0.0.1</code>, so only Caddy is public</li>
+</ul>
+<p>If your app needs volume mounts, extra ports, or different environment files, add those flags to the <code>ExecStart</code> line.</p>
+<p>Load the unit and enable it:</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>myapp.service
+</code></pre></div>
+<p>Do not worry if it is not running yet. The image does not exist until the first deployment.</p>
+<h2 id="5-create-the-server-side-deploy-script">5. Create The Server-Side Deploy Script</h2>
+<p>Now create the script GitHub Actions will call on each deployment.</p>
+<p>Save this as <code>~/apps/myapp/deploy.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">APP_NAME</span><span class="o">=</span><span class="s2">&quot;myapp&quot;</span>
+<span class="nv">APP_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/</span><span class="nv">$APP_NAME</span><span class="s2">&quot;</span>
+<span class="nv">RELEASE_ID</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:?release id is required</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">RELEASE_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$APP_DIR</span><span class="s2">/releases/</span><span class="nv">$RELEASE_ID</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RELEASE_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Release directory not found: </span><span class="nv">$RELEASE_DIR</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+ln<span class="w"> </span>-sfn<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RELEASE_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APP_DIR</span><span class="s2">/current&quot;</span>
+
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APP_DIR</span><span class="s2">/current&quot;</span>
+podman<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;localhost/</span><span class="nv">$APP_NAME</span><span class="s2">:</span><span class="nv">$RELEASE_ID</span><span class="s2">&quot;</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;localhost/</span><span class="nv">$APP_NAME</span><span class="s2">:latest&quot;</span><span class="w"> </span>.
+
+systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APP_NAME</span><span class="s2">.service&quot;</span>
+systemctl<span class="w"> </span>--user<span class="w"> </span>--no-pager<span class="w"> </span>--full<span class="w"> </span>status<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APP_NAME</span><span class="s2">.service&quot;</span>
+</code></pre></div>
+<p>Make it executable:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/apps/myapp/deploy.sh&quot;</span>
+</code></pre></div>
+<p>This script does four things:</p>
+<ol>
+<li>It picks the uploaded release directory based on the commit SHA.</li>
+<li>It updates a <code>current</code> symlink to point at that release.</li>
+<li>It builds a local Podman image tagged both with the commit SHA and <code>latest</code>.</li>
+<li>It restarts the systemd user service.</li>
+</ol>
+<p>If your app needs database migrations, this script is the right place to run them just before the service restart.</p>
+<h2 id="6-point-caddy-at-the-real-app">6. Point Caddy At The Real App</h2>
+<p>In Part 1 we pointed Caddy at a tiny test container. Now swap that to your real app port.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/caddy/Caddyfile<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">example.com, www.example.com {</span>
+<span class="s">    encode zstd gzip</span>
+<span class="s">    reverse_proxy 127.0.0.1:3000</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Validate and reload Caddy:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>caddy
+</code></pre></div>
+<p>If you still have the Part 1 demo container running, clean it up:</p>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>hello-site
+</code></pre></div>
+<h2 id="7-add-deployment-secrets-in-github">7. Add Deployment Secrets In GitHub</h2>
+<p>In your GitHub repository settings, add these Actions secrets:</p>
+<ul>
+<li><code>DEPLOY_HOST</code>: your server IP or DNS name</li>
+<li><code>DEPLOY_USER</code>: your server user, for example <code>deploy</code></li>
+<li><code>DEPLOY_SSH_PRIVATE_KEY</code>: the private key GitHub Actions will use to SSH to the server</li>
+<li><code>DEPLOY_KNOWN_HOSTS</code>: the pinned SSH host key entry for that server</li>
+</ul>
+<p>From a trusted machine, you can get the host key entry like this:</p>
+<div class="highlight"><pre><span></span><code>ssh-keyscan<span class="w"> </span>-H<span class="w"> </span>your_server_ip
+</code></pre></div>
+<p>Paste that exact output into the <code>DEPLOY_KNOWN_HOSTS</code> secret.</p>
+<p>For the deploy key pair itself, create a dedicated SSH key just for GitHub Actions rather than reusing your personal admin key:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;github-actions-deploy&quot;</span><span class="w"> </span>-f<span class="w"> </span>./github-actions-deploy
+</code></pre></div>
+<p>Then:</p>
+<ul>
+<li>add the public key to <code>/home/deploy/.ssh/authorized_keys</code> on the server</li>
+<li>store the private key contents in <code>DEPLOY_SSH_PRIVATE_KEY</code></li>
+</ul>
+<p>That keeps the blast radius smaller if you ever need to rotate this credential.</p>
+<h2 id="8-add-a-github-actions-workflow">8. Add A GitHub Actions Workflow</h2>
+<p>Create <code>.github/workflows/deploy.yml</code> in your app repository:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci-cd</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+
+<span class="nt">concurrency</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci-cd-${{ github.ref }}</span>
+<span class="w">  </span><span class="nt">cancel-in-progress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build container image</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker build -t myapp-ci .</span>
+
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.event_name == &#39;push&#39; &amp;&amp; github.ref == &#39;refs/heads/main&#39;</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configure SSH</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">install -m 700 -d ~/.ssh</span>
+<span class="w">          </span><span class="no">printf &#39;%s\n&#39; &quot;${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}&quot; &gt; ~/.ssh/id_ed25519</span>
+<span class="w">          </span><span class="no">chmod 600 ~/.ssh/id_ed25519</span>
+<span class="w">          </span><span class="no">printf &#39;%s\n&#39; &quot;${{ secrets.DEPLOY_KNOWN_HOSTS }}&quot; &gt; ~/.ssh/known_hosts</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload release bundle</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">DEPLOY_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_HOST }}</span>
+<span class="w">          </span><span class="nt">DEPLOY_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_USER }}</span>
+<span class="w">          </span><span class="nt">RELEASE_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.sha }}</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ssh &quot;$DEPLOY_USER@$DEPLOY_HOST&quot; &quot;mkdir -p ~/apps/myapp/releases/$RELEASE_ID&quot;</span>
+<span class="w">          </span><span class="no">git archive --format=tar HEAD \</span>
+<span class="w">            </span><span class="no">| gzip \</span>
+<span class="w">            </span><span class="no">| ssh &quot;$DEPLOY_USER@$DEPLOY_HOST&quot; \</span>
+<span class="w">                </span><span class="no">&quot;tar -xzf - -C ~/apps/myapp/releases/$RELEASE_ID&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and restart on server</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">DEPLOY_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_HOST }}</span>
+<span class="w">          </span><span class="nt">DEPLOY_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_USER }}</span>
+<span class="w">          </span><span class="nt">RELEASE_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.sha }}</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ssh &quot;$DEPLOY_USER@$DEPLOY_HOST&quot; &quot;~/apps/myapp/deploy.sh $RELEASE_ID&quot;</span>
+</code></pre></div>
+<p>This gives you the behavior we wanted:</p>
+<ul>
+<li>every pull request gets a CI run</li>
+<li>every branch push gets a CI run</li>
+<li>every push to <code>main</code> gets CI and then deployment</li>
+</ul>
+<p>Why use <code>docker build</code> in CI when the server uses Podman? Because GitHub-hosted runners already have Docker available, and both Docker and Podman build OCI-compatible images. For a simple build check, that is perfectly fine.</p>
+<p>Replace these values for your own app:</p>
+<ul>
+<li><code>myapp</code></li>
+<li><code>3000</code></li>
+<li><code>main</code>, if you use a different default branch</li>
+<li>the build command if your <code>Containerfile</code> is not at the repo root</li>
+</ul>
+<p>If you already have real test commands, add them to the <code>ci</code> job before or after the image build.</p>
+<h2 id="9-test-the-whole-flow">9. Test The Whole Flow</h2>
+<p>The cleanest way to test this is with a small harmless change.</p>
+<ol>
+<li>Make a visible change in the app.</li>
+<li>Open a pull request and confirm the <code>ci</code> job passes.</li>
+<li>Merge into <code>main</code>.</li>
+<li>Watch the <code>deploy</code> job run in GitHub Actions.</li>
+<li>Visit your site and confirm the new version is live.</li>
+</ol>
+<p>Useful checks on the server:</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>myapp.service
+podman<span class="w"> </span>ps
+podman<span class="w"> </span>logs<span class="w"> </span>myapp<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span>
+curl<span class="w"> </span>http://127.0.0.1:3000
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+</code></pre></div>
+<h2 id="10-roll-back-if-you-need-to">10. Roll Back If You Need To</h2>
+<p>One nice side effect of storing releases by commit SHA is that rollback is simple.</p>
+<p>If a previous deployment is still present in <code>~/apps/myapp/releases</code>, you can redeploy it directly:</p>
+<div class="highlight"><pre><span></span><code>~/apps/myapp/deploy.sh<span class="w"> </span>previous_commit_sha
+</code></pre></div>
+<p>That rebuilds the app from the older release directory and restarts the service.</p>
+<p>For a small single-server setup, that is often good enough. You do not need a complicated rollout system on day one.</p>
+<h2 id="11-what-we-are-deliberately-not-doing-yet">11. What We Are Deliberately Not Doing Yet</h2>
+<p>This pipeline is useful, but it is still the pragmatic version.</p>
+<p>We have not yet covered:</p>
+<ul>
+<li>stricter SSH policy and key rotation</li>
+<li>running builds from a container registry instead of source uploads</li>
+<li>multi-server deployments</li>
+<li>zero-downtime deploy strategies</li>
+<li>deeper secret management</li>
+<li>automatic backup and restore flows</li>
+</ul>
+<p>That is intentional. The goal here is to get from manual deploys to repeatable deploys without turning the setup into a science project.</p>
+<p>Part 3 will cover the security hardening side in more detail.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="the-github-action-cannot-ssh-into-the-server">The GitHub Action Cannot SSH Into The Server</h3>
+<p>Check these first:</p>
+<ul>
+<li>the public half of the deploy key is present in <code>/home/deploy/.ssh/authorized_keys</code></li>
+<li><code>DEPLOY_USER</code> and <code>DEPLOY_HOST</code> are correct</li>
+<li><code>DEPLOY_KNOWN_HOSTS</code> matches the actual server host key</li>
+</ul>
+<h3 id="the-deploy-job-passes-but-the-site-returns-502">The Deploy Job Passes But The Site Returns <code>502</code></h3>
+<p>That usually means Caddy is fine and the app is not listening where Caddy expects it.</p>
+<p>Check these:</p>
+<ul>
+<li>the app really listens on port <code>3000</code> inside the container</li>
+<li>the systemd service publishes <code>127.0.0.1:3000:3000</code></li>
+<li>Caddy reverse proxies to <code>127.0.0.1:3000</code></li>
+</ul>
+<h3 id="the-service-restarts-but-the-container-fails-immediately">The Service Restarts But The Container Fails Immediately</h3>
+<p>Usually that means one of three things:</p>
+<ul>
+<li>a missing environment variable</li>
+<li>the image built successfully but the app startup command is wrong</li>
+<li>the app now requires a migration or dependency that is not available</li>
+</ul>
+<p>The fastest checks are:</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>myapp.service
+podman<span class="w"> </span>logs<span class="w"> </span>myapp<span class="w"> </span>--tail<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<h2 id="wrap-up">Wrap Up</h2>
+<p>You now have a deployment flow that is boring in a good way:</p>
+<ul>
+<li>GitHub runs CI on code changes</li>
+<li>a push to <code>main</code> uploads a release to the server</li>
+<li>Podman builds the new image locally</li>
+<li>systemd restarts the app</li>
+<li>Caddy keeps serving HTTPS at the edge</li>
+</ul>
+<p>This is a strong place to be for a side project or early product. It is automated, understandable, and still small enough that you can debug every moving part yourself.</p>
+<p>The next step is not more deployment complexity. The next step is hardening the host and the deploy path, which we will cover in Part 3.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../09/09/easyrunner-secure-network-architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EasyRunner Secure Network Architecture">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                EasyRunner Secure Network Architecture
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../manually-setup-hetzner-vps-for-self-hosting/" class="md-footer__link md-footer__link--next" aria-label="Next: Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Manually Set Up a Hetzner VPS for Self-Hosting, Pt 1: Base Web Host
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Janaka Abeywardhana
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/janaka" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/janaka_a" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm297.1 84L257.3 234.6 379.4 396h-95.6L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5 78.2-89.5zm-37.8 251.6L153.4 142.9h-28.3l171.8 224.7z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.footer", "navigation.top", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
