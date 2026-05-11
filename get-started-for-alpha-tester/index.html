@@ -941,10 +941,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-install-easyrunner" class="md-nav__link">
+  <a href="#step-1-install-and-configure-easyrunner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Install EasyRunner
+        Step 1: Install and Configure EasyRunner
       
     </span>
   </a>
@@ -1002,10 +1002,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-add-your-application" class="md-nav__link">
+  <a href="#step-4-link-github" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Add Your Application
+        Step 4: Link GitHub
       
     </span>
   </a>
@@ -1013,10 +1013,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-configure-you-application-repo-for-deployment-to-your-easyrunner-server" class="md-nav__link">
+  <a href="#step-5-add-your-application" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 5: Configure You Application Repo for Deployment to Your EasyRunner Server
+        Step 5: Add Your Application
       
     </span>
   </a>
@@ -1024,10 +1024,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-configure-your-domain-name" class="md-nav__link">
+  <a href="#step-6-configure-your-application-repo-for-deployment-to-your-easyrunner-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 6: Configure Your Domain Name
+        Step 6: Configure Your Application Repo for Deployment to Your EasyRunner Server
       
     </span>
   </a>
@@ -1035,10 +1035,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-deploy-your-application" class="md-nav__link">
+  <a href="#step-7-configure-your-domain-name" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 7: Deploy Your Application
+        Step 7: Configure Your Domain Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-deploy-your-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Deploy Your Application
       
     </span>
   </a>
@@ -1145,26 +1156,29 @@
 <h2 id="overview">Overview</h2>
 <p>EasyRunner makes it simple to host web applications on your own server. Here's what you would have achieved by the end of this guide:</p>
 <ol>
-<li><strong>Installed EasyRunner</strong> on your computer.</li>
+<li><strong>Installed and configured EasyRunner</strong> on your computer.</li>
 <li><strong>Set up a server</strong> in the cloud (or use one you already have) as a secure web host using EasyRunner.</li>
-<li><strong>Deploy your application</strong> to the server using EasyRunner.</li>
+<li><strong>Linked GitHub and deployed your application</strong> to the server using EasyRunner.</li>
 </ol>
 <p>Let's get started!</p>
-<p>NOTE: the macOS key chain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like a Github access token, in your keychain for safe keeping. So when accessing it you need to authenticate to authorise it.</p>
+<p>NOTE: the macOS keychain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like GitHub and cloud-provider tokens, in your keychain for safekeeping. So when accessing them you need to authenticate to authorize it.</p>
 <hr />
-<h2 id="step-1-install-easyrunner">Step 1: Install EasyRunner</h2>
+<h2 id="step-1-install-and-configure-easyrunner">Step 1: Install and Configure EasyRunner</h2>
 <p><strong>What's happening?</strong> We're installing the EasyRunner command-line tool on your computer.</p>
 <p>Open your terminal and run these commands:</p>
 <p><code>brew tap janaka/easyrunner</code></p>
 <p><code>brew install easyrunner-cli-beta</code></p>
 <p>Verify the installation:</p>
 <p><code>er --version</code></p>
-<p>or</p>
-<p><code>easy --version</code></p>
 <p>Add license:</p>
-<p><code>er license install path_to_licence_file.jwt</code></p>
+<p><code>er license install path_to_license_file.jwt</code></p>
+<p>Run the first-time setup wizard:</p>
+<p><code>er setup</code></p>
+<p>Choose <code>Server</code> when asked how EasyRunner should run on this machine. In current EasyRunner releases this means the CLI runs locally on your Mac and stores its config locally, which is the right mode for managing remote servers from your laptop.</p>
+<p>If you prefer a non-interactive command, use:</p>
+<p><code>er setup --mode server</code></p>
 <p>You should see something like <code>EasyRunner CLI version 0.0.7b0</code>.</p>
-<p><code>er --help</code> or <code>er license --help</code> or <code>er server --help</code></p>
+<p><code>er --help</code> or <code>er setup --help</code> or <code>er license --help</code> or <code>er server --help</code></p>
 <p>Add <code>--help</code> to the end of any command to discover available options and explanations.</p>
 <h2 id="step-2-set-up-a-server">Step 2: Set Up a Server</h2>
 <p>You have two options:</p>
@@ -1183,13 +1197,14 @@
 <li>Create a project your Hetzner console.</li>
 <li>Create an API key. Name is EasyRunner</li>
 <li>Link EasyRunner to your Hetzner project (securely stores the api key in your macOS keychain)</li>
-<li><code>er link hetzner --api-key &lt;api key from the above step&gt;  my-hetzner-project-name</code></li>
+<li><code>er link hetzner my-hetzner-project-name --api-key &lt;api key from the above step&gt;</code></li>
 </ul>
 <p><strong>Create the server:</strong></p>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>my-first-easy-server<span class="w"> </span>hetzner
 </code></pre></div>
 <p>Replace <code>my-first-easy-server</code> with any name you like (e.g., <code>blog-server</code>, <code>app-host</code>).
 This command can take 10-15mins if you have a poor Internet connection.</p>
+<p>Note: in the current CLI this command is marked as legacy, but it is still the command implemented for automated Hetzner server creation.</p>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>server<span class="w"> </span>list
 </code></pre></div>
 <p>This should show basic details of your new server.</p>
@@ -1207,8 +1222,12 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 </code></pre></div>
 <p>Replace <code>YOUR_SERVER_IP</code> with your server's actual IP address (e.g., <code>192.0.2.1</code>).</p>
 <blockquote>
-<p><strong>What's happening?</strong> EasyRunner creates a secure SSH key and saves your server information for future use.</p>
+<p><strong>What's happening?</strong> EasyRunner creates a dedicated SSH keypair for that server and saves your server information for future use.</p>
 </blockquote>
+<p><code>er server add</code> prints the generated public key. Add that public key to your server before continuing. If you need to print it again later, run:</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>server<span class="w"> </span>show-ssh-key<span class="w"> </span>my-first-easy-server
+</code></pre></div>
+<p>For example, paste it into <code>~/.ssh/authorized_keys</code> for the user you'll use with <code>er server init</code>, or add it via your cloud provider's SSH-key UI.</p>
 <hr />
 <h2 id="step-3-initialize-your-server">Step 3: Initialize Your Server</h2>
 <blockquote>
@@ -1219,7 +1238,7 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <p>Replace <code>my-first-easy-server</code> with the name you used in Step 2, and change <code>--username</code> if needed:</p>
 <ul>
 <li>Use <code>root</code> for Hetzner servers or servers where you have root access</li>
-<li>Other cloud providers may use a deferent naming convention (e.g., <code>azureuser</code> for Azure VMs)</li>
+<li>Other cloud providers may use a different naming convention (e.g., <code>ubuntu</code> or <code>azureuser</code>)</li>
 </ul>
 <p>This process takes 5-10 minutes. EasyRunner will:</p>
 <ul>
@@ -1227,12 +1246,30 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <li>Configure the OS firewall</li>
 <li>Prepare the server for deployment automation</li>
 </ul>
+<p>You can verify the setup afterwards with:</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>server<span class="w"> </span>verify<span class="w"> </span>my-first-easy-server
+</code></pre></div>
 <p>ROADMAP: CIS Level 1 Server hardening will be added in the future.</p>
 <hr />
-<h2 id="step-4-add-your-application">Step 4: Add Your Application</h2>
+<h2 id="step-4-link-github">Step 4: Link GitHub</h2>
+<blockquote>
+<p><strong>What's happening?</strong> EasyRunner uses your GitHub authorization to create a repository-specific deploy key during Flow A deployments.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>link<span class="w"> </span>github
+</code></pre></div>
+<p>This opens GitHub's device-flow login and stores the resulting token in your macOS keychain.</p>
+<p>You can check linked services any time with:</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>link<span class="w"> </span>status
+</code></pre></div>
+<p>If you use Cloudflare and want EasyRunner to create the DNS record for you when you add the app, also link Cloudflare now:</p>
+<div class="highlight"><pre><span></span><code>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>my-cloudflare-account<span class="w"> </span>--api-token<span class="w"> </span>&lt;your<span class="w"> </span>cloudflare<span class="w"> </span>api<span class="w"> </span>token&gt;
+</code></pre></div>
+<hr />
+<h2 id="step-5-add-your-application">Step 5: Add Your Application</h2>
 <blockquote>
 <p><strong>What's happening?</strong> EasyRunner is saving information about your application and which server it should run on. This enables you to reference the application using it's short name in other commands.</p>
 </blockquote>
+<p>This guide uses EasyRunner's default deploy flow, <code>flow_a</code>, which clones your repo to the server and builds the container there.</p>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-first-easy-server<span class="w"> </span>git@github.com:yourusername/your-repo.git<span class="w"> </span>--custom-domain<span class="w"> </span>your-domain.com
 </code></pre></div>
 <p>or you can use one of our demo app repos</p>
@@ -1242,13 +1279,15 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <ul>
 <li><code>my-app</code> with a name for your application</li>
 <li><code>my-first-easy-server</code> with your server name</li>
-<li>The GitHub URL with your actual repository URL (use the SSH format: <code>git@github.com:...</code>)</li>
+<li>The GitHub URL with your actual repository URL. Use the SSH format: <code>git@github.com:...</code></li>
 <li><code>your-domain.com</code> replace with the domain you want your app accessible on like <code>app.easyrunner.xyz</code></li>
 </ul>
+<p>Use the SSH URL from GitHub's <code>Code</code> dropdown, not the HTTPS URL. Current EasyRunner deployment code validates SSH URLs for Flow A.</p>
+<p>If you linked Cloudflare in Step 4 and the domain exists in that Cloudflare account, EasyRunner will attempt to create the DNS A record for you when you run <code>er app add</code>.</p>
 <hr />
-<h2 id="step-5-configure-you-application-repo-for-deployment-to-your-easyrunner-server">Step 5: Configure You Application Repo for Deployment to Your EasyRunner Server</h2>
+<h2 id="step-6-configure-your-application-repo-for-deployment-to-your-easyrunner-server">Step 6: Configure Your Application Repo for Deployment to Your EasyRunner Server</h2>
 <blockquote>
-<p><strong>What's happening?</strong> EasyRunner uses Docker container technology to build and run your application. The configuration for this process is managed in each applications code repo as it's application specific. This approach is called GitOps.</p>
+<p><strong>What's happening?</strong> EasyRunner uses Podman on the server to build and run your application. The configuration for this process lives in your application's repo because it is application specific.</p>
 </blockquote>
 <p>There are two things you need to drop into your repo:</p>
 <ul>
@@ -1257,7 +1296,7 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <p>A docker compose file into <code>.easyrunner/docker-compose-app.yaml</code>. EasyRunner uses this configuration to run your application container image.</p>
 </li>
 <li>
-<p>Make sure you commit and push/merge to main.</p>
+<p>Make sure you commit and push to the branch you intend to deploy. By default EasyRunner deploys <code>main</code> unless you set a different default branch for the app or pass <code>--branch</code> during deploy.</p>
 </li>
 </ul>
 <p>These repos have examples of these files you can copy and use as a starting point:</p>
@@ -1268,10 +1307,11 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 </ul>
 <p>ROADMAP: considering adding a command you can run to add the template files into your repo</p>
 <hr />
-<h2 id="step-6-configure-your-domain-name">Step 6: Configure Your Domain Name</h2>
+<h2 id="step-7-configure-your-domain-name">Step 7: Configure Your Domain Name</h2>
 <blockquote>
 <p><strong>What's happening?</strong> You'll be creating a DNS recording that points at your new server IP address</p>
 </blockquote>
+<p>If Step 5 created the DNS record for you through Cloudflare, you can skip this step.</p>
 <p>You can view the server IP address and the domain name for your app by running:</p>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-first-easy-app<span class="w"> </span>my-first-easy-server
 </code></pre></div>
@@ -1279,18 +1319,17 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <ul>
 <li>add an A Record</li>
 <li>Name: "next-hello2" from our example</li>
-<li>IP: you server IP from the show-details command</li>
+<li>IP: your server IP from the show-details command</li>
 </ul>
-<p>ROADMAP: CloudFlare integration is coming which will automate domain name record setup.</p>
 <hr />
-<h2 id="step-7-deploy-your-application">Step 7: Deploy Your Application</h2>
+<h2 id="step-8-deploy-your-application">Step 8: Deploy Your Application</h2>
 <p>Now for the exciting part — deploy your application to your server!</p>
 <blockquote>
 <p><strong>What's happening?</strong> EasyRunner will:</p>
 <ol>
 <li>Download your code to the server</li>
 <li>Build the container image using the dockerfile in the repo</li>
-<li>Read your <code>docker-compose.yaml</code> file</li>
+<li>Read your <code>.easyrunner/docker-compose-app.yaml</code> file</li>
 <li>Configure your app container image</li>
 <li>Configure automatic HTTPS for the custom domain you setup</li>
 <li>Start your application</li>
@@ -1305,6 +1344,8 @@ This command can take 10-15mins if you have a poor Internet connection.</p>
 <h3 id="built-in-help">Built-in Help</h3>
 <p>Every command has built-in help:</p>
 <div class="highlight"><pre><span></span><code>er<span class="w"> </span>--help
+er<span class="w"> </span>setup<span class="w"> </span>--help
+er<span class="w"> </span>link<span class="w"> </span>--help
 er<span class="w"> </span>server<span class="w"> </span>--help
 er<span class="w"> </span>app<span class="w"> </span>--help
 </code></pre></div>
@@ -1313,17 +1354,28 @@ er<span class="w"> </span>app<span class="w"> </span>--help
 <ul>
 <li>Check that your server's firewall allows SSH (port 22), HTTP (port 80), and HTTPS (port 443)</li>
 <li>Verify the IP address is correct: <code>er server list</code></li>
+<li>Test the SSH connection EasyRunner is using: <code>er server ssh-connect-test my-first-easy-server --username root</code></li>
 </ul>
 <p><strong>Application won't start?</strong></p>
 <ul>
-<li>Check your <code>docker-compose.yaml</code> file is valid</li>
-<li>View logs: <code>er app logs my-app my-server</code></li>
+<li>Check your <code>.easyrunner/docker-compose-app.yaml</code> file is valid</li>
+<li>Check the app status: <code>er app status my-app my-first-easy-server</code></li>
+<li>Re-run deployment with the right branch if needed: <code>er app deploy my-app my-first-easy-server --branch main</code></li>
 </ul>
 <p><strong>HTTPS not working?</strong></p>
 <ul>
 <li>Ensure your domain's DNS points to your server's IP</li>
 <li>Wait 5-10 minutes for DNS propagation</li>
 <li>Check that ports 80 and 443 are open in your firewall</li>
+</ul>
+<p><strong>EasyRunner says it isn't set up yet?</strong></p>
+<ul>
+<li>Run <code>er setup</code> and choose <code>Server</code></li>
+</ul>
+<p><strong>GitHub deploy-key setup fails?</strong></p>
+<ul>
+<li>Make sure you ran <code>er link github</code></li>
+<li>Make sure the app was added with a GitHub SSH URL like <code>git@github.com:yourusername/your-repo.git</code></li>
 </ul>
 <h3 id="still-stuck">Still Stuck</h3>
 <p>Email me at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#97;&#110;&#97;&#107;&#97;&#64;&#101;&#97;&#115;&#121;&#114;&#117;&#110;&#110;&#101;&#114;&#46;&#120;&#121;&#122;">&#106;&#97;&#110;&#97;&#107;&#97;&#64;&#101;&#97;&#115;&#121;&#114;&#117;&#110;&#110;&#101;&#114;&#46;&#120;&#121;&#122;</a></p>
