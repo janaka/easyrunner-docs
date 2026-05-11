@@ -12,17 +12,17 @@ Welcome to EasyRunner! This guide will help you deploy your first web applicatio
 
 EasyRunner makes it simple to host web applications on your own server. Here's what you would have achieved by the end of this guide:
 
-1. **Installed EasyRunner** on your computer.
+1. **Installed and configured EasyRunner** on your computer.
 2. **Set up a server** in the cloud (or use one you already have) as a secure web host using EasyRunner.
-3. **Deploy your application** to the server using EasyRunner.
+3. **Linked GitHub and deployed your application** to the server using EasyRunner.
 
 Let's get started!
 
-NOTE: the macOS key chain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like a Github access token, in your keychain for safe keeping. So when accessing it you need to authenticate to authorise it.
+NOTE: the macOS keychain will prompt you to authenticate when running certain EasyRunner commands. This is because EasyRunner stores secrets, like GitHub and cloud-provider tokens, in your keychain for safekeeping. So when accessing them you need to authenticate to authorize it.
 
 ---
 
-## Step 1: Install EasyRunner
+## Step 1: Install and Configure EasyRunner
 
 **What's happening?** We're installing the EasyRunner command-line tool on your computer.
 
@@ -36,17 +36,23 @@ Verify the installation:
 
 `er --version`
 
-or
-
-`easy --version`
-
 Add license:
 
-`er license install path_to_licence_file.jwt`
+`er license install path_to_license_file.jwt`
+
+Run the first-time setup wizard:
+
+`er setup`
+
+Choose `Server` when asked how EasyRunner should run on this machine. In current EasyRunner releases this means the CLI runs locally on your Mac and stores its config locally, which is the right mode for managing remote servers from your laptop.
+
+If you prefer a non-interactive command, use:
+
+`er setup --mode server`
 
 You should see something like `EasyRunner CLI version 0.0.7b0`.
 
-`er --help` or `er license --help` or `er server --help`
+`er --help` or `er setup --help` or `er license --help` or `er server --help`
 
 Add `--help` to the end of any command to discover available options and explanations.
 
@@ -68,7 +74,7 @@ You have two options:
   - Create a project your Hetzner console.
   - Create an API key. Name is EasyRunner
 - Link EasyRunner to your Hetzner project (securely stores the api key in your macOS keychain)
-  - `er link hetzner --api-key <api key from the above step>  my-hetzner-project-name`
+  - `er link hetzner my-hetzner-project-name --api-key <api key from the above step>`
 
 **Create the server:**
 
@@ -78,6 +84,8 @@ er server create my-first-easy-server hetzner
 
 Replace `my-first-easy-server` with any name you like (e.g., `blog-server`, `app-host`).
 This command can take 10-15mins if you have a poor Internet connection.
+
+Note: in the current CLI this command is marked as legacy, but it is still the command implemented for automated Hetzner server creation.
 
 ```bash
 er server list
@@ -104,7 +112,15 @@ er server add my-first-easy-server YOUR_SERVER_IP
 
 Replace `YOUR_SERVER_IP` with your server's actual IP address (e.g., `192.0.2.1`).
 
-> **What's happening?** EasyRunner creates a secure SSH key and saves your server information for future use.
+> **What's happening?** EasyRunner creates a dedicated SSH keypair for that server and saves your server information for future use.
+
+`er server add` prints the generated public key. Add that public key to your server before continuing. If you need to print it again later, run:
+
+```bash
+er server show-ssh-key my-first-easy-server
+```
+
+For example, paste it into `~/.ssh/authorized_keys` for the user you'll use with `er server init`, or add it via your cloud provider's SSH-key UI.
 
 ---
 
@@ -119,7 +135,7 @@ er server init my-first-easy-server --username root
 Replace `my-first-easy-server` with the name you used in Step 2, and change `--username` if needed:
 
 - Use `root` for Hetzner servers or servers where you have root access
-- Other cloud providers may use a deferent naming convention (e.g., `azureuser` for Azure VMs)
+- Other cloud providers may use a different naming convention (e.g., `ubuntu` or `azureuser`)
 
 This process takes 5-10 minutes. EasyRunner will:
 
@@ -127,13 +143,45 @@ This process takes 5-10 minutes. EasyRunner will:
 - Configure the OS firewall
 - Prepare the server for deployment automation
 
+You can verify the setup afterwards with:
+
+```bash
+er server verify my-first-easy-server
+```
+
 ROADMAP: CIS Level 1 Server hardening will be added in the future.
 
 ---
 
-## Step 4: Add Your Application
+## Step 4: Link GitHub
+
+> **What's happening?** EasyRunner uses your GitHub authorization to create a repository-specific deploy key during Flow A deployments.
+
+```bash
+er link github
+```
+
+This opens GitHub's device-flow login and stores the resulting token in your macOS keychain.
+
+You can check linked services any time with:
+
+```bash
+er link status
+```
+
+If you use Cloudflare and want EasyRunner to create the DNS record for you when you add the app, also link Cloudflare now:
+
+```bash
+er link cloudflare my-cloudflare-account --api-token <your cloudflare api token>
+```
+
+---
+
+## Step 5: Add Your Application
 
 > **What's happening?** EasyRunner is saving information about your application and which server it should run on. This enables you to reference the application using it's short name in other commands.
+
+This guide uses EasyRunner's default deploy flow, `flow_a`, which clones your repo to the server and builds the container there.
 
 ```bash
 er app add my-app my-first-easy-server git@github.com:yourusername/your-repo.git --custom-domain your-domain.com
@@ -150,21 +198,25 @@ Replace:
 
 - `my-app` with a name for your application
 - `my-first-easy-server` with your server name
-- The GitHub URL with your actual repository URL (use the SSH format: `git@github.com:...`)
+- The GitHub URL with your actual repository URL. Use the SSH format: `git@github.com:...`
 - `your-domain.com` replace with the domain you want your app accessible on like `app.easyrunner.xyz`
+
+Use the SSH URL from GitHub's `Code` dropdown, not the HTTPS URL. Current EasyRunner deployment code validates SSH URLs for Flow A.
+
+If you linked Cloudflare in Step 4 and the domain exists in that Cloudflare account, EasyRunner will attempt to create the DNS A record for you when you run `er app add`.
 
 ---
 
-## Step 5: Configure You Application Repo for Deployment to Your EasyRunner Server
+## Step 6: Configure Your Application Repo for Deployment to Your EasyRunner Server
 
-> **What's happening?** EasyRunner uses Docker container technology to build and run your application. The configuration for this process is managed in each applications code repo as it's application specific. This approach is called GitOps.
+> **What's happening?** EasyRunner uses Podman on the server to build and run your application. The configuration for this process lives in your application's repo because it is application specific.
 
 There are two things you need to drop into your repo:
 
 - A `Dockerfile` or `Containerfile` for your application. EasyRunner uses this to build a container image for your app.
 - A docker compose file into `.easyrunner/docker-compose-app.yaml`. EasyRunner uses this configuration to run your application container image.
 
-- Make sure you commit and push/merge to main.
+- Make sure you commit and push to the branch you intend to deploy. By default EasyRunner deploys `main` unless you set a different default branch for the app or pass `--branch` during deploy.
 
 These repos have examples of these files you can copy and use as a starting point:
 
@@ -176,9 +228,11 @@ ROADMAP: considering adding a command you can run to add the template files into
 
 ---
 
-## Step 6: Configure Your Domain Name
+## Step 7: Configure Your Domain Name
 
 > **What's happening?** You'll be creating a DNS recording that points at your new server IP address
+
+If Step 5 created the DNS record for you through Cloudflare, you can skip this step.
 
 You can view the server IP address and the domain name for your app by running:
 
@@ -190,14 +244,12 @@ Then login to your domain host like CloudFlare. Navigate to 'yourdomain.com'
 
 - add an A Record
 - Name: "next-hello2" from our example
-- IP: you server IP from the show-details command
+- IP: your server IP from the show-details command
 
-
-ROADMAP: CloudFlare integration is coming which will automate domain name record setup.
 
 ---
 
-## Step 7: Deploy Your Application
+## Step 8: Deploy Your Application
 
 Now for the exciting part — deploy your application to your server!
 
@@ -205,7 +257,7 @@ Now for the exciting part — deploy your application to your server!
 >
 >1. Download your code to the server
 >2. Build the container image using the dockerfile in the repo
->3. Read your `docker-compose.yaml` file
+>3. Read your `.easyrunner/docker-compose-app.yaml` file
 >4. Configure your app container image
 >5. Configure automatic HTTPS for the custom domain you setup
 >6. Start your application
@@ -228,6 +280,8 @@ Every command has built-in help:
 
 ```bash
 er --help
+er setup --help
+er link --help
 er server --help
 er app --help
 ```
@@ -238,17 +292,28 @@ er app --help
 
 - Check that your server's firewall allows SSH (port 22), HTTP (port 80), and HTTPS (port 443)
 - Verify the IP address is correct: `er server list`
+- Test the SSH connection EasyRunner is using: `er server ssh-connect-test my-first-easy-server --username root`
 
 **Application won't start?**
 
-- Check your `docker-compose.yaml` file is valid
-- View logs: `er app logs my-app my-server`
+- Check your `.easyrunner/docker-compose-app.yaml` file is valid
+- Check the app status: `er app status my-app my-first-easy-server`
+- Re-run deployment with the right branch if needed: `er app deploy my-app my-first-easy-server --branch main`
 
 **HTTPS not working?**
 
 - Ensure your domain's DNS points to your server's IP
 - Wait 5-10 minutes for DNS propagation
 - Check that ports 80 and 443 are open in your firewall
+
+**EasyRunner says it isn't set up yet?**
+
+- Run `er setup` and choose `Server`
+
+**GitHub deploy-key setup fails?**
+
+- Make sure you ran `er link github`
+- Make sure the app was added with a GitHub SSH URL like `git@github.com:yourusername/your-repo.git`
 
 ### Still Stuck
 
