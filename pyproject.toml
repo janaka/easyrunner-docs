@@ -16,7 +16,7 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
-mkdocs-material = {version = ">=9.6.19", extras = ["imaging"]}
+mkdocs-material = {version = ">=9.7.6", extras = ["imaging"]}
 
 [tool.poetry.group.dev.dependencies]
 cairosvg = "^2.8.2"
