@@ -32,7 +32,13 @@ extra_css:
   - stylesheets/extra.css
 plugins:
   - search
-  - social
+  - social:
+      cards_layout_dir: material/overrides
+      cards_layout: easyrunner
+      cards_layout_options:
+        background_color: "#111111"
+        color: "#ffffff"
+        font_family: Sarpanch
   - blog:
       blog_dir: blog
       post_dir: blog/posts

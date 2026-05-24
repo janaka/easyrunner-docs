@@ -1,7 +1,7 @@
 ---
 template: home.html
-title: EasyRunner.xyz
-description: The CLI-first self-hosting platform. Own your stack with no surprise bills.
+title: Own your stack. No surprise bills.
+description: The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity.
 social:
   cards_layout_options:
     title: Own your stack. No surprise bills.
