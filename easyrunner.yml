@@ -1,48 +1,64 @@
 size: { width: 1200, height: 630 }
 
+definitions:
+
+  # Page title with fallback
+  - &page_title >-
+    {%- if layout.title -%}
+      {{ layout.title }}
+    {%- else -%}
+      {{ page.meta.get("title", page.title) }}
+    {%- endif -%}
+
+  # Page description with fallback
+  - &page_description >-
+    {%- if layout.description -%}
+      {{ layout.description }}
+    {%- else -%}
+      {{ page.meta.get("description", config.site_description) }}
+    {%- endif -%}
+
 layers:
 
   # Background
   - background:
       color: "#111111"
 
-  # Site name – top left, uppercase + larger so Sarpanch letterforms are visible
+  # Site name – top left, Sarpanch Bold green
   - size: { width: 500, height: 64 }
     offset: { x: 56, y: 44 }
     typography:
-      content: "EASYRUNNER"
+      content: "EasyRunner"
       color: "#22c563"
       font:
         family: Sarpanch
         style: Bold
-        size: 48
 
   # Logo – top right
   - size: { width: 130, height: 130 }
-    offset: { x: 1014, y: 56 }
+    offset: { x: 1014, y: 44 }
     background:
       image: "{{ layout.logo }}"
 
-  # Title – large bold centrepiece
-  - size: { width: 832, height: 310 }
-    offset: { x: 56, y: 160 }
+  # Description – large bold centrepiece
+  - size: { width: 1088, height: 260 }
+    offset: { x: 56, y: 130 }
     typography:
-      content: "{{ layout.description }}"
+      content: *page_description
       align: start
       color: "#ffffff"
       line:
-        amount: 3
-        height: 1.25
+        amount: 4
+        height: 1.15
       font:
         family: Roboto Mono
         style: Bold
-        size: 78
 
-  # Description – bottom
-  - size: { width: 1088, height: 90 }
-    offset: { x: 56, y: 490 }
+  # Title – bottom
+  - size: { width: 1088, height: 80 }
+    offset: { x: 56, y: 410 }
     typography:
-      content: "{{ layout.title }}"
+      content: *page_title
       align: start
       color: "#aaaaaa"
       line:
@@ -51,4 +67,3 @@ layers:
       font:
         family: Roboto Mono
         style: Regular
-        size: 22
