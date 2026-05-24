@@ -1,0 +1,54 @@
+size: { width: 1200, height: 630 }
+
+layers:
+
+  # Background
+  - background:
+      color: "#111111"
+
+  # Site name – top left, uppercase + larger so Sarpanch letterforms are visible
+  - size: { width: 500, height: 64 }
+    offset: { x: 56, y: 44 }
+    typography:
+      content: "EASYRUNNER"
+      color: "#22c563"
+      font:
+        family: Sarpanch
+        style: Bold
+        size: 48
+
+  # Logo – top right
+  - size: { width: 130, height: 130 }
+    offset: { x: 1014, y: 56 }
+    background:
+      image: "{{ layout.logo }}"
+
+  # Title – large bold centrepiece
+  - size: { width: 832, height: 310 }
+    offset: { x: 56, y: 160 }
+    typography:
+      content: "{{ layout.title }}"
+      align: start
+      color: "#ffffff"
+      line:
+        amount: 3
+        height: 1.25
+      font:
+        family: "Roboto Mono"
+        style: Bold
+        size: 78
+
+  # Description – bottom
+  - size: { width: 1088, height: 90 }
+    offset: { x: 56, y: 490 }
+    typography:
+      content: "{{ layout.description }}"
+      align: start
+      color: "#aaaaaa"
+      line:
+        amount: 2
+        height: 1.5
+      font:
+        family: "Roboto Mono"
+        style: Regular
+        size: 22
