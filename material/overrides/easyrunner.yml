@@ -34,7 +34,7 @@ layers:
         amount: 3
         height: 1.25
       font:
-        family: "Roboto Mono"
+        family: Roboto Mono
         style: Bold
         size: 78
 
@@ -49,6 +49,6 @@ layers:
         amount: 2
         height: 1.5
       font:
-        family: "Roboto Mono"
+        family: Roboto Mono
         style: Regular
         size: 22
