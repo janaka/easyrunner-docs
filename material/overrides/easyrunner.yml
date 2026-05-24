@@ -27,7 +27,7 @@ layers:
   - size: { width: 832, height: 310 }
     offset: { x: 56, y: 160 }
     typography:
-      content: "{{ layout.title }}"
+      content: "{{ layout.description }}"
       align: start
       color: "#ffffff"
       line:
@@ -42,7 +42,7 @@ layers:
   - size: { width: 1088, height: 90 }
     offset: { x: 56, y: 490 }
     typography:
-      content: "{{ layout.description }}"
+      content: "{{ layout.title }}"
       align: start
       color: "#aaaaaa"
       line:
