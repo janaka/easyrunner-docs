@@ -1,6 +1,10 @@
 # Install
 
-This how you install EasyRunner.
+This is how you install EasyRunner. The setup and config guide will be published soon but you can use the `--help` to explore.
+
+!!! Note
+
+    EasyRunner is licensed software therefore requires a license to be used legally. This is enforced with a good oldskool license file which needs to be installed in order to unlock. 
 
 ## Pre-requisites
 
