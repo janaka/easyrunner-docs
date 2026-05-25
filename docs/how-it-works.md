@@ -8,7 +8,16 @@
 
     EasyRunner is still an alpha version, meaning it's being rapidly developed therefore unstable.
 
-
 Read more : [Why Behind EasyRunner](https://janaka.dev/side-project-intro-easyrunner/)
 
-![EasyRunner Architecture Diagram](/images/easyrunner-arch-diag.jpg?v=cc54c26d)
+## Architecture Overview
+
+![EasyRunner Architecture Diagram](/images/easyrunner-updated-arch-overview-diag.jpg?v=cc54c26d)
+
+## Provision a Hetzner Server and Deploy Your App
+
+![EasyRunner Architecture Diagram](/images/easyrunner-provision-to-deploy-steps-diag.jpg?v=cc54g45d)
+
+## Bring-You-Own-Server and Deploy Your App
+
+![EasyRunner Architecture Diagram](/images/easyrunner-byo-server-to-deploy-diag.jpg?v=cc78c88d)
