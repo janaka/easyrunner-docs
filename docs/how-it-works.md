@@ -12,12 +12,12 @@ Read more : [Why Behind EasyRunner](https://janaka.dev/side-project-intro-easyru
 
 ## Architecture Overview
 
-![EasyRunner Architecture Diagram](/images/easyrunner-updated-arch-overview-diag.jpg?v=cc54c26d)
+![EasyRunner Architecture Diagram](images/easyrunner-updated-arch-overview-diag.png)
 
 ## Provision a Hetzner Server and Deploy Your App
 
-![EasyRunner Architecture Diagram](/images/easyrunner-provision-to-deploy-steps-diag.jpg?v=cc54g45d)
+![EasyRunner Provision a Server and Deploy App Diagram](images/easyrunner-provision-to-deploy-steps-diag.png)
 
 ## Bring-You-Own-Server and Deploy Your App
 
-![EasyRunner Architecture Diagram](/images/easyrunner-byo-server-to-deploy-diag.jpg?v=cc78c88d)
+![EasyRunner Being Your Own Server and Deploy Your App Diagram](images/easyrunner-byo-server-to-deploy-diag.png)
