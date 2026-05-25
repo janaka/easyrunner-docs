@@ -77,6 +77,3 @@ Use one of the method below to install it.
         brew update
         brew upgrade easyrunner-cli-beta
         ```
-
-        **When to use:** Testing new features, providing feedback, or development environments where you want the latest features.
-
