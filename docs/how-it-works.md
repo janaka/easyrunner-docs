@@ -8,7 +8,11 @@
 
     EasyRunner is still an alpha version, meaning it's being rapidly developed therefore unstable.
 
-Read more : [Why Behind EasyRunner](https://janaka.dev/side-project-intro-easyrunner/)
+## Read More
+
+[Why Behind EasyRunner](https://janaka.dev/side-project-intro-easyrunner/)
+
+[EasyRunner Secure Network Architecture](./blog/posts/easyrunner-secure-network-architecture.md)
 
 ## Architecture Overview
 
