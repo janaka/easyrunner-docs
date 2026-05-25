@@ -1,6 +1,6 @@
 # How It Works
 
-1. You provide an Ubuntu server (cloud VM, VPS, or bare metal).
+1. You provide an Ubuntu 24.04 server (cloud VM, VPS, or bare metal).
 2. Install the EasyRunner CLI on your laptop.
 3. EasyRunner configures the server and deploys your app securely.
 
