@@ -22,9 +22,9 @@ er app update-details my-app my-server \
   --compose-file ./docker-compose.yaml
 ```
 
-`--compose-file` reads the file at command time and stores its content on the app. If you edit the file later, run `er app update-details --compose-file ...` again.
+`--compose-file` reads a Compose-format file at command time and stores its content on the app. If you edit the file later, run `er app update-details --compose-file ...` again.
 
-## Compose Shape
+## Compose-Format Shape
 
 ```yaml
 name: my-app
@@ -61,7 +61,7 @@ Use a classic GitHub PAT with `read:packages` for GHCR pulls.
 er app deploy my-app my-server
 ```
 
-Flow B ignores `--branch`; it deploys the image references in the stored compose content.
+Flow B ignores `--branch`; it deploys the image references in the stored Compose-format content.
 
-??? question "Compose changes are not taking effect"
-    Flow B stores compose content when you run `er app update-details --compose-file`. Rerun that command after editing the compose file, then deploy again.
+??? question "Compose-format changes are not taking effect"
+    Flow B stores Compose-format content when you run `er app update-details --compose-file`. Rerun that command after editing the file, then deploy again.

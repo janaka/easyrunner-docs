@@ -45,7 +45,7 @@ er app deploy my-app my-server --branch main
 2. Connects to the web host over SSH.
 3. Pulls or clones the selected branch.
 4. Builds the image with Podman.
-5. Converts the Compose configuration into systemd-managed containers.
+5. Converts the Compose-format configuration into systemd-managed containers.
 6. Configures Caddy for the app domain.
 7. Starts or restarts the app.
 

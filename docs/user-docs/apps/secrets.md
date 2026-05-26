@@ -42,7 +42,7 @@ er app secret set my-app EASYRUNNER_GHCR_PAT
 
 ## Runtime Injection
 
-Non-reserved app secrets are made available to your containers during deployment. Keep sensitive values out of Compose files and source control; store them as app secrets instead.
+Non-reserved app secrets are made available to your containers during deployment. Keep sensitive values out of Compose-format files and source control; store them as app secrets instead.
 
 ## Rotation
 

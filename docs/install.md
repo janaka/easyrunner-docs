@@ -4,7 +4,7 @@ The main install and setup docs now live in the CLI user docs section.
 
 <div class="grid cards" markdown>
 
--   #### Install the CLI
+-   #### :material-download: Install the CLI
 
     ---
 
@@ -12,7 +12,7 @@ The main install and setup docs now live in the CLI user docs section.
 
     [Install the CLI](user-docs/setup/install.md)
 
--   #### First-Run Setup
+-   #### :material-cog-play: First-Run Setup
 
     ---
 
@@ -20,7 +20,7 @@ The main install and setup docs now live in the CLI user docs section.
 
     [Run setup](user-docs/setup/first-run-setup.md)
 
--   #### Deploy Your First App
+-   #### :material-rocket-launch: Deploy Your First App
 
     ---
 

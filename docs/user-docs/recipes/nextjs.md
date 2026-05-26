@@ -25,7 +25,7 @@ For Flow A, the repo needs:
 - A `Dockerfile` or `Containerfile`
 - `.easyrunner/docker-compose-app.yaml`
 
-The compose file should mark the public service as a web service and set the internal port your Next.js process listens on.
+The Compose-format file should mark the public service as a web service and set the internal port your Next.js process listens on.
 
 ```yaml
 name: next-demo
@@ -68,5 +68,5 @@ Your app should be available at `https://next-demo.example.com` after DNS and ce
 
 1. Replace the repository URL with your app repo.
 2. Make sure your container listens on the same port as `xyz.easyrunner.appContainerInternalPort`.
-3. Store sensitive values with `er app secret`, not in the compose file.
+3. Store sensitive values with `er app secret`, not in the Compose-format file.
 4. Deploy a release branch with `er app deploy <app> <server> --branch <branch>` if needed.

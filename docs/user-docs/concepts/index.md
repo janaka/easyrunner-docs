@@ -32,8 +32,8 @@ Users visit your app
 | Control plane | The EasyRunner CLI install and local state that remembers servers, apps, links, and secrets. |
 | Server mode | A first-run setup mode where this EasyRunner install stores the control-plane state. This is usually your laptop or a machine you keep around, not the web host itself. |
 | Web host | The Ubuntu server EasyRunner configures to run apps. CLI commands call this a `server`. |
-| App | An EasyRunner deployable app stack. It has a name, web host, domain, deploy flow, Compose configuration, secrets, and lifecycle. |
-| Service | One Compose service inside an app. Usually one container or process. An app can have one service or many. |
+| App | An EasyRunner deployable app stack. It has a name, web host, domain, deploy flow, Compose-format configuration, secrets, and lifecycle. |
+| Service | One service entry inside the app's Compose-format configuration. Usually one container or process. An app can have one service or many. |
 | Deploy flow | How the app image gets to the web host: build from source on the server, or pull a pre-built image from a registry. |
 | Link | A stored connection to an external service such as GitHub, Hetzner, or Cloudflare. |
 | Mesh | Advanced private networking between EasyRunner-managed resources. It is not required for the first deployment path. |
@@ -41,23 +41,26 @@ Users visit your app
 !!! note "Server can mean two things"
     EasyRunner has `er setup --mode server`, which means a control-plane server mode install. It also has `er server ...`, which manages Ubuntu web hosts. These docs use **web host** when talking about the machine that runs apps.
 
+!!! note "Compose means the file format"
+    EasyRunner reads the Docker Compose file format as app configuration, then converts it into Podman/systemd units on the web host. In these docs, **Compose** is shorthand for that file format, not the Docker Compose CLI tool.
+
 ## App Shape
 
-An EasyRunner app is the thing you add, deploy, start, stop, inspect, and remove with `er app ...`. A simple app might contain one Compose service:
+An EasyRunner app is the thing you add, deploy, start, stop, inspect, and remove with `er app ...`. A simple app might contain one service entry:
 
 ```text
 EasyRunner app: blog
-└── Compose service: web
+└── service entry: web
 ```
 
 A larger app can contain several services:
 
 ```text
 EasyRunner app: shop
-├── Compose service: web      public, routed by Caddy
-├── Compose service: api      internal
-├── Compose service: worker   internal
-└── Compose service: redis    internal
+├── service entry: web      public, routed by Caddy
+├── service entry: api      internal
+├── service entry: worker   internal
+└── service entry: redis    internal
 ```
 
 EasyRunner routes public HTTPS traffic to services marked as web services. Other services stay internal unless you deliberately expose them through EasyRunner-supported configuration.

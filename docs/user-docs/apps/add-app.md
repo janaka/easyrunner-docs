@@ -23,7 +23,7 @@ Options you will commonly use:
 
 ## Flow B App
 
-Flow B pulls a pre-built image from a registry. Create the app, then store the Flow B compose file on the app:
+Flow B pulls a pre-built image from a registry. Create the app, then store the Flow B Compose-format file on the app:
 
 ```bash
 er app add my-app my-server "" --custom-domain app.example.com

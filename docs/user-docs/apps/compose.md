@@ -1,6 +1,9 @@
-# Compose Configuration
+# Compose-Format Configuration
 
 EasyRunner uses the Docker Compose file format as the user-facing app configuration format. It reads the file and turns it into Podman/systemd configuration on the web host.
+
+!!! info "Compose is a format here"
+    EasyRunner does not require you to run the Docker Compose CLI. It reads Compose-format YAML because it is a familiar way to describe containerized app stacks.
 
 ## Flow A Location
 
@@ -72,4 +75,4 @@ networks:
     external: true
 ```
 
-See [Compose and Labels](../reference/compose-labels.md) for the reference.
+See [Compose-Format Files and Labels](../reference/compose-labels.md) for the reference.

@@ -17,7 +17,7 @@ er app logs my-app my-server --lines 100
 er app logs my-app my-server --since "1 hour ago"
 ```
 
-Logs come from the systemd user journal for the containers generated from your Compose services.
+Logs come from the systemd user journal for the containers generated from your service entries.
 
 ## Lifecycle
 

@@ -92,8 +92,8 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
 ??? question "Flow A build fails"
     Check that the repo has a Dockerfile or Containerfile and `.easyrunner/docker-compose-app.yaml`. Then review deploy output and app logs.
 
-??? question "Flow B uses old compose settings"
-    Re-store the compose file and deploy again:
+??? question "Flow B uses old Compose-format settings"
+    Re-store the Compose-format file and deploy again:
 
     ```bash
     er app update-details my-app my-server --compose-file ./docker-compose.yaml
