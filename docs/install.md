@@ -56,7 +56,7 @@ Use one of the method below to install it.
 
     Not supported yet but might work.
 
-## Update
+## Update EasyRunner CLI
 
 === "macOS"
 
