@@ -6,10 +6,15 @@ theme:
   name: material
   custom_dir: material/overrides  
   features:
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
     - navigation.footer  
+    - navigation.sections
     - navigation.top
     - navigation.tabs
-    - navigation.tabs.sticky    
+    - navigation.tabs.sticky
+    - toc.follow
   font:
     text: Roboto Mono
     code: Roboto Mono
@@ -30,6 +35,9 @@ theme:
   logo: images/logo.png
 extra_css:
   - stylesheets/extra.css
+extra_javascript:
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+  - javascripts/mermaid.js
 plugins:
   - search
   - social:
@@ -52,7 +60,17 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -72,6 +90,43 @@ nav:
   - Home: index.md
   - How It Works: how-it-works.md
   - Install: install.md
+  - Docs:
+    - Overview: user-docs/index.md
+    - Concepts:
+      - EasyRunner in One Page: user-docs/concepts/index.md
+      - Server Provisioning Paths: user-docs/concepts/server-provisioning.md
+      - Apps and Services: user-docs/concepts/apps-and-services.md
+      - Deploy Flows: user-docs/concepts/deploy-flows.md
+      - Links and Integrations: user-docs/concepts/links-and-integrations.md
+    - Quickstart:
+      - Deploy Your First App: user-docs/quickstart/first-app.md
+      - New Hetzner Server: user-docs/quickstart/new-hetzner-server.md
+      - Existing Ubuntu Server: user-docs/quickstart/existing-ubuntu-server.md
+    - Install & Setup:
+      - Install the CLI: user-docs/setup/install.md
+      - First-Run Setup: user-docs/setup/first-run-setup.md
+      - License Setup: user-docs/setup/license.md
+      - Links and Integrations: user-docs/setup/integrations.md
+    - Servers:
+      - Create a Hetzner Server: user-docs/servers/create-hetzner-server.md
+      - Add an Existing Server: user-docs/servers/add-existing-server.md
+      - Initialize a Web Host: user-docs/servers/initialize.md
+      - Server Operations: user-docs/servers/operations.md
+    - Apps:
+      - Add an App: user-docs/apps/add-app.md
+      - Compose-Format Configuration: user-docs/apps/compose.md
+      - Flow A - Deploy from Source: user-docs/apps/flow-a.md
+      - Flow B - Deploy from a Registry: user-docs/apps/flow-b.md
+      - App Secrets: user-docs/apps/secrets.md
+      - Domains and HTTPS: user-docs/apps/dns-https.md
+      - App Operations: user-docs/apps/operations.md
+    - Recipes:
+      - Recipes: user-docs/recipes/index.md
+      - Deploy a Next.js App: user-docs/recipes/nextjs.md
+    - Reference:
+      - CLI Command Reference: user-docs/reference/commands.md
+      - Compose-Format Files and Labels: user-docs/reference/compose-labels.md
+      - Troubleshooting: user-docs/reference/troubleshooting.md
   - Features: features.md
   - FAQ: faq.md
   - Blog:
