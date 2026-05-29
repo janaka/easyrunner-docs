@@ -49,7 +49,7 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
 
     ```bash
     er link cloudflare production --status
-    er link status
+    er link doctor
     ```
 
 ## SSH and Server Init
@@ -62,13 +62,15 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
     er server ssh-connect-test my-server --username root
     ```
 
-??? question "Server verification fails"
-    Re-run verification and inspect server logs:
+??? question "Server health checks fail"
+    Re-run the diagnostics and inspect server logs:
 
     ```bash
-    er server verify my-server
+    er server doctor my-server
     er server logs my-server --lines 200
     ```
+
+    Add `--fix` to attempt automatic remediation where supported.
 
 ## DNS and HTTPS
 
@@ -119,4 +121,32 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
     er app logs my-app my-server --lines 200
     ```
 
-    Confirm `xyz.easyrunner.appContainerInternalPort` matches the port your app listens on inside the container.
+    Confirm `xyz.easyrunner.service.port` matches the port your app listens on inside the container.
+
+## Mesh / Secure Access
+
+??? question "`wireguard-tools` is missing"
+    Check and install CLI prerequisites:
+
+    ```bash
+    er doctor
+    er doctor --fix
+    ```
+
+??? question "Mesh interface is down after a reboot"
+    macOS does not persist the WireGuard interface across reboots. Bring it back up:
+
+    ```bash
+    er mesh up
+    er mesh doctor
+    ```
+
+??? question "A peer handshake is stale or a locked server is unreachable"
+    Diagnose the mesh, then confirm UDP `51820` is open in the cloud-provider firewall:
+
+    ```bash
+    er mesh doctor
+    er mesh status
+    ```
+
+    Re-running `er mesh join my-server` reconciles the server config and firewall rules. If a locked server's tunnel is fully broken, the lock's dead-man's switch re-opens public SSH automatically; see [Secure Access with the Mesh VPN](../servers/mesh.md#if-the-tunnel-breaks-while-locked) for out-of-band recovery.

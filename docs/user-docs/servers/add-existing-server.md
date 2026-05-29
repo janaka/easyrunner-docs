@@ -33,7 +33,7 @@ Add the printed key to the server. For example:
 ```bash
 er server ssh-connect-test my-server --username root
 er server init my-server --username root
-er server verify my-server
+er server doctor my-server
 ```
 
 !!! tip "Provider usernames"

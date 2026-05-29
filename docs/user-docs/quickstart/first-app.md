@@ -39,13 +39,13 @@ er setup --mode server                             # (5)!
   er link hetzner default --api-key <hetzner-api-token>  # (1)!
   er server create my-first-server hetzner               # (2)!
   er server init my-first-server --username root          # (3)!
-  er server verify my-first-server                       # (4)!
+  er server doctor my-first-server                       # (4)!
     ```
 
   1. Stores a Hetzner API token in your keyring.
   2. Creates and registers a Hetzner server.
   3. Installs the EasyRunner web-host stack.
-  4. Checks the server setup.
+  4. Runs health-check diagnostics on the web host.
 
   !!! info "What happens"
     EasyRunner handles the cloud provisioning step, then the server joins the same web-host lifecycle as any manually provisioned Ubuntu server.
@@ -56,13 +56,13 @@ er setup --mode server                             # (5)!
   er server add my-first-server <server-ip>        # (1)!
   er server show-ssh-key my-first-server           # (2)!
   er server init my-first-server --username root   # (3)!
-  er server verify my-first-server                 # (4)!
+  er server doctor my-first-server                 # (4)!
     ```
 
   1. Registers the Ubuntu server in EasyRunner and creates a dedicated SSH key.
   2. Prints the public key. Add it to `authorized_keys` or your provider's SSH-key UI before initialization.
   3. Installs the EasyRunner web-host stack.
-  4. Checks the server setup.
+  4. Runs health-check diagnostics on the web host.
 
   !!! info "What happens"
     You own the provisioning step. EasyRunner takes over once its generated SSH key can access the server.
@@ -71,7 +71,7 @@ er setup --mode server                             # (5)!
 
 ```bash
 er link github  # (1)!
-er link status  # (2)!
+er link doctor  # (2)!
 ```
 
 1. Starts GitHub device-flow auth and stores the token in your keyring.
@@ -110,9 +110,9 @@ services:
     networks:
       - easyrunner_proxy_network
     labels:
-      xyz.easyrunner.appNodeType: web # (3)!
-      xyz.easyrunner.appFramework: standardbackend
-      xyz.easyrunner.appContainerInternalPort: "3000" # (4)!
+      xyz.easyrunner.service.type: web # (3)!
+      xyz.easyrunner.service.framework: standardbackend
+      xyz.easyrunner.service.port: "3000" # (4)!
 
 networks:
   easyrunner_proxy_network:

@@ -15,13 +15,15 @@ er server init my-server --username root
 - Systemd user services for app lifecycle
 - Supporting network configuration for app containers
 
-## Verify
+## Check the Setup
 
 ```bash
-er server verify my-server
+er server doctor my-server
 ```
 
-If verification fails, check SSH first:
+`er server doctor` runs health-check diagnostics on the web host (Podman, Caddy, the EasyRunner user, firewall rules, and more) and reports pass/fail for each. Add `--fix` to attempt automatic remediation where supported.
+
+If checks fail, verify SSH first:
 
 ```bash
 er server ssh-connect-test my-server --username root

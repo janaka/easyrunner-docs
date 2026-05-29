@@ -9,12 +9,36 @@ er server list
 er server update-details my-server --description "Production web host"
 ```
 
-## Verify Setup
+## Health and Status
 
 ```bash
-er server verify my-server
-er server verify my-server --include-security-scan
+er server doctor my-server   # (1)!
+er server status my-server   # (2)!
 ```
+
+1. Runs pass/fail health diagnostics across the host stack (Podman, Caddy, the EasyRunner user, firewall rules, connectivity). Add `--fix` to attempt automatic remediation where supported.
+2. Shows a read-only snapshot of runtime state: uptime, load average, memory, disk, per-app container status, and the server's mesh IP.
+
+`er server doctor` answers "is this web host healthy?" and exits non-zero when a check fails. `er server status` answers "what is this web host doing right now?" and never fails on observed state.
+
+!!! note "Renamed from `er server verify`"
+    Earlier releases used `er server verify`. It is now `er server doctor`, part of a unified diagnostics pattern shared by `er doctor`, `er server doctor`, `er link doctor`, and `er mesh doctor`.
+
+## Security Scan
+
+```bash
+er server security-scan my-server
+```
+
+Scans deployed apps for information-disclosure vulnerabilities. Use `--scan-all-apps`, or target a specific app or URL with the command's options (see `er server security-scan --help`).
+
+## Reapply Firewall Policy
+
+```bash
+er server reapply-firewall my-server
+```
+
+Re-applies EasyRunner's canonical host firewall policy on an existing server. It is idempotent — only missing rules are added and stale ones removed — and is the way to backfill new firewall rules (for example mesh-related rules) onto servers initialized by an older CLI version.
 
 ## SSH Troubleshooting
 

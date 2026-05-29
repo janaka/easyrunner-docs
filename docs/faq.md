@@ -92,6 +92,10 @@ We are considering moving to certificate based SSH auth to increase security by 
 
 The SSH Key for the easyrunner ops user can be rotated easily at anytime with a single CLI command.
 
+### Can I take SSH off the public internet entirely?
+
+Yes. EasyRunner includes an optional WireGuard mesh VPN. You build a private network between your machine and your servers with `er mesh`, then run `er mesh lock` to restrict SSH to that private network. After locking, port 22 is unreachable from the public internet while your apps (ports 80/443) stay reachable. A dead-man's switch automatically reopens SSH if the tunnel breaks, so you can't accidentally lock yourself out. See [Secure Access with the Mesh VPN](user-docs/servers/mesh.md).
+
 ### Can I configure firewalls with EasyRunner?
 
 Yes. EasyRunner configures an OS level (IPTables) during initialisation. See [this post](./blog/posts/easyrunner-secure-network-architecture) for more details.

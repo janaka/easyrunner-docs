@@ -8,7 +8,7 @@ Use this path when you want EasyRunner to create and register a Hetzner Cloud se
 er link hetzner default --api-key <hetzner-api-token>
 er server create my-server hetzner
 er server init my-server --username root
-er server verify my-server
+er server doctor my-server
 ```
 
 !!! info "What happens"

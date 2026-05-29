@@ -39,9 +39,9 @@ services:
     networks:
       - easyrunner_proxy_network
     labels:
-      xyz.easyrunner.appNodeType: web
-      xyz.easyrunner.appFramework: nextjs
-      xyz.easyrunner.appContainerInternalPort: "3000"
+      xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.framework: nextjs
+      xyz.easyrunner.service.port: "3000"
 
 networks:
   easyrunner_proxy_network:
@@ -67,6 +67,6 @@ Your app should be available at `https://next-demo.example.com` after DNS and ce
 ## Adapt for Your Own App
 
 1. Replace the repository URL with your app repo.
-2. Make sure your container listens on the same port as `xyz.easyrunner.appContainerInternalPort`.
+2. Make sure your container listens on the same port as `xyz.easyrunner.service.port`.
 3. Store sensitive values with `er app secret`, not in the Compose-format file.
 4. Deploy a release branch with `er app deploy <app> <server> --branch <branch>` if needed.

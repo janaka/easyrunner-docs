@@ -18,11 +18,11 @@ er server show-ssh-key my-server
 
 Add the printed public key to the server. For example, add it to `~/.ssh/authorized_keys` for the user you will pass to `er server init`, or add it through your cloud provider's SSH-key UI.
 
-Then initialize and verify:
+Then initialize and check it:
 
 ```bash
 er server init my-server --username root
-er server verify my-server
+er server doctor my-server
 ```
 
 !!! info "What happens"

@@ -112,6 +112,7 @@ nav:
       - Add an Existing Server: user-docs/servers/add-existing-server.md
       - Initialize a Web Host: user-docs/servers/initialize.md
       - Server Operations: user-docs/servers/operations.md
+      - Secure Access (Mesh VPN): user-docs/servers/mesh.md
     - Apps:
       - Add an App: user-docs/apps/add-app.md
       - Compose-Format Configuration: user-docs/apps/compose.md

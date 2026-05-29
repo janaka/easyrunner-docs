@@ -35,8 +35,8 @@ services:
     networks:
       - easyrunner_proxy_network
     labels:
-      xyz.easyrunner.appNodeType: web
-      xyz.easyrunner.appContainerInternalPort: "3000"
+      xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.port: "3000"
 
 networks:
   easyrunner_proxy_network:

@@ -64,21 +64,19 @@ Only the service you mark as public should receive external traffic. Internal se
 
 ## Compose-Format Labels
 
-EasyRunner reads labels on service entries to understand how to route and run them.
-
-Current labels use `app...` names even though they are applied at the service level:
+EasyRunner reads labels on service entries to understand how to route and run them. The canonical labels use the `service.*` prefix:
 
 ```yaml
 labels:
-  xyz.easyrunner.appNodeType: web # (1)!
-  xyz.easyrunner.appFramework: standardbackend
-  xyz.easyrunner.appContainerInternalPort: "3000" # (2)!
+  xyz.easyrunner.service.type: web # (1)!
+  xyz.easyrunner.service.framework: standardbackend
+  xyz.easyrunner.service.port: "3000" # (2)!
 ```
 
-1. Service role. `web` means this service can receive public traffic through Caddy.
+1. Service role: `web`, `internal`, or `worker`. `web` means this service can receive public traffic through Caddy.
 2. Internal container port Caddy should proxy to.
 
-!!! note "Current naming"
-    Treat these labels as service-level configuration. The product may introduce clearer `service.*` labels in the future, but the current labels are the supported public interface today.
+!!! note "Renamed from `app*` labels"
+    The older `appNodeType`, `appFramework`, and `appContainerInternalPort` labels still work for backward compatibility, but the `service.*` names are canonical. Prefer them for new files.
 
 See [Compose-Format Files and Labels](../reference/compose-labels.md) for the reference.
