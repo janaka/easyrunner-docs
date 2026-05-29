@@ -26,9 +26,9 @@ services:
     networks:
       - easyrunner_proxy_network
     labels:
-      xyz.easyrunner.appNodeType: web
-      xyz.easyrunner.appFramework: standardbackend
-      xyz.easyrunner.appContainerInternalPort: "3000"
+      xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.framework: standardbackend
+      xyz.easyrunner.service.port: "3000"
 
 networks:
   easyrunner_proxy_network:
@@ -43,11 +43,25 @@ networks:
 | `name:` | Used in generated systemd unit names. Use a unique app-specific value. |
 | `services:` | Defines the containers/processes inside the EasyRunner app. |
 | `networks.easyrunner_proxy_network` | Connects public services to Caddy's proxy network. |
-| `xyz.easyrunner.appNodeType` | Marks a service as `web` or `internal`. |
-| `xyz.easyrunner.appContainerInternalPort` | Tells Caddy which internal port the service listens on. |
+| `xyz.easyrunner.service.type` | Marks a service as `web`, `internal`, or `worker`. |
+| `xyz.easyrunner.service.port` | Tells Caddy which internal port the service listens on. |
 
 !!! warning "Do not bind public host ports"
     EasyRunner expects Caddy to be the public entry point. Avoid exposing app containers directly with host port bindings unless a guide explicitly tells you to.
+
+## Auto-Injected Environment Variables
+
+EasyRunner injects read-only metadata variables (`EASYRUNNER_APP_URL`, `EASYRUNNER_APP_DOMAIN`, and others) into every service container at deploy time. Reference them from your app or from `environment:` instead of hardcoding your domain:
+
+```yaml
+services:
+  web:
+    image: localhost/my-app:latest
+    environment:
+      - PUBLIC_URL=${EASYRUNNER_APP_URL}
+```
+
+See [Compose-Format Files and Labels](../reference/compose-labels.md#auto-injected-environment-variables) for the full list.
 
 ## Multi-Service Apps
 
@@ -58,16 +72,16 @@ services:
     image: localhost/shop-web:latest
     networks: [easyrunner_proxy_network]
     labels:
-      xyz.easyrunner.appNodeType: web
-      xyz.easyrunner.appContainerInternalPort: "3000"
+      xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.port: "3000"
   worker:
     image: localhost/shop-worker:latest
     labels:
-      xyz.easyrunner.appNodeType: internal
+      xyz.easyrunner.service.type: worker
   redis:
     image: docker.io/library/redis:7-alpine
     labels:
-      xyz.easyrunner.appNodeType: internal
+      xyz.easyrunner.service.type: internal
 
 networks:
   easyrunner_proxy_network:

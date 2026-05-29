@@ -11,7 +11,7 @@ A **link** is a stored connection to an external service. EasyRunner stores the 
 Check all links:
 
 ```bash
-er link status
+er link doctor
 ```
 
 !!! note "Link is the command, integration is the concept"

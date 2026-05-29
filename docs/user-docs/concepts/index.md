@@ -36,7 +36,7 @@ Users visit your app
 | Service | One service entry inside the app's Compose-format configuration. Usually one container or process. An app can have one service or many. |
 | Deploy flow | How the app image gets to the web host: build from source on the server, or pull a pre-built image from a registry. |
 | Link | A stored connection to an external service such as GitHub, Hetzner, or Cloudflare. |
-| Mesh | Advanced private networking between EasyRunner-managed resources. It is not required for the first deployment path. |
+| Mesh | An optional WireGuard VPN between your machine and your web hosts. It lets you lock SSH to a private network instead of the public internet. Not required for the first deployment path. See [Secure Access with the Mesh VPN](../servers/mesh.md). |
 
 !!! note "Server can mean two things"
     EasyRunner has `er setup --mode server`, which means a control-plane server mode install. It also has `er server ...`, which manages Ubuntu web hosts. These docs use **web host** when talking about the machine that runs apps.

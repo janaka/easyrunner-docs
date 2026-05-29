@@ -40,6 +40,9 @@ er app secret set my-app EASYRUNNER_GHCR_USERNAME
 er app secret set my-app EASYRUNNER_GHCR_PAT
 ```
 
+!!! note "Reserved secrets vs. injected metadata"
+    This reserved rule is about secrets *you set*. Separately, EasyRunner *injects* its own read-only `EASYRUNNER_*` metadata variables (such as `EASYRUNNER_APP_URL`) into your container at deploy time. Those are provided by EasyRunner, not secrets you manage. See [Auto-Injected Environment Variables](../reference/compose-labels.md#auto-injected-environment-variables).
+
 ## Runtime Injection
 
 Non-reserved app secrets are made available to your containers during deployment. Keep sensitive values out of Compose-format files and source control; store them as app secrets instead.

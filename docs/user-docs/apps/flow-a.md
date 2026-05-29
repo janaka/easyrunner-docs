@@ -16,7 +16,7 @@ GitHub repo -> web host -> podman build -> systemd service -> Caddy HTTPS
 
 ```bash
 er link github
-er link status
+er link doctor
 ```
 
 Your repo must contain:

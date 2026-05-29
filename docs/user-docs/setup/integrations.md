@@ -29,11 +29,13 @@ Use Cloudflare linking when you want EasyRunner to create or update DNS records 
 ## Status and Unlinking
 
 ```bash
-er link status
+er link doctor
 er link github --status
 er link hetzner default --status
 er link cloudflare production --status
 ```
+
+`er link doctor` reports health across all linked services at once. The per-service `--status` flags inspect a single integration.
 
 Unlink a service when you want EasyRunner to forget the stored credential:
 

@@ -29,7 +29,7 @@ er server create my-server hetzner
 
 ```bash
 er server init my-server --username root
-er server verify my-server
+er server doctor my-server
 ```
 
 After initialization, continue with [Add an App](../apps/add-app.md).

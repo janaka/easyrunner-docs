@@ -19,7 +19,8 @@ er app --help     # (3)!
 	| First-run setup | `er setup` |
 	| Non-interactive server mode setup | `er setup --mode server` |
 	| Show config | `er config show` |
-	| Run local checks | `er doctor` |
+	| Check CLI prerequisites | `er doctor` |
+	| Install missing prerequisites | `er doctor --fix` |
 
 ??? abstract "License"
 
@@ -37,7 +38,8 @@ er app --help     # (3)!
 	| Link GitHub | `er link github` |
 	| Link Hetzner | `er link hetzner <project> --api-key <token>` |
 	| Link Cloudflare | `er link cloudflare <account> --api-token <token>` |
-	| Show all link status | `er link status` |
+	| Diagnose all links | `er link doctor` |
+	| Show one link's status | `er link <service> --status` |
 
 ???+ abstract "Servers"
 
@@ -48,7 +50,11 @@ er app --help     # (3)!
 	| Show generated SSH key | `er server show-ssh-key <name>` |
 	| Test SSH | `er server ssh-connect-test <name> --username <user>` |
 	| Initialize web host | `er server init <name> --username <user>` |
-	| Verify web host | `er server verify <name>` |
+	| Run health diagnostics | `er server doctor <name>` |
+	| Auto-fix server issues | `er server doctor <name> --fix` |
+	| Show operational status | `er server status <name>` |
+	| Reapply firewall policy | `er server reapply-firewall <name>` |
+	| Security scan | `er server security-scan <name>` |
 	| Show Caddy logs | `er server logs <name>` |
 	| Show Fail2Ban status | `er server fail2ban-status <name>` |
 
@@ -78,10 +84,18 @@ er app --help     # (3)!
 	| List secrets | `er app secret list <app>` |
 	| Delete secret | `er app secret delete <app> <NAME>` |
 
-??? abstract "Advanced"
+??? abstract "Mesh (Secure Access)"
 
-	Mesh commands are advanced and not required for the normal first deployment path:
+	An optional WireGuard mesh for private admin access and SSH lockdown. Not required for the normal first deployment path — see [Secure Access with the Mesh VPN](../servers/mesh.md).
 
-	```bash
-	er mesh --help
-	```
+	| Task | Command |
+	| --- | --- |
+	| Initialize the local mesh | `er mesh init` |
+	| Bring the local interface up | `er mesh up` |
+	| Bring the local interface down | `er mesh down` |
+	| Join a server to the mesh | `er mesh join <server>` |
+	| Remove a server from the mesh | `er mesh leave <server>` |
+	| Show mesh status and peers | `er mesh status` |
+	| Diagnose mesh health | `er mesh doctor` |
+	| Restrict SSH to the mesh | `er mesh lock <server>` |
+	| Reopen public SSH | `er mesh unlock <server>` |

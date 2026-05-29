@@ -41,6 +41,13 @@
     Ability to add your own policies (coming)
 
 
+-   #### Private Mesh VPN + SSH Lockdown
+
+    ---
+
+    Build a WireGuard mesh between your machine and your servers with `er mesh`, then lock SSH down to that private network so port 22 is no longer exposed to the public internet. A dead-man's switch guards against accidental lockout.
+
+
 -   #### CI/CD - Deploy Easily
 
     ---
