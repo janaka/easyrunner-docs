@@ -48,15 +48,24 @@
     Build a WireGuard mesh between your machine and your servers with `er mesh`, then lock SSH down to that private network so port 22 is no longer exposed to the public internet. A dead-man's switch guards against accidental lockout.
 
 
+-   #### Application Security Scanning
+
+    ---
+
+    Scan your deployed apps for information-disclosure vulnerabilities with a single `er server security-scan` command.
+
+
 -   #### CI/CD - Deploy Easily
 
     ---
 
-    Several CI/CD flows to securely deploy you application.
+    Multiple deploy flows to securely ship your application.
 
-    CLI command trigger + web host build
-    Git push trigger + web host build (coming)
-    Git push trigger + Github Action build (coming)
+    Flow A: trigger from the CLI and build the image on the web host.
+
+    Flow B: deploy a pre-built image from a container registry such as GHCR (private images supported).
+
+    Git push trigger (coming). Git push + GitHub Action build (coming).
 
 
 -   #### Host Multiple Apps on a Single Server
@@ -86,6 +95,20 @@
     Define your application's composition using as a Docker compose file. You can define your UI and public API containers as public. Internal service containers will be on the internal network only.
 
 
+-   #### Encrypted App Secrets
+
+    ---
+
+    Store per-app secrets in your system keyring with `er app secret`. They are injected into your containers at deploy time and kept out of your repo and Compose files.
+
+
+-   #### Built-in Health Checks
+
+    ---
+
+    `er doctor` checks your local setup and `er server doctor` runs pass/fail diagnostics on a web host (container runtime, reverse proxy, firewall, connectivity) with remediation hints. `er server status` shows live runtime state, and missing CLI prerequisites install with `er doctor --fix`.
+
+
 -   #### Predictable Cost
 
     ---
@@ -107,6 +130,8 @@
     ---
 
     Github: for automated secure CI/CD setup
+
+    Hetzner: for automated server provisioning
 
     CloudFlare: for secure DNS record setup
 
