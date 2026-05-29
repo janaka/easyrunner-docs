@@ -1245,6 +1245,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1794,13 +1822,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-labels" class="md-nav__link">
+  <a href="#service-labels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Labels
+        Service Labels
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Service Labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#label-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1809,6 +1854,17 @@
     <span class="md-ellipsis">
       
         Service Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-injected-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Injected Environment Variables
       
     </span>
   </a>
@@ -2359,13 +2415,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-labels" class="md-nav__link">
+  <a href="#service-labels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Labels
+        Service Labels
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Service Labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#label-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2374,6 +2447,17 @@
     <span class="md-ellipsis">
       
         Service Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-injected-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Injected Environment Variables
       
     </span>
   </a>
@@ -2420,7 +2504,8 @@
 <li>EasyRunner creates this network during web-host initialization. Public services attach to it so Caddy can reach them.</li>
 </ol>
 <p>Attach public web services to this network so Caddy can route traffic to them.</p>
-<h2 id="current-labels">Current Labels</h2>
+<h2 id="service-labels">Service Labels</h2>
+<p>EasyRunner reads labels on each service entry to decide how to route and run it. The canonical labels use the <code>xyz.easyrunner.service.*</code> prefix.</p>
 <table>
 <thead>
 <tr>
@@ -2431,31 +2516,65 @@
 </thead>
 <tbody>
 <tr>
-<td><code>xyz.easyrunner.appNodeType</code></td>
+<td><code>xyz.easyrunner.service.type</code></td>
 <td>Service entry</td>
-<td>Service role. Common values: <code>web</code>, <code>internal</code>.</td>
+<td>Service role. Values: <code>web</code>, <code>internal</code>, <code>worker</code>.</td>
 </tr>
 <tr>
-<td><code>xyz.easyrunner.appFramework</code></td>
+<td><code>xyz.easyrunner.service.framework</code></td>
 <td>Service entry</td>
-<td>Routing/framework hint such as <code>standardbackend</code> or <code>nextjs</code>.</td>
+<td>Routing/framework hint such as <code>standardbackend</code> or <code>nextjs</code>. Relevant for <code>web</code> and <code>internal</code> services.</td>
 </tr>
 <tr>
-<td><code>xyz.easyrunner.appContainerInternalPort</code></td>
+<td><code>xyz.easyrunner.service.port</code></td>
 <td>Service entry</td>
-<td>Port the service listens on inside the container network.</td>
+<td>Port the service listens on inside the container network, quoted as a string (default <code>3000</code>).</td>
 </tr>
 <tr>
-<td><code>xyz.easyrunner.appBuildContext</code></td>
+<td><code>xyz.easyrunner.service.build-context</code></td>
 <td>Service entry</td>
 <td>Optional Flow A build context relative to the repo root.</td>
 </tr>
 </tbody>
 </table>
+<h3 id="label-values">Label values</h3>
+<ul>
+<li><strong><code>service.type</code></strong> — <code>web</code> (publicly routable through Caddy), <code>internal</code> (reachable only inside the app stack), or <code>worker</code> (background process with no inbound port).</li>
+<li><strong><code>service.framework</code></strong> — <code>standardbackend</code> (generic HTTP backend) or <code>nextjs</code> (Next.js-aware Caddy configuration).</li>
+<li><strong><code>service.port</code></strong> — the container's internal listen port, quoted as a string (for example <code>"3000"</code>). Defaults to <code>3000</code> when omitted.</li>
+<li><strong><code>service.build-context</code></strong> — a path relative to the repo root, used by Flow A to build a service from a subdirectory.</li>
+</ul>
 <div class="admonition note">
-<p class="admonition-title">Terminology</p>
+<p class="admonition-title">Renamed from the <code>app*</code> labels</p>
+<p>Earlier releases used <code>appNodeType</code>, <code>appFramework</code>, <code>appContainerInternalPort</code>, and <code>appBuildContext</code>. Those names still work — EasyRunner falls back to them when the matching <code>service.*</code> label is absent — but the <code>service.*</code> names are canonical and recommended for new files. When both names are set on a service, the <code>service.*</code> value wins.</p>
+<table>
+<thead>
+<tr>
+<th>Deprecated alias</th>
+<th>Canonical label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>xyz.easyrunner.appNodeType</code></td>
+<td><code>xyz.easyrunner.service.type</code></td>
+</tr>
+<tr>
+<td><code>xyz.easyrunner.appFramework</code></td>
+<td><code>xyz.easyrunner.service.framework</code></td>
+</tr>
+<tr>
+<td><code>xyz.easyrunner.appContainerInternalPort</code></td>
+<td><code>xyz.easyrunner.service.port</code></td>
+</tr>
+<tr>
+<td><code>xyz.easyrunner.appBuildContext</code></td>
+<td><code>xyz.easyrunner.service.build-context</code></td>
+</tr>
+</tbody>
+</table>
+<p>The older <code>xyz.easyrunner.appIsPublic: true</code> flag is also still honored but deprecated. Mark public services with <code>xyz.easyrunner.service.type: web</code> instead.</p>
 </div>
-<p>These labels currently use <code>app...</code> names, but they configure service entries. Read them as service-level settings.</p>
 <h2 id="service-examples">Service Examples</h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Public web service</label><label for="__tabbed_1_2">Internal service</label><label for="__tabbed_1_3">Flow A build context</label></div>
 <div class="tabbed-content">
@@ -2466,9 +2585,9 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appNodeType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (1)!</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appFramework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appContainerInternalPort</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (2)!</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (2)!</span>
 </span></code></pre></div>
 <ol>
 <li>Marks this service as publicly routable.</li>
@@ -2480,7 +2599,7 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">worker</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost/my-worker:latest</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appNodeType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">internal</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">internal</span><span class="w"> </span><span class="c1"># (1)!</span>
 </span></code></pre></div>
 <ol>
 <li>Keeps the service internal to the app stack.</li>
@@ -2491,14 +2610,60 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">api</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost/my-api:latest</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appNodeType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appBuildContext</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;apps/api&quot;</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.build-context</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;apps/api&quot;</span><span class="w"> </span><span class="c1"># (1)!</span>
 </span></code></pre></div>
 <ol>
 <li>Builds this service from a subdirectory relative to the repo root.</li>
 </ol>
 </div>
 </div>
+</div>
+<h2 id="auto-injected-environment-variables">Auto-Injected Environment Variables</h2>
+<p>When EasyRunner deploys an app it injects a set of read-only metadata environment variables into every service container. You can reference them from your application or from the <code>environment:</code> block of your Compose-format file. They are available in both Flow A and Flow B.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EASYRUNNER_APP_NAME</code></td>
+<td>The EasyRunner app name.</td>
+</tr>
+<tr>
+<td><code>EASYRUNNER_APP_DOMAIN</code></td>
+<td>The app's custom domain without a scheme, e.g. <code>app.example.com</code>.</td>
+</tr>
+<tr>
+<td><code>EASYRUNNER_APP_URL</code></td>
+<td>The full HTTPS URL, e.g. <code>https://app.example.com</code>.</td>
+</tr>
+<tr>
+<td><code>EASYRUNNER_SERVER_NAME</code></td>
+<td>The EasyRunner web-host name.</td>
+</tr>
+<tr>
+<td><code>EASYRUNNER_SERVER_IP</code></td>
+<td>The web host's IP address or hostname.</td>
+</tr>
+</tbody>
+</table>
+<p>These are plain environment variables, not secrets. EasyRunner injects them <em>before</em> your service's own <code>environment:</code> entries, so a service can override one by setting the same name. Use them to build absolute URLs, OAuth/OIDC callback URLs, and CORS allowlists without hardcoding your domain.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost/my-app:latest</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC_URL=${EASYRUNNER_APP_URL}</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Resolves to <code>https://app.example.com</code> at deploy time.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title"><code>EASYRUNNER_*</code> secrets are different</p>
+<p>App secrets you set with names beginning <code>EASYRUNNER_</code> (such as <code>EASYRUNNER_GHCR_USERNAME</code>) are reserved for EasyRunner's own use and are <em>not</em> injected into your container. The metadata variables above are provided by EasyRunner and <em>are</em> injected. See <a href="../../apps/secrets/">App Secrets</a>.</p>
 </div>
 <h2 id="naming-guidance">Naming Guidance</h2>
 <ul>

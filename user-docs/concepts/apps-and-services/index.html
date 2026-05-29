@@ -1338,6 +1338,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2460,20 +2488,19 @@
 </div>
 </div>
 <h2 id="compose-format-labels">Compose-Format Labels</h2>
-<p>EasyRunner reads labels on service entries to understand how to route and run them.</p>
-<p>Current labels use <code>app...</code> names even though they are applied at the service level:</p>
+<p>EasyRunner reads labels on service entries to understand how to route and run them. The canonical labels use the <code>service.*</code> prefix:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">xyz.easyrunner.appNodeType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (1)!</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">xyz.easyrunner.appFramework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">xyz.easyrunner.appContainerInternalPort</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (2)!</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (2)!</span>
 </span></code></pre></div>
 <ol>
-<li>Service role. <code>web</code> means this service can receive public traffic through Caddy.</li>
+<li>Service role: <code>web</code>, <code>internal</code>, or <code>worker</code>. <code>web</code> means this service can receive public traffic through Caddy.</li>
 <li>Internal container port Caddy should proxy to.</li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Current naming</p>
-<p>Treat these labels as service-level configuration. The product may introduce clearer <code>service.*</code> labels in the future, but the current labels are the supported public interface today.</p>
+<p class="admonition-title">Renamed from <code>app*</code> labels</p>
+<p>The older <code>appNodeType</code>, <code>appFramework</code>, and <code>appContainerInternalPort</code> labels still work for backward compatibility, but the <code>service.*</code> names are canonical. Prefer them for new files.</p>
 </div>
 <p>See <a href="../../reference/compose-labels/">Compose-Format Files and Labels</a> for the reference.</p>
 

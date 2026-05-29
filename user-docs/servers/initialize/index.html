@@ -1269,10 +1269,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify" class="md-nav__link">
+  <a href="#check-the-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify
+        Check the Setup
       
     </span>
   </a>
@@ -1314,6 +1314,34 @@
     
   
     Server Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
   
 
     
@@ -2348,10 +2376,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify" class="md-nav__link">
+  <a href="#check-the-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify
+        Check the Setup
       
     </span>
   </a>
@@ -2399,10 +2427,11 @@
 <li>Systemd user services for app lifecycle</li>
 <li>Supporting network configuration for app containers</li>
 </ul>
-<h2 id="verify">Verify</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>server<span class="w"> </span>verify<span class="w"> </span>my-server
+<h2 id="check-the-setup">Check the Setup</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>server<span class="w"> </span>doctor<span class="w"> </span>my-server
 </span></code></pre></div>
-<p>If verification fails, check SSH first:</p>
+<p><code>er server doctor</code> runs health-check diagnostics on the web host (Podman, Caddy, the EasyRunner user, firewall rules, and more) and reports pass/fail for each. Add <code>--fix</code> to attempt automatic remediation where supported.</p>
+<p>If checks fail, verify SSH first:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>server<span class="w"> </span>ssh-connect-test<span class="w"> </span>my-server<span class="w"> </span>--username<span class="w"> </span>root
 </span></code></pre></div>
 <h2 id="shared-lifecycle">Shared Lifecycle</h2>

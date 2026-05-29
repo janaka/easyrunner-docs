@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://easyrunner.xyz/user-docs/reference/commands/">
+        <link rel="canonical" href="https://easyrunner.xyz/user-docs/servers/mesh/">
       
       
-        <link rel="prev" href="../../recipes/nextjs/">
+        <link rel="prev" href="../operations/">
       
       
-        <link rel="next" href="../compose-labels/">
+        <link rel="next" href="../../apps/add-app/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>CLI Command Reference - EasyRunner</title>
+        <title>Secure Access (Mesh VPN) - EasyRunner</title>
       
     
     
@@ -90,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-command-reference" class="md-skip">
+        <a href="#secure-access-with-the-mesh-vpn" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CLI Command Reference
+              Secure Access (Mesh VPN)
             
           </span>
         </div>
@@ -1082,6 +1082,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1097,11 +1099,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" checked>
         
           
           <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
@@ -1122,7 +1124,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1140,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../servers/create-hetzner-server/" class="md-nav__link">
+      <a href="../create-hetzner-server/" class="md-nav__link">
         
   
   
@@ -1168,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../servers/add-existing-server/" class="md-nav__link">
+      <a href="../add-existing-server/" class="md-nav__link">
         
   
   
@@ -1196,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../servers/initialize/" class="md-nav__link">
+      <a href="../initialize/" class="md-nav__link">
         
   
   
@@ -1224,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../servers/operations/" class="md-nav__link">
+      <a href="../operations/" class="md-nav__link">
         
   
   
@@ -1249,10 +1251,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../servers/mesh/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1268,6 +1297,147 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-problem-it-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Problem It Solves
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-initialize-the-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Initialize the Mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-join-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Join a Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-check-status-and-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Check Status and Health
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-lock-ssh-to-the-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Lock SSH to the Mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-reopen-public-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Reopen Public SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-the-tunnel-breaks-while-locked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If the Tunnel Breaks While Locked
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-to-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day-to-Day
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1663,8 +1833,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1680,11 +1848,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
         
           
           <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
@@ -1705,7 +1873,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1720,19 +1888,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../reference/commands/" class="md-nav__link">
         
   
   
@@ -1748,7 +1907,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1761,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../compose-labels/" class="md-nav__link">
+      <a href="../../reference/compose-labels/" class="md-nav__link">
         
   
   
@@ -1789,7 +1947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../reference/troubleshooting/" class="md-nav__link">
         
   
   
@@ -2288,6 +2446,135 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-problem-it-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Problem It Solves
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-initialize-the-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Initialize the Mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-join-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Join a Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-check-status-and-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Check Status and Health
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-lock-ssh-to-the-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Lock SSH to the Mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-reopen-public-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Reopen Public SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-the-tunnel-breaks-while-locked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If the Tunnel Breaks While Locked
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-to-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day-to-Day
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,266 +2590,140 @@
 
 
 
-<h1 id="cli-command-reference">CLI Command Reference</h1>
-<p>This is a task-oriented map of common EasyRunner commands. Use <code>--help</code> on any command for current options.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>--help<span class="w">         </span><span class="c1"># (1)!</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>server<span class="w"> </span>--help<span class="w">  </span><span class="c1"># (2)!</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>er<span class="w"> </span>app<span class="w"> </span>--help<span class="w">     </span><span class="c1"># (3)!</span>
+<h1 id="secure-access-with-the-mesh-vpn">Secure Access with the Mesh VPN</h1>
+<p>The mesh is an optional private network between your machine and your EasyRunner web hosts, built on <a href="https://www.wireguard.com/">WireGuard</a>. Its main purpose is to let you lock SSH down to that private network so port 22 is no longer reachable from the public internet, while HTTP/HTTPS stay open for your apps.</p>
+<div class="admonition note">
+<p class="admonition-title">Optional and advanced</p>
+<p>The mesh is not required for the normal install → deploy path. Reach for it when you want to reduce your servers' SSH attack surface. The mesh CLI is currently developed and tested on macOS.</p>
+</div>
+<h2 id="what-problem-it-solves">What Problem It Solves</h2>
+<p>A server with SSH open to the internet is a constant target for port scanners, brute-force attempts, and credential stuffing. The mesh lets you move SSH off the public internet entirely: after you lock a server, <code>sshd</code> only answers on the private WireGuard interface, and the public port 22 shows as filtered to the outside world.</p>
+<h2 id="how-it-works">How It Works</h2>
+<p>EasyRunner builds a <strong>hub-and-spoke</strong> WireGuard network. Your machine (the CLI) is the hub; each server you join is a spoke.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>        ┌──────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        │  Your machine (CLI hub)  │  10.99.0.254
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        └────────────┬─────────────┘
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                     │ WireGuard (UDP 51820)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        ┌────────────┼─────────────┐
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ▼            ▼             ▼
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ┌─────────┐  ┌─────────┐   ┌─────────┐
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   │ server  │  │ server  │   │ server  │
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>   │10.99.0.1│  │10.99.0.2│   │10.99.0.3│
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>   └─────────┘  └─────────┘   └─────────┘
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Topology</td>
+<td>Hub-and-spoke; your machine is the hub, servers are spokes</td>
+</tr>
+<tr>
+<td>Mesh subnet</td>
+<td><code>10.99.0.0/24</code></td>
+</tr>
+<tr>
+<td>Your machine's mesh IP</td>
+<td><code>10.99.0.254</code></td>
+</tr>
+<tr>
+<td>Server mesh IPs</td>
+<td>Assigned from <code>10.99.0.1</code> upward as servers join</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>WireGuard over UDP port <code>51820</code></td>
+</tr>
+<tr>
+<td>Local interface</td>
+<td><code>wg0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Once a server is locked, EasyRunner automatically routes its SSH commands (<code>er app deploy</code>, <code>er app logs</code>, etc.) over the server's mesh IP. You do not change how you run commands.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>The mesh needs the <code>wireguard-tools</code> package on your machine. Check and install prerequisites with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>doctor<span class="w">        </span><span class="c1"># (1)!</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>doctor<span class="w"> </span>--fix<span class="w">  </span><span class="c1"># (2)!</span>
 </span></code></pre></div>
 <ol>
-<li>Top-level CLI help and global options.</li>
-<li>Web-host/server commands.</li>
-<li>App deployment and operations commands.</li>
+<li>Reports whether CLI prerequisites such as <code>wireguard-tools</code> are installed.</li>
+<li>Attempts to install any that are missing.</li>
 </ol>
-<details class="abstract" open="open">
-<summary>Setup</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>First-run setup</td>
-<td><code>er setup</code></td>
-</tr>
-<tr>
-<td>Non-interactive server mode setup</td>
-<td><code>er setup --mode server</code></td>
-</tr>
-<tr>
-<td>Show config</td>
-<td><code>er config show</code></td>
-</tr>
-<tr>
-<td>Check CLI prerequisites</td>
-<td><code>er doctor</code></td>
-</tr>
-<tr>
-<td>Install missing prerequisites</td>
-<td><code>er doctor --fix</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract">
-<summary>License</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Install license</td>
-<td><code>er license install &lt;file.jwt&gt;</code></td>
-</tr>
-<tr>
-<td>Show license</td>
-<td><code>er license status</code></td>
-</tr>
-<tr>
-<td>Validate license</td>
-<td><code>er license validate</code></td>
-</tr>
-<tr>
-<td>Remove license</td>
-<td><code>er license remove</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract">
-<summary>Links</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Link GitHub</td>
-<td><code>er link github</code></td>
-</tr>
-<tr>
-<td>Link Hetzner</td>
-<td><code>er link hetzner &lt;project&gt; --api-key &lt;token&gt;</code></td>
-</tr>
-<tr>
-<td>Link Cloudflare</td>
-<td><code>er link cloudflare &lt;account&gt; --api-token &lt;token&gt;</code></td>
-</tr>
-<tr>
-<td>Diagnose all links</td>
-<td><code>er link doctor</code></td>
-</tr>
-<tr>
-<td>Show one link's status</td>
-<td><code>er link &lt;service&gt; --status</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract" open="open">
-<summary>Servers</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Add existing server</td>
-<td><code>er server add &lt;name&gt; &lt;ip-or-hostname&gt;</code></td>
-</tr>
-<tr>
-<td>Create Hetzner server</td>
-<td><code>er server create &lt;name&gt; hetzner</code></td>
-</tr>
-<tr>
-<td>Show generated SSH key</td>
-<td><code>er server show-ssh-key &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Test SSH</td>
-<td><code>er server ssh-connect-test &lt;name&gt; --username &lt;user&gt;</code></td>
-</tr>
-<tr>
-<td>Initialize web host</td>
-<td><code>er server init &lt;name&gt; --username &lt;user&gt;</code></td>
-</tr>
-<tr>
-<td>Run health diagnostics</td>
-<td><code>er server doctor &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Auto-fix server issues</td>
-<td><code>er server doctor &lt;name&gt; --fix</code></td>
-</tr>
-<tr>
-<td>Show operational status</td>
-<td><code>er server status &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Reapply firewall policy</td>
-<td><code>er server reapply-firewall &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Security scan</td>
-<td><code>er server security-scan &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Show Caddy logs</td>
-<td><code>er server logs &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td>Show Fail2Ban status</td>
-<td><code>er server fail2ban-status &lt;name&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract" open="open">
-<summary>Apps</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Add app</td>
-<td><code>er app add &lt;app&gt; &lt;server&gt; &lt;repo-url&gt; --custom-domain &lt;domain&gt;</code></td>
-</tr>
-<tr>
-<td>Update app</td>
-<td><code>er app update-details &lt;app&gt; &lt;server&gt; [options]</code></td>
-</tr>
-<tr>
-<td>Deploy app</td>
-<td><code>er app deploy &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Deploy branch</td>
-<td><code>er app deploy &lt;app&gt; &lt;server&gt; --branch &lt;branch&gt;</code></td>
-</tr>
-<tr>
-<td>Show app details</td>
-<td><code>er app show-details &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Show app status</td>
-<td><code>er app status &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Show app logs</td>
-<td><code>er app logs &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Start app</td>
-<td><code>er app start &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Stop app</td>
-<td><code>er app stop &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Restart app</td>
-<td><code>er app restart &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Remove app</td>
-<td><code>er app remove &lt;app&gt; &lt;server&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract">
-<summary>App Secrets</summary>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Set secret</td>
-<td><code>er app secret set &lt;app&gt; &lt;NAME&gt;</code></td>
-</tr>
-<tr>
-<td>Generate secret</td>
-<td><code>er app secret generate &lt;app&gt; &lt;NAME&gt;</code></td>
-</tr>
-<tr>
-<td>Get secret</td>
-<td><code>er app secret get &lt;app&gt; &lt;NAME&gt;</code></td>
-</tr>
-<tr>
-<td>List secrets</td>
-<td><code>er app secret list &lt;app&gt;</code></td>
-</tr>
-<tr>
-<td>Delete secret</td>
-<td><code>er app secret delete &lt;app&gt; &lt;NAME&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="abstract">
-<summary>Mesh (Secure Access)</summary>
-<p>An optional WireGuard mesh for private admin access and SSH lockdown. Not required for the normal first deployment path — see <a href="../../servers/mesh/">Secure Access with the Mesh VPN</a>.</p>
+<p>On macOS you can also install it directly with <code>brew install wireguard-tools</code>. Mesh commands require <code>sudo</code> because they bring network interfaces up and down; the CLI prompts for it when needed.</p>
+<h2 id="1-initialize-the-mesh">1. Initialize the Mesh</h2>
+<p>Run this once on your machine. It generates the CLI's WireGuard keypair and brings up the local <code>wg0</code> interface.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>init
+</span></code></pre></div>
+<p>The output shows the mesh subnet, the listen port, and your machine's mesh IP (<code>10.99.0.254</code>).</p>
+<h2 id="2-join-a-server">2. Join a Server</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>join<span class="w"> </span>my-server
+</span></code></pre></div>
+<p>Joining a registered server does several things for you:</p>
+<ul>
+<li>Installs and starts WireGuard on the server.</li>
+<li>Adds the server as a peer on your local <code>wg0</code> interface and assigns it a mesh IP.</li>
+<li>Opens UDP <code>51820</code> on the server's host firewall <strong>and</strong> on the cloud-provider firewall. For Hetzner, EasyRunner reconciles the cloud firewall automatically (best-effort; it warns if it can't, for example when no Hetzner link is present).</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Backfilling firewall rules</p>
+<p>If a server was initialized by an older CLI version and is missing mesh-related firewall rules, run <a href="../operations/#reapply-firewall-policy"><code>er server reapply-firewall my-server</code></a>.</p>
+</div>
+<h2 id="3-check-status-and-health">3. Check Status and Health</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>status<span class="w">   </span><span class="c1"># (1)!</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>er<span class="w"> </span>mesh<span class="w"> </span>doctor<span class="w">   </span><span class="c1"># (2)!</span>
+</span></code></pre></div>
+<ol>
+<li>Lists the mesh subnet, listen port, and every peer with its mesh IP, endpoint, and key. Your machine (the hub) is shown first.</li>
+<li>Diagnoses mesh health: <code>wireguard-tools</code> installed, mesh initialized, interface up, stored config in sync with the live interface, and — per peer — that a route is installed and a handshake was seen recently.</li>
+</ol>
+<p>Confirm the tunnel is healthy with <code>er mesh status</code> and that you can reach the server over its mesh IP <strong>before</strong> locking SSH down.</p>
+<h2 id="4-lock-ssh-to-the-mesh">4. Lock SSH to the Mesh</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>lock<span class="w"> </span>my-server
+</span></code></pre></div>
+<p>After this, the server's firewall only accepts SSH on the <code>wg0</code> interface. Public port 22 becomes unreachable from the internet; ports 80 and 443 stay open. EasyRunner routes its own SSH for the server over the mesh from this point on.</p>
+<div class="admonition warning">
+<p class="admonition-title">Safety: the dead-man's switch</p>
+<p><code>er mesh lock</code> arms a timer on the server that automatically reverts the firewall if no WireGuard handshake is seen within roughly 150 seconds. A broken tunnel therefore re-opens public SSH on its own rather than locking you out permanently. The threshold is wider than WireGuard's natural rekey interval, so a healthy but idle tunnel still passes.</p>
+</div>
+<p>Use <code>er mesh lock my-server --yes</code> to skip the confirmation prompt in scripts.</p>
+<h2 id="5-reopen-public-ssh">5. Reopen Public SSH</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>unlock<span class="w"> </span>my-server
+</span></code></pre></div>
+<p>Use this when you need public SSH back — for example before rotating keys or decommissioning the mesh on that server. While the lockdown is in force this command reaches the server over the mesh IP, so a healthy tunnel is required.</p>
+<h2 id="if-the-tunnel-breaks-while-locked">If the Tunnel Breaks While Locked</h2>
+<p>The dead-man's switch from <code>er mesh lock</code> reverts the firewall automatically if no handshake is observed within the freshness window. If you need access sooner, open a root shell through your VPS provider's web console / VNC and run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>iptables<span class="w"> </span>-D<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span>wg0<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</span></code></pre></div>
+<p>Then SSH back in over the public IP and run <code>er mesh unlock my-server</code> from the CLI to clear the local lockdown state.</p>
+<h2 id="day-to-day">Day-to-Day</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After a reboot</label><label for="__tabbed_1_2">Pause without destroying</label><label for="__tabbed_1_3">Remove a server</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>macOS does not persist the WireGuard interface across reboots. If <code>er mesh doctor</code> reports the interface is down, bring it back up:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>up
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Bring the local interface down without losing the mesh config or keys:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>down
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>er<span class="w"> </span>mesh<span class="w"> </span>up<span class="w">    </span><span class="c1"># bring it back later</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>leave<span class="w"> </span>my-server
+</span></code></pre></div>
+<p>This stops WireGuard on the server, removes the peer locally, and removes the UDP <code>51820</code> firewall rule (including the cloud-provider rule).</p>
+</div>
+</div>
+</div>
+<h2 id="command-summary">Command Summary</h2>
 <table>
 <thead>
 <tr>
@@ -2576,23 +2737,15 @@
 <td><code>er mesh init</code></td>
 </tr>
 <tr>
-<td>Bring the local interface up</td>
-<td><code>er mesh up</code></td>
+<td>Bring the local interface up / down</td>
+<td><code>er mesh up</code> / <code>er mesh down</code></td>
 </tr>
 <tr>
-<td>Bring the local interface down</td>
-<td><code>er mesh down</code></td>
+<td>Join / remove a server</td>
+<td><code>er mesh join &lt;server&gt;</code> / <code>er mesh leave &lt;server&gt;</code></td>
 </tr>
 <tr>
-<td>Join a server to the mesh</td>
-<td><code>er mesh join &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Remove a server from the mesh</td>
-<td><code>er mesh leave &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Show mesh status and peers</td>
+<td>Show status and peers</td>
 <td><code>er mesh status</code></td>
 </tr>
 <tr>
@@ -2600,16 +2753,12 @@
 <td><code>er mesh doctor</code></td>
 </tr>
 <tr>
-<td>Restrict SSH to the mesh</td>
-<td><code>er mesh lock &lt;server&gt;</code></td>
-</tr>
-<tr>
-<td>Reopen public SSH</td>
-<td><code>er mesh unlock &lt;server&gt;</code></td>
+<td>Lock / unlock SSH</td>
+<td><code>er mesh lock &lt;server&gt;</code> / <code>er mesh unlock &lt;server&gt;</code></td>
 </tr>
 </tbody>
 </table>
-</details>
+<p>See the <a href="../../reference/commands/">CLI Command Reference</a> for the full command list.</p>
 
 
 
@@ -2649,7 +2798,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../recipes/nextjs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploy a Next.js App">
+          <a href="../operations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Server Operations">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2659,20 +2808,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Deploy a Next.js App
+                Server Operations
               </div>
             </div>
           </a>
         
         
           
-          <a href="../compose-labels/" class="md-footer__link md-footer__link--next" aria-label="Next: Compose-Format Files and Labels">
+          <a href="../../apps/add-app/" class="md-footer__link md-footer__link--next" aria-label="Next: Add an App">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Compose-Format Files and Labels
+                Add an App
               </div>
             </div>
             <div class="md-footer__button md-icon">

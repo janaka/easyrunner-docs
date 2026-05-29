@@ -1382,6 +1382,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2541,13 +2569,13 @@
 <p>er link hetzner default --api-key <hetzner-api-token>  # (1)!
   er server create my-first-server hetzner               # (2)!
   er server init my-first-server --username root          # (3)!
-  er server verify my-first-server                       # (4)!
+  er server doctor my-first-server                       # (4)!
     ```</p>
 <ol>
 <li>Stores a Hetzner API token in your keyring.</li>
 <li>Creates and registers a Hetzner server.</li>
 <li>Installs the EasyRunner web-host stack.</li>
-<li>Checks the server setup.</li>
+<li>Runs health-check diagnostics on the web host.</li>
 </ol>
 <p>!!! info "What happens"
     EasyRunner handles the cloud provisioning step, then the server joins the same web-host lifecycle as any manually provisioned Ubuntu server.</p>
@@ -2561,19 +2589,19 @@
 <p>er server add my-first-server <server-ip>        # (1)!
   er server show-ssh-key my-first-server           # (2)!
   er server init my-first-server --username root   # (3)!
-  er server verify my-first-server                 # (4)!
+  er server doctor my-first-server                 # (4)!
     ```</p>
 <ol>
 <li>Registers the Ubuntu server in EasyRunner and creates a dedicated SSH key.</li>
 <li>Prints the public key. Add it to <code>authorized_keys</code> or your provider's SSH-key UI before initialization.</li>
 <li>Installs the EasyRunner web-host stack.</li>
-<li>Checks the server setup.</li>
+<li>Runs health-check diagnostics on the web host.</li>
 </ol>
 <p>!!! info "What happens"
     You own the provisioning step. EasyRunner takes over once its generated SSH key can access the server.</p>
 <h2 id="3-link-github">3. Link GitHub</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w">  </span><span class="c1"># (1)!</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>link<span class="w"> </span>status<span class="w">  </span><span class="c1"># (2)!</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>link<span class="w"> </span>doctor<span class="w">  </span><span class="c1"># (2)!</span>
 </span></code></pre></div>
 <ol>
 <li>Starts GitHub device-flow auth and stores the token in your keyring.</li>
@@ -2605,9 +2633,9 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appNodeType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (3)!</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appFramework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.appContainerInternalPort</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (4)!</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (3)!</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (4)!</span>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="nt">networks</span><span class="p">:</span>
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="nt">easyrunner_proxy_network</span><span class="p">:</span>

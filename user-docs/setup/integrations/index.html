@@ -1338,6 +1338,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2423,11 +2451,12 @@
 </span></code></pre></div>
 <p>Use Cloudflare linking when you want EasyRunner to create or update DNS records for app domains.</p>
 <h2 id="status-and-unlinking">Status and Unlinking</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>link<span class="w"> </span>status
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>link<span class="w"> </span>doctor
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w"> </span>--status
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>er<span class="w"> </span>link<span class="w"> </span>hetzner<span class="w"> </span>default<span class="w"> </span>--status
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--status
 </span></code></pre></div>
+<p><code>er link doctor</code> reports health across all linked services at once. The per-service <code>--status</code> flags inspect a single integration.</p>
 <p>Unlink a service when you want EasyRunner to forget the stored credential:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w"> </span>--unlink
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>er<span class="w"> </span>link<span class="w"> </span>hetzner<span class="w"> </span>default<span class="w"> </span>--unlink

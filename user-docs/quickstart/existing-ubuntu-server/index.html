@@ -1327,6 +1327,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2400,9 +2428,9 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>server<span class="w"> </span>show-ssh-key<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Add the printed public key to the server. For example, add it to <code>~/.ssh/authorized_keys</code> for the user you will pass to <code>er server init</code>, or add it through your cloud provider's SSH-key UI.</p>
-<p>Then initialize and verify:</p>
+<p>Then initialize and check it:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>server<span class="w"> </span>init<span class="w"> </span>my-server<span class="w"> </span>--username<span class="w"> </span>root
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>server<span class="w"> </span>verify<span class="w"> </span>my-server
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>server<span class="w"> </span>doctor<span class="w"> </span>my-server
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">What happens</p>

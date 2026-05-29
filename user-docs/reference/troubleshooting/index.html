@@ -1245,6 +1245,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1887,6 +1915,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#mesh-secure-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh / Secure Access
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2457,6 +2496,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#mesh-secure-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh / Secure Access
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2513,7 +2563,7 @@
 <summary>Cloudflare did not create DNS</summary>
 <p>Check the Cloudflare link, token scopes, and whether the domain belongs to that account:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--status
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>er<span class="w"> </span>link<span class="w"> </span>status
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>er<span class="w"> </span>link<span class="w"> </span>doctor
 </span></code></pre></div>
 </details>
 <h2 id="ssh-and-server-init">SSH and Server Init</h2>
@@ -2525,11 +2575,12 @@
 </span></code></pre></div>
 </details>
 <details class="question">
-<summary>Server verification fails</summary>
-<p>Re-run verification and inspect server logs:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>server<span class="w"> </span>verify<span class="w"> </span>my-server
+<summary>Server health checks fail</summary>
+<p>Re-run the diagnostics and inspect server logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>server<span class="w"> </span>doctor<span class="w"> </span>my-server
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span>
 </span></code></pre></div>
+<p>Add <code>--fix</code> to attempt automatic remediation where supported.</p>
 </details>
 <h2 id="dns-and-https">DNS and HTTPS</h2>
 <details class="question">
@@ -2572,7 +2623,30 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span>
 </span></code></pre></div>
-<p>Confirm <code>xyz.easyrunner.appContainerInternalPort</code> matches the port your app listens on inside the container.</p>
+<p>Confirm <code>xyz.easyrunner.service.port</code> matches the port your app listens on inside the container.</p>
+</details>
+<h2 id="mesh-secure-access">Mesh / Secure Access</h2>
+<details class="question">
+<summary><code>wireguard-tools</code> is missing</summary>
+<p>Check and install CLI prerequisites:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>er<span class="w"> </span>doctor
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>er<span class="w"> </span>doctor<span class="w"> </span>--fix
+</span></code></pre></div>
+</details>
+<details class="question">
+<summary>Mesh interface is down after a reboot</summary>
+<p>macOS does not persist the WireGuard interface across reboots. Bring it back up:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>up
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>er<span class="w"> </span>mesh<span class="w"> </span>doctor
+</span></code></pre></div>
+</details>
+<details class="question">
+<summary>A peer handshake is stale or a locked server is unreachable</summary>
+<p>Diagnose the mesh, then confirm UDP <code>51820</code> is open in the cloud-provider firewall:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>doctor
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>er<span class="w"> </span>mesh<span class="w"> </span>status
+</span></code></pre></div>
+<p>Re-running <code>er mesh join my-server</code> reconciles the server config and firewall rules. If a locked server's tunnel is fully broken, the lock's dead-man's switch re-opens public SSH automatically; see <a href="../../servers/mesh/#if-the-tunnel-breaks-while-locked">Secure Access with the Mesh VPN</a> for out-of-band recovery.</p>
 </details>
 
 

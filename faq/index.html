@@ -1228,6 +1228,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2096,6 +2124,17 @@
     <span class="md-ellipsis">
       
         How does EasyRunner handle SSH security?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-i-take-ssh-off-the-public-internet-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can I take SSH off the public internet entirely?
       
     </span>
   </a>
@@ -3191,6 +3230,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#can-i-take-ssh-off-the-public-internet-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can I take SSH off the public internet entirely?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#can-i-configure-firewalls-with-easyrunner" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3669,6 +3719,8 @@
 <p>During setup a dedicated user account is created for EasyRunner operational connections. We only use the root account credential during first server initialisation.</p>
 <p>We are considering moving to certificate based SSH auth to increase security by eliminating long lived credentials.</p>
 <p>The SSH Key for the easyrunner ops user can be rotated easily at anytime with a single CLI command.</p>
+<h3 id="can-i-take-ssh-off-the-public-internet-entirely">Can I take SSH off the public internet entirely?</h3>
+<p>Yes. EasyRunner includes an optional WireGuard mesh VPN. You build a private network between your machine and your servers with <code>er mesh</code>, then run <code>er mesh lock</code> to restrict SSH to that private network. After locking, port 22 is unreachable from the public internet while your apps (ports 80/443) stay reachable. A dead-man's switch automatically reopens SSH if the tunnel breaks, so you can't accidentally lock yourself out. See <a href="../user-docs/servers/mesh/">Secure Access with the Mesh VPN</a>.</p>
 <h3 id="can-i-configure-firewalls-with-easyrunner">Can I configure firewalls with EasyRunner?</h3>
 <p>Yes. EasyRunner configures an OS level (IPTables) during initialisation. See <a href="./blog/posts/easyrunner-secure-network-architecture">this post</a> for more details.</p>
 <h3 id="does-easyrunner-support-ssltls-certificates">Does EasyRunner support SSL/TLS certificates?</h3>
