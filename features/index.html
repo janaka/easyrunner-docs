@@ -1920,6 +1920,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#application-security-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application Security Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cicd-deploy-easily" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1968,6 +1979,28 @@
     <span class="md-ellipsis">
       
         Apps can be composed of several services
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypted-app-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encrypted App Secrets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-health-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Health Checks
       
     </span>
   </a>
@@ -2524,6 +2557,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#application-security-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application Security Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cicd-deploy-easily" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2572,6 +2616,28 @@
     <span class="md-ellipsis">
       
         Apps can be composed of several services
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypted-app-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encrypted App Secrets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-health-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Health Checks
       
     </span>
   </a>
@@ -2665,12 +2731,17 @@
 <p>Build a WireGuard mesh between your machine and your servers with <code>er mesh</code>, then lock SSH down to that private network so port 22 is no longer exposed to the public internet. A dead-man's switch guards against accidental lockout.</p>
 </li>
 <li>
+<h4 id="application-security-scanning">Application Security Scanning</h4>
+<hr />
+<p>Scan your deployed apps for information-disclosure vulnerabilities with a single <code>er server security-scan</code> command.</p>
+</li>
+<li>
 <h4 id="cicd-deploy-easily">CI/CD - Deploy Easily</h4>
 <hr />
-<p>Several CI/CD flows to securely deploy you application.</p>
-<p>CLI command trigger + web host build
-Git push trigger + web host build (coming)
-Git push trigger + Github Action build (coming)</p>
+<p>Multiple deploy flows to securely ship your application.</p>
+<p>Flow A: trigger from the CLI and build the image on the web host.</p>
+<p>Flow B: deploy a pre-built image from a container registry such as GHCR (private images supported).</p>
+<p>Git push trigger (coming). Git push + GitHub Action build (coming).</p>
 </li>
 <li>
 <h4 id="host-multiple-apps-on-a-single-server">Host Multiple Apps on a Single Server</h4>
@@ -2693,6 +2764,16 @@ Git push trigger + Github Action build (coming)</p>
 <p>Define your application's composition using as a Docker compose file. You can define your UI and public API containers as public. Internal service containers will be on the internal network only.</p>
 </li>
 <li>
+<h4 id="encrypted-app-secrets">Encrypted App Secrets</h4>
+<hr />
+<p>Store per-app secrets in your system keyring with <code>er app secret</code>. They are injected into your containers at deploy time and kept out of your repo and Compose files.</p>
+</li>
+<li>
+<h4 id="built-in-health-checks">Built-in Health Checks</h4>
+<hr />
+<p><code>er doctor</code> checks your local setup and <code>er server doctor</code> runs pass/fail diagnostics on a web host (container runtime, reverse proxy, firewall, connectivity) with remediation hints. <code>er server status</code> shows live runtime state, and missing CLI prerequisites install with <code>er doctor --fix</code>.</p>
+</li>
+<li>
 <h4 id="predictable-cost">Predictable Cost</h4>
 <hr />
 <p>You pick your cloud provider and server product hence know your where your cost is capped.</p>
@@ -2707,6 +2788,7 @@ Git push trigger + Github Action build (coming)</p>
 <h4 id="integrations">Integrations</h4>
 <hr />
 <p>Github: for automated secure CI/CD setup</p>
+<p>Hetzner: for automated server provisioning</p>
 <p>CloudFlare: for secure DNS record setup</p>
 </li>
 </ul>
