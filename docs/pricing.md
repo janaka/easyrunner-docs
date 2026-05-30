@@ -17,6 +17,8 @@ EasyRunner pricing is simple: **you pay for the number of apps you host**, count
 
     That's just **$6** a month
 
+    or **$14.40** per app a year
+
 -   #### Up to 20 apps
 
     ---
@@ -25,6 +27,8 @@ EasyRunner pricing is simple: **you pay for the number of apps you host**, count
 
     That's just **$12** a month
 
+    or **$7.20** per app a year
+
 -   #### Up to 50 apps
 
     ---
@@ -32,6 +36,8 @@ EasyRunner pricing is simple: **you pay for the number of apps you host**, count
     **$300** billed yearly
 
     That's just **$25** a month
+
+    or **$6** per app a year
 
 </div>
 
