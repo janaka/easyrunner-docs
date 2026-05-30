@@ -18,6 +18,35 @@ definitions:
       {{ page.meta.get("description", config.site_description) }}
     {%- endif -%}
 
+  # Page title with site name (used for og:title / twitter:title)
+  - &page_title_with_site_name >-
+    {%- if not page.is_homepage -%}
+      {{ page.meta.get("title", page.title) }} - {{ config.site_name }}
+    {%- else -%}
+      {{ config.site_name }}
+    {%- endif -%}
+
+# Meta tags injected into each page's <head>. REQUIRED — a custom layout only
+# emits the tags it declares here, so without this block the social plugin still
+# renders the card PNG but never points X/LinkedIn/Slack at it (no og:image).
+tags:
+
+  # Open Graph (LinkedIn, Slack, Facebook, …)
+  og:type: website
+  og:title: *page_title_with_site_name
+  og:description: *page_description
+  og:image: "{{ image.url }}"
+  og:image:type: "{{ image.type }}"
+  og:image:width: "{{ image.width }}"
+  og:image:height: "{{ image.height }}"
+  og:url: "{{ page.canonical_url }}"
+
+  # Twitter / X (falls back to og:* when absent, but be explicit)
+  twitter:card: summary_large_image
+  twitter:title: *page_title_with_site_name
+  twitter:description: *page_description
+  twitter:image: "{{ image.url }}"
+
 layers:
 
   # Background
