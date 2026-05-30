@@ -69,30 +69,30 @@ layers:
     background:
       image: "{{ layout.logo }}"
 
-  # Description – large bold centrepiece
-  - size: { width: 1088, height: 260 }
-    offset: { x: 56, y: 130 }
+  # Title – prominent bold heading, FIRST (top of the content area)
+  - size: { width: 1088, height: 150 }
+    offset: { x: 56, y: 190 }
     typography:
-      content: *page_description
+      content: *page_title
       align: start
       color: "#ffffff"
       line:
-        amount: 4
-        height: 1.15
+        amount: 2
+        height: 1.2
       font:
         family: Roboto Mono
         style: Bold
 
-  # Title – bottom
-  - size: { width: 1088, height: 80 }
-    offset: { x: 56, y: 410 }
+  # Description – supporting text, SECOND (below the title)
+  - size: { width: 1088, height: 200 }
+    offset: { x: 56, y: 350 }
     typography:
-      content: *page_title
+      content: *page_description
       align: start
       color: "#aaaaaa"
       line:
-        amount: 2
-        height: 1.5
+        amount: 4
+        height: 1.25
       font:
         family: Roboto Mono
         style: Regular
