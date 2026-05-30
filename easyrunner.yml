@@ -32,10 +32,15 @@ definitions:
 tags:
 
   # Open Graph (LinkedIn, Slack, Facebook, …)
+  # NOTE: og:image carries a "?v=N" cache-buster. LinkedIn (and X) cache the
+  # downloaded image keyed on this URL and never re-fetch it on their own — the
+  # Post Inspector only re-scrapes metadata, not the image rendition. The card
+  # filename is stable across deploys, so whenever the card DESIGN changes, bump
+  # this version (v2 → v3 …) to force the networks to download the fresh image.
   og:type: website
   og:title: *page_title_with_site_name
   og:description: *page_description
-  og:image: "{{ image.url }}"
+  og:image: "{{ image.url }}?v=2"
   og:image:type: "{{ image.type }}"
   og:image:width: "{{ image.width }}"
   og:image:height: "{{ image.height }}"
@@ -45,7 +50,7 @@ tags:
   twitter:card: summary_large_image
   twitter:title: *page_title_with_site_name
   twitter:description: *page_description
-  twitter:image: "{{ image.url }}"
+  twitter:image: "{{ image.url }}?v=2"
 
 layers:
 
