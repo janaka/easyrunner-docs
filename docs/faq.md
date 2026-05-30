@@ -32,21 +32,21 @@ Think of the CLI as your escape hatch for independence by design.
 
 ### How much does EasyRunner cost?
 
-EasyRunner has predictable pricing with no hidden fees or surprise charges. You pay only for your server costs from your VPS provider, plus EasyRunner's per server license cost. There are no usage-based billing surprises. We haven't announced pricing yet but aim to be affordable affordable.
+EasyRunner has predictable pricing with no hidden fees or surprise charges. You pay only for your server costs from your VPS provider, plus EasyRunner's per-app license cost. Pricing is based on the number of apps you host across all your servers — not on server size, bandwidth, or usage — so there are no usage-based billing surprises. See the [Pricing](pricing.md) page for current tiers.
 
 ### How does EasyRunner compare to Vercel, Railway, Render, or Fly.io pricing?
 
-EasyRunner typically costs significantly less than platforms like [Vercel](https://vercel.com), [Railway](https://railway.app), [Render](https://render.com), or [Fly.io](https://fly.io). While those platforms charge per request, bandwidth, or compute time with costs that can spike unexpectedly, EasyRunner uses fixed monthly pricing based on your server size.
+EasyRunner typically costs significantly less than platforms like [Vercel](https://vercel.com), [Railway](https://railway.app), [Render](https://render.com), or [Fly.io](https://fly.io). While those platforms charge per request, bandwidth, or compute time with costs that can spike unexpectedly, EasyRunner charges a simple per-app license fee while you pay your VPS provider directly for compute. Your bill doesn't spike with traffic.
 
 ### Are there any hidden costs or usage limits?
 
-No. EasyRunner is designed without rug-pulls or surprise charges. You know exactly what you'll pay each month based on your server resources, with no unexpected overage fees for bandwidth, build minutes, or function invocations.
+No. EasyRunner is designed without rug-pulls or surprise charges. You know exactly what you'll pay: a per-app license fee, plus whatever your VPS provider charges for compute. There are no unexpected overage fees for bandwidth, build minutes, or function invocations.
 
 When you purchase a license you get upgrades for a year. If you decide not to renew the license, no problem you get to use the version you have for ever.
 
 ### Can I host multiple projects on one server?
 
-Yes. Unlike platforms like [Vercel](https://vercel.com), [Railway](https://railway.app), [Render](https://render.com), or [Fly.io](https://fly.io) that charge per project, EasyRunner lets you deploy an unlimited number of SaaS applications on a single Ubuntu server, significantly reducing your hosting costs while maintaining security isolation between projects. Server memory and CPU resources are your limiting factor.
+Yes. You can deploy many apps on a single Ubuntu server, limited only by its memory and CPU, with security isolation between projects. Because you pay your VPS provider directly for compute, packing more apps onto a server lowers your compute bill. EasyRunner's own price is the same however you arrange your apps across servers — it's based on the total number of apps you host, so you're free to choose whatever server layout works best for you.
 
 ## Technical Questions
 

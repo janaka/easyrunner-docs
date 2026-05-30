@@ -15,7 +15,7 @@ er license status
 er license validate
 ```
 
-The status output shows the licensed customer, server limit, issue date, and update period.
+The status output shows the licensed customer, app limit, issue date, and update period.
 
 ## Replace a License
 
@@ -35,5 +35,5 @@ er license install ~/Downloads/new-easyrunner-license.jwt
     er license status
     ```
 
-??? question "I reached my server limit"
-    Remove an unused server from EasyRunner or upgrade your license before adding another web host.
+??? question "I reached my app limit"
+    Remove an unused app from EasyRunner or upgrade your license before adding another app.

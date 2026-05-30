@@ -129,6 +129,7 @@ nav:
       - Compose-Format Files and Labels: user-docs/reference/compose-labels.md
       - Troubleshooting: user-docs/reference/troubleshooting.md
   - Features: features.md
+  - Pricing: pricing.md
   - FAQ: faq.md
   - Blog:
     - blog/index.md
