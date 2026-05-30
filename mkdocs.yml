@@ -41,6 +41,11 @@ extra_javascript:
 plugins:
   - search
   - social:
+      # Versioned output dir so the card URLs change wholesale when the design
+      # changes. LinkedIn/X cache card images by URL and won't re-fetch a path
+      # they've already cached (and they can normalize away a "?v=" query) — a
+      # new *path* is the only reliable cache-bust. Bump v2 → v3 on redesign.
+      cards_dir: assets/images/social/v2
       cards_layout_dir: material/overrides
       cards_layout: easyrunner
       cards_layout_options:
