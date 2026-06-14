@@ -133,8 +133,8 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
     er doctor --fix
     ```
 
-??? question "Mesh interface is down after a reboot"
-    macOS does not persist the WireGuard interface across reboots. Bring it back up:
+??? question "Mesh interface is down after a reboot or sleep"
+    macOS does not persist the WireGuard interface across reboots or sleep/wake cycles. The mesh is intentionally not auto-restored after those events, so run `er mesh up` manually when you need it again:
 
     ```bash
     er mesh up

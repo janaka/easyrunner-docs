@@ -122,9 +122,9 @@ Then SSH back in over the public IP and run `er mesh unlock my-server` from the 
 
 ## Day-to-Day
 
-=== "After a reboot"
+=== "After a reboot or sleep"
 
-    macOS does not persist the WireGuard interface across reboots. If `er mesh doctor` reports the interface is down, bring it back up:
+    macOS does not persist the WireGuard interface across reboots or sleep/wake cycles. The mesh does not auto-start after those events; this is by design as ER doesn't implement functionality yet to make this happen. If you cannot connect to your server and `er mesh doctor` reports the interface is down, bring it back up manually:
 
     ```bash
     er mesh up
