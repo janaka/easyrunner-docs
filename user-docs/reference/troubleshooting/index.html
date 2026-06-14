@@ -2693,8 +2693,8 @@
 </span></code></pre></div>
 </details>
 <details class="question">
-<summary>Mesh interface is down after a reboot</summary>
-<p>macOS does not persist the WireGuard interface across reboots. Bring it back up:</p>
+<summary>Mesh interface is down after a reboot or sleep</summary>
+<p>macOS does not persist the WireGuard interface across reboots or sleep/wake cycles. The mesh is intentionally not auto-restored after those events, so run <code>er mesh up</code> manually when you need it again:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>up
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>er<span class="w"> </span>mesh<span class="w"> </span>doctor
 </span></code></pre></div>

@@ -2762,10 +2762,10 @@
 </span></code></pre></div>
 <p>Then SSH back in over the public IP and run <code>er mesh unlock my-server</code> from the CLI to clear the local lockdown state.</p>
 <h2 id="day-to-day">Day-to-Day</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After a reboot</label><label for="__tabbed_1_2">Pause without destroying</label><label for="__tabbed_1_3">Remove a server</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After a reboot or sleep</label><label for="__tabbed_1_2">Pause without destroying</label><label for="__tabbed_1_3">Remove a server</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>macOS does not persist the WireGuard interface across reboots. If <code>er mesh doctor</code> reports the interface is down, bring it back up:</p>
+<p>macOS does not persist the WireGuard interface across reboots or sleep/wake cycles. The mesh does not auto-start after those events; this is by design as ER doesn't implement functionality yet to make this happen. If you cannot connect to your server and <code>er mesh doctor</code> reports the interface is down, bring it back up manually:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>er<span class="w"> </span>mesh<span class="w"> </span>up
 </span></code></pre></div>
 </div>
