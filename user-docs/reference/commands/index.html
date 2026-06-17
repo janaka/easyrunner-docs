@@ -1102,6 +1102,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1821,6 +1849,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../troubleshooting/" class="md-nav__link">
         
   
@@ -2367,11 +2423,13 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>--help<span class="w">         </span><span class="c1"># (1)!</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>server<span class="w"> </span>--help<span class="w">  </span><span class="c1"># (2)!</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>er<span class="w"> </span>app<span class="w"> </span>--help<span class="w">     </span><span class="c1"># (3)!</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>er<span class="w"> </span>backup<span class="w"> </span>--help<span class="w">  </span><span class="c1"># (4)!</span>
 </span></code></pre></div>
 <ol>
 <li>Top-level CLI help and global options.</li>
 <li>Web-host/server commands.</li>
 <li>App deployment and operations commands.</li>
+<li>Control-plane backup and restore commands.</li>
 </ol>
 <details class="abstract" open="open">
 <summary>Setup</summary>
@@ -2458,12 +2516,24 @@
 <td><code>er link cloudflare &lt;account&gt; --api-token &lt;token&gt;</code></td>
 </tr>
 <tr>
+<td>List linked accounts on macOS</td>
+<td><code>er link list</code></td>
+</tr>
+<tr>
 <td>Diagnose all links</td>
 <td><code>er link doctor</code></td>
 </tr>
 <tr>
-<td>Show one link's status</td>
-<td><code>er link &lt;service&gt; --status</code></td>
+<td>Show GitHub link status</td>
+<td><code>er link github --status</code></td>
+</tr>
+<tr>
+<td>Show named provider status</td>
+<td><code>er link &lt;provider&gt; &lt;account&gt; --status</code></td>
+</tr>
+<tr>
+<td>Unlink a service/account</td>
+<td><code>er link &lt;service&gt; [account] --unlink</code></td>
 </tr>
 </tbody>
 </table>
@@ -2615,6 +2685,105 @@
 <tr>
 <td>Delete secret</td>
 <td><code>er app secret delete &lt;app&gt; &lt;NAME&gt;</code></td>
+</tr>
+<tr>
+<td>Push secrets to destinations</td>
+<td><code>er app secret push &lt;app&gt; &lt;server&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="abstract" open="open">
+<summary>Control-Plane Backup</summary>
+<p>Backs up EasyRunner's local control-plane state to an encrypted restic repository in Cloudflare R2. See <a href="../../setup/backup-restore/">Control-Plane Backup and Restore</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initialise backup destination</td>
+<td><code>er backup init [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>Run backup now</td>
+<td><code>er backup run [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>Preview backup</td>
+<td><code>er backup run [cloudflare-account] --dry-run</code></td>
+</tr>
+<tr>
+<td>Show backup status</td>
+<td><code>er backup status [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>List snapshots</td>
+<td><code>er backup list [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>Restore latest snapshot</td>
+<td><code>er backup restore [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>Restore specific snapshot</td>
+<td><code>er backup restore [cloudflare-account] --snapshot &lt;id&gt;</code></td>
+</tr>
+<tr>
+<td>Preview restore</td>
+<td><code>er backup restore [cloudflare-account] --dry-run</code></td>
+</tr>
+<tr>
+<td>Force restore over configured host</td>
+<td><code>er backup restore [cloudflare-account] --force</code></td>
+</tr>
+<tr>
+<td>Diagnose backup setup</td>
+<td><code>er backup doctor [cloudflare-account]</code></td>
+</tr>
+<tr>
+<td>Fix backup prerequisites</td>
+<td><code>er backup doctor [cloudflare-account] --fix</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="abstract">
+<summary>Audit</summary>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>View audit trail</td>
+<td><code>er audit</code></td>
+</tr>
+<tr>
+<td>Show recent N events</td>
+<td><code>er audit --limit &lt;n&gt;</code></td>
+</tr>
+<tr>
+<td>Filter by event type</td>
+<td><code>er audit --event action</code></td>
+</tr>
+<tr>
+<td>Verify audit chain</td>
+<td><code>er audit --verify</code></td>
+</tr>
+<tr>
+<td>View secret-vault audit</td>
+<td><code>er secrets_vault audit</code></td>
+</tr>
+<tr>
+<td>Verify secret-vault audit</td>
+<td><code>er secrets_vault audit --verify</code></td>
 </tr>
 </tbody>
 </table>

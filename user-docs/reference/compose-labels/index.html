@@ -16,7 +16,7 @@
         <link rel="prev" href="../commands/">
       
       
-        <link rel="next" href="../troubleshooting/">
+        <link rel="next" href="../audit/">
       
       
         
@@ -1102,6 +1102,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1893,6 +1921,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#build-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Arguments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#auto-injected-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1918,6 +1957,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2513,6 +2580,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#build-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Arguments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#auto-injected-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2678,6 +2756,19 @@
 </div>
 </div>
 </div>
+<h2 id="build-arguments">Build Arguments</h2>
+<p>Flow A passes standard Compose <code>build.args</code> through to <code>podman build</code>. Use this for build-time values such as <code>NEXT_PUBLIC_*</code> variables in Next.js apps.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nt">NEXT_PUBLIC_APP_URL</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://app.example.com&quot;</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Build args are not secrets</p>
+<p>Build arguments can be visible in image history and build logs. Do not use them for passwords, tokens, or private keys. Store sensitive runtime values with <a href="../../apps/secrets/">App Secrets</a>.</p>
+</div>
 <h2 id="auto-injected-environment-variables">Auto-Injected Environment Variables</h2>
 <p>When EasyRunner deploys an app it injects a set of read-only metadata environment variables into every service container. You can reference them from your application or from the <code>environment:</code> block of your Compose-format file. They are available in both Flow A and Flow B.</p>
 <table>
@@ -2711,11 +2802,11 @@
 </tbody>
 </table>
 <p>These are plain environment variables, not secrets. EasyRunner injects them <em>before</em> your service's own <code>environment:</code> entries, so a service can override one by setting the same name. Use them to build absolute URLs, OAuth/OIDC callback URLs, and CORS allowlists without hardcoding your domain.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost/my-app:latest</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC_URL=${EASYRUNNER_APP_URL}</span><span class="w"> </span><span class="c1"># (1)!</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost/my-app:latest</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUBLIC_URL=${EASYRUNNER_APP_URL}</span><span class="w"> </span><span class="c1"># (1)!</span>
 </span></code></pre></div>
 <ol>
 <li>Resolves to <code>https://app.example.com</code> at deploy time.</li>
@@ -2786,13 +2877,13 @@
         
         
           
-          <a href="../troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting">
+          <a href="../audit/" class="md-footer__link md-footer__link--next" aria-label="Next: Audit Trail">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Troubleshooting
+                Audit Trail
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -16,7 +16,7 @@
         <link rel="prev" href="../license/">
       
       
-        <link rel="next" href="../../servers/create-hetzner-server/">
+        <link rel="next" href="../backup-restore/">
       
       
         
@@ -1195,6 +1195,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1902,6 +1930,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/troubleshooting/" class="md-nav__link">
         
   
@@ -2496,7 +2552,7 @@
 
 
 <h1 id="links-and-integrations">Links and Integrations</h1>
-<p>EasyRunner stores integration credentials in your system keyring. Link only the services you need for the path you are using.</p>
+<p>EasyRunner stores integration credentials in its encrypted secrets vault. Link only the services you need for the path you are using.</p>
 <h2 id="github">GitHub</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>link<span class="w"> </span>github
 </span></code></pre></div>
@@ -2509,13 +2565,15 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--api-token<span class="w"> </span>&lt;cloudflare-api-token&gt;
 </span></code></pre></div>
 <p>Use Cloudflare linking when you want EasyRunner to create or update DNS records for app domains.</p>
+<p>If you also use <a href="../backup-restore/">control-plane backups</a>, the same Cloudflare link is used for R2. Add <strong>Account -&gt; Workers R2 Storage -&gt; Edit</strong> to the token, in addition to the DNS permissions required for domain automation.</p>
 <h2 id="status-and-unlinking">Status and Unlinking</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>link<span class="w"> </span>doctor
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w"> </span>--status
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>er<span class="w"> </span>link<span class="w"> </span>hetzner<span class="w"> </span>default<span class="w"> </span>--status
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--status
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>link<span class="w"> </span>list
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w"> </span>--status
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>er<span class="w"> </span>link<span class="w"> </span>hetzner<span class="w"> </span>default<span class="w"> </span>--status
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--status
 </span></code></pre></div>
-<p><code>er link doctor</code> reports health across all linked services at once. The per-service <code>--status</code> flags inspect a single integration.</p>
+<p><code>er link doctor</code> reports health across all linked services at once. <code>er link list</code> shows linked account names on macOS, which is useful when several Cloudflare or Hetzner accounts are configured. The per-service <code>--status</code> flags inspect a single integration.</p>
 <p>Unlink a service when you want EasyRunner to forget the stored credential:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>link<span class="w"> </span>github<span class="w"> </span>--unlink
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>er<span class="w"> </span>link<span class="w"> </span>hetzner<span class="w"> </span>default<span class="w"> </span>--unlink
@@ -2523,7 +2581,7 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Keyring prompts</p>
-<p>Your OS may ask you to approve keyring access when EasyRunner reads stored credentials. That is expected.</p>
+<p>EasyRunner stores linked credentials in the encrypted secrets vault. Your OS may ask you to approve secret access for sensitive operations, but normal multi-secret commands should avoid prompting once per individual key.</p>
 </div>
 
 
@@ -2581,13 +2639,13 @@
         
         
           
-          <a href="../../servers/create-hetzner-server/" class="md-footer__link md-footer__link--next" aria-label="Next: Create a Hetzner Server">
+          <a href="../backup-restore/" class="md-footer__link md-footer__link--next" aria-label="Next: Control-Plane Backup and Restore">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Create a Hetzner Server
+                Control-Plane Backup and Restore
               </div>
             </div>
             <div class="md-footer__button md-icon">

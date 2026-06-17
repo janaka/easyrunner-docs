@@ -1102,6 +1102,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1757,6 +1785,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recommended-dockerfile-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Dockerfile Shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-easyrunner-configures-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What EasyRunner Configures Automatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-time-vs-runtime-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build-Time vs Runtime Environment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1893,6 +1954,34 @@
     
   
     Compose-Format Files and Labels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
   
 
     
@@ -2479,6 +2568,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recommended-dockerfile-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Dockerfile Shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-easyrunner-configures-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What EasyRunner Configures Automatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-time-vs-runtime-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build-Time vs Runtime Environment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2518,6 +2640,8 @@
 
 
 <h1 id="recipe-deploy-a-nextjs-app">Recipe: Deploy a Next.js App</h1>
+<p>EasyRunner runs Next.js using the official self-hosted <strong>Node.js server</strong> model: your app runs as a long-lived container, usually with <code>next start</code>, under systemd/Podman, with Caddy in front for HTTPS and Next.js-aware routing.</p>
+<p>It does not use OpenNext or serverless adapters for this path. Those tools are useful for platforms without a persistent Node server; EasyRunner is targeting the simpler VPS/container model.</p>
 <p>This recipe uses the public demo app as a starting point for a Flow A deployment.</p>
 <p>Demo repo: <a href="https://github.com/janaka/next-helloworld-app">https://github.com/janaka/next-helloworld-app</a></p>
 <h2 id="what-you-need">What You Need</h2>
@@ -2545,32 +2669,122 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NODE_ENV=production</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PORT=3000</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextjs</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nt">networks</span><span class="p">:</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="nt">easyrunner_proxy_network</span><span class="p">:</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">next_cache:/app/.next/cache</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextjs</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">  </span><span class="nt">next_cache</span><span class="p">:</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="nt">easyrunner_proxy_network</span><span class="p">:</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">ISR cache volume</p>
+<p>Apps using ISR or cache-heavy rendering need <code>.next/cache</code> mounted on a named volume so the cache survives redeploys. The example Compose file above already includes this. If you omit the volume, EasyRunner will warn you at deploy time that ISR is silently disabled. The exact path depends on your Dockerfile's working directory — <code>/app/.next/cache</code> for a <code>WORKDIR /app</code> image.</p>
+</div>
+<h2 id="recommended-dockerfile-shape">Recommended Dockerfile Shape</h2>
+<p>For production Next.js apps, prefer <code>output: "standalone"</code> in <code>next.config.js</code> and copy the standalone output into a small runtime image.</p>
+<div class="language-js highlight"><span class="filename">next.config.js</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cm">/** @type {import(&#39;next&#39;).NextConfig} */</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">nextConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nx">output</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;standalone&quot;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">};</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nextConfig</span><span class="p">;</span>
+</span></code></pre></div>
+<div class="language-dockerfile highlight"><span class="filename">Dockerfile</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:22-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">deps</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:22-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>deps<span class="w"> </span>/app/node_modules<span class="w"> </span>./node_modules
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:22-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">runner</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PORT</span><span class="o">=</span><span class="m">3000</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/public<span class="w"> </span>./public
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/.next/static<span class="w"> </span>./.next/static
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/.next/standalone<span class="w"> </span>./
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;server.js&quot;</span><span class="p">]</span>
+</span></code></pre></div>
+<h2 id="what-easyrunner-configures-automatically">What EasyRunner Configures Automatically</h2>
+<p>When <code>xyz.easyrunner.service.framework: nextjs</code> is set, EasyRunner adjusts the Caddy configuration and build process automatically — you do not need to wire these up yourself.</p>
+<p><strong>Caddy cache and routing:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/_next/static/*</code></td>
+<td>Immutable caching (1 year, <code>Cache-Control: public, max-age=31536000, immutable</code>)</td>
+</tr>
+<tr>
+<td>Static assets (<code>.svg</code>, <code>.ico</code>, <code>.png</code>, <code>.jpg</code>, etc.)</td>
+<td>24-hour cache</td>
+</tr>
+<tr>
+<td><code>/api/*</code></td>
+<td>No-store (responses bypass cache)</td>
+</tr>
+<tr>
+<td>Everything else</td>
+<td>Streaming-safe reverse proxy (<code>flush_interval: -1</code>) for SSR, Suspense, and Server-Sent Events</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-injected build args:</strong></p>
+<p><code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are injected automatically as Docker build args for Next.js apps. Consume them in your Dockerfile with <code>ARG</code>:</p>
+<div class="language-dockerfile highlight"><span class="filename">Dockerfile (builder stage)</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">ARG</span><span class="w"> </span>EASYRUNNER_APP_URL
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NEXT_PUBLIC_APP_URL</span><span class="o">=</span><span class="nv">$EASYRUNNER_APP_URL</span>
+</span></code></pre></div>
+<p>You do not need to add these to <code>build.args</code> in your Compose file — EasyRunner passes them for you.</p>
+<p><strong>Graceful shutdown:</strong></p>
+<p>The systemd unit is configured with a 30-second stop timeout so in-flight requests complete before the container is removed on redeploy.</p>
+<h2 id="build-time-vs-runtime-environment">Build-Time vs Runtime Environment</h2>
+<p>Values prefixed with <code>NEXT_PUBLIC_</code> are baked into the client bundle at build time. <code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are auto-injected as build args (see above), so you get those for free. For any other build-time values, add them to <code>build.args</code> in your Compose file:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="nt">NEXT_PUBLIC_STRIPE_KEY</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pk_live_...&quot;</span>
+</span></code></pre></div>
+<p>Runtime-only values should stay in app secrets and normal runtime environment configuration.</p>
 <h2 id="deploy">Deploy</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>next-demo<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>next-demo<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Inspect it:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>next-demo<span class="w"> </span>my-server
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>next-demo<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>next-demo<span class="w"> </span>my-server
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>next-demo<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
 </span></code></pre></div>
 <p>Your app should be available at <code>https://next-demo.example.com</code> after DNS and certificate issuance complete.</p>
 <h2 id="adapt-for-your-own-app">Adapt for Your Own App</h2>
 <ol>
 <li>Replace the repository URL with your app repo.</li>
 <li>Make sure your container listens on the same port as <code>xyz.easyrunner.service.port</code>.</li>
+<li>Set <code>xyz.easyrunner.service.framework: nextjs</code> on the public service so EasyRunner uses the Next.js-aware Caddy routing.</li>
 <li>Store sensitive values with <code>er app secret</code>, not in the Compose-format file.</li>
+<li>Use <code>build.args</code> for build-time <code>NEXT_PUBLIC_</code> values.</li>
 <li>Deploy a release branch with <code>er app deploy &lt;app&gt; &lt;server&gt; --branch &lt;branch&gt;</code> if needed.</li>
 </ol>
 

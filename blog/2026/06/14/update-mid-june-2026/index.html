@@ -1083,6 +1083,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../user-docs/setup/backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1778,6 +1806,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../../user-docs/reference/audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../../user-docs/reference/troubleshooting/" class="md-nav__link">
         
   
@@ -2424,20 +2480,14 @@
 <p>This has been a very security-and-recovery focused stretch for EasyRunner. The May update made servers safer to operate with the WireGuard mesh, SSH lockdown and a much clearer <code>doctor</code> surface. This update keeps moving in that direction: EasyRunner can now back up and restore its own control-plane state, run self-hosted Next.js apps more confidently, read secrets with far fewer auth interruptions, show a tamper-evident audit trail, and push app secrets to the right places with one command.</p>
 <p>The result is a CLI that feels much more ready for real use: you can recover from losing the machine that runs EasyRunner, handle secrets with fewer prompts, see what sensitive actions happened, and spend less time wiring together deployment-time and CI-time configuration by hand.</p>
 <ul>
+<li><strong>Encrypted control-plane backup and restore</strong> — EasyRunner can now back up and restore its own state to Cloudflare R2. The backup covers the SQLite store, <code>config.json</code>, license, SSH keys and secrets — everything needed to rebuild the control plane. This is not an app-data backup for your containers and databases; it is disaster recovery for EasyRunner itself, so a lost laptop or server-mode host does not mean rebuilding all of your app and server records from scratch.</li>
+<li><strong>Setup is guided</strong> — <code>er backup init</code> reuses your linked Cloudflare account, auto-detects the account ID, and creates a per-install R2 bucket. It shows the full plan before it changes anything and asks for confirmation. Bucket names include the hostname plus a short unique suffix, making them easy to identify when you are choosing what to restore.</li>
+<li><strong>Restore onto a new machine</strong> — <code>er backup restore</code> can recover onto a fresh host after you reinstall EasyRunner and re-link Cloudflare. It discovers candidate backup buckets, asks for the restic password, shows a restore plan, restores the store/config/license/SSH keys/secrets, and runs an integrity check. A <code>--dry-run</code> path lets you preview what would happen, and it refuses to overwrite an already configured host unless you explicitly force it.</li>
 <li>
-<p><strong>Control-plane backups to Cloudflare R2</strong> — A new <code>er backup</code> command group backs up EasyRunner's own state to an encrypted <a href="https://restic.net/">restic</a> repository in Cloudflare R2. It captures the SQLite store, <code>config.json</code>, license, EasyRunner SSH keys and secrets needed to rebuild the control plane. This is not an app-data backup for your containers and databases; it is disaster recovery for EasyRunner itself, so a lost laptop or server-mode host does not mean rebuilding all of your app and server records from scratch.</p>
+<p><strong>Day-to-day commands included</strong> — <code>er backup run</code>, <code>er backup status</code>, <code>er backup list</code>, <code>er backup doctor</code> and <code>er backup doctor --fix</code> are all there. Status reports what is known without failing just because something needs attention, and doctor checks the Cloudflare token, R2 scope, restic, repository and integrity. Long operations show clear phase progress so you are never left wondering if anything is happening.</p>
 </li>
 <li>
-<p><strong>A guided backup setup instead of a blank-page setup</strong> — <code>er backup init</code> now does the fussy parts for you: it reuses your linked Cloudflare account, auto-detects the account ID, creates a per-install R2 bucket by default, shows the full plan before it changes anything and asks for confirmation. The bucket names include the hostname plus a short unique suffix, which makes them much easier to recognise later when you are choosing what to restore. Restic is also treated as a backup prerequisite instead of something every EasyRunner user has to satisfy during <code>er setup</code> or a general <code>er doctor</code>, so the first-run path stays lighter until you actually enable backups.</p>
-</li>
-<li>
-<p><strong>Fresh-host restore is now a real flow</strong> — <code>er backup restore</code> can recover onto a new machine after you reinstall EasyRunner and re-link Cloudflare. It discovers candidate backup buckets, asks for the restic password, shows a restore plan, restores the store/config/license/SSH keys/secrets, and runs an integrity check. It also has a <code>--dry-run</code> path for previewing the restore and refuses to overwrite an already configured host unless you explicitly force it. A batch of restore and R2 fixes makes this path more predictable too: restore finds the right snapshot root deterministically, clears stale SQLite WAL/SHM sidecar files, handles R2-only or zoneless Cloudflare accounts, checks Cloudflare bucket-create responses properly, and avoids false "R2 scope missing" reports.</p>
-</li>
-<li>
-<p><strong>Backup commands for everyday confidence</strong> — The backup surface includes <code>er backup run</code>, <code>er backup status</code>, <code>er backup list</code>, <code>er backup doctor</code> and <code>er backup doctor --fix</code>. Status tells you what is known without failing just because something needs attention, while doctor checks the Cloudflare token, R2 scope, restic, repository and integrity. Run and restore also gained clearer phase progress, so long operations feel a lot less opaque.</p>
-</li>
-<li>
-<p><strong>Smoother secret access with the same security posture</strong> — EasyRunner already had an encrypted vault for secrets; this work refactors how the CLI accesses it so macOS no longer asks you to approve every individual key read. The vault now uses one master-key access path, while sensitive egress operations such as <code>er app secret get</code>, <code>er app secret generate</code>, <code>er backup init</code>, <code>er backup run</code> and <code>er server run-sudo</code> go through a presence gate with a configurable unlock window. The user-visible difference is simple: commands that need several secrets feel calmer, routine commands stay smooth, and commands that reveal or export sensitive material still get an intentional user-presence check.</p>
+<p><strong>Smoother secret access with the same security posture</strong> — EasyRunner already had an encrypted vault for secrets; this work refactors how the CLI accesses it so macOS no longer asks you to approve every individual key read. Sensitive egress operations such as <code>er app secret get</code>, <code>er app secret generate</code>, <code>er backup init</code>, <code>er backup run</code> and <code>er server run-sudo</code> go through a presence gate with a configurable unlock window. The user-visible difference is simple: commands that need several secrets feel calmer, routine commands stay smooth, and commands that reveal or export sensitive material still get an intentional user-presence check. App secrets stored in the vault can also be pushed to your servers and GitHub Actions in one step with <code>er app secret push</code> — see below.</p>
 </li>
 <li>
 <p><strong>A tamper-evident audit trail</strong> — EasyRunner now records a hash-chained audit log for command actions, vault access and authentication challenges. The new top-level <code>er audit</code> command lets you view recent events, filter by event type with <code>--event action</code>, <code>--event vault_access</code> or <code>--event auth_challenge</code>, and verify the log chain with <code>--verify</code>. For operators, this is a big step toward being able to answer "what happened?" after a sensitive operation, not just whether the command succeeded.</p>
@@ -2446,10 +2496,10 @@
 <p><strong>Push app secrets to the server and GitHub Actions</strong> — <code>er app secret push &lt;app_name&gt; &lt;server_name&gt;</code> gives app secrets a proper sync command. Plain app secrets are pushed to the server as Podman secrets. Secrets prefixed with <code>GH_SECRET_</code> are pushed to GitHub Actions for the app's repository, with the prefix stripped, and <code>EASYRUNNER_*</code> internal secrets are skipped. That makes it much easier to keep runtime secrets and CI secrets in sync without copying values through terminals, repos or browser tabs.</p>
 </li>
 <li>
-<p><strong>Stronger Next.js self-hosting support</strong> — EasyRunner now lines up with the official Node.js server path for self-hosted Next.js apps: it keeps the simple long-running-container model with Caddy in front, uses clear Dockerfile and build/runtime environment patterns, and closes practical gaps around warm ISR cache, streaming, and graceful shutdown. In other words: Next.js on a small VPS now feels more like a first-class EasyRunner path without pulling in serverless machinery that does not fit how EasyRunner runs apps.</p>
+<p><strong>Stronger Next.js self-hosting support</strong> — EasyRunner now lines up with the official Node.js server path for self-hosted Next.js apps: it keeps the simple long-running-container model with Caddy in front, uses clear Dockerfile and build/runtime environment patterns, and closes practical gaps around warm ISR cache, streaming, and graceful shutdown. Caddy is configured with framework-aware cache headers — immutable caching for <code>/_next/static/*</code>, no-store for API routes, and flush-based streaming for SSR and Suspense. <code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are also auto-injected as build args so Dockerfiles can wire them straight into <code>NEXT_PUBLIC_*</code> environment variables without hardcoding domains. EasyRunner also warns at deploy time if the app is marked as Next.js but has no volume mounted for <code>.next/cache</code>, since a missing cache mount silently disables ISR. In other words: Next.js on a small VPS now feels more like a first-class EasyRunner path without pulling in serverless machinery that does not fit how EasyRunner runs apps. See the <a href="../../../../../user-docs/recipes/nextjs/">Deploy a Next.js App</a> recipe for a full walkthrough.</p>
 </li>
 <li>
-<p><strong>Security hardening around the edges</strong> — Several smaller changes close off places where sensitive material could linger or be shown too eagerly. WireGuard private keys are scrubbed from <code>wg0.conf</code> after the tunnel comes up. HTTP debug logging now redacts bodies. <code>er link --status</code> shows less token material. A dead <code>podman login -p</code> path was removed so registry credentials are not passed in a risky argv shape. These are not flashy features, but they make the whole tool more comfortable to trust.</p>
+<p><strong>Security hardening around the edges</strong> — Several smaller changes close off places where sensitive material could linger or be shown too eagerly. WireGuard private keys are scrubbed from <code>wg0.conf</code> after the tunnel comes up, so the on-disk config never holds a live key. GHCR username and PAT are now vault-only — the old <code>podman login -p</code> argv path (which exposed credentials in process listings) has been removed and replaced with Podman's authfile mechanism. HTTP debug logging now redacts auth token fields (<code>access_token</code>, <code>api_key</code>, <code>secret</code>, <code>password</code>, and similar) rather than logging them verbatim. <code>er link --status</code> shows less token material. None of these are flashy features, but together they mean sensitive values are harder to leak from logs, disk, or process state.</p>
 </li>
 <li>
 <p><strong>Store migrations for smoother upgrades</strong> — EasyRunner now has a schema-migration runner and an indexed key-column convention for store tables, with <code>backup_destinations</code> moved onto that pattern. Most users will never think about this directly, which is the point: internal state changes can land with less upgrade drama, and restored databases can be migrated on load instead of leaving newer features to trip over older records.</p>
