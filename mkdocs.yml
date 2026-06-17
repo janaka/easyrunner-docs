@@ -112,6 +112,7 @@ nav:
       - First-Run Setup: user-docs/setup/first-run-setup.md
       - License Setup: user-docs/setup/license.md
       - Links and Integrations: user-docs/setup/integrations.md
+      - Control-Plane Backup and Restore: user-docs/setup/backup-restore.md
     - Servers:
       - Create a Hetzner Server: user-docs/servers/create-hetzner-server.md
       - Add an Existing Server: user-docs/servers/add-existing-server.md
@@ -132,6 +133,7 @@ nav:
     - Reference:
       - CLI Command Reference: user-docs/reference/commands.md
       - Compose-Format Files and Labels: user-docs/reference/compose-labels.md
+      - Audit Trail: user-docs/reference/audit.md
       - Troubleshooting: user-docs/reference/troubleshooting.md
   - Features: features.md
   - Pricing: pricing.md

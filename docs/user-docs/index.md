@@ -24,7 +24,7 @@ EasyRunner is a CLI-first way to turn your own Ubuntu server into a secure web h
 
     ---
 
-    Install EasyRunner, run first-time setup, install a license, and link external services.
+    Install EasyRunner, run first-time setup, install a license, link external services, and back up the control plane.
 
     [Prepare the CLI](setup/install.md)
 

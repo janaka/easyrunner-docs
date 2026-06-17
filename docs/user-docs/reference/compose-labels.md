@@ -89,6 +89,22 @@ EasyRunner reads labels on each service entry to decide how to route and run it.
 
     1. Builds this service from a subdirectory relative to the repo root.
 
+## Build Arguments
+
+Flow A passes standard Compose `build.args` through to `podman build`. Use this for build-time values such as `NEXT_PUBLIC_*` variables in Next.js apps.
+
+```yaml
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: "https://app.example.com"
+```
+
+!!! warning "Build args are not secrets"
+    Build arguments can be visible in image history and build logs. Do not use them for passwords, tokens, or private keys. Store sensitive runtime values with [App Secrets](../apps/secrets.md).
+
 ## Auto-Injected Environment Variables
 
 When EasyRunner deploys an app it injects a set of read-only metadata environment variables into every service container. You can reference them from your application or from the `environment:` block of your Compose-format file. They are available in both Flow A and Flow B.

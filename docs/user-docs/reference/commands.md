@@ -6,11 +6,13 @@ This is a task-oriented map of common EasyRunner commands. Use `--help` on any c
 er --help         # (1)!
 er server --help  # (2)!
 er app --help     # (3)!
+er backup --help  # (4)!
 ```
 
 1. Top-level CLI help and global options.
 2. Web-host/server commands.
 3. App deployment and operations commands.
+4. Control-plane backup and restore commands.
 
 ???+ abstract "Setup"
 
@@ -38,8 +40,11 @@ er app --help     # (3)!
 	| Link GitHub | `er link github` |
 	| Link Hetzner | `er link hetzner <project> --api-key <token>` |
 	| Link Cloudflare | `er link cloudflare <account> --api-token <token>` |
+	| List linked accounts on macOS | `er link list` |
 	| Diagnose all links | `er link doctor` |
-	| Show one link's status | `er link <service> --status` |
+	| Show GitHub link status | `er link github --status` |
+	| Show named provider status | `er link <provider> <account> --status` |
+	| Unlink a service/account | `er link <service> [account] --unlink` |
 
 ???+ abstract "Servers"
 
@@ -83,6 +88,36 @@ er app --help     # (3)!
 	| Get secret | `er app secret get <app> <NAME>` |
 	| List secrets | `er app secret list <app>` |
 	| Delete secret | `er app secret delete <app> <NAME>` |
+	| Push secrets to destinations | `er app secret push <app> <server>` |
+
+???+ abstract "Control-Plane Backup"
+
+	Backs up EasyRunner's local control-plane state to an encrypted restic repository in Cloudflare R2. See [Control-Plane Backup and Restore](../setup/backup-restore.md).
+
+	| Task | Command |
+	| --- | --- |
+	| Initialise backup destination | `er backup init [cloudflare-account]` |
+	| Run backup now | `er backup run [cloudflare-account]` |
+	| Preview backup | `er backup run [cloudflare-account] --dry-run` |
+	| Show backup status | `er backup status [cloudflare-account]` |
+	| List snapshots | `er backup list [cloudflare-account]` |
+	| Restore latest snapshot | `er backup restore [cloudflare-account]` |
+	| Restore specific snapshot | `er backup restore [cloudflare-account] --snapshot <id>` |
+	| Preview restore | `er backup restore [cloudflare-account] --dry-run` |
+	| Force restore over configured host | `er backup restore [cloudflare-account] --force` |
+	| Diagnose backup setup | `er backup doctor [cloudflare-account]` |
+	| Fix backup prerequisites | `er backup doctor [cloudflare-account] --fix` |
+
+??? abstract "Audit"
+
+	| Task | Command |
+	| --- | --- |
+	| View audit trail | `er audit` |
+	| Show recent N events | `er audit --limit <n>` |
+	| Filter by event type | `er audit --event action` |
+	| Verify audit chain | `er audit --verify` |
+	| View secret-vault audit | `er secrets_vault audit` |
+	| Verify secret-vault audit | `er secrets_vault audit --verify` |
 
 ??? abstract "Mesh (Secure Access)"
 

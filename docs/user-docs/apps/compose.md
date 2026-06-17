@@ -46,6 +46,21 @@ networks:
 | `xyz.easyrunner.service.type` | Marks a service as `web`, `internal`, or `worker`. |
 | `xyz.easyrunner.service.port` | Tells Caddy which internal port the service listens on. |
 
+## Build Arguments
+
+For Flow A, EasyRunner passes standard Compose `build.args` to `podman build`.
+
+```yaml
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: "https://app.example.com"
+```
+
+Use build args for values that must exist while the image is built. Do not use them for secrets; use [App Secrets](secrets.md) for sensitive runtime values.
+
 !!! warning "Do not bind public host ports"
     EasyRunner expects Caddy to be the public entry point. Avoid exposing app containers directly with host port bindings unless a guide explicitly tells you to.
 

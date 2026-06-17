@@ -7,7 +7,7 @@ Your machine
 ┌──────────────────────────────┐
 │ EasyRunner CLI               │
 │ - stores app/server config   │
-│ - stores secrets in keyring  │
+│ - stores secrets in vault    │
 │ - talks to web hosts by SSH  │
 └──────────────┬───────────────┘
                │ SSH
@@ -36,6 +36,7 @@ Users visit your app
 | Service | One service entry inside the app's Compose-format configuration. Usually one container or process. An app can have one service or many. |
 | Deploy flow | How the app image gets to the web host: build from source on the server, or pull a pre-built image from a registry. |
 | Link | A stored connection to an external service such as GitHub, Hetzner, or Cloudflare. |
+| Backup | An encrypted restic snapshot of EasyRunner's control-plane state in Cloudflare R2. It helps recover EasyRunner itself, not app runtime data. |
 | Mesh | An optional WireGuard VPN between your machine and your web hosts. It lets you lock SSH to a private network instead of the public internet. Not required for the first deployment path. See [Secure Access with the Mesh VPN](../servers/mesh.md). |
 
 !!! note "Server can mean two things"
