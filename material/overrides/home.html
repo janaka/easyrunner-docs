@@ -324,6 +324,16 @@
     margin-bottom: 2.5rem;
   }
 
+  .substack-embed {
+    display: block;
+    width: min(100%, 480px);
+    height: 150px;
+    border: 1px solid var(--md-default-fg-color--lighter);
+    background: var(--md-default-bg-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
   .stack-logo {
     width: 80px;
     height: 80px;
@@ -457,7 +467,7 @@
           </div>
         </form> -->
         <div>
-        <iframe src="https://easyrunnerxyz.substack.com/embed" width="480" height="150" style="border: 1px solid #EEE; background: white" frameborder="0" scrolling="no"></iframe>
+          <iframe class="substack-embed" src="https://easyrunnerxyz.substack.com/embed" frameborder="0" scrolling="no" title="EasyRunner newsletter"></iframe>
         </div>
 
         <div class="scroll-indicator">
