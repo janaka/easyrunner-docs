@@ -75,7 +75,7 @@ er app secret set my-app EASYRUNNER_GHCR_PAT
 
 Non-reserved app secrets are made available to your containers during deployment. Keep sensitive values out of Compose-format files and source control; store them as app secrets instead.
 
-Sensitive reads are gated. Commands such as `er app secret get`, `er app secret generate`, `er backup init`, `er backup run`, and `er server run-sudo` may ask for Touch ID or your device password on macOS when the unlock window has expired.
+Sensitive reads are gated. Commands such as `er app secret get`, `er app secret generate`, `er backup init`, `er backup run`, and `er server run-sudo` may ask for Touch ID or your device password on macOS when the unlock window has expired. The default unlock window is **60 minutes** — a successful presence check keeps subsequent sensitive commands uninterrupted for that period.
 
 ## Rotation
 

@@ -58,8 +58,8 @@ networks:
     external: true
 ```
 
-!!! tip "Warm ISR cache"
-    For apps using ISR or cache-heavy rendering, mount `.next/cache` on a named volume so it survives redeploys. The exact path depends on your Dockerfile's working directory, for example `/app/.next/cache`.
+!!! tip "ISR cache volume"
+    Apps using ISR or cache-heavy rendering need `.next/cache` mounted on a named volume so the cache survives redeploys. The example Compose file above already includes this. If you omit the volume, EasyRunner will warn you at deploy time that ISR is silently disabled. The exact path depends on your Dockerfile's working directory — `/app/.next/cache` for a `WORKDIR /app` image.
 
 ## Recommended Dockerfile Shape
 
@@ -99,9 +99,37 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 ```
 
+## What EasyRunner Configures Automatically
+
+When `xyz.easyrunner.service.framework: nextjs` is set, EasyRunner adjusts the Caddy configuration and build process automatically — you do not need to wire these up yourself.
+
+**Caddy cache and routing:**
+
+| Route | Behaviour |
+| --- | --- |
+| `/_next/static/*` | Immutable caching (1 year, `Cache-Control: public, max-age=31536000, immutable`) |
+| Static assets (`.svg`, `.ico`, `.png`, `.jpg`, etc.) | 24-hour cache |
+| `/api/*` | No-store (responses bypass cache) |
+| Everything else | Streaming-safe reverse proxy (`flush_interval: -1`) for SSR, Suspense, and Server-Sent Events |
+
+**Auto-injected build args:**
+
+`EASYRUNNER_APP_DOMAIN` and `EASYRUNNER_APP_URL` are injected automatically as Docker build args for Next.js apps. Consume them in your Dockerfile with `ARG`:
+
+```dockerfile title="Dockerfile (builder stage)"
+ARG EASYRUNNER_APP_URL
+ENV NEXT_PUBLIC_APP_URL=$EASYRUNNER_APP_URL
+```
+
+You do not need to add these to `build.args` in your Compose file — EasyRunner passes them for you.
+
+**Graceful shutdown:**
+
+The systemd unit is configured with a 30-second stop timeout so in-flight requests complete before the container is removed on redeploy.
+
 ## Build-Time vs Runtime Environment
 
-Values prefixed with `NEXT_PUBLIC_` are usually baked into the client bundle at build time. For Flow A, pass those through Compose `build.args`:
+Values prefixed with `NEXT_PUBLIC_` are baked into the client bundle at build time. `EASYRUNNER_APP_DOMAIN` and `EASYRUNNER_APP_URL` are auto-injected as build args (see above), so you get those for free. For any other build-time values, add them to `build.args` in your Compose file:
 
 ```yaml
 services:
@@ -109,7 +137,7 @@ services:
     build:
       context: .
       args:
-        NEXT_PUBLIC_APP_URL: "https://next-demo.example.com"
+        NEXT_PUBLIC_STRIPE_KEY: "pk_live_..."
 ```
 
 Runtime-only values should stay in app secrets and normal runtime environment configuration.
