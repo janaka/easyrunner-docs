@@ -1,7 +1,7 @@
 site_name: EasyRunner
 site_url: https://easyrunner.xyz
 site_description: The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity.
-copyright: Copyright &copy; 2025-2026 Janaka Abeywardhana
+copyright: Copyright &copy; 2025-2026 <a href="https://www.linkedin.com/in/janakaabeywardhana" target="_blank" rel="noopener">Janaka Abeywardhana</a>
 theme:
   name: material
   custom_dir: material/overrides  
