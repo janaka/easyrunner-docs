@@ -47,3 +47,24 @@ div.md-header__title > div > div:nth-child(1) > span {
 [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
     background-color: #1d1d1dff !important;
 }
+
+/* Make the footer copyright link obviously a link */
+.md-copyright a {
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.md-copyright a:hover,
+.md-copyright a:focus {
+  color: var(--md-primary-fg-color--light);
+  text-decoration: underline;
+}
+
+/* Make strong/bold text pop more in dark mode */
+[data-md-color-scheme="slate"] .md-typeset strong,
+[data-md-color-scheme="slate"] .md-typeset b {
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+}
