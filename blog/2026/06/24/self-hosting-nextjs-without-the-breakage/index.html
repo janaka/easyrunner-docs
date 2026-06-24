@@ -10,13 +10,11 @@
       
       
       
-        <link rel="canonical" href="https://easyrunner.xyz/blog/2026/06/14/update-mid-june-2026/">
+        <link rel="canonical" href="https://easyrunner.xyz/blog/2026/06/24/self-hosting-nextjs-without-the-breakage/">
       
       
-        <link rel="prev" href="../../../05/30/update-may-2026/">
+        <link rel="prev" href="../../14/update-mid-june-2026/">
       
-      
-        <link rel="next" href="../../24/self-hosting-nextjs-without-the-breakage/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>EasyRunner Mid-June 2026 Update - EasyRunner</title>
+        <title>Self-hosting Next.js shouldn't break on every deploy - EasyRunner</title>
       
     
     
@@ -73,17 +71,17 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="EasyRunner Mid-June 2026 Update - EasyRunner" />
+<meta property="og:title" content="Self-hosting Next.js shouldn't break on every deploy - EasyRunner" />
 <meta property="og:description" content="The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity." />
-<meta property="og:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/14/update-mid-june-2026.png" />
+<meta property="og:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/24/self-hosting-nextjs-without-the-breakage.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://easyrunner.xyz/blog/2026/06/14/update-mid-june-2026/" />
+<meta property="og:url" content="https://easyrunner.xyz/blog/2026/06/24/self-hosting-nextjs-without-the-breakage/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="EasyRunner Mid-June 2026 Update - EasyRunner" />
+<meta property="twitter:title" content="Self-hosting Next.js shouldn't break on every deploy - EasyRunner" />
 <meta property="twitter:description" content="The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity." />
-<meta property="twitter:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/14/update-mid-june-2026.png" />
+<meta property="twitter:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/24/self-hosting-nextjs-without-the-breakage.png" />
 </head>
   
   
@@ -101,6 +99,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#its-not-you-its-the-missing-platform" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -133,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              EasyRunner Mid-June 2026 Update
+              Self-hosting Next.js shouldn't break on every deploy
             
           </span>
         </div>
@@ -2375,6 +2378,58 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#its-not-you-its-the-missing-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        It's not you, it's the missing platform
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-actually-broke-and-what-easyrunner-does-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What actually broke — and what EasyRunner does now
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-payoff-one-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The payoff: one label
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-line-is-right-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the line is right now
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2429,7 +2484,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-06-14 00:00:00+00:00" class="md-ellipsis">June 14, 2026</time>
+                        <time datetime="2026-06-24 00:00:00+00:00" class="md-ellipsis">June 24, 2026</time>
                       </div>
                     </li>
                     
@@ -2440,7 +2495,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/news/">news</a></span>
+                              <a href="../../../../category/behind-the-scenes/">behind-the-scenes</a></span>
                         </div>
                       </li>
                     
@@ -2451,7 +2506,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              5 min read
+                              3 min read
                             
                           </span>
                         </div>
@@ -2475,43 +2530,79 @@
 
 
 
-  <h1>EasyRunner Mid-June 2026 Update</h1>
+  <h1>Self-hosting Next.js shouldn't break on every deploy</h1>
 
-<p>Progress update since the May post: encrypted control-plane backup and restore, stronger Next.js self-hosting, smoother secret access, audit logs, app secret sync, and more.</p>
+<p>You move a Next.js app off Vercel onto your own VPS, it works, and then every redeploy quietly breaks <em>something</em> — ISR goes cold, the browser 404s on chunks that no longer exist, <code>next/image</code> stops optimising, streaming stalls, <code>NEXT_PUBLIC_</code> values come out wrong, and in-flight requests get cut mid-deploy. I kept hitting these, so I made Next.js a first-class path in EasyRunner and closed the gaps one by one.</p>
 <!-- more -->
-<p>This has been a very security-and-recovery focused stretch for EasyRunner. The May update made servers safer to operate with the WireGuard mesh, SSH lockdown and a much clearer <code>doctor</code> surface. This update keeps moving in that direction: EasyRunner can now back up and restore its own control-plane state, run self-hosted Next.js apps more confidently, read secrets with far fewer auth interruptions, show a tamper-evident audit trail, and push app secrets to the right places with one command.</p>
-<p>The result is a CLI that feels much more ready for real use: you can recover from losing the machine that runs EasyRunner, handle secrets with fewer prompts, see what sensitive actions happened, and spend less time wiring together deployment-time and CI-time configuration by hand.</p>
-<ul>
-<li><strong>Encrypted control-plane backup and restore</strong> — EasyRunner can now back up and restore its own state to Cloudflare R2. The backup covers the SQLite store, <code>config.json</code>, license, SSH keys and secrets — everything needed to rebuild the control plane. This is not an app-data backup for your containers and databases; it is disaster recovery for EasyRunner itself, so a lost laptop or server-mode host does not mean rebuilding all of your app and server records from scratch.</li>
-<li><strong>Setup is guided</strong> — <code>er backup init</code> reuses your linked Cloudflare account, auto-detects the account ID, and creates a per-install R2 bucket. It shows the full plan before it changes anything and asks for confirmation. Bucket names include the hostname plus a short unique suffix, making them easy to identify when you are choosing what to restore.</li>
-<li><strong>Restore onto a new machine</strong> — <code>er backup restore</code> can recover onto a fresh host after you reinstall EasyRunner and re-link Cloudflare. It discovers candidate backup buckets, asks for the restic password, shows a restore plan, restores the store/config/license/SSH keys/secrets, and runs an integrity check. A <code>--dry-run</code> path lets you preview what would happen, and it refuses to overwrite an already configured host unless you explicitly force it.</li>
-<li>
-<p><strong>Day-to-day commands included</strong> — <code>er backup run</code>, <code>er backup status</code>, <code>er backup list</code>, <code>er backup doctor</code> and <code>er backup doctor --fix</code> are all there. Status reports what is known without failing just because something needs attention, and doctor checks the Cloudflare token, R2 scope, restic, repository and integrity. Long operations show clear phase progress so you are never left wondering if anything is happening.</p>
-</li>
-<li>
-<p><strong>Smoother secret access with the same security posture</strong> — EasyRunner already had an encrypted vault for secrets; this work refactors how the CLI accesses it so macOS no longer asks you to approve every individual key read. Sensitive egress operations such as <code>er app secret get</code>, <code>er app secret generate</code>, <code>er backup init</code>, <code>er backup run</code> and <code>er server run-sudo</code> go through a presence gate with a configurable unlock window. The user-visible difference is simple: commands that need several secrets feel calmer, routine commands stay smooth, and commands that reveal or export sensitive material still get an intentional user-presence check. App secrets stored in the vault can also be pushed to your servers and GitHub Actions in one step with <code>er app secret push</code> — see below.</p>
-</li>
-<li>
-<p><strong>A tamper-evident audit trail</strong> — EasyRunner now records a hash-chained audit log for command actions, vault access and authentication challenges. The new top-level <code>er audit</code> command lets you view recent events, filter by event type with <code>--event action</code>, <code>--event vault_access</code> or <code>--event auth_challenge</code>, and verify the log chain with <code>--verify</code>. For operators, this is a big step toward being able to answer "what happened?" after a sensitive operation, not just whether the command succeeded.</p>
-</li>
-<li>
-<p><strong>Push app secrets to the server and GitHub Actions</strong> — <code>er app secret push &lt;app_name&gt; &lt;server_name&gt;</code> gives app secrets a proper sync command. Plain app secrets are pushed to the server as Podman secrets. Secrets prefixed with <code>GH_SECRET_</code> are pushed to GitHub Actions for the app's repository, with the prefix stripped, and <code>EASYRUNNER_*</code> internal secrets are skipped. That makes it much easier to keep runtime secrets and CI secrets in sync without copying values through terminals, repos or browser tabs.</p>
-</li>
-<li>
-<p><strong>Stronger Next.js self-hosting support</strong> — EasyRunner now lines up with the official Node.js server path for self-hosted Next.js apps: it keeps the simple long-running-container model with Caddy in front, uses clear Dockerfile and build/runtime environment patterns, and closes practical gaps around warm ISR cache, streaming, and graceful shutdown. Caddy is configured with framework-aware cache headers — immutable caching for <code>/_next/static/*</code>, no-store for API routes, and flush-based streaming for SSR and Suspense. <code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are also auto-injected as build args so Dockerfiles can wire them straight into <code>NEXT_PUBLIC_*</code> environment variables without hardcoding domains. EasyRunner also warns at deploy time if the app is marked as Next.js but has no volume mounted for <code>.next/cache</code>, since a missing cache mount silently disables ISR. In other words: Next.js on a small VPS now feels more like a first-class EasyRunner path without pulling in serverless machinery that does not fit how EasyRunner runs apps. See the <a href="../../../../../user-docs/recipes/nextjs/">Deploy a Next.js App</a> recipe for a full walkthrough.</p>
-</li>
-<li>
-<p><strong>Security hardening around the edges</strong> — Several smaller changes close off places where sensitive material could linger or be shown too eagerly. WireGuard private keys are scrubbed from <code>wg0.conf</code> after the tunnel comes up, so the on-disk config never holds a live key. GHCR username and PAT are now vault-only — the old <code>podman login -p</code> argv path (which exposed credentials in process listings) has been removed and replaced with Podman's authfile mechanism. HTTP debug logging now redacts auth token fields (<code>access_token</code>, <code>api_key</code>, <code>secret</code>, <code>password</code>, and similar) rather than logging them verbatim. <code>er link --status</code> shows less token material. None of these are flashy features, but together they mean sensitive values are harder to leak from logs, disk, or process state.</p>
-</li>
-<li>
-<p><strong>Store migrations for smoother upgrades</strong> — EasyRunner now has a schema-migration runner and an indexed key-column convention for store tables, with <code>backup_destinations</code> moved onto that pattern. Most users will never think about this directly, which is the point: internal state changes can land with less upgrade drama, and restored databases can be migrated on load instead of leaving newer features to trip over older records.</p>
-</li>
-<li>
-<p><strong>License quota correctness</strong> — License enforcement now uses the server limit from the license itself instead of a hardcoded value. For alpha users this should mostly be invisible, but it means the CLI's behaviour is now aligned with the plan data it is checking.</p>
-</li>
-</ul>
-<p>The theme this time is resilience. EasyRunner is getting better at protecting the state it owns, recovering that state when something goes wrong, and making security-sensitive work visible without making everyday commands miserable. That is a good place for an alpha self-hosting tool to be heading.</p>
-<p>We are still in alpha testing. If you'd like to get involved, drop me a line at <a href="mailto:janaka@easyrunner.xyz">janaka@easyrunner.xyz</a> or a tweet @janaka_a.</p>
+
+<h2 id="its-not-you-its-the-missing-platform">It's not you, it's the missing platform</h2>
+<p>Here's the thing almost nobody tells you up front: Next.js is co-designed with Vercel. The framework leans on a CDN, an edge cache, immutable asset routing, and a build/runtime split that Vercel provides invisibly. The moment you self-host, all of that disappears — and <em>you</em> are now the platform.</p>
+<p>That's why self-hosted Next.js feels like it "breaks after every update". Nothing is actually broken. You're just re-solving caching, cache-busting headers, image optimisation, streaming, and build-time vs runtime config by hand, on every single deploy, and any one of them slipping shows up as a user-visible regression.</p>
+<p>I didn't want EasyRunner users re-solving that. So when a service is tagged as Next.js, EasyRunner now wires up the platform layer for you.</p>
+<h2 id="what-actually-broke-and-what-easyrunner-does-now">What actually broke — and what EasyRunner does now</h2>
+<table>
+<thead>
+<tr>
+<th>What breaks when you self-host</th>
+<th>What EasyRunner does for you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ISR cache wiped on every redeploy</strong> — pages re-render cold, first visitor after each deploy eats the latency</td>
+<td>Detects whether <code>.next/cache</code> is on a persistent volume and <strong>warns you at deploy time</strong> if it isn't, so ISR actually survives a redeploy</td>
+</tr>
+<tr>
+<td><strong><code>ChunkLoadError</code> / 404s on <code>/_next/static/*</code></strong> — old HTML asks for chunks that aren't cached, or aren't cached long enough</td>
+<td>Caddy serves <code>/_next/static/*</code> with <code>Cache-Control: public, max-age=31536000, immutable</code> — chunks are cached hard and correctly, the way Vercel's CDN does it</td>
+</tr>
+<tr>
+<td><strong>Streaming &amp; Suspense stall</strong> — App Router streaming, RSC, and SSE buffer behind the proxy and arrive all at once</td>
+<td>The catch-all reverse proxy runs with <code>flush_interval: -1</code>, so every chunk is flushed immediately and streaming works end to end</td>
+</tr>
+<tr>
+<td><strong><code>next/image</code> throws in production</strong> — <code>sharp</code> isn't in the runtime image</td>
+<td>The reference image installs <code>sharp</code> so image optimisation works without you debugging native deps</td>
+</tr>
+<tr>
+<td><strong><code>NEXT_PUBLIC_</code> values are wrong</strong> — they're baked at <em>build</em> time, but you only know the domain at <em>deploy</em> time</td>
+<td><code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are auto-injected as build args, so you can wire them into <code>NEXT_PUBLIC_*</code> without hardcoding a domain anywhere</td>
+</tr>
+<tr>
+<td><strong>Redeploys cut live requests</strong> — the old container is killed before it finishes responding</td>
+<td>systemd/Podman units get a 30-second graceful stop window, so in-flight requests drain before the container goes away</td>
+</tr>
+<tr>
+<td><strong>Static public files re-fetched every time</strong> — fonts, icons, favicons</td>
+<td>Common asset types (<code>.svg</code>, <code>.ico</code>, <code>.png</code>, <code>.woff2</code>, …) get a 24-hour cache; <code>/api/*</code> is set <code>no-store</code> so dynamic routes never get cached by mistake</td>
+</tr>
+</tbody>
+</table>
+<p>None of this is exotic. It's the boring platform plumbing that Vercel hides and self-hosting exposes — now handled for you.</p>
+<h2 id="the-payoff-one-label">The payoff: one label</h2>
+<p>You don't configure any of the above by hand. You mark your public service as Next.js, and EasyRunner applies the framework-aware Caddy routing, the build-arg injection, and the graceful-shutdown window automatically:</p>
+<div class="language-yaml highlight"><span class="filename">.easyrunner/docker-compose-app.yaml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1"># ...</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">next_cache:/app/.next/cache</span><span class="w">   </span><span class="c1"># ISR survives redeploys</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextjs</span><span class="w">   </span><span class="c1"># ← turns on everything above</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span>
+</span></code></pre></div>
+<p>Then the usual:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-next-app<span class="w"> </span>my-server
+</span></code></pre></div>
+<h2 id="where-the-line-is-right-now">Where the line is right now</h2>
+<div class="admonition note">
+<p class="admonition-title">Single-server today, multi-instance on the roadmap</p>
+<p>Everything above targets the <strong>single-server</strong> case — one VPS running your app — which is how most people actually self-host. That case is now solid.</p>
+<p>The one failure mode I'm <em>not</em> claiming to have solved is multi-instance: running several replicas behind a load balancer, where each instance can build a different <code>BUILD_ID</code> and a client can land on a replica that doesn't have its chunks. Doing that properly needs a shared cache handler and a stable <code>deploymentId</code> across instances. That's on the multi-server roadmap — I'd rather ship the honest single-server path than hand-wave a distributed one.</p>
+</div>
+<p>If you're on one box — and for self-hosting, you very likely are — Next.js now behaves the way you expected it to before you left the platform.</p>
+<p><a class="md-button md-button--primary" href="../../../../../user-docs/recipes/nextjs/">Deploy a Next.js App →</a>
+<a class="md-button" href="../../../../../how-it-works/">See how EasyRunner works</a></p>
 
 
 
@@ -2558,7 +2649,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../../05/30/update-may-2026/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EasyRunner May 2026 Update">
+          <a href="../../14/update-mid-june-2026/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EasyRunner Mid-June 2026 Update">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2568,27 +2659,11 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                EasyRunner May 2026 Update
+                EasyRunner Mid-June 2026 Update
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../../24/self-hosting-nextjs-without-the-breakage/" class="md-footer__link md-footer__link--next" aria-label="Next: Self-hosting Next.js shouldn&#39;t break on every deploy">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Self-hosting Next.js shouldn't break on every deploy
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
