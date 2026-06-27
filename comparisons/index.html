@@ -1,0 +1,3166 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How EasyRunner compares to the popular open-source self-hosting PaaS tools — architecture, operating model, multi-server management, and security.">
+      
+      
+      
+        <link rel="canonical" href="https://easyrunner.xyz/comparisons/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>EasyRunner vs Dokku, Dokploy & Coolify - EasyRunner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Mono";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-ZR0DQEXRPH"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-ZR0DQEXRPH",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-ZR0DQEXRPH",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="EasyRunner vs Dokku, Dokploy & Coolify - EasyRunner" />
+<meta property="og:description" content="How EasyRunner compares to the popular open-source self-hosting PaaS tools — architecture, operating model, multi-server management, and security." />
+<meta property="og:image" content="https://easyrunner.xyz/assets/images/social/v2/comparisons.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://easyrunner.xyz/comparisons/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="EasyRunner vs Dokku, Dokploy & Coolify - EasyRunner" />
+<meta property="twitter:description" content="How EasyRunner compares to the popular open-source self-hosting PaaS tools — architecture, operating model, multi-server management, and security." />
+<meta property="twitter:image" content="https://easyrunner.xyz/assets/images/social/v2/comparisons.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#easyrunner-vs-dokku-dokploy-coolify" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EasyRunner" class="md-header__button md-logo" aria-label="EasyRunner" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EasyRunner
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EasyRunner vs Dokku, Dokploy & Coolify
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../how-it-works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How It Works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Install
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user-docs/" class="md-tabs__link">
+          
+  
+  
+  Docs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../features/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Features
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../pricing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Pricing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../blog/" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EasyRunner" class="md-nav__button md-logo" aria-label="EasyRunner" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    EasyRunner
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EasyRunner in One Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/concepts/server-provisioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Provisioning Paths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/concepts/apps-and-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apps and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/concepts/deploy-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy Flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/concepts/links-and-integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Links and Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Quickstart
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/quickstart/first-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy Your First App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/quickstart/new-hetzner-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New Hetzner Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/quickstart/existing-ubuntu-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Existing Ubuntu Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Install & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/setup/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install the CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/setup/first-run-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First-Run Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/setup/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/setup/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Links and Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/setup/backup-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control-Plane Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Servers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/create-hetzner-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a Hetzner Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/add-existing-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add an Existing Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/initialize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Initialize a Web Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/servers/mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Access (Mesh VPN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Apps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/add-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose-Format Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/flow-a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flow A - Deploy from Source
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/flow-b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flow B - Deploy from a Registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/dns-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains and HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/apps/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recipes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/recipes/nextjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy a Next.js App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/reference/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Command Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/reference/compose-labels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose-Format Files and Labels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/reference/audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Trail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-docs/reference/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog Posts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/category/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/category/behind-the-scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    behind-the-scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/category/guides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    guides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/category/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    news
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        At a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technologies-building-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technologies &amp; building blocks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licensing-operating-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Licensing &amp; operating model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primary-ui-ai-agent-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primary UI &amp; AI-agent compatibility
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primary UI &amp; AI-agent compatibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-a-human-drives-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How a human drives it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-an-ai-agent-drives-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How an AI agent drives it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-multiple-web-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing multiple web hosts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-plane-attack-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control-plane attack surface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-app-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host &amp; app hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-should-you-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which should you choose?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Which should you choose?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choose-dokku-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose Dokku if…
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-coolify-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose Coolify if…
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-dokploy-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose Dokploy if…
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choose-easyrunner-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose EasyRunner if…
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="easyrunner-vs-dokku-dokploy-coolify">EasyRunner vs Dokku, Dokploy &amp; Coolify</h1>
+<p>If you want to run your apps on <strong>your own server</strong> instead of renting a platform like Vercel,
+Heroku, or Railway, EasyRunner, <a href="https://dokku.com">Dokku</a>, <a href="https://dokploy.com">Dokploy</a>, and
+<a href="https://coolify.io">Coolify</a> all get you there. They all turn a plain VPS into a place you can
+deploy to, with containers, a reverse proxy, and automatic HTTPS.</p>
+<p>Where they really differ is <strong>how they're built and operated</strong> — the runtime, the operating model,
+how much attack surface they expose, and how <em>opinionated</em> they are. This guide compares all four
+across the dimensions that actually matter when you're choosing one, and it's honest about where the
+others are genuinely strong.</p>
+<div class="admonition info">
+<p class="admonition-title">The one-line summary</p>
+<p>The three open-source tools are free and put a <strong>web dashboard</strong> at the center. EasyRunner is a
+<strong>paid, CLI-first</strong> product with <strong>no web control plane at all</strong> — the control plane is the <code>er</code>
+CLI on your own machine — and it ships <strong>secure, opinionated defaults</strong> so you're not wiring up
+hardening, secrets, and a private network yourself.</p>
+</div>
+<h2 id="at-a-glance">At a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>EasyRunner</th>
+<th>Dokku</th>
+<th>Dokploy</th>
+<th>Coolify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary interface</strong></td>
+<td>CLI (<code>er</code>)</td>
+<td>CLI / <code>git push</code></td>
+<td>Web dashboard</td>
+<td>Web dashboard</td>
+</tr>
+<tr>
+<td><strong>AI-agent control</strong></td>
+<td>CLI + shipped agent <strong>skills</strong></td>
+<td>Scriptable CLI; community MCP (early)</td>
+<td>Official <strong>MCP</strong> + CLI</td>
+<td>Built-in <strong>MCP</strong> (read-only) + API</td>
+</tr>
+<tr>
+<td><strong>Control plane</strong></td>
+<td>On <em>your</em> machine</td>
+<td>On the server (SSH)</td>
+<td>Web app on a server</td>
+<td>Web app on a server</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td>Rootless <strong>Podman</strong> + systemd</td>
+<td>Docker</td>
+<td>Docker <strong>Swarm</strong></td>
+<td>Docker</td>
+</tr>
+<tr>
+<td><strong>Reverse proxy / TLS</strong></td>
+<td>Caddy + Let's Encrypt</td>
+<td>nginx + Let's Encrypt</td>
+<td>Traefik + Let's Encrypt</td>
+<td>Traefik/Caddy + Let's Encrypt</td>
+</tr>
+<tr>
+<td><strong>Deploy method</strong></td>
+<td><code>er</code> over SSH — build-on-server or pull a prebuilt image</td>
+<td><code>git push</code> → buildpacks/Dockerfile</td>
+<td>Git webhook → Nixpacks/Dockerfile/Compose</td>
+<td>Git webhook → Nixpacks/Dockerfile/Compose</td>
+</tr>
+<tr>
+<td><strong>Manage multiple hosts</strong></td>
+<td>✅ from one local control plane</td>
+<td>❌ single host</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Licensing</strong></td>
+<td>Proprietary, <strong>paid</strong></td>
+<td>MIT (open source)</td>
+<td>Apache-2.0 (open source)</td>
+<td>Apache-2.0 (open source)</td>
+</tr>
+<tr>
+<td><strong>Internet-facing web admin</strong></td>
+<td><strong>None</strong></td>
+<td>None by default</td>
+<td>Yes (the dashboard)</td>
+<td>Yes (the dashboard)</td>
+</tr>
+<tr>
+<td><strong>Host hardening out of the box</strong></td>
+<td>✅ CIS L1, fail2ban, firewall</td>
+<td>DIY</td>
+<td>DIY</td>
+<td>DIY</td>
+</tr>
+<tr>
+<td><strong>Built-in secrets vault</strong></td>
+<td>✅ encrypted</td>
+<td>env vars</td>
+<td>env vars (in DB)</td>
+<td>env vars (in DB)</td>
+</tr>
+<tr>
+<td><strong>Built-in VPN mesh</strong></td>
+<td>✅ WireGuard</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Secure-by-default, opinionated, multi-host</td>
+<td>One box, CLI purists</td>
+<td>Modern dashboard, multi-node</td>
+<td>Biggest ecosystem, one-click catalog</td>
+</tr>
+</tbody>
+</table>
+<p>The sections below unpack each dimension.</p>
+<h2 id="deployment-architecture">Deployment architecture</h2>
+<p>How your code actually gets from a repo to a running container.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>How you deploy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td>Run <code>er app deploy</code> from your machine. It connects over SSH and either <strong>builds your repo on the server</strong> with <code>podman build</code> (Flow A) or <strong>pulls a prebuilt image</strong> from a registry such as GHCR (Flow B). Your app is described by a Compose-format file with <code>xyz.easyrunner.service.*</code> labels.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>The classic mini-Heroku: <code>git push dokku main</code> over SSH triggers a build with Heroku-style buildpacks (or your <code>Dockerfile</code>), then deploys.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td>Connect a Git repo; a push fires a webhook and Dokploy builds with Nixpacks (or your Dockerfile/Compose) and rolls out. You can also trigger deploys from the dashboard.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>Same git-webhook auto-deploy model (Nixpacks/Dockerfile/Compose), <strong>plus a catalog of 280+ one-click services</strong> (databases, tools) you can stand up alongside your apps.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Two clear paths, on purpose</p>
+<p>EasyRunner deliberately offers exactly two deploy flows — build-on-server or pull-an-image —
+rather than a long menu of builders. It's the <em>opinionated</em> choice: fewer ways to do it, each
+one hardened and supported. See <a href="../user-docs/concepts/deploy-flows/">Deploy Flows</a>.</p>
+</div>
+<h2 id="runtime-architecture">Runtime architecture</h2>
+<p>What actually runs your containers once they're deployed, and how traffic reaches them.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Runtime &amp; routing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td><strong>Rootless Podman</strong> containers supervised by <strong>systemd</strong> units — no long-running Docker daemon, no Swarm or Kubernetes. Each app runs as its <strong>own dedicated OS user</strong>. Only <strong>Caddy</strong> is exposed; it terminates TLS (auto Let's Encrypt) and forces HTTPS. Apps never bind host ports.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>Docker containers on a <strong>single host</strong> behind <strong>nginx</strong> (default), with Let's Encrypt via plugin.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td><strong>Docker Swarm</strong> services behind <strong>Traefik</strong> + Let's Encrypt. Swarm is what gives it multi-node clustering and rolling updates.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>Docker containers on each connected server, behind a per-server <strong>Traefik</strong> (or Caddy) proxy + Let's Encrypt.</td>
+</tr>
+</tbody>
+</table>
+<p>The rootless-Podman-plus-systemd model is EasyRunner's most distinctive runtime choice: there's no
+privileged Docker daemon in the picture, and per-app OS users mean a compromised container is boxed
+into its own account rather than sitting next to everything else on a shared daemon.</p>
+<h2 id="technologies-building-blocks">Technologies &amp; building blocks</h2>
+<p>The components each tool is assembled from. (All four lean on the same boring, proven primitives —
+containers, a reverse proxy, Let's Encrypt — but stitch them together differently.)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Built from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td>Podman · systemd · Caddy · Let's Encrypt · GHCR (or any registry) · an <strong>encrypted SQLite secrets vault</strong> tied to your OS keyring · <strong>restic</strong> backups (optionally to Cloudflare R2) · an optional <strong>WireGuard</strong> mesh.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>A Bash + Go core with a plugin-trigger system · herokuish / Cloud Native Buildpacks · Docker · nginx.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td>A <strong>TypeScript/Node</strong> control plane backed by Postgres + Redis · Traefik · Docker Swarm · Nixpacks.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>A <strong>PHP/Laravel</strong> control plane backed by Postgres · Traefik/Caddy · Docker · Nixpacks.</td>
+</tr>
+</tbody>
+</table>
+<p>The tell here: Dokploy and Coolify ship a <strong>stateful web application</strong> (with its own database, and in
+Dokploy's case a Redis too) that <em>is</em> the control plane. EasyRunner has no such service to run — the
+control plane is the CLI on your laptop, with its state and secrets stored locally.</p>
+<h2 id="licensing-operating-model">Licensing &amp; operating model</h2>
+<p>This is the sharpest difference, and worth being blunt about.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>License</th>
+<th>Operating model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td><strong>Proprietary, paid</strong> (closed source)</td>
+<td>Per-app pricing tiers; a perpetual <em>buy-once</em> license — one purchase covers a year of updates and <strong>keeps working after</strong> it lapses. <strong>No SaaS</strong> (the control plane is the <code>er</code> CLI on your own machine), <strong>no vendor lock-in</strong>, and <strong>no feature gates</strong> — every tier ships the complete product.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>MIT (free)</td>
+<td>Self-host; optional paid <strong>Dokku Pro</strong> adds a web UI/API.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td>Apache-2.0 (free)</td>
+<td>Self-host; optional low-cost managed <strong>Dokploy Cloud</strong>.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>Apache-2.0 (free)</td>
+<td>Self-host; optional managed <strong>Coolify Cloud</strong>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">EasyRunner is the only paid one — and it's closed source, but without the usual traps</p>
+<p>With the open-source tools the software is free; the work of hardening the host, wiring up
+secrets, locking down access, and keeping it all patched is <strong>on you</strong>. EasyRunner charges for an
+<strong>opinionated, secure-by-default, supported product</strong> that does that work for you out of the box.</p>
+<p>It's <strong>closed source</strong>, but it deliberately avoids the two things people actually fear from
+proprietary software. There's <strong>no lock-in</strong> — your apps are standard OCI containers running on
+servers <em>you</em> own, and the perpetual license keeps working even if you never renew. And there are
+<strong>no feature gates</strong> — tiers scale with the <em>number of apps</em>, not capabilities, so every plan
+includes the full security, secrets vault, VPN mesh, and multi-host feature set.</p>
+<p>If you'd still rather have the source and assemble it yourself, that's a perfectly good reason to
+pick Dokku, Dokploy, or Coolify instead. See <a href="../pricing/">Pricing</a> for the tiers.</p>
+</div>
+<h2 id="primary-ui-ai-agent-compatibility">Primary UI &amp; AI-agent compatibility</h2>
+<h3 id="how-a-human-drives-it">How a human drives it</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Main interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td><strong>CLI only</strong> (<code>er</code>), by design — there's no web UI to host, expose, or depend on us to run. The control plane lives with you.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td><strong>CLI / SSH</strong> and <code>git push</code>. Web UIs exist but are third-party or part of Dokku Pro.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td><strong>Web dashboard first</strong> (with an API/CLI as secondary).</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td><strong>Web dashboard first</strong> (with an API as secondary).</td>
+</tr>
+</tbody>
+</table>
+<p>A web dashboard is genuinely nice for click-ops, log browsing, and onboarding teammates who don't
+live in a terminal — that's a real advantage of Dokploy and Coolify. The flip side is that the
+dashboard is also the thing you must expose to the internet and keep secure (see
+<a href="#security">Security</a> below). EasyRunner trades the dashboard away to remove that surface entirely.</p>
+<h3 id="how-an-ai-agent-drives-it">How an AI agent drives it</h3>
+<p>There's now a third kind of interface that matters as much as the CLI or the GUI: <strong>the AI agent</strong>.
+Coding agents like Claude Code can stand up and operate your infrastructure for you — but only as
+well as the tool exposes a <strong>complete, deterministic, text-based surface</strong>. An agent can't reliably
+click through a dashboard; it needs a full CLI, an API, or an <a href="https://modelcontextprotocol.io">MCP</a>
+server. All four have moved in this direction, but from very different starting points.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Driving it with an AI agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td><strong>Agent-native by construction.</strong> The whole product <em>is</em> the <code>er</code> CLI, so the complete, deterministic surface an agent drives is the <strong>same first-class interface a human uses</strong> — no GUI-only gap to bridge. On top of that, EasyRunner ships <strong>agent skills</strong> (repo-prep, app-create, deploy, update) that encode the <em>entire workflow</em>: an agent can take a repo that isn't even containerized yet, pick the right deploy flow, wire up secrets, and get it live.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>Its complete CLI over SSH is inherently scriptable, so an agent can drive the full lifecycle today. A <strong>community MCP server</strong> exists but is early-stage and not recommended for production. No agent skills.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td>Dashboard-first, but ships an <strong>official MCP server and CLI</strong> — auto-generated from its OpenAPI spec for full API coverage (hundreds of tools) — plus AI-assisted debugging. Broad coverage, though the agent surface is an API mapping of the GUI rather than a CLI-first product.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>Dashboard-first, with a <strong>built-in MCP server</strong> (read-only today; writes planned) plus community MCP servers and a REST API. Strong for agent-driven inspection and queries; write automation through the official MCP is still maturing.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Skills encode <em>how</em>; MCP exposes <em>what</em></p>
+<p>There's a meaningful difference between these approaches. An MCP server maps a tool's API
+endpoints to agent tools — powerful, but the agent still has to know the right sequence and make
+the right choices. EasyRunner's <strong>skills</strong> package up the <em>procedure and judgment</em> — how to
+containerize an unprepared repo, which deploy flow fits, how secrets get wired — so an agent goes
+from a raw repo to a running app, not just from one endpoint to the next. And because EasyRunner
+is CLI-first, that agent surface <strong>is the product itself</strong>, not a secondary layer bolted onto a
+dashboard.</p>
+</div>
+<h2 id="managing-multiple-web-hosts">Managing multiple web hosts</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Multi-server story</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td>One <strong>local control plane manages many</strong> Ubuntu web hosts. Provision a Hetzner box with <code>er server create</code>, or bring your own with <code>er server add</code>, then <code>er server init</code>.</td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>Built for a <strong>single host</strong>. Multi-node is possible via K3s/Nomad schedulers, but it isn't the main path.</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td><strong>Multi-server / multi-node</strong> — the control plane plus SSH-connected remote servers and Docker Swarm nodes.</td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td><strong>Multi-server</strong> — one lightweight control plane plus any number of SSH-connected worker servers.</td>
+</tr>
+</tbody>
+</table>
+<p>If you only ever run one box, Dokku's simplicity is hard to beat. Once you're spreading apps across
+several servers, EasyRunner, Dokploy, and Coolify all manage a fleet from one place — EasyRunner from
+your CLI, the other two from their dashboard.</p>
+<h2 id="security">Security</h2>
+<p>The biggest security difference between these tools isn't a feature checklist — it's the <strong>shape of
+the system</strong>.</p>
+<p>A web-dashboard PaaS puts a <em>privileged</em> control plane on the public internet: a web app that can
+build images and run containers as root across your whole fleet. That's convenient, and it's also the
+highest-value target on the box. EasyRunner has <strong>no web control plane at all</strong> — the control plane is
+the <code>er</code> CLI on your own machine, reaching hosts over SSH — so there's simply no dashboard to expose,
+brute-force, or exploit.</p>
+<h3 id="control-plane-attack-surface">Control-plane attack surface</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Where the control plane lives</th>
+<th>Internet-facing web admin?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EasyRunner</strong></td>
+<td>The <code>er</code> CLI on your machine</td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td><strong>Dokku</strong></td>
+<td>On the server, driven over SSH</td>
+<td>No by default (Pro/3rd-party UI is optional)</td>
+</tr>
+<tr>
+<td><strong>Dokploy</strong></td>
+<td>A web app on a server</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td><strong>Coolify</strong></td>
+<td>A web app on a server</td>
+<td><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="host-app-hardening">Host &amp; app hardening</h3>
+<p>EasyRunner ships secure defaults that you'd otherwise assemble by hand:</p>
+<ul>
+<li><strong>Firewall</strong> with a default-drop policy — only ports 22, 80, and 443 are open.</li>
+<li><strong>fail2ban</strong> and <strong>CIS Level 1</strong> server hardening applied out of the box.</li>
+<li><strong>SSH key-only</strong> access; keys held in your OS keyring, not left on disk.</li>
+<li><strong>Per-app OS-user isolation</strong> — apps can't reach each other or bind host ports.</li>
+<li>An <strong>encrypted secrets vault</strong> — secrets are injected at deploy time (never written into the repo
+  or Compose file) and sensitive reads are gated behind Touch ID.</li>
+<li>An optional <strong>WireGuard mesh</strong> you can lock SSH behind with <code>er mesh lock</code>.</li>
+</ul>
+<p>With Dokku, Dokploy, and Coolify you <em>can</em> reach a strong security posture too — but the hardening,
+secrets handling, and network lockdown are largely <strong>your</strong> responsibility to configure and keep up.</p>
+<div class="admonition warning">
+<p class="admonition-title">If you do run a web dashboard, own its patch cadence</p>
+<p>Any internet-facing control plane that can run containers as root is a high-value target, and
+web admin panels across this whole category have periodically shipped serious vulnerabilities —
+simply because that's where the value is. If you self-host Dokploy or Coolify, keep them updated
+promptly, restrict who can reach the dashboard, and put it behind a VPN or allow-list where you
+can. Removing that surface is precisely why EasyRunner has no web UI.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Be fair: EasyRunner is the youngest and only closed-source option</p>
+<p>Dokku has been battle-tested for over a decade, and Coolify has a very large, active community
+finding and fixing issues in the open. If open-source auditability or a big plugin ecosystem is a
+hard requirement for you, that's a legitimate reason to choose one of the others.</p>
+</div>
+<h2 id="which-should-you-choose">Which should you choose?</h2>
+<p>There's no single winner — it depends on what you value.</p>
+<div class="grid cards">
+<ul>
+<li>
+<h4 id="choose-dokku-if">Choose <strong>Dokku</strong> if…</h4>
+<hr />
+<p>You run a <strong>single box</strong>, live happily in the terminal, want the smallest, most mature,
+<code>git push</code>-to-deploy mini-Heroku, and want it free and MIT-licensed.</p>
+</li>
+<li>
+<h4 id="choose-coolify-if">Choose <strong>Coolify</strong> if…</h4>
+<hr />
+<p>You want the <strong>richest free web dashboard</strong>, a huge <strong>one-click service catalog</strong>, and the
+biggest community — and you're comfortable owning the dashboard's security and updates.</p>
+</li>
+<li>
+<h4 id="choose-dokploy-if">Choose <strong>Dokploy</strong> if…</h4>
+<hr />
+<p>You want a <strong>modern free dashboard</strong> with <strong>multi-node</strong> Docker Swarm deployments and Compose
+support, and you like clicking through deploys rather than typing them.</p>
+</li>
+<li>
+<h4 id="choose-easyrunner-if">Choose <strong>EasyRunner</strong> if…</h4>
+<hr />
+<p>You want <strong>secure-by-default</strong> infrastructure with <strong>no web control plane to expose</strong>, rootless
+Podman isolation, a built-in secrets vault and VPN mesh, multi-host management from one CLI — and
+you'd rather <strong>pay for opinionated, hardened defaults</strong> than wire them up yourself.</p>
+</li>
+</ul>
+</div>
+<p>If that last one sounds like you, the fastest way to feel the difference is to deploy something:</p>
+<p><a class="md-button md-button--primary" href="../user-docs/quickstart/first-app/">Deploy your first app →</a>
+<a class="md-button" href="../how-it-works/">See how EasyRunner works</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 <a href="https://www.linkedin.com/in/janakaabeywardhana" target="_blank" rel="noopener">Janaka Abeywardhana</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/janaka" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/janaka_a" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm297.1 84L257.3 234.6 379.4 396h-95.6L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5 78.2-89.5zm-37.8 251.6L153.4 142.9h-28.3l171.8 224.7z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.footer", "navigation.sections", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid.js"></script>
+      
+    
+  </body>
+</html>
