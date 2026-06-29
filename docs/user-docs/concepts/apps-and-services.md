@@ -69,12 +69,14 @@ EasyRunner reads labels on service entries to understand how to route and run th
 ```yaml
 labels:
   xyz.easyrunner.service.type: web # (1)!
+  xyz.easyrunner.service.domain: app.example.com # (2)!
   xyz.easyrunner.service.framework: standardbackend
-  xyz.easyrunner.service.port: "3000" # (2)!
+  xyz.easyrunner.service.port: "3000" # (3)!
 ```
 
 1. Service role: `web`, `internal`, or `worker`. `web` means this service can receive public traffic through Caddy.
-2. Internal container port Caddy should proxy to.
+2. The public domain Caddy routes to this `web` service. Each `web` service has its own; an app can route several domains.
+3. Internal container port Caddy should proxy to.
 
 !!! note "Renamed from `app*` labels"
     The older `appNodeType`, `appFramework`, and `appContainerInternalPort` labels still work for backward compatibility, but the `service.*` names are canonical. Prefer them for new files.
