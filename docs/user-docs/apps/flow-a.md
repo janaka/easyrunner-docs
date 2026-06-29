@@ -27,11 +27,12 @@ Your repo must contain:
 ## Add and Deploy
 
 ```bash
-er app add my-app my-server git@github.com:yourname/your-repo.git \
-  --custom-domain app.example.com
+er app add my-app my-server git@github.com:yourname/your-repo.git
 
 er app deploy my-app my-server
 ```
+
+The public domain comes from the `xyz.easyrunner.service.domain` label on each `web` service in `.easyrunner/docker-compose-app.yaml` — see [Domains and HTTPS](dns-https.md).
 
 Deploy a specific branch:
 
@@ -46,7 +47,7 @@ er app deploy my-app my-server --branch main
 3. Pulls or clones the selected branch.
 4. Builds the image with Podman.
 5. Converts the Compose-format configuration into systemd-managed containers.
-6. Configures Caddy for the app domain.
+6. Provisions DNS (when Cloudflare is linked) and configures Caddy to route each `web` service to its `service.domain`.
 7. Starts or restarts the app.
 
 ??? question "Build fails on the server"
