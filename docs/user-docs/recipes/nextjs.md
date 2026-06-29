@@ -18,9 +18,10 @@ Demo repo: <https://github.com/janaka/next-helloworld-app>
 ## Add the App
 
 ```bash
-er app add next-demo my-server git@github.com:janaka/next-helloworld-app.git \
-  --custom-domain next-demo.example.com
+er app add next-demo my-server git@github.com:janaka/next-helloworld-app.git
 ```
+
+The public domain is set on the `web` service in the compose file below via `xyz.easyrunner.service.domain` — DNS is provisioned at deploy time.
 
 ## Check the Repo Shape
 
@@ -46,6 +47,7 @@ services:
       - easyrunner_proxy_network
     labels:
       xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.domain: next-demo.example.com
       xyz.easyrunner.service.framework: nextjs
       xyz.easyrunner.service.port: "3000"
 
@@ -160,8 +162,9 @@ Your app should be available at `https://next-demo.example.com` after DNS and ce
 ## Adapt for Your Own App
 
 1. Replace the repository URL with your app repo.
-2. Make sure your container listens on the same port as `xyz.easyrunner.service.port`.
-3. Set `xyz.easyrunner.service.framework: nextjs` on the public service so EasyRunner uses the Next.js-aware Caddy routing.
-4. Store sensitive values with `er app secret`, not in the Compose-format file.
-5. Use `build.args` for build-time `NEXT_PUBLIC_` values.
-6. Deploy a release branch with `er app deploy <app> <server> --branch <branch>` if needed.
+2. Set `xyz.easyrunner.service.domain` to the domain you want this app served at.
+3. Make sure your container listens on the same port as `xyz.easyrunner.service.port`.
+4. Set `xyz.easyrunner.service.framework: nextjs` on the public service so EasyRunner uses the Next.js-aware Caddy routing.
+5. Store sensitive values with `er app secret`, not in the Compose-format file.
+6. Use `build.args` for build-time `NEXT_PUBLIC_` values.
+7. Deploy a release branch with `er app deploy <app> <server> --branch <branch>` if needed.
