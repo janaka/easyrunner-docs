@@ -67,7 +67,8 @@ er backup --help  # (4)!
 
 	| Task | Command |
 	| --- | --- |
-	| Add app | `er app add <app> <server> <repo-url> --custom-domain <domain>` |
+	| Add app (Flow A) | `er app add <app> <server> <repo-url>` |
+	| Add app (Flow B) | `er app add <app> <server> --deploy-flow flow_b --compose-file <path>` |
 	| Update app | `er app update-details <app> <server> [options]` |
 	| Deploy app | `er app deploy <app> <server>` |
 	| Deploy branch | `er app deploy <app> <server> --branch <branch>` |
