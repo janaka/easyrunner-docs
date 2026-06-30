@@ -2784,7 +2784,11 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span>
 </span></code></pre></div>
-<p>Confirm <code>xyz.easyrunner.service.port</code> matches the port your app listens on inside the container.</p>
+<p><code>er app status</code> reports <strong>readiness</strong>: if it shows <code>not listening</code>, the
+container is running but nothing is bound to its <code>service.port</code> — usually a
+port mismatch or the process failed to start. Confirm
+<code>xyz.easyrunner.service.port</code> matches the port your app listens on inside the
+container, then check the logs for a startup error.</p>
 </details>
 <h2 id="mesh-secure-access">Mesh / Secure Access</h2>
 <details class="question">

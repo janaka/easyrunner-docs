@@ -2627,6 +2627,10 @@
 <td><code>er server status &lt;name&gt;</code></td>
 </tr>
 <tr>
+<td>Operational status as JSON</td>
+<td><code>er server status &lt;name&gt; --json</code></td>
+</tr>
+<tr>
 <td>Reapply firewall policy</td>
 <td><code>er server reapply-firewall &lt;name&gt;</code></td>
 </tr>
@@ -2684,6 +2688,10 @@
 <td><code>er app status &lt;app&gt; &lt;server&gt;</code></td>
 </tr>
 <tr>
+<td>App status as JSON</td>
+<td><code>er app status &lt;app&gt; &lt;server&gt; --json</code></td>
+</tr>
+<tr>
 <td>Show app logs</td>
 <td><code>er app logs &lt;app&gt; &lt;server&gt;</code></td>
 </tr>
@@ -2717,8 +2725,12 @@
 </thead>
 <tbody>
 <tr>
-<td>Set secret</td>
+<td>Set secret (hidden prompt)</td>
 <td><code>er app secret set &lt;app&gt; &lt;NAME&gt;</code></td>
+</tr>
+<tr>
+<td>Set secret from file/stdin</td>
+<td><code>er app secret set &lt;app&gt; &lt;NAME&gt; --value-file &lt;path&gt;</code> (<code>-</code> reads stdin)</td>
 </tr>
 <tr>
 <td>Generate secret</td>

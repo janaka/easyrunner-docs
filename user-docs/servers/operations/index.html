@@ -1384,6 +1384,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Health and Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-readable-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine-readable output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2600,6 +2617,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Health and Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-readable-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine-readable output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2697,37 +2731,69 @@
 </span></code></pre></div>
 <ol>
 <li>Runs pass/fail health diagnostics across the host stack (Podman, Caddy, the EasyRunner user, firewall rules, connectivity). Add <code>--fix</code> to attempt automatic remediation where supported.</li>
-<li>Shows a read-only snapshot of runtime state: uptime, load average, memory, disk, per-app container status, and the server's mesh IP.</li>
+<li>Shows a read-only snapshot of runtime state — see the fields below.</li>
 </ol>
 <p><code>er server doctor</code> answers "is this web host healthy?" and exits non-zero when a check fails. <code>er server status</code> answers "what is this web host doing right now?" and never fails on observed state.</p>
+<p><code>er server status</code> samples live resource use from the host and reports:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System</td>
+<td>Uptime, load average, <strong>CPU %</strong>, memory free/total, disk free/total, <strong>disk I/O</strong> (read/write throughput), mesh IP.</td>
+</tr>
+<tr>
+<td>Per app</td>
+<td>Deployment state (running / stopped / not deployed), <strong>readiness</strong> (is the web service listening on its <code>service.port</code>?), and <strong>per-app CPU % and memory</strong> aggregated across the app's containers.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Readiness is a port-level check</p>
+<p>Readiness reports whether <em>something is listening</em> on the web service's
+<code>xyz.easyrunner.service.port</code> inside the container — it catches "container up
+but nothing on the port". A listening port can still return errors, so this
+is not a full HTTP health check. Values: <code>listening</code>, <code>not listening</code>, or
+<code>readiness unknown</code> (no web port, or the probe could not run).</p>
+</div>
+<p>Any field shows <code>—</code> when its probe could not be read; the command still succeeds.</p>
+<h3 id="machine-readable-output">Machine-readable output</h3>
+<p>Add <code>--json</code> to emit the full snapshot as JSON instead of the formatted view — useful for scripting, dashboards, or piping into <code>jq</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>server<span class="w"> </span>status<span class="w"> </span>my-server<span class="w"> </span>--json
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Renamed from <code>er server verify</code></p>
 <p>Earlier releases used <code>er server verify</code>. It is now <code>er server doctor</code>, part of a unified diagnostics pattern shared by <code>er doctor</code>, <code>er server doctor</code>, <code>er link doctor</code>, and <code>er mesh doctor</code>.</p>
 </div>
 <h2 id="security-scan">Security Scan</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>server<span class="w"> </span>security-scan<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>server<span class="w"> </span>security-scan<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Scans deployed apps for information-disclosure vulnerabilities. Use <code>--scan-all-apps</code>, or target a specific app or URL with the command's options (see <code>er server security-scan --help</code>).</p>
 <h2 id="reapply-firewall-policy">Reapply Firewall Policy</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>server<span class="w"> </span>reapply-firewall<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>server<span class="w"> </span>reapply-firewall<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Re-applies EasyRunner's canonical host firewall policy on an existing server. It is idempotent — only missing rules are added and stale ones removed — and is the way to backfill new firewall rules (for example mesh-related rules) onto servers initialized by an older CLI version.</p>
 <h2 id="ssh-troubleshooting">SSH Troubleshooting</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>server<span class="w"> </span>ssh-connect-test<span class="w"> </span>my-server<span class="w"> </span>--username<span class="w"> </span>root
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>server<span class="w"> </span>ssh-connect-test<span class="w"> </span>my-server<span class="w"> </span>--username<span class="w"> </span>root
 </span></code></pre></div>
 <p>Use this when <code>er server init</code>, <code>er app deploy</code>, or logs commands cannot connect.</p>
 <h2 id="reverse-proxy-logs">Reverse Proxy Logs</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
 </span></code></pre></div>
 <p>These logs come from the Caddy reverse proxy service on the web host.</p>
 <h2 id="intrusion-prevention">Intrusion Prevention</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>server<span class="w"> </span>fail2ban-status<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>server<span class="w"> </span>fail2ban-status<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Use this to inspect Fail2Ban jail status, policies, and banned IPs.</p>
 <h2 id="easyrunner-stack-lifecycle">EasyRunner Stack Lifecycle</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>server<span class="w"> </span>easyrunner-stop<span class="w"> </span>my-server
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>er<span class="w"> </span>server<span class="w"> </span>easyrunner-start<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>er<span class="w"> </span>server<span class="w"> </span>easyrunner-stop<span class="w"> </span>my-server
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>er<span class="w"> </span>server<span class="w"> </span>easyrunner-start<span class="w"> </span>my-server
 </span></code></pre></div>
 <p>Use these carefully. Stopping the EasyRunner stack can interrupt app routing.</p>
 

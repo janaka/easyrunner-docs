@@ -2626,23 +2626,37 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
+<p><code>er app status</code> reports the app's runtime state on the server:</p>
+<ul>
+<li><strong>State</strong> — running, not running, or not deployed.</li>
+<li><strong>Readiness</strong> — whether the web service is listening on its <code>service.port</code> (<code>listening</code>, <code>not listening</code>, or <code>readiness unknown</code>). A <code>running</code> app can still be <code>not listening</code> if the process hasn't bound its port yet.</li>
+<li><strong>Containers</strong> — each container with its live <strong>CPU %</strong> and <strong>memory</strong> use.</li>
+</ul>
+<p>Add <code>--json</code> for machine-readable output to script against or pipe into <code>jq</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--json
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Server-wide view</p>
+<p><code>er server status &lt;server&gt;</code> shows the same readiness and resource figures for
+every app on a host at once. See <a href="../../servers/operations/#health-and-status">Server Operations</a>.</p>
+</div>
 <h2 id="logs">Logs</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>er<span class="w"> </span>app<span class="w"> </span>logs<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
 </span></code></pre></div>
 <p>Logs come from the systemd user journal for the containers generated from your service entries.</p>
 <h2 id="lifecycle">Lifecycle</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>stop<span class="w"> </span>my-app<span class="w"> </span>my-server
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>er<span class="w"> </span>app<span class="w"> </span>start<span class="w"> </span>my-app<span class="w"> </span>my-server
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>er<span class="w"> </span>app<span class="w"> </span>restart<span class="w"> </span>my-app<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>stop<span class="w"> </span>my-app<span class="w"> </span>my-server
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>app<span class="w"> </span>start<span class="w"> </span>my-app<span class="w"> </span>my-server
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>er<span class="w"> </span>app<span class="w"> </span>restart<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
 <h2 id="redeploy">Redeploy</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--branch<span class="w"> </span>main
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--branch<span class="w"> </span>main
 </span></code></pre></div>
 <p>Flow A can use <code>--branch</code>. Flow B deploys the stored image references and ignores branch selection.</p>
 <h2 id="remove">Remove</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>app<span class="w"> </span>remove<span class="w"> </span>my-app<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>app<span class="w"> </span>remove<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Data and volumes</p>
