@@ -10,6 +10,22 @@ er app show-details my-app my-server
 er app status my-app my-server
 ```
 
+`er app status` reports the app's runtime state on the server:
+
+- **State** — running, not running, or not deployed.
+- **Readiness** — whether the web service is listening on its `service.port` (`listening`, `not listening`, or `readiness unknown`). A `running` app can still be `not listening` if the process hasn't bound its port yet.
+- **Containers** — each container with its live **CPU %** and **memory** use.
+
+Add `--json` for machine-readable output to script against or pipe into `jq`:
+
+```bash
+er app status my-app my-server --json
+```
+
+!!! tip "Server-wide view"
+    `er server status <server>` shows the same readiness and resource figures for
+    every app on a host at once. See [Server Operations](../servers/operations.md#health-and-status).
+
 ## Logs
 
 ```bash
