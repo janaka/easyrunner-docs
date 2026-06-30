@@ -2770,12 +2770,14 @@
 </ol>
 <p>EasyRunner uses this link to create repository-specific deploy keys for Flow A deployments.</p>
 <h2 id="4-add-the-app">4. Add the App</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-first-server<span class="w"> </span>git@github.com:yourname/your-repo.git<span class="w"> </span>--custom-domain<span class="w"> </span>app.example.com
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-first-server<span class="w"> </span>git@github.com:yourname/your-repo.git
 </span></code></pre></div>
 <p>Use the SSH GitHub URL, not the HTTPS URL.</p>
 <div class="admonition info">
 <p class="admonition-title">What happens</p>
-<p>EasyRunner stores the app name, target web host, repo URL, domain, and default deploy-flow settings. It does not deploy yet.</p>
+<p>EasyRunner stores the app name, target web host, repo URL, and default
+deploy-flow settings. It does not deploy yet. The public domain is set on the
+<code>web</code> service in your compose file (next step), not on this command.</p>
 </div>
 <h2 id="5-add-app-configuration-to-your-repo">5. Add App Configuration to Your Repo</h2>
 <p>Flow A expects your app repo to contain:</p>
@@ -2795,25 +2797,27 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w"> </span><span class="c1"># (3)!</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (4)!</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="nt">networks</span><span class="p">:</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="nt">easyrunner_proxy_network</span><span class="p">:</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># (5)!</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.example.com</span><span class="w"> </span><span class="c1"># (4)!</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardbackend</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="w"> </span><span class="c1"># (5)!</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="nt">easyrunner_proxy_network</span><span class="p">:</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># (6)!</span>
 </span></code></pre></div>
 <ol>
 <li>Use an app-specific project name in the Compose-format file.</li>
 <li>This service entry is the public web process.</li>
 <li>Marks the service as publicly routable through Caddy.</li>
+<li>The public domain Caddy routes to this service. DNS for it is provisioned at deploy time.</li>
 <li>Must match the port your app listens on inside the container.</li>
 <li>Connects the service to EasyRunner's proxy network.</li>
 </ol>
 <p>Commit and push these files before deploying.</p>
 <h2 id="6-point-dns-at-the-server">6. Point DNS at the Server</h2>
-<p>Create an <code>A</code> record for <code>app.example.com</code> pointing at the web host IP.</p>
-<p>If Cloudflare is linked and your domain is in that account, EasyRunner can create the record when you add the app.</p>
+<p>Create an <code>A</code> record for <code>app.example.com</code> (the <code>service.domain</code> you set above) pointing at the web host IP.</p>
+<p>If Cloudflare is linked and your domain is in that account, EasyRunner creates the record for you at deploy time — one per <code>service.domain</code> declared in your compose file.</p>
 <div class="admonition warning">
 <p class="admonition-title">DNS before certificates</p>
 </div>

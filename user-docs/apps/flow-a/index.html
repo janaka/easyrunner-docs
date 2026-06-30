@@ -2617,11 +2617,11 @@
 <li><code>.easyrunner/docker-compose-app.yaml</code></li>
 </ul>
 <h2 id="add-and-deploy">Add and Deploy</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--custom-domain<span class="w"> </span>app.example.com
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
+<p>The public domain comes from the <code>xyz.easyrunner.service.domain</code> label on each <code>web</code> service in <code>.easyrunner/docker-compose-app.yaml</code> — see <a href="../dns-https/">Domains and HTTPS</a>.</p>
 <p>Deploy a specific branch:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--branch<span class="w"> </span>main
 </span></code></pre></div>
@@ -2632,7 +2632,7 @@
 <li>Pulls or clones the selected branch.</li>
 <li>Builds the image with Podman.</li>
 <li>Converts the Compose-format configuration into systemd-managed containers.</li>
-<li>Configures Caddy for the app domain.</li>
+<li>Provisions DNS (when Cloudflare is linked) and configures Caddy to route each <code>web</code> service to its <code>service.domain</code>.</li>
 <li>Starts or restarts the app.</li>
 </ol>
 <details class="question">

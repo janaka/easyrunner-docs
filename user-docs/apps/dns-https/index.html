@@ -1624,10 +1624,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#add-a-domain-to-an-app" class="md-nav__link">
+  <a href="#set-a-domain-on-a-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add a Domain to an App
+        Set a Domain on a Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-domains-per-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Domains per App
       
     </span>
   </a>
@@ -2537,10 +2548,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#add-a-domain-to-an-app" class="md-nav__link">
+  <a href="#set-a-domain-on-a-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add a Domain to an App
+        Set a Domain on a Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-domains-per-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Domains per App
       
     </span>
   </a>
@@ -2598,41 +2620,93 @@
 
 
 <h1 id="domains-and-https">Domains and HTTPS</h1>
-<p>Every public EasyRunner app is expected to be served over HTTPS through Caddy.</p>
-<h2 id="add-a-domain-to-an-app">Add a Domain to an App</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--custom-domain<span class="w"> </span>app.example.com
+<p>Every public EasyRunner service is served over HTTPS through Caddy. Domains are declared <strong>per web service</strong> in your Compose-format file — there is no app-level domain flag.</p>
+<div class="admonition info">
+<p class="admonition-title">Domains live in the compose file</p>
+<p>Each <code>web</code> service sets its own public domain with the
+<code>xyz.easyrunner.service.domain</code> label. The compose file is the single source
+of truth for routing, and DNS is provisioned at <strong>deploy</strong> time. The old
+<code>--custom-domain</code> flag on <code>er app add</code> / <code>er app update-details</code> has been
+removed.</p>
+</div>
+<h2 id="set-a-domain-on-a-service">Set a Domain on a Service</h2>
+<p>Add the <code>xyz.easyrunner.service.domain</code> label to each public (<code>web</code>) service:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyrunner_proxy_network</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.example.com</span><span class="w"> </span><span class="c1"># (1)!</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span>
 </span></code></pre></div>
-<p>or update an existing app:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>update-details<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--custom-domain<span class="w"> </span>app.example.com
+<ol>
+<li>The public domain Caddy routes to this service. Required on every <code>web</code> service; must be unique within the app.</li>
+</ol>
+<p>How you change it depends on the deploy flow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Flow A (repo apps)</label><label for="__tabbed_1_2">Flow B (registry apps)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Edit <code>.easyrunner/docker-compose-app.yaml</code> in the repo, commit, and push.</p>
+</div>
+<div class="tabbed-block">
+<p>Edit your local compose file, then re-snapshot it onto the app:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>update-details<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--compose-file<span class="w"> </span>./compose.yaml
 </span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Then deploy — DNS and Caddy routing for the domain are set up during the deploy:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
+</span></code></pre></div>
+<h2 id="multiple-domains-per-app">Multiple Domains per App</h2>
+<p>An app can declare several <code>web</code> services, each on its own domain. They are all routed, and a DNS record is provisioned for each declared domain:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">storefront</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">easyrunner_proxy_network</span><span class="p p-Indicator">]</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shop.example.com</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8000&quot;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">admin</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">easyrunner_proxy_network</span><span class="p p-Indicator">]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin.example.com</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;7001&quot;</span>
+</span></code></pre></div>
+<p>Each <code>service.domain</code> must be unique within the app. See <a href="../../reference/compose-labels/#multiple-public-services">Compose-Format Files and Labels</a> for a fuller multi-service example, including how one service reads another's public URL.</p>
 <h2 id="dns">DNS</h2>
-<p>Create an <code>A</code> record pointing your app domain at the web host IP address.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>app.example.com -&gt; &lt;web-host-ip&gt;
+<p>Create an <code>A</code> record pointing each service domain at the web host IP:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>app.example.com -&gt; &lt;web-host-ip&gt;
 </span></code></pre></div>
-<p>You can find app and server details with:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-app<span class="w"> </span>my-server
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>server<span class="w"> </span>list
+<p>Find the web host IP with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-app<span class="w"> </span>my-server
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>er<span class="w"> </span>server<span class="w"> </span>list
 </span></code></pre></div>
 <h2 id="cloudflare-automation">Cloudflare Automation</h2>
-<p>If your domain is managed in Cloudflare, link Cloudflare before adding the app:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--api-token<span class="w"> </span>&lt;cloudflare-api-token&gt;
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--custom-domain<span class="w"> </span>app.example.com
+<p>If your domains are managed in Cloudflare, link Cloudflare and EasyRunner creates or confirms the <code>A</code> records for you — <strong>at deploy time</strong>, one per declared <code>service.domain</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>link<span class="w"> </span>cloudflare<span class="w"> </span>production<span class="w"> </span>--api-token<span class="w"> </span>&lt;cloudflare-api-token&gt;
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
-<p>EasyRunner can then create or update the DNS record for you.</p>
+<p>The deploy prints the record it created or confirmed for each domain. If DNS setup fails (for example, the domain is not in the linked account), EasyRunner warns and continues — the deploy is not blocked.</p>
 <h2 id="https">HTTPS</h2>
-<p>Caddy handles certificate issuance and renewal. Make sure DNS points at the web host before deploying so HTTP-01 validation can succeed.</p>
+<p>Caddy handles certificate issuance and renewal for every routed domain. Because DNS is provisioned right before routing, certificates issue cleanly on the first deploy.</p>
+<div class="admonition note">
+<p class="admonition-title">First-deploy TLS</p>
+<p>Certificates can take a minute to issue while a freshly created DNS record
+propagates (TTL 300s). Caddy retries automatically.</p>
+</div>
 <details class="question">
 <summary>HTTPS is not working</summary>
 <p>Check these first:</p>
 <ul>
-<li>DNS resolves to the web host IP.</li>
+<li>DNS resolves to the web host IP for the service's <code>service.domain</code>.</li>
 <li>Ports <code>80</code> and <code>443</code> are open to the internet.</li>
-<li>The app domain in EasyRunner matches the DNS name.</li>
+<li>The <code>xyz.easyrunner.service.domain</code> label matches the DNS name.</li>
 <li>Caddy logs do not show certificate challenge failures.</li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span>
 </span></code></pre></div>
 </details>
 

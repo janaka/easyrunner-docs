@@ -2579,8 +2579,7 @@
 <p><code>er app add</code> registers a deployable app stack on an EasyRunner web host.</p>
 <h2 id="flow-a-app">Flow A App</h2>
 <p>Flow A builds from a GitHub repo on the web host.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--custom-domain<span class="w"> </span>app.example.com
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>git@github.com:yourname/your-repo.git
 </span></code></pre></div>
 <p>Options you will commonly use:</p>
 <table>
@@ -2604,26 +2603,38 @@
 <td>SSH repository URL for Flow A.</td>
 </tr>
 <tr>
-<td><code>--custom-domain</code></td>
-<td>Public domain Caddy will route.</td>
-</tr>
-<tr>
 <td><code>--default-deploy-branch</code></td>
 <td>Branch to deploy when <code>er app deploy</code> has no <code>--branch</code>.</td>
 </tr>
+<tr>
+<td><code>--description</code></td>
+<td>Short, one-line description of the app.</td>
+</tr>
 </tbody>
 </table>
+<div class="admonition info">
+<p class="admonition-title">Domains are not set here</p>
+<p>Public domains are declared <strong>per web service</strong> in the compose file via the
+<code>xyz.easyrunner.service.domain</code> label — there is no <code>--custom-domain</code> flag.
+DNS is provisioned at <code>er app deploy</code>. See
+<a href="../dns-https/">Domains and HTTPS</a>.</p>
+</div>
 <h2 id="flow-b-app">Flow B App</h2>
-<p>Flow B pulls a pre-built image from a registry. Create the app, then store the Flow B Compose-format file on the app:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>--custom-domain<span class="w"> </span>app.example.com
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>er<span class="w"> </span>app<span class="w"> </span>update-details<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--deploy-flow<span class="w"> </span>flow_b<span class="w"> </span><span class="se">\</span>
+<p>Flow B pulls a pre-built image from a registry. Register the app, then store the Flow B Compose-format file on it:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span>--deploy-flow<span class="w"> </span>flow_b
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>er<span class="w"> </span>app<span class="w"> </span>update-details<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--compose-file<span class="w"> </span>./docker-compose.yaml
 </span></code></pre></div>
-<p>The empty repo URL is a current CLI requirement for <code>er app add</code>; Flow B does not use it.</p>
+<p>You can also snapshot the compose file in a single step:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>add<span class="w"> </span>my-app<span class="w"> </span>my-server<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--deploy-flow<span class="w"> </span>flow_b<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--compose-file<span class="w"> </span>./docker-compose.yaml
+</span></code></pre></div>
+<p>The repo URL is optional for Flow B — omit it. (Flow A still requires one.)</p>
 <h2 id="inspect">Inspect</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>list
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-app<span class="w"> </span>my-server
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>er<span class="w"> </span>app<span class="w"> </span>list
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>my-app<span class="w"> </span>my-server
 </span></code></pre></div>
 
 
