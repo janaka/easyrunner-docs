@@ -58,6 +58,7 @@ er backup --help  # (4)!
 	| Run health diagnostics | `er server doctor <name>` |
 	| Auto-fix server issues | `er server doctor <name> --fix` |
 	| Show operational status | `er server status <name>` |
+	| Operational status as JSON | `er server status <name> --json` |
 	| Reapply firewall policy | `er server reapply-firewall <name>` |
 	| Security scan | `er server security-scan <name>` |
 	| Show Caddy logs | `er server logs <name>` |
@@ -74,6 +75,7 @@ er backup --help  # (4)!
 	| Deploy branch | `er app deploy <app> <server> --branch <branch>` |
 	| Show app details | `er app show-details <app> <server>` |
 	| Show app status | `er app status <app> <server>` |
+	| App status as JSON | `er app status <app> <server> --json` |
 	| Show app logs | `er app logs <app> <server>` |
 	| Start app | `er app start <app> <server>` |
 	| Stop app | `er app stop <app> <server>` |
@@ -84,7 +86,8 @@ er backup --help  # (4)!
 
 	| Task | Command |
 	| --- | --- |
-	| Set secret | `er app secret set <app> <NAME>` |
+	| Set secret (hidden prompt) | `er app secret set <app> <NAME>` |
+	| Set secret from file/stdin | `er app secret set <app> <NAME> --value-file <path>` (`-` reads stdin) |
 	| Generate secret | `er app secret generate <app> <NAME>` |
 	| Get secret | `er app secret get <app> <NAME>` |
 	| List secrets | `er app secret list <app>` |
