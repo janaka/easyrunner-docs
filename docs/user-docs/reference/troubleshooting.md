@@ -121,7 +121,11 @@ Install/setup -> license/link -> SSH/server init -> DNS/HTTPS -> deploy -> runti
     er app logs my-app my-server --lines 200
     ```
 
-    Confirm `xyz.easyrunner.service.port` matches the port your app listens on inside the container.
+    `er app status` reports **readiness**: if it shows `not listening`, the
+    container is running but nothing is bound to its `service.port` — usually a
+    port mismatch or the process failed to start. Confirm
+    `xyz.easyrunner.service.port` matches the port your app listens on inside the
+    container, then check the logs for a startup error.
 
 ## Mesh / Secure Access
 

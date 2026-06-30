@@ -10,7 +10,43 @@ The vault is designed to keep the same security posture while avoiding prompt fa
 er app secret set my-app DATABASE_URL
 ```
 
-The CLI prompts for the value with hidden input so it does not appear in shell history.
+With no value flag, the CLI prompts for the value with hidden input so it does not appear in shell history. You can also supply the value non-interactively:
+
+=== "Hidden prompt (default)"
+
+    ```bash
+    er app secret set my-app DATABASE_URL
+    ```
+
+    Best for typing a value by hand — it never reaches your shell history.
+
+=== "From a file"
+
+    ```bash
+    er app secret set my-app SERVICE_ACCOUNT_JSON --value-file ./service-account.json
+    ```
+
+    Reads the value from a file. Use this for **large or multi-line secrets**
+    (e.g. JSON keys) that exceed the hidden prompt's ~1024-byte single-line
+    limit. A single trailing newline is stripped.
+
+=== "From stdin"
+
+    ```bash
+    jq -c . service-account.json | er app secret set my-app SERVICE_ACCOUNT_JSON --value-file -
+    ```
+
+    `--value-file -` reads from stdin, so you can pipe a value in from another
+    command without it touching disk.
+
+=== "Inline (discouraged)"
+
+    ```bash
+    er app secret set my-app DATABASE_URL --value "postgres://..."
+    ```
+
+    `--value`/`-v` is convenient in scripts but the value is visible in shell
+    history and process listings — prefer `--value-file` for anything sensitive.
 
 ## Generate a Secret
 
@@ -28,8 +64,17 @@ er app secret list my-app
 er app secret delete my-app DATABASE_URL
 ```
 
+`list` shows each secret name alongside a **masked preview** of its value — the last 4 characters, with short values fully masked — so you can tell two secrets apart or confirm a rotation without revealing the full value:
+
+```text
+DATABASE_URL       ••••••6f3a
+SESSION_SECRET     ••••••••
+```
+
 !!! note "Secret values stay hidden"
-    `list` shows secret names, not values. Use `get` only when you intentionally need to reveal a value.
+    The `list` preview never shows the full value. Use `get` only when you
+    intentionally need to reveal one. Listing previews are supported on macOS;
+    on other platforms `list` returns an empty result.
 
 ## Push Secrets to Their Destinations
 

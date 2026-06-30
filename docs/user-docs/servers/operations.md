@@ -17,9 +17,33 @@ er server status my-server   # (2)!
 ```
 
 1. Runs pass/fail health diagnostics across the host stack (Podman, Caddy, the EasyRunner user, firewall rules, connectivity). Add `--fix` to attempt automatic remediation where supported.
-2. Shows a read-only snapshot of runtime state: uptime, load average, memory, disk, per-app container status, and the server's mesh IP.
+2. Shows a read-only snapshot of runtime state — see the fields below.
 
 `er server doctor` answers "is this web host healthy?" and exits non-zero when a check fails. `er server status` answers "what is this web host doing right now?" and never fails on observed state.
+
+`er server status` samples live resource use from the host and reports:
+
+| Section | Fields |
+| --- | --- |
+| System | Uptime, load average, **CPU %**, memory free/total, disk free/total, **disk I/O** (read/write throughput), mesh IP. |
+| Per app | Deployment state (running / stopped / not deployed), **readiness** (is the web service listening on its `service.port`?), and **per-app CPU % and memory** aggregated across the app's containers. |
+
+!!! info "Readiness is a port-level check"
+    Readiness reports whether *something is listening* on the web service's
+    `xyz.easyrunner.service.port` inside the container — it catches "container up
+    but nothing on the port". A listening port can still return errors, so this
+    is not a full HTTP health check. Values: `listening`, `not listening`, or
+    `readiness unknown` (no web port, or the probe could not run).
+
+Any field shows `—` when its probe could not be read; the command still succeeds.
+
+### Machine-readable output
+
+Add `--json` to emit the full snapshot as JSON instead of the formatted view — useful for scripting, dashboards, or piping into `jq`:
+
+```bash
+er server status my-server --json
+```
 
 !!! note "Renamed from `er server verify`"
     Earlier releases used `er server verify`. It is now `er server doctor`, part of a unified diagnostics pattern shared by `er doctor`, `er server doctor`, `er link doctor`, and `er mesh doctor`.
