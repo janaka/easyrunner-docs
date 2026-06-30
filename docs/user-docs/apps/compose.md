@@ -27,6 +27,7 @@ services:
       - easyrunner_proxy_network
     labels:
       xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.domain: app.example.com
       xyz.easyrunner.service.framework: standardbackend
       xyz.easyrunner.service.port: "3000"
 
@@ -44,6 +45,7 @@ networks:
 | `services:` | Defines the containers/processes inside the EasyRunner app. |
 | `networks.easyrunner_proxy_network` | Connects public services to Caddy's proxy network. |
 | `xyz.easyrunner.service.type` | Marks a service as `web`, `internal`, or `worker`. |
+| `xyz.easyrunner.service.domain` | Public domain Caddy routes to this `web` service. Required on every `web` service. |
 | `xyz.easyrunner.service.port` | Tells Caddy which internal port the service listens on. |
 
 ## Build Arguments
@@ -66,7 +68,7 @@ Use build args for values that must exist while the image is built. Do not use t
 
 ## Auto-Injected Environment Variables
 
-EasyRunner injects read-only metadata variables (`EASYRUNNER_APP_URL`, `EASYRUNNER_APP_DOMAIN`, and others) into every service container at deploy time. Reference them from your app or from `environment:` instead of hardcoding your domain:
+EasyRunner injects read-only metadata variables into every service container at deploy time. `EASYRUNNER_APP_URL` and `EASYRUNNER_APP_DOMAIN` resolve to **this service's own** public URL/domain (from its `service.domain` label). Reference them from your app or from `environment:` instead of hardcoding your domain:
 
 ```yaml
 services:
@@ -76,9 +78,11 @@ services:
       - PUBLIC_URL=${EASYRUNNER_APP_URL}
 ```
 
-See [Compose-Format Files and Labels](../reference/compose-labels.md#auto-injected-environment-variables) for the full list.
+When an app has several `web` services, each one's public URL is also exposed to every container as `EASYRUNNER_SERVICE_<NAME>_URL` / `_DOMAIN`, so one service can address another (e.g. a storefront calling its backend API). See [Compose-Format Files and Labels](../reference/compose-labels.md#auto-injected-environment-variables) for the full list.
 
 ## Multi-Service Apps
+
+Each `web` service declares its own `service.domain`; `worker` and `internal` services are not routed and have no domain.
 
 ```yaml
 name: shop
@@ -88,6 +92,7 @@ services:
     networks: [easyrunner_proxy_network]
     labels:
       xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.domain: shop.example.com
       xyz.easyrunner.service.port: "3000"
   worker:
     image: localhost/shop-worker:latest

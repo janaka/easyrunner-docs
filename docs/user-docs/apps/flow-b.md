@@ -14,15 +14,24 @@ CI builds image -> registry -> web host pulls image -> systemd service -> Caddy 
 
 ## Add or Update the App
 
-```bash
-er app add my-app my-server "" --custom-domain app.example.com
+Register the app and snapshot its compose file in one step:
 
-er app update-details my-app my-server \
+```bash
+er app add my-app my-server \
   --deploy-flow flow_b \
   --compose-file ./docker-compose.yaml
 ```
 
-`--compose-file` reads a Compose-format file at command time and stores its content on the app. If you edit the file later, run `er app update-details --compose-file ...` again.
+Or register first and attach the compose file later:
+
+```bash
+er app add my-app my-server --deploy-flow flow_b
+
+er app update-details my-app my-server \
+  --compose-file ./docker-compose.yaml
+```
+
+`--compose-file` reads a Compose-format file at command time and stores its content on the app. If you edit the file later — including changing a `service.domain` — run `er app update-details --compose-file ...` again. The public domain comes from the `xyz.easyrunner.service.domain` label, not a CLI flag.
 
 ## Compose-Format Shape
 
@@ -36,6 +45,7 @@ services:
       - easyrunner_proxy_network
     labels:
       xyz.easyrunner.service.type: web
+      xyz.easyrunner.service.domain: app.example.com
       xyz.easyrunner.service.port: "3000"
 
 networks:

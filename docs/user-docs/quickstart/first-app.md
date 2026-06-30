@@ -82,13 +82,15 @@ EasyRunner uses this link to create repository-specific deploy keys for Flow A d
 ## 4. Add the App
 
 ```bash
-er app add my-app my-first-server git@github.com:yourname/your-repo.git --custom-domain app.example.com
+er app add my-app my-first-server git@github.com:yourname/your-repo.git
 ```
 
 Use the SSH GitHub URL, not the HTTPS URL.
 
 !!! info "What happens"
-    EasyRunner stores the app name, target web host, repo URL, domain, and default deploy-flow settings. It does not deploy yet.
+    EasyRunner stores the app name, target web host, repo URL, and default
+    deploy-flow settings. It does not deploy yet. The public domain is set on the
+    `web` service in your compose file (next step), not on this command.
 
 ## 5. Add App Configuration to Your Repo
 
@@ -111,28 +113,30 @@ services:
       - easyrunner_proxy_network
     labels:
       xyz.easyrunner.service.type: web # (3)!
+      xyz.easyrunner.service.domain: app.example.com # (4)!
       xyz.easyrunner.service.framework: standardbackend
-      xyz.easyrunner.service.port: "3000" # (4)!
+      xyz.easyrunner.service.port: "3000" # (5)!
 
 networks:
   easyrunner_proxy_network:
     name: easyrunner_proxy_network
-    external: true # (5)!
+    external: true # (6)!
 ```
 
 1. Use an app-specific project name in the Compose-format file.
 2. This service entry is the public web process.
 3. Marks the service as publicly routable through Caddy.
-4. Must match the port your app listens on inside the container.
-5. Connects the service to EasyRunner's proxy network.
+4. The public domain Caddy routes to this service. DNS for it is provisioned at deploy time.
+5. Must match the port your app listens on inside the container.
+6. Connects the service to EasyRunner's proxy network.
 
 Commit and push these files before deploying.
 
 ## 6. Point DNS at the Server
 
-Create an `A` record for `app.example.com` pointing at the web host IP.
+Create an `A` record for `app.example.com` (the `service.domain` you set above) pointing at the web host IP.
 
-If Cloudflare is linked and your domain is in that account, EasyRunner can create the record when you add the app.
+If Cloudflare is linked and your domain is in that account, EasyRunner creates the record for you at deploy time — one per `service.domain` declared in your compose file.
 
 !!! warning "DNS before certificates"
   Caddy can only issue the certificate after DNS points at the web host and ports `80` and `443` are reachable.

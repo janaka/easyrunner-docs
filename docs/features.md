@@ -78,7 +78,7 @@
 
     ---
 
-    Configure your apps with custom domains. HTTPS is the default and configured automatically. TLS certs issued by Let's Encrypt and automatically renewed.
+    Give each public service its own custom domain — an app can route several at once. HTTPS is the default and configured automatically. TLS certs issued by Let's Encrypt and automatically renewed.
 
 
 -   #### Manage Multiple Web Host Servers

@@ -32,7 +32,7 @@ Users visit your app
 | Control plane | The EasyRunner CLI install and local state that remembers servers, apps, links, and secrets. |
 | Server mode | A first-run setup mode where this EasyRunner install stores the control-plane state. This is usually your laptop or a machine you keep around, not the web host itself. |
 | Web host | The Ubuntu server EasyRunner configures to run apps. CLI commands call this a `server`. |
-| App | An EasyRunner deployable app stack. It has a name, web host, domain, deploy flow, Compose-format configuration, secrets, and lifecycle. |
+| App | An EasyRunner deployable app stack. It has a name, web host, deploy flow, Compose-format configuration (which declares a public domain per `web` service), secrets, and lifecycle. |
 | Service | One service entry inside the app's Compose-format configuration. Usually one container or process. An app can have one service or many. |
 | Deploy flow | How the app image gets to the web host: build from source on the server, or pull a pre-built image from a registry. |
 | Link | A stored connection to an external service such as GitHub, Hetzner, or Cloudflare. |
