@@ -2370,6 +2370,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#blast-radius-hardening-easyrunner-after-a-real-compromise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blast radius: hardening EasyRunner after a real compromise
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#self-hosting-nextjs-shouldnt-break-on-every-deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2502,6 +2513,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#blast-radius-hardening-easyrunner-after-a-real-compromise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blast radius: hardening EasyRunner after a real compromise
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#self-hosting-nextjs-shouldnt-break-on-every-deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2537,6 +2559,60 @@
       <header class="md-typeset">
         <h1 id="behind-the-scenes">behind-the-scenes</h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/janaka.png" alt="Janaka Abeywardhana">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-05 00:00:00+00:00">July 5, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">behind-the-scenes</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="blast-radius-hardening-easyrunner-after-a-real-compromise"><a class="toclink" href="../../2026/07/05/hardening-easyrunner-after-a-compromise/">Blast radius: hardening EasyRunner after a real compromise</a></h2>
+<p>A Hetzner abuse email is not how you want to learn that one of your own apps has joined a botnet.</p>
+<blockquote>
+<p>We have indications that there was an attack from your server.</p>
+</blockquote>
+<p>That was the gist of it — one flat sentence from Hetzner's abuse desk, the polite version of <em>something on your box is attacking other machines</em>. The culprit turned out to be a small personal Next.js app — a private search engine over my own notes and documents — that I'd deployed months earlier and mostly forgotten about, popped by a critical Next.js RCE and quietly scanning the internet for <strong>nine days</strong> before an outside party noticed.</p>
+<p>This post is the whole account — the alert, tracking down <em>which</em> app it was, patching and rotating and redeploying it. But the part I actually care about is the last bit: what's now going into EasyRunner so that the next time a hosted app gets breached, it can't take the whole server down with it. Because it will happen again. To someone. Maybe to you.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../2026/07/05/hardening-easyrunner-after-a-compromise/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

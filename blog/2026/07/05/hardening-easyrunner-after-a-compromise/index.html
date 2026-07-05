@@ -10,13 +10,11 @@
       
       
       
-        <link rel="canonical" href="https://easyrunner.xyz/blog/2026/06/24/self-hosting-nextjs-without-the-breakage/">
+        <link rel="canonical" href="https://easyrunner.xyz/blog/2026/07/05/hardening-easyrunner-after-a-compromise/">
       
       
-        <link rel="prev" href="../../14/update-mid-june-2026/">
+        <link rel="prev" href="../../../06/24/self-hosting-nextjs-without-the-breakage/">
       
-      
-        <link rel="next" href="../../../07/05/hardening-easyrunner-after-a-compromise/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>Self-hosting Next.js shouldn't break on every deploy - EasyRunner</title>
+        <title>Blast radius: hardening EasyRunner after a real compromise - EasyRunner</title>
       
     
     
@@ -73,17 +71,17 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Self-hosting Next.js shouldn't break on every deploy - EasyRunner" />
+<meta property="og:title" content="Blast radius: hardening EasyRunner after a real compromise - EasyRunner" />
 <meta property="og:description" content="The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity." />
-<meta property="og:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/24/self-hosting-nextjs-without-the-breakage.png" />
+<meta property="og:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/07/05/hardening-easyrunner-after-a-compromise.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://easyrunner.xyz/blog/2026/06/24/self-hosting-nextjs-without-the-breakage/" />
+<meta property="og:url" content="https://easyrunner.xyz/blog/2026/07/05/hardening-easyrunner-after-a-compromise/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Self-hosting Next.js shouldn't break on every deploy - EasyRunner" />
+<meta property="twitter:title" content="Blast radius: hardening EasyRunner after a real compromise - EasyRunner" />
 <meta property="twitter:description" content="The CLI-first self-hosting platform. Deploy apps to your own servers without the complexity." />
-<meta property="twitter:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/06/24/self-hosting-nextjs-without-the-breakage.png" />
+<meta property="twitter:image" content="https://easyrunner.xyz/assets/images/social/v2/blog/2026/07/05/hardening-easyrunner-after-a-compromise.png" />
 </head>
   
   
@@ -103,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#its-not-you-its-the-missing-platform" class="md-skip">
+        <a href="#it-wasnt-an-alert-of-mine-that-caught-it" class="md-skip">
           Skip to content
         </a>
       
@@ -138,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Self-hosting Next.js shouldn't break on every deploy
+              Blast radius: hardening EasyRunner after a real compromise
             
           </span>
         </div>
@@ -2433,10 +2431,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#its-not-you-its-the-missing-platform" class="md-nav__link">
+  <a href="#it-wasnt-an-alert-of-mine-that-caught-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        It's not you, it's the missing platform
+        It wasn't an alert of mine that caught it
       
     </span>
   </a>
@@ -2444,10 +2442,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-actually-broke-and-what-easyrunner-does-now" class="md-nav__link">
+  <a href="#which-app-running-the-rca-with-claude-code-over-the-er-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What actually broke — and what EasyRunner does now
+        Which app? Running the RCA with Claude Code over the er CLI
       
     </span>
   </a>
@@ -2455,10 +2453,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-payoff-one-label" class="md-nav__link">
+  <a href="#containment-one-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The payoff: one label
+        Containment: one command
       
     </span>
   </a>
@@ -2466,13 +2464,141 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-the-line-is-right-now" class="md-nav__link">
+  <a href="#root-cause-react2shell-cve-2025-66478" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where the line is right now
+        Root cause: React2Shell (CVE-2025-66478)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Root cause: React2Shell (CVE-2025-66478)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#while-i-was-in-there-two-app-level-bugs-the-audit-turned-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        While I was in there: two app-level bugs the audit turned up
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patch-rotate-redeploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patch, rotate, redeploy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-real-lesson-assume-the-app-will-be-breached" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The real lesson: assume the app will be breached
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The real lesson: assume the app will be breached">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layer-1-in-the-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1, in the open
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-two-layers-that-map-onto-what-hetzner-actually-saw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The two layers that map onto what Hetzner actually saw
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-easyrunner-made-this-survivable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why EasyRunner made this survivable
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why EasyRunner made this survivable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#found-it-fast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Found it fast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contained-it-instantly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contained it instantly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotated-cleanly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotated cleanly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wont-escalate-next-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Won't escalate next time
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2532,7 +2658,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-06-24 00:00:00+00:00" class="md-ellipsis">June 24, 2026</time>
+                        <time datetime="2026-07-05 00:00:00+00:00" class="md-ellipsis">July 5, 2026</time>
                       </div>
                     </li>
                     
@@ -2554,7 +2680,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              11 min read
                             
                           </span>
                         </div>
@@ -2578,79 +2704,193 @@
 
 
 
-  <h1>Self-hosting Next.js shouldn't break on every deploy</h1>
+  <h1>Blast radius: hardening EasyRunner after a real compromise</h1>
 
-<p>You move a Next.js app off Vercel onto your own VPS, it works, and then every redeploy quietly breaks <em>something</em> — ISR goes cold, the browser 404s on chunks that no longer exist, <code>next/image</code> stops optimising, streaming stalls, <code>NEXT_PUBLIC_</code> values come out wrong, and in-flight requests get cut mid-deploy. I kept hitting these, so I made Next.js a first-class path in EasyRunner and closed the gaps one by one.</p>
+<p>A Hetzner abuse email is not how you want to learn that one of your own apps has joined a botnet.</p>
+<blockquote>
+<p>We have indications that there was an attack from your server.</p>
+</blockquote>
+<p>That was the gist of it — one flat sentence from Hetzner's abuse desk, the polite version of <em>something on your box is attacking other machines</em>. The culprit turned out to be a small personal Next.js app — a private search engine over my own notes and documents — that I'd deployed months earlier and mostly forgotten about, popped by a critical Next.js RCE and quietly scanning the internet for <strong>nine days</strong> before an outside party noticed.</p>
+<p>This post is the whole account — the alert, tracking down <em>which</em> app it was, patching and rotating and redeploying it. But the part I actually care about is the last bit: what's now going into EasyRunner so that the next time a hosted app gets breached, it can't take the whole server down with it. Because it will happen again. To someone. Maybe to you.</p>
 <!-- more -->
 
-<h2 id="its-not-you-its-the-missing-platform">It's not you, it's the missing platform</h2>
-<p>Here's the thing almost nobody tells you up front: Next.js is co-designed with Vercel. The framework leans on a CDN, an edge cache, immutable asset routing, and a build/runtime split that Vercel provides invisibly. The moment you self-host, all of that disappears — and <em>you</em> are now the platform.</p>
-<p>That's why self-hosted Next.js feels like it "breaks after every update". Nothing is actually broken. You're just re-solving caching, cache-busting headers, image optimisation, streaming, and build-time vs runtime config by hand, on every single deploy, and any one of them slipping shows up as a user-visible regression.</p>
-<p>I didn't want EasyRunner users re-solving that. So when a service is tagged as Next.js, EasyRunner now wires up the platform layer for you.</p>
-<h2 id="what-actually-broke-and-what-easyrunner-does-now">What actually broke — and what EasyRunner does now</h2>
+<h2 id="it-wasnt-an-alert-of-mine-that-caught-it"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18 8-8 5-8-5V6l8 5 8-5m0-2H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m6 3h-2v6h2zm0 8h-2v2h2z"/></svg></span> It wasn't an alert of mine that caught it</h2>
+<p>The uncomfortable truth first: nothing I ran caught this. An external abuse desk did. The compromise landed on <strong>23 June</strong>; the Hetzner notice arrived on <strong>2 July</strong>. Nine days of my container acting as a scanner and phoning home to a command-and-control server, and the first signal came from someone else's inbox.</p>
+<p>That gap is a finding in its own right, and it comes back later as an entire layer of the response. But first I had to work out what on earth was happening.</p>
+<p>One thing I was confident about from the start: it wasn't the <em>host</em> that had been breached. The server's own attack surface is deliberately tiny — only <code>:80</code> and <code>:443</code> are exposed to the public internet, and SSH is locked down to the EasyRunner Mesh VPN, so the only machine that can open a shell on it is my laptop. If traffic was attacking the outside world from my box, it was almost certainly coming from <em>inside</em> an app. And because that server hosts several web apps, the question became: <em>which</em> one?</p>
+<h2 id="which-app-running-the-rca-with-claude-code-over-the-er-cli"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Which app? Running the RCA with Claude Code over the <code>er</code> CLI</h2>
+<p>My first instinct was wrong, and it's worth owning: I assumed a <strong>supply-chain compromise</strong> in <code>shoutrrr</code>, a notification-relay service I'd added to that box only recently — that felt far likelier than one of my older, boring apps suddenly turning malicious. So the brief I gave Claude Code was deliberately narrow: <em>investigate, find the cause, </em><em>don't change anything</em>** — read-only, preserve the evidence.</p>
+<p>Here's where EasyRunner earned its keep the first time. I didn't hand it an SSH-as-root shell — I pointed <strong>Claude Code</strong> at the box and let it drive the same <code>er</code> CLI I use. It worked the problem in the open:</p>
+<ul>
+<li><strong>Cleared my prime suspect.</strong> <code>er app list</code> and <code>er app show-details</code> enumerated what was actually deployed; <code>shoutrrr</code> came up clean.</li>
+<li><strong>Followed the traffic to a process.</strong> Through <code>er server run-sudo</code> — EasyRunner's <em>audited, presence-gated</em> channel for privileged host commands — it pulled the live outbound connections mid-scan (<code>SYN_SENT</code> to a spread of hosts and ports: the scan signature) and traced them back to a single PID.</li>
+<li><strong>Pinned it to one container.</strong> That PID was an app's own <code>node server.js</code>, and its cgroup and network namespace mapped straight to one container out of several. The scanner wasn't loose on the host — it was running <em>inside</em> an app. Not the one I'd suspected.</li>
+<li><strong>Named the payload and the way in.</strong> That process was dropping rotating-named ELF binaries into <code>/tmp</code> and executing them, matching documented in-the-wild payloads for a Next.js Server Action RCE — and the Caddy access logs showed the matching entry probe: a <code>POST /</code> with a <code>Next-Action: x</code> header and a crafted <code>multipart/form-data</code> body against that app's domain. (The specific CVE has a name; more on that below.)</li>
+</ul>
+<div class="language-bash highlight"><span class="filename">the same er CLI a human uses — driven by an agent, read-only</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>list<span class="w"> </span>my-server<span class="w">                        </span><span class="c1"># what&#39;s actually deployed here?</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>shoutrrr<span class="w"> </span>my-server<span class="w">       </span><span class="c1"># clear the app I&#39;d blamed</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>er<span class="w"> </span>server<span class="w"> </span>status<span class="w"> </span>my-server<span class="w">                   </span><span class="c1"># apps + run state at a glance</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>er<span class="w"> </span>server<span class="w"> </span>run-sudo<span class="w"> </span>my-server<span class="w"> </span><span class="s1">&#39;&lt;host recon&gt;&#39;</span><span class="w">  </span><span class="c1"># audited, presence-gated host forensics</span>
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Why an agent could run the whole investigation</p>
+<p>EasyRunner has no web dashboard to click through and no bespoke API to learn. The entire product <em>is</em> the <code>er</code> CLI — the same surface a human uses — including <code>er server run-sudo</code>, which runs a privileged host command through an <em>audited, presence-gated</em> path rather than a raw root shell. That's what "agent-native by construction" buys you here: Claude Code ran real host forensics end to end, every step logged, with nothing to screen-scrape and no root credentials handed around.</p>
+</div>
+<h2 id="containment-one-command"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 18H6V6h12z"/></svg></span> Containment: one command</h2>
+<p>The investigation stayed read-only on purpose — you don't want to trample the evidence while you still need it. But the moment I knew <em>which</em> container and <em>what</em> it was doing, containment was blunt and immediate. Because this is a personal app that only I use, I could just take it offline:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>stop<span class="w"> </span>the-app<span class="w"> </span>my-server
+</span></code></pre></div>
+<p>Container stopped, scanner silenced. No orchestration console, no hand-editing unit files, no hunting for the right <code>systemctl --user</code> incantation as the wrong OS user.</p>
+<div class="admonition note">
+<p class="admonition-title">The honest caveat</p>
+<p>Stopping outright is correct <em>because nobody depends on this app</em>. For a production service with real users you'd fail over or roll back rather than go dark — but even then, isolating the compromised container is a single command, and that's the point.</p>
+</div>
+<h2 id="root-cause-react2shell-cve-2025-66478"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 12h-4v-2h4m0 6h-4v-2h4m6-6h-2.81a6 6 0 0 0-1.82-1.96L17 4.41 15.59 3l-2.17 2.17a6 6 0 0 0-2.83 0L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20z"/></svg></span> Root cause: React2Shell (CVE-2025-66478)</h2>
+<p>The way in was <strong>React2Shell</strong> — CVE-2025-66478 (also tracked as CVE-2025-55182), a <strong>CVSS 10.0</strong> remote-code-execution bug in the <strong>React Server Components</strong> protocol. Any Next.js <strong>App Router</strong> app is a candidate: send a <code>POST</code> with a <code>Next-Action</code> header and a crafted body, and the RSC action-handling path runs attacker code on the server. There is <strong>no config-only workaround</strong> — you have to upgrade.</p>
+<div class="admonition danger">
+<p class="admonition-title">The part that stings: I thought I was patched</p>
+<p>My <code>package.json</code> asked for <code>next: ^15.0.3</code>. Looks fine. But the <strong>lockfile had resolved to <code>15.5.6</code> — exactly one patch below the fixed <code>15.5.7</code>.</strong> A caret range plus a stale lockfile was all it took to sit one version short of safety on a 10.0 RCE. The fixed releases are <code>15.0.5</code>, <code>15.1.9</code>, <code>15.2.6</code>, <code>15.3.6</code>, <code>15.4.8</code>, <code>15.5.7</code>, or <code>16.0.7</code> — audit the <em>resolved</em> version, not the range you wrote.</p>
+</div>
+<p>There's a sibling worth knowing about: <strong>CVE-2025-29927</strong>, a Next.js middleware auth-bypass you trigger by spoofing the <code>x-middleware-subrequest</code> header. Different bug, same "the request lies to the framework" shape — and it comes back below, because EasyRunner now defuses it for every app at the edge.</p>
+<h3 id="while-i-was-in-there-two-app-level-bugs-the-audit-turned-up">While I was in there: two app-level bugs the audit turned up</h3>
+<p>Once you've had one RCE you stop trusting everything, so the audit went wider than the framework CVE. Under the hood this is a search-and-notes app — a vector database (LanceDB) over my own documents, plus a WebSocket server for collaborative editing — and two of my <em>own</em> bugs fell out of it:</p>
+<ul>
+<li><strong>LanceDB query injection.</strong> Document and file ids from route params were interpolated straight into <code>.where()</code> / <code>.delete()</code> SQL predicates. An id like <code>doc_mine' OR user_id = 'someone_else</code> would quietly widen a delete to another user's rows. Fixed by routing every predicate through an escaping helper.</li>
+<li><strong>A WebSocket that failed open.</strong> The collaboration server resolved its JWT secret with <code>?? ""</code>, so a deploy that was <em>missing</em> the secret would happily verify tokens against an empty key. Fixed to fail <em>closed</em> — no secret, no upgrade.</li>
+</ul>
+<p>Neither was the entry point this time. But "assume breach" cuts both ways: the framework was the door, and an audit is how you find the windows.</p>
+<h2 id="patch-rotate-redeploy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.7 19-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4"/></svg></span> Patch, rotate, redeploy</h2>
+<p>The app-side remediation, in order:</p>
+<ol>
+<li><strong>Patch.</strong> <code>next</code> → <code>^15.5.20</code> (well past the fix; React stays on 18). <code>npm audit</code> stops flagging React2Shell.</li>
+<li><strong>Fix the two audit findings</strong> — escaping helper and fail-closed WebSocket — with regression tests.</li>
+<li><strong>Rebuild the image from clean source.</strong> This one matters: the <em>running image is compromised</em>. Fresh checkout, fresh <code>npm ci</code>, brand-new image. You do not reuse the artefact that was serving the attacker.</li>
+<li>
+<p><strong>Rotate every secret.</strong> The RCE executed inside the Node process, so it could read the entire environment. That means <em>all</em> of it — the auth secret, both OAuth client secrets, and the GHCR pull token. EasyRunner's secrets vault made this the least painful part:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>er<span class="w"> </span>app<span class="w"> </span>secret<span class="w"> </span>generate<span class="w"> </span>the-app<span class="w"> </span>AUTH_SECRET<span class="w"> </span>--length<span class="w"> </span><span class="m">48</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>er<span class="w"> </span>app<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>the-app<span class="w"> </span>GOOGLE_CLIENT_SECRET<span class="w">      </span><span class="c1"># hidden prompt</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># … GITHUB_CLIENT_SECRET, the GHCR pull token, and the rest …</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>er<span class="w"> </span>app<span class="w"> </span>secret<span class="w"> </span>push<span class="w"> </span>the-app<span class="w"> </span>my-server<span class="w">                </span><span class="c1"># sync to the container + GitHub Actions</span>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Redeploy</strong> with <code>er app deploy the-app my-server</code>, kept off the public internet until I'd verified it was clean.</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Rotation is where the vault paid off</p>
+<p>Because secrets live in EasyRunner's encrypted vault and sync to the container — and to GitHub Actions — with <code>er app secret push</code>, rotating everything after a compromise is a handful of commands rather than a scavenger hunt across <code>.env</code> files and four provider dashboards.</p>
+</div>
+<h2 id="the-real-lesson-assume-the-app-will-be-breached"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0 3 7l1.63 1.27L12 14l7.36-5.73L21 7zm7.37 10.73L12 16.47l-7.38-5.73L3 12l9 7 9-7zm0 5L12 21.47l-7.38-5.73L3 17l9 7 9-7z"/></svg></span> The real lesson: assume the app <em>will</em> be breached</h2>
+<p>Here's what I keep coming back to. <strong>The app being vulnerable was the trigger — but it isn't the reason this became a server-wide abuse incident.</strong> The reason is that the container let a popped app do whatever it liked: write a binary to <code>/tmp</code>, execute it, and open outbound connections to a C2 and half the internet on arbitrary ports.</p>
+<p>A platform has to <em>assume</em> that some app it hosts will eventually be exploited — a stale lockfile, a fresh zero-day, a dependency nobody audited — and it has to make sure a single compromised app can't escalate into a compromised <em>server</em>. That's defence in depth, and it's now the design centre of EasyRunner's container story. <strong>None of this is Next.js-specific</strong> — it applies to every app EasyRunner runs.</p>
+<pre class="mermaid"><code>flowchart TD
+    A([Attacker: POST / with a Next-Action header]) --&gt; B[React2Shell RCE&lt;br/&gt;code runs inside node server.js]
+    B --&gt; C[ELF dropper written to /tmp]
+    C --&gt; D[Payload executed]
+    D --&gt; E[Botnet: C2 + outbound netscan]
+    E --&gt; F([Hetzner abuse notice — 9 days later])
+
+    L3[Layer 3 · Caddy ingress hardening]:::layer -.-&gt; B
+    L1[Layer 1 · noexec /tmp]:::layer -.-&gt; C
+    L2[Layer 2 · egress default-deny]:::layer -.-&gt; E
+
+    classDef layer fill:#fdecea,stroke:#d33,color:#a00;</code></pre>
+<p>Every step in that chain is a place to break it. EasyRunner is closing them layer by layer:</p>
 <table>
 <thead>
 <tr>
-<th>What breaks when you self-host</th>
-<th>What EasyRunner does for you</th>
+<th>How one popped app escalated</th>
+<th>What EasyRunner does about it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>ISR cache wiped on every redeploy</strong> — pages re-render cold, first visitor after each deploy eats the latency</td>
-<td>Detects whether <code>.next/cache</code> is on a persistent volume and <strong>warns you at deploy time</strong> if it isn't, so ISR actually survives a redeploy</td>
+<td>Payload written to <code>/tmp</code> and <strong>executed</strong></td>
+<td><strong>Now</strong> — <code>/tmp</code>, <code>/var/tmp</code> and <code>/dev/shm</code> are mounted <code>noexec,nosuid,nodev</code>, plus <code>no-new-privileges</code>, for <em>every</em> app. The dropped binary is an inert file.</td>
 </tr>
 <tr>
-<td><strong><code>ChunkLoadError</code> / 404s on <code>/_next/static/*</code></strong> — old HTML asks for chunks that aren't cached, or aren't cached long enough</td>
-<td>Caddy serves <code>/_next/static/*</code> with <code>Cache-Control: public, max-age=31536000, immutable</code> — chunks are cached hard and correctly, the way Vercel's CDN does it</td>
+<td><strong>Unrestricted outbound</strong> to a C2 and arbitrary-port scanning</td>
+<td><strong>Building</strong> — a default-deny egress policy: DNS, HTTP and HTTPS out, everything else rejected and logged. This is the layer that maps directly onto the Hetzner notice.</td>
 </tr>
 <tr>
-<td><strong>Streaming &amp; Suspense stall</strong> — App Router streaming, RSC, and SSE buffer behind the proxy and arrive all at once</td>
-<td>The catch-all reverse proxy runs with <code>flush_interval: -1</code>, so every chunk is flushed immediately and streaming works end to end</td>
+<td>A <strong>sibling header-spoof CVE</strong> reachable at the edge</td>
+<td><strong>Now</strong> — Caddy strips the <code>x-middleware-subrequest</code> header platform-wide, closing CVE-2025-29927 even for apps that haven't patched. A WAF and rate limiting come next.</td>
 </tr>
 <tr>
-<td><strong><code>next/image</code> throws in production</strong> — <code>sharp</code> isn't in the runtime image</td>
-<td>The reference image installs <code>sharp</code> so image optimisation works without you debugging native deps</td>
+<td>Ran <strong>nine days</strong> before anyone noticed</td>
+<td><strong>Building</strong> — fail2ban jails on the Caddy logs, plus alerting on the egress-deny log line. An app repeatedly tripping egress-deny is <em>the</em> incident signature.</td>
 </tr>
 <tr>
-<td><strong><code>NEXT_PUBLIC_</code> values are wrong</strong> — they're baked at <em>build</em> time, but you only know the domain at <em>deploy</em> time</td>
-<td><code>EASYRUNNER_APP_DOMAIN</code> and <code>EASYRUNNER_APP_URL</code> are auto-injected as build args, so you can wire them into <code>NEXT_PUBLIC_*</code> without hardcoding a domain anywhere</td>
-</tr>
-<tr>
-<td><strong>Redeploys cut live requests</strong> — the old container is killed before it finishes responding</td>
-<td>systemd/Podman units get a 30-second graceful stop window, so in-flight requests drain before the container goes away</td>
-</tr>
-<tr>
-<td><strong>Static public files re-fetched every time</strong> — fonts, icons, favicons</td>
-<td>Common asset types (<code>.svg</code>, <code>.ico</code>, <code>.png</code>, <code>.woff2</code>, …) get a 24-hour cache; <code>/api/*</code> is set <code>no-store</code> so dynamic routes never get cached by mistake</td>
+<td>Container had <strong>more power than the app needs</strong></td>
+<td><strong>Opt-in</strong> — a <code>strict</code> mode with a read-only root filesystem and all Linux capabilities dropped.</td>
 </tr>
 </tbody>
 </table>
-<p>None of this is exotic. It's the boring platform plumbing that Vercel hides and self-hosting exposes — now handled for you.</p>
-<h2 id="the-payoff-one-label">The payoff: one label</h2>
-<p>You don't configure any of the above by hand. You mark your public service as Next.js, and EasyRunner applies the framework-aware Caddy routing, the build-arg injection, and the graceful-shutdown window automatically:</p>
-<div class="language-yaml highlight"><span class="filename">.easyrunner/docker-compose-app.yaml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1"># ...</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">next_cache:/app/.next/cache</span><span class="w">   </span><span class="c1"># ISR survives redeploys</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextjs</span><span class="w">   </span><span class="c1"># ← turns on everything above</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">xyz.easyrunner.service.port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3000&quot;</span>
+<h3 id="layer-1-in-the-open">Layer 1, in the open</h3>
+<p>The container hardening is the layer that would have stopped <em>this</em> incident cold, so it's worth seeing. EasyRunner now emits these flags into the generated unit for every service:</p>
+<div class="language-ini highlight"><span class="filename">generated .container unit — every service, by default</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="na">PodmanArgs</span><span class="o">=</span><span class="s">--security-opt=no-new-privileges</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">PodmanArgs</span><span class="o">=</span><span class="s">--tmpfs=/tmp:rw,noexec,nosuid,nodev</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">PodmanArgs</span><span class="o">=</span><span class="s">--tmpfs=/var/tmp:rw,noexec,nosuid,nodev</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">PodmanArgs</span><span class="o">=</span><span class="s">--tmpfs=/dev/shm:rw,noexec,nosuid,nodev,size=64m</span>
 </span></code></pre></div>
-<p>Then the usual:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>app<span class="w"> </span>deploy<span class="w"> </span>my-next-app<span class="w"> </span>my-server
+<p>The malware's entire game was <em>drop an ELF into <code>/tmp</code>, then run it</em>. Mount <code>/tmp</code> <code>noexec</code> and that second step fails — the binary is just a file taking up space. <code>no-new-privileges</code> closes off setuid escalation on top. You get it for free on your next deploy, with an escape hatch for the rare service that genuinely needs it:</p>
+<div class="language-yaml highlight"><span class="filename">.easyrunner/docker-compose-app.yaml</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">labels</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">xyz.easyrunner.service.security-hardening</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span><span class="w">   </span><span class="c1"># default — also: strict | off</span>
 </span></code></pre></div>
-<h2 id="where-the-line-is-right-now">Where the line is right now</h2>
-<div class="admonition note">
-<p class="admonition-title">Single-server today, multi-instance on the roadmap</p>
-<p>Everything above targets the <strong>single-server</strong> case — one VPS running your app — which is how most people actually self-host. That case is now solid.</p>
-<p>The one failure mode I'm <em>not</em> claiming to have solved is multi-instance: running several replicas behind a load balancer, where each instance can build a different <code>BUILD_ID</code> and a client can land on a replica that doesn't have its chunks. Doing that properly needs a shared cache handler and a stable <code>deploymentId</code> across instances. That's on the multi-server roadmap — I'd rather ship the honest single-server path than hand-wave a distributed one.</p>
+<p>Unrecognised values fail <em>safe</em> to <code>standard</code>. Hardening is the kind of thing you want on by default and awkward to turn off by accident.</p>
+<h3 id="the-two-layers-that-map-onto-what-hetzner-actually-saw">The two layers that map onto what Hetzner actually saw</h3>
+<p><strong>Egress default-deny</strong> is the one I'm building next, deliberately, because it's the layer that would have cut the abuse the notice was about. Turn the host outbound policy from "allow everything" into "allow DNS, <code>:80</code> and <code>:443</code>, reject and log the rest", and <em>my container scanned the internet and reached a C2 on some random high port</em> becomes <em>my container tried, got rejected, and left a log line behind</em>. That rejected-connection log is also the tripwire the detection layer watches.</p>
+<p><strong>Ingress hardening at Caddy</strong> is already doing part of its job: every request now has its <code>x-middleware-subrequest</code> header stripped at the reverse proxy before it reaches your app, neutralising CVE-2025-29927 for everything on the platform — patched or not. A WAF (the OWASP Core Rule Set) and per-route rate limiting are next.</p>
+<div class="admonition warning">
+<p class="admonition-title">One honest limit of the WAF</p>
+<p>The RSC RCE request looks almost identical to a <em>legitimate</em> Server Action — same shape, same header. A WAF genuinely is defence-in-depth here, not the fix. <strong>Patching and containment are the primary controls</strong>; signature matching is the belt to their braces.</p>
 </div>
-<p>If you're on one box — and for self-hosting, you very likely are — Next.js now behaves the way you expected it to before you left the platform.</p>
+<h2 id="why-easyrunner-made-this-survivable"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"/></svg></span> Why EasyRunner made this survivable</h2>
+<div class="grid cards">
+<ul>
+<li>
+<h4 id="found-it-fast"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg></span> Found it fast</h4>
+<hr />
+<p>Claude Code ran the whole RCA over the <code>er</code> CLI — deterministic logs and <code>--json</code> status meant no screen-scraping, and the malware's parent process pinned it to one container out of several.</p>
+</li>
+<li>
+<h4 id="contained-it-instantly"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2M9 9h6v6H9"/></svg></span> Contained it instantly</h4>
+<hr />
+<p><code>er app stop the-app my-server</code> — one command to isolate a compromised container. No console, no unit-file surgery.</p>
+</li>
+<li>
+<h4 id="rotated-cleanly"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c2 0 3.6 1.2 4.2 3H21v3h-3v3h-3V8h-3.3c-.6 1.8-2.3 3-4.2 3C5 11 3 9 3 6.5S5 2 7.5 2m0 3C6.7 5 6 5.7 6 6.5S6.7 8 7.5 8 9 7.3 9 6.5 8.3 5 7.5 5m0 8c2 0 3.6 1.2 4.2 3H21v3h-1v3h-2v-3h-2v3h-3v-3h-1.3c-.6 1.8-2.3 3-4.2 3C5 22 3 20 3 17.5S5 13 7.5 13m0 3c-.8 0-1.5.7-1.5 1.5S6.7 19 7.5 19 9 18.3 9 17.5 8.3 16 7.5 16"/></svg></span> Rotated cleanly</h4>
+<hr />
+<p>Every secret regenerated and pushed to the container and GitHub Actions with a few <code>er app secret</code> commands, because they live in one encrypted vault.</p>
+</li>
+<li>
+<h4 id="wont-escalate-next-time"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.3v3.5c0 .6-.6 1.2-1.3 1.2H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2V9.5C9.2 8.1 10.6 7 12 7m0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3"/></svg></span> Won't escalate next time</h4>
+<hr />
+<p><code>noexec</code> temp dirs and <code>no-new-privileges</code> ship today; egress default-deny and detection are landing next — so containment stops being something I have to <em>do</em>.</p>
+</li>
+</ul>
+</div>
+<p>The lesson I'm taking, and building: a self-hosting platform can't promise your apps will never be vulnerable. It <em>can</em> promise that one vulnerable app doesn't become a compromised server. That's the bar.</p>
+<details class="danger">
+<summary>Indicators of compromise (for the curious / the defenders)</summary>
+<p>Server-name, app-name and IP details are redacted, but the behavioural markers are useful if you're hunting for the same payload family:</p>
+<ul>
+<li><strong>Dropper pattern:</strong> static x86-64 ELF binaries written to <code>/tmp</code> and executed, re-dropped under rotating names (<code>npm_update</code>, <code>batch2</code>, <code>batch5</code>, <code>plazooza</code>, <code>virtuoso</code>, <code>pls_pak_choi</code>), plus a Go scanner and a second-stage binary. Spawned process names include <code>npm_update</code> and random 8-character strings.</li>
+<li><strong>Ingress fingerprint:</strong> <code>POST /</code> with header <code>Next-Action: x</code> and a crafted <code>multipart/form-data</code> body.</li>
+<li><strong>Payload SHA-256:</strong><ul>
+<li><code>b20f39fc00d242e706b6c30367ad811c676e0575050a4ec2f30104b696944b49</code> (primary ELF)</li>
+<li><code>ddb73583e188981a7ddc1e190db6f9e3e5cd864e449eb818d79ea5ce454b5b4d</code> (Go scanner)</li>
+<li><code>e3db0055875f6f42a8be9e9e4a3c07099d6db8fa4979f21f210d294c6eb22054</code> (second stage)</li>
+</ul>
+</li>
+</ul>
+</details>
 <p><a class="md-button md-button--primary" href="../../../../../user-docs/recipes/nextjs/">Deploy a Next.js App →</a>
-<a class="md-button" href="../../../../../how-it-works/">See how EasyRunner works</a></p>
+<a class="md-button" href="../../../../../how-it-works/">How EasyRunner works</a>
+<a class="md-button" href="../../../../../comparisons/">Security &amp; architecture, compared</a></p>
+<hr />
+<p>EasyRunner is still in alpha. If you'd like to kick the tyres — or just argue with how I handled this — email <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#97;&#110;&#97;&#107;&#97;&#64;&#101;&#97;&#115;&#121;&#114;&#117;&#110;&#110;&#101;&#114;&#46;&#120;&#121;&#122;">&#106;&#97;&#110;&#97;&#107;&#97;&#64;&#101;&#97;&#115;&#121;&#114;&#117;&#110;&#110;&#101;&#114;&#46;&#120;&#121;&#122;</a> or find me at <a href="https://twitter.com/janaka_a">@janaka_a</a>.</p>
 
 
 
@@ -2697,7 +2937,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../14/update-mid-june-2026/" class="md-footer__link md-footer__link--prev" aria-label="Previous: EasyRunner Mid-June 2026 Update">
+          <a href="../../../06/24/self-hosting-nextjs-without-the-breakage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Self-hosting Next.js shouldn&#39;t break on every deploy">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2707,27 +2947,11 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                EasyRunner Mid-June 2026 Update
+                Self-hosting Next.js shouldn't break on every deploy
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../../../07/05/hardening-easyrunner-after-a-compromise/" class="md-footer__link md-footer__link--next" aria-label="Next: Blast radius: hardening EasyRunner after a real compromise">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Blast radius: hardening EasyRunner after a real compromise
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
