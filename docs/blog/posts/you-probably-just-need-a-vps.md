@@ -4,7 +4,7 @@ date: 2026-07-07
 authors:
   - janaka
 categories:
-  - behind-the-scenes
+  - First Principles
 tags:
   - self-hosting
   - vps
