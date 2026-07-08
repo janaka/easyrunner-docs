@@ -4,7 +4,7 @@ date: 2026-06-14
 authors:
   - janaka
 categories:
-  - news
+  - News
 tags:
   - progress-update
 slug: update-mid-june-2026

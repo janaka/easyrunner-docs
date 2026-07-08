@@ -4,7 +4,7 @@ date: 2026-07-05
 authors:
   - janaka
 categories:
-  - behind-the-scenes
+  - Behind the Scenes
 tags:
   - security
   - nextjs

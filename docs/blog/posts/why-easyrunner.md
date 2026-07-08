@@ -4,7 +4,7 @@ date: 2025-07-03
 authors:
   - janaka
 categories:
-  - behind-the-scenes
+  - Behind the Scenes
 tags:
   - behind-the-scenes
 slug: why-behind-easyrunner

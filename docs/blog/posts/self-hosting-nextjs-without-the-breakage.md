@@ -4,7 +4,7 @@ date: 2026-06-24
 authors:
   - janaka
 categories:
-  - behind-the-scenes
+  - Behind the Scenes
 tags:
   - nextjs
   - self-hosting
