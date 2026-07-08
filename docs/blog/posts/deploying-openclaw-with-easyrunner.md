@@ -4,7 +4,7 @@ date: 2026-02-02
 authors:
   - janaka
 categories:
-  - guides
+  - Guides
 tags:
   - deployment
   - openclaw

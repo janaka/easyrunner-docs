@@ -4,7 +4,7 @@ date: 2025-12-05
 authors:
   - janaka
 categories:
-  - news
+  - News
 tags:
   - progress-update
 slug: update-november-2025

@@ -4,7 +4,7 @@ date: 2025-11-05
 authors:
   - janaka
 categories:
-  - guides
+  - Guides
 tags:
   - hetzner
   - self-hosting
