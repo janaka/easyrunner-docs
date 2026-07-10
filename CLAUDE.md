@@ -50,3 +50,7 @@ Add to `markdown_extensions` in [mkdocs.yml](mkdocs.yml) when you need them (all
 - `abbr` (+ `pymdownx.snippets` glossary) — abbreviation tooltips
 
 Always run `.venv/bin/mkdocs build --strict` after changes and confirm the feature actually renders.
+
+## Content Authoring and Site Information Architecture
+
+The strategy is available in @STRATEGY.md
