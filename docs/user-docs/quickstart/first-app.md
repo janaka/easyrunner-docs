@@ -29,43 +29,43 @@ er setup --mode server                             # (5)!
     Server mode means this EasyRunner install stores the control-plane state: servers, apps, links, and secrets. For a first setup, your laptop is a good place for that state.
 
 !!! success "Checkpoint"
-  `er --help`, `er license status`, and `er config show` should work before you prepare a web host.
+    `er --help`, `er license status`, and `er config show` should work before you prepare a web host.
 
 ## 2. Prepare a Web Host
 
 === "New Hetzner server"
 
     ```bash
-  er link hetzner default --api-key <hetzner-api-token>  # (1)!
-  er server create my-first-server hetzner               # (2)!
-  er server init my-first-server --username root          # (3)!
-  er server doctor my-first-server                       # (4)!
+    er link hetzner default --api-key <hetzner-api-token>  # (1)!
+    er server create my-first-server hetzner               # (2)!
+    er server init my-first-server --username root          # (3)!
+    er server doctor my-first-server                       # (4)!
     ```
 
-  1. Stores a Hetzner API token in your keyring.
-  2. Creates and registers a Hetzner server.
-  3. Installs the EasyRunner web-host stack.
-  4. Runs health-check diagnostics on the web host.
+    1. Stores a Hetzner API token in your keyring.
+    2. Creates and registers a Hetzner server.
+    3. Installs the EasyRunner web-host stack.
+    4. Runs health-check diagnostics on the web host.
 
-  !!! info "What happens"
-    EasyRunner handles the cloud provisioning step, then the server joins the same web-host lifecycle as any manually provisioned Ubuntu server.
+    !!! info "What happens"
+        EasyRunner handles the cloud provisioning step, then the server joins the same web-host lifecycle as any manually provisioned Ubuntu server.
 
 === "Existing Ubuntu server"
 
     ```bash
-  er server add my-first-server <server-ip>        # (1)!
-  er server show-ssh-key my-first-server           # (2)!
-  er server init my-first-server --username root   # (3)!
-  er server doctor my-first-server                 # (4)!
+    er server add my-first-server <server-ip>        # (1)!
+    er server show-ssh-key my-first-server           # (2)!
+    er server init my-first-server --username root   # (3)!
+    er server doctor my-first-server                 # (4)!
     ```
 
-  1. Registers the Ubuntu server in EasyRunner and creates a dedicated SSH key.
-  2. Prints the public key. Add it to `authorized_keys` or your provider's SSH-key UI before initialization.
-  3. Installs the EasyRunner web-host stack.
-  4. Runs health-check diagnostics on the web host.
+    1. Registers the Ubuntu server in EasyRunner and creates a dedicated SSH key.
+    2. Prints the public key. Add it to `authorized_keys` or your provider's SSH-key UI before initialization.
+    3. Installs the EasyRunner web-host stack.
+    4. Runs health-check diagnostics on the web host.
 
-  !!! info "What happens"
-    You own the provisioning step. EasyRunner takes over once its generated SSH key can access the server.
+    !!! info "What happens"
+        You own the provisioning step. EasyRunner takes over once its generated SSH key can access the server.
 
 ## 3. Link GitHub
 
@@ -139,7 +139,7 @@ Create an `A` record for `app.example.com` (the `service.domain` you set above) 
 If Cloudflare is linked and your domain is in that account, EasyRunner creates the record for you at deploy time — one per `service.domain` declared in your compose file.
 
 !!! warning "DNS before certificates"
-  Caddy can only issue the certificate after DNS points at the web host and ports `80` and `443` are reachable.
+    Caddy can only issue the certificate after DNS points at the web host and ports `80` and `443` are reachable.
 
 ## 7. Deploy
 
