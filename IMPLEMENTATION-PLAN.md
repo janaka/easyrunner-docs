@@ -160,6 +160,40 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 
 ---
 
+## Phase 3 — Prove the agent-native claim
+
+**Gap identified during Phase 1 QA** (see `STRATEGTY.md` → Content workstreams → 4. Agent-driven execution
+content): every instructional page on the site — the quickstart, the Next.js recipe, the CLI reference —
+is written exclusively as manual commands for a human to type. This undercuts the "CLI-first, so Claude
+Code / Cursor can take a raw repo to a live app" pillar now live on the homepage hero and the
+"agent-native by construction" claim in `comparisons.md`: the claim currently has no on-site proof.
+
+### 3.1 Agent-driven tab on the primary quickstart
+
+**Files:** `docs/user-docs/quickstart/first-app.md` (the homepage's primary CTA target).
+
+Add a "Drive it with your AI agent" tab alongside the existing manual-CLI steps, reusing the
+tabbed-content pattern already on this page (`=== "..."`, `pymdownx.tabbed`). Show the actual prompt a
+user would give Claude Code/Cursor and what the agent does with the relevant `easyrunner-skills`, not
+just a restatement of the same CLI commands.
+
+### 3.2 Agent-driven tab on the Next.js recipe
+
+**Files:** `docs/user-docs/recipes/nextjs.md` (the `/from-vercel/` page's primary CTA target).
+
+Same treatment — this is the second-most CTA-linked guide.
+
+### 3.3 Document the `easyrunner-skills`
+
+**Files:** new page, e.g. `docs/user-docs/reference/agent-skills.md`, added to nav under Reference.
+
+Nothing on the docs site currently explains what the `easyrunner-skills` (repo-prep, app-create, deploy,
+update) are, how to install/enable them for Claude Code/Cursor, or what each one does — despite
+`comparisons.md` citing them as EasyRunner's proof point for being "agent-native by construction." This
+page is the missing backing for that claim.
+
+---
+
 ## Cross-cutting conventions
 
 - Match existing **CTA syntax** and **root-relative** link paths (see Site mechanics).

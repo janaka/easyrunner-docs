@@ -220,6 +220,35 @@ Recommended pages or posts:
 
 This content should be balanced and credible. It should not read like disguised product hype. Its job is to help buyers reach a decision and then naturally route the best-fit ones toward EasyRunner[3][4][5].
 
+#### 4. Agent-driven execution content
+
+Primary goal: make the "AI-agent-native" positioning pillar credible by showing it, not just claiming it.
+
+**Gap identified during Phase 1 execution.** The positioning pillars (this brief, `IMPLEMENTATION-PLAN.md`'s
+strategy spine, and `comparisons.md`'s "agent-native by construction" claim) name CLI/AI-agent-native as one
+of three core pillars, and the live homepage hero now says so explicitly ("Driven from your terminal — or
+your AI agent"). But every existing instructional page — the quickstart, the Next.js recipe, the CLI
+reference — is written exclusively as manual commands for a human to type. There is no page that shows or
+teaches the agent-driven path, and the `easyrunner-skills` (repo-prep, app-create, deploy, update) that
+`comparisons.md` cites as the proof point aren't documented or linked anywhere on the site. This is a
+credibility gap: the claim has no on-site proof, which matters most for exactly the audience it's aimed
+at — an AI-native founder persona may approach deployment by delegating to their coding agent rather than
+hand-typing CLI commands, and currently has nothing on the site that matches that expectation.
+
+Recommended pages or additions:
+
+- An agent-driven variant of the primary quickstart (`user-docs/quickstart/first-app.md`) and the Next.js
+  recipe (`user-docs/recipes/nextjs.md`) — the two most CTA-linked guides (homepage primary CTA and
+  `/from-vercel/` primary CTA respectively). The existing tabbed-content pattern (`=== "..."`) already used
+  on these pages is a natural fit for an added "Drive it with your AI agent" tab alongside the manual-CLI
+  tabs.
+- A dedicated page documenting the `easyrunner-skills` themselves — what they are, how to install/enable
+  them for Claude Code/Cursor, and what each one (repo-prep, app-create, deploy, update) does — since none
+  of that currently exists on the docs site despite being a proof point in `comparisons.md`.
+
+This content should not read as hype-only description; it should be the same kind of concrete walkthrough
+as the manual guides, just narrated as an agent transcript/prompt rather than a list of commands.
+
 ## Site messaging adjustment plan
 
 ### Immediate changes
