@@ -1,6 +1,6 @@
 site_name: EasyRunner
 site_url: https://easyrunner.xyz
-site_description: EasyRunner turns any Ubuntu server into a hardened, HTTPS web host — and ships your app to it, driven from your terminal or your AI coding agent.
+site_description: EasyRunner turns any Ubuntu VPS into a hardened, HTTPS web host — and ships your app to it, driven from your terminal or your AI coding agent.
 copyright: Copyright &copy; 2025-2026 <a href="https://www.linkedin.com/in/janakaabeywardhana" target="_blank" rel="noopener">Janaka Abeywardhana</a>
 theme:
   name: material
