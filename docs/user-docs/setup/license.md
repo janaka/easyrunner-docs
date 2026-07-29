@@ -3,9 +3,7 @@
 EasyRunner requires a license file.
 
 !!! tip "Don't have a license yet?"
-    A **free license — 1 app on 1 server, every feature included — is weeks away** from self-serve download. Until then, alpha access (license included) is available by email.
-
-    [Get the free download when it lands →](../../download.md){ .md-button data-ga-event="download_cta_click" data-ga-source="license_page" }
+    A limited batch of free licenses is on the way — [details & availability →](../../download.md){ data-ga-event="download_cta_click" data-ga-source="license_page" }
 
 ## Install
 

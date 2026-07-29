@@ -5,9 +5,15 @@ description: EasyRunner's free tier — 1 app on 1 server, every feature include
 
 # Download EasyRunner
 
-**Free for 1 app on 1 server — every feature included.** No feature gates, no trial clock.
+**Free for 1 app on 1 server — every feature included.** No feature gates, no trial clock — a real perpetual license, in a **first batch limited to 10**.
 
-The self-serve download isn't live *quite* yet — we're **weeks, not months** away. Here's exactly where things stand, and how to be first in line.
+The self-serve download isn't live *quite* yet — we're **weeks, not months** away. When it opens, the batch goes **first come, first served**.
+
+<!-- MANUAL COUNTER — on every claimed license update: the "left" number below, and the fill width % (remaining ÷ total × 100). -->
+<div class="er-license-meter">
+  <p class="er-meter-labels"><span>First batch — <strong>10</strong> free licenses</span><span><strong>9 left</strong></span></p>
+  <div class="er-meter-track"><div class="er-meter-fill" style="width: 90%"></div></div>
+</div>
 
 [Notify me when it's live →](https://easyrunnerxyz.substack.com/subscribe){ .md-button .md-button--primary data-ga-event="notify_me_click" data-ga-source="download_page" }
 [Can't wait? Email for alpha access](mailto:janaka@easyrunner.xyz){ .md-button data-ga-event="alpha_email_click" data-ga-source="download_page" }
@@ -65,6 +71,10 @@ The self-serve download isn't live *quite* yet — we're **weeks, not months** a
 ??? question "Why isn't the download live today?"
 
     Honest answer: the software is done enough that alpha users run production apps on it — but licenses are still issued by hand, one email at a time. Wiring up the flow that issues a free license automatically is the last self-serve piece, and we'd rather ship it properly than bolt on a signup form that leads to a waiting inbox.
+
+??? question "Why only 10? And what happens when they're gone?"
+
+    Because it's honest scarcity, not a marketing gimmick: EasyRunner is a small hand-run product, and every free license comes with real support attention we intend to actually give. When the batch is gone, the free tier closes — we may open another batch later, but that's not a promise. If you want one, being early genuinely matters.
 
 ---
 
