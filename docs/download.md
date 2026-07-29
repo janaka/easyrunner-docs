@@ -9,7 +9,7 @@ description: EasyRunner's free tier — 1 app on 1 server, every feature include
 
 The self-serve download isn't live *quite* yet — we're **weeks, not months** away. When it opens, the batch goes **first come, first served**.
 
-<!-- MANUAL COUNTER — on every claimed license update: the "left" number below, and the fill width % (remaining ÷ total × 100). -->
+<!-- MANUAL COUNTER — on every claimed license update: the "left" number below, and the fill width % (remaining ÷ total × 100). Keep in sync with the hero counter in material/overrides/home.html. -->
 <div class="er-license-meter">
   <p class="er-meter-labels"><span>First batch — <strong>10</strong> free licenses</span><span><strong>9 left</strong></span></p>
   <div class="er-meter-track"><div class="er-meter-fill" style="width: 90%"></div></div>

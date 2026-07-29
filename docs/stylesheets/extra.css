@@ -95,6 +95,12 @@ div.md-header__title > div > div:nth-child(1) > span {
   background: var(--md-primary-fg-color);
 }
 
+/* Compact centered variant under the homepage hero Download button */
+.er-license-meter--hero {
+  margin: 0.6rem auto 0.2rem;
+  max-width: 19rem;
+}
+
 /* Make strong/bold text pop more in dark mode */
 [data-md-color-scheme="slate"] .md-typeset strong,
 [data-md-color-scheme="slate"] .md-typeset b {

@@ -432,7 +432,12 @@
           </div>
         </div>
         <div class="hero-cta">
-          <a class="md-button md-button--primary" href="/download/" data-ga-event="download_cta_click" data-ga-source="hero">Download free — limited first batch →</a>
+          <a class="md-button md-button--primary" href="/download/" data-ga-event="download_cta_click" data-ga-source="hero">Download free →</a>
+          <!-- MANUAL COUNTER — keep in sync with docs/download.md: the "left" number and the fill width % (remaining ÷ total × 100). -->
+          <div class="er-license-meter er-license-meter--hero">
+            <p class="er-meter-labels"><span>First batch — <strong>10</strong> free licenses</span><span><strong>9 left</strong></span></p>
+            <div class="er-meter-track"><div class="er-meter-fill" style="width: 90%"></div></div>
+          </div>
           <a class="md-button" href="/user-docs/quickstart/first-app/">Deploy your first app</a>
           <p class="hero-ecosystem"><a href="/from-vercel/">Coming from Vercel? →</a> &nbsp;·&nbsp; <a href="/blog/2026/07/07/you-probably-just-need-a-vps/">Is self-hosting right for you? →</a></p>
         </div>
