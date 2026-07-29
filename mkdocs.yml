@@ -38,6 +38,7 @@ extra_css:
 extra_javascript:
   - https://unpkg.com/mermaid@11/dist/mermaid.min.js
   - javascripts/mermaid.js
+  - javascripts/analytics.js
 plugins:
   - search
   - social:
@@ -95,6 +96,7 @@ extra:
 nav:
   - Home: index.md
   - How It Works: how-it-works.md
+  - Download: download.md
   - Install: install.md
   - Docs:
     - Overview: user-docs/index.md

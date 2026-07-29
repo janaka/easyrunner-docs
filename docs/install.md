@@ -32,3 +32,7 @@ The main install and setup docs now live in the CLI user docs section.
 
 !!! note "License required"
     EasyRunner is licensed software. After installing the CLI, install your license with `er license install <file.jwt>`.
+
+    **Don't have a license yet?** A free tier — 1 app on 1 server, every feature included — is weeks away from self-serve download.
+
+    [Download — free →](download.md){ .md-button .md-button--primary data-ga-event="download_cta_click" data-ga-source="install" }
