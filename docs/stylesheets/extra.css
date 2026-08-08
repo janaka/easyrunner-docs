@@ -95,9 +95,9 @@ div.md-header__title > div > div:nth-child(1) > span {
   background: var(--md-primary-fg-color);
 }
 
-/* Compact centered variant under the homepage hero Download button */
+/* Compact centered variant above the homepage hero Download button */
 .er-license-meter--hero {
-  margin: 0.6rem auto 0.2rem;
+  margin: 0 auto 0.7rem;
   max-width: 19rem;
 }
 
