@@ -68,3 +68,85 @@ div.md-header__title > div > div:nth-child(1) > span {
   color: var(--md-default-fg-color);
   font-weight: 700;
 }
+
+/* ---------------------------------------------------------------------------
+   Terminal screenshots
+   Frames a CLI screen-capture in terminal window chrome so it reads as
+   terminal output at a glance rather than as a generic inline image.
+
+   Usage (needs md_in_html):
+
+     <figure class="terminal-shot" markdown>
+     ![Descriptive alt text](capture.png)
+     <figcaption>er server status test3</figcaption>
+     </figure>
+
+   The figcaption is rendered as the window title bar (see `order: -1`), so
+   write it as the command being run. Chrome stays dark in both colour
+   schemes — a terminal that goes light on a light page stops reading as a
+   terminal — with only the border and shadow adapting.
+   --------------------------------------------------------------------------- */
+.md-typeset figure.terminal-shot {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 1.6em auto;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.55rem;
+  overflow: hidden;
+  background: #2b2b2b;
+  box-shadow: 0 0.2rem 0.9rem rgba(0, 0, 0, 0.3);
+}
+
+[data-md-color-scheme="slate"] .md-typeset figure.terminal-shot {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0.2rem 0.9rem rgba(0, 0, 0, 0.55);
+}
+
+/* The caption renders above the image as the window title bar. */
+.md-typeset figure.terminal-shot > figcaption {
+  order: -1;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  /* Material caps figcaption at 24rem and centres it; the title bar has to
+     span the full frame. */
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0.45em 0.75em;
+  font-style: normal;
+  background: linear-gradient(#3a3a3a, #2f2f2f);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.66);
+  text-align: left;
+}
+
+/* macOS-style traffic lights, drawn in CSS so there's no extra markup. */
+.md-typeset figure.terminal-shot > figcaption::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 2.5em;
+  height: 0.66em;
+  background-image:
+    radial-gradient(circle at 0.33em 50%, #ff5f57 0.32em, transparent 0.33em),
+    radial-gradient(circle at 1.25em 50%, #febc2e 0.32em, transparent 0.33em),
+    radial-gradient(circle at 2.17em 50%, #28c840 0.32em, transparent 0.33em);
+}
+
+/* md_in_html wraps the image in a <p>; strip its spacing so the capture sits
+   flush against the title bar. */
+.md-typeset figure.terminal-shot > p {
+  margin: 0;
+  line-height: 0;
+}
+
+.md-typeset figure.terminal-shot img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+}
