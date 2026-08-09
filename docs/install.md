@@ -32,3 +32,5 @@ The main install and setup docs now live in the CLI user docs section.
 
 !!! note "License required"
     EasyRunner is licensed software. After installing the CLI, install your license with `er license install <file.jwt>`.
+
+    **No license yet?** A limited batch of free licenses is on the way — [details & availability →](download.md){ data-ga-event="download_cta_click" data-ga-source="install" }

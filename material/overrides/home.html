@@ -2,29 +2,6 @@
 {% block extrahead %}
 {{ super() }}
 <script>
-  // Ensure Material's palette system is ready
-  function loadLaunchListWhenReady() {
-    // Check if Material's palette functions exist
-    if (typeof __md_get !== 'undefined' && typeof __md_set !== 'undefined') {
-      // Material is ready, safe to load LaunchList
-      var widgetScript = document.createElement('script');
-      widgetScript.src = 'https://getlaunchlist.com/js/widget.js';
-      widgetScript.defer = true;
-      document.head.appendChild(widgetScript);
-
-      var popupScript = document.createElement('script');
-      popupScript.src = 'https://getlaunchlist.com/js/popup.js';
-      popupScript.defer = true;
-      document.head.appendChild(popupScript);
-    } else {
-      // Material not ready yet, try again
-      setTimeout(loadLaunchListWhenReady, 50);
-    }
-  }
-
-  // Start checking after DOM is ready
-  document.addEventListener('DOMContentLoaded', loadLaunchListWhenReady);
-
   // Prevent scroll jumping during theme toggle
   document.addEventListener('DOMContentLoaded', function () {
     // Find palette toggle buttons
@@ -178,11 +155,11 @@
   }
 
   #text01:not(:last-child) {
-    margin-bottom: 2.625rem !important;
+    margin-bottom: 1.6rem !important;
   }
 
   #text01:not(:first-child) {
-    margin-top: 2.625rem !important;
+    margin-top: 1.6rem !important;
   }
 
   #text01 {
@@ -214,10 +191,10 @@
     color: var(--md-default-fg-color--light);
     font-family: 'Roboto Mono', monospace;
     font-size: 1.2em;
-    line-height: 1.65;
+    line-height: 1.55;
     font-weight: 400;
     max-width: 36rem;
-    margin: 0 auto 2.75rem auto;
+    margin: 0 auto 1.8rem auto;
   }
 
   #text02 span.p:nth-child(n + 2) {
@@ -227,10 +204,10 @@
   .hero-pillars {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.9rem;
     text-align: left;
     max-width: 30rem;
-    margin: 0 auto 2.75rem auto;
+    margin: 0 auto 2.25rem auto;
   }
 
   .pillar {
@@ -269,8 +246,8 @@
   }
 
   .hero-cta {
-    margin-top: 1rem;
-    margin-bottom: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 2.25rem;
   }
 
   .hero-cta .md-button {
@@ -278,7 +255,7 @@
   }
 
   .hero-ecosystem {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 0;
     font-size: 0.8rem;
   }
@@ -296,43 +273,11 @@
     margin-bottom: 1.5rem;
   }
 
-  /* Base form styling */
-
-  .md-form__group {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-  }
-
   /* Mobile: Stack elements vertically with custom spacing */
   @media screen and (max-width: 44.9375em) {
 
     .md-main {
       height: 1rem;
-    }
-
-    form.launchlist-form-popup {
-      margin-top: 2rem;
-      /* Reduce top margin on mobile */
-      margin-bottom: 2rem;
-      /* Reduce bottom margin on mobile */
-    }
-
-    .md-form__group {
-      flex-direction: column;
-      gap: 1rem;
-      /* Space between stacked input and button */
-    }
-
-    .md-form__group .md-input {
-      width: 100%;
-      max-width: 280px;
-    }
-
-    .md-form__group .md-button {
-      width: 100%;
-      max-width: 280px;
     }
 
     .logos-grid {
@@ -391,12 +336,6 @@
 
   }
 
-  form.launchlist-form-popup {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
   .newsletter-block {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
@@ -439,6 +378,60 @@
 
   .nextjs-logo {
     width: 100px !important;
+    order: -1;
+  }
+
+  /* Next.js first-class panel */
+  .nextjs-panel {
+    max-width: 30rem;
+    margin: 0 auto 2.25rem;
+    padding: 1.1rem 1.15rem;
+    border-radius: 0.65rem;
+    background: var(--md-code-bg-color);
+    border: 1px solid rgba(34, 197, 99, 0.4);
+    text-align: left;
+  }
+
+  .nextjs-panel-title {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    font-size: 1em;
+    color: var(--md-typeset-color);
+    margin: 0 0 0.4rem;
+  }
+
+  .nextjs-panel-body {
+    font-size: 0.88em;
+    line-height: 1.55;
+    color: var(--md-default-fg-color--light);
+    margin: 0;
+  }
+
+  .nextjs-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.8rem 0 0.9rem;
+  }
+
+  .nextjs-chips span {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.12rem 0.55rem;
+    border-radius: 1rem;
+    border: 1px solid var(--md-default-fg-color--lighter);
+    color: var(--md-default-fg-color--light);
+    white-space: nowrap;
+  }
+
+  .nextjs-panel-link {
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
+  .nextjs-panel-link a {
+    color: #22c563;
+    font-weight: 500;
   }
 
   .nextjs-logo svg path,
@@ -464,11 +457,24 @@
       </div>
       <div class="mdx-hero__content">
         <h2 id="text01">
-          <span class="p">Self-hosting, without the server management.</span>
+          <!-- <span class="p">Self host Next.js on your VPS</span> -->
+          <span class="p">Deploy Next.js on your own VPS, from Claude Code</span>
+          <!-- <span class="p">Let Claude deploy Next.js apps on your own VPS</span> -->
+          <!-- <span class="p">Let your coding agent deploy Next.js on your own VPS without the security holes</span> -->
         </h2>
         <p id="text02">
-          <span class="p">EasyRunner turns any Ubuntu VPS into a hardened, HTTPS web host — and ships your app to it, driven from your terminal or your AI coding agent.</span>
+          <span class="p">EasyRunner turns any Ubuntu VPS into a hardened, HTTPS web host — and ships your app to it - and giving Claude Code the tool to drive it deterministically.</span>
         </p>
+        <div class="hero-cta">
+          <!-- MANUAL COUNTER — keep in sync with docs/download.md: the "left" number and the fill width % (remaining ÷ total × 100). -->
+          <div class="er-license-meter er-license-meter--hero">
+            <p class="er-meter-labels"><span>First batch — <strong>10</strong> free licenses</span><span><strong>9 left</strong></span></p>
+            <div class="er-meter-track"><div class="er-meter-fill" style="width: 90%"></div></div>
+          </div>
+          <a class="md-button md-button--primary" href="/download/" data-ga-event="download_cta_click" data-ga-source="hero">Download free →</a>
+          <a class="md-button" href="/user-docs/quickstart/first-app/">Deploy your first app</a>
+          <p class="hero-ecosystem"><a href="/from-vercel/">Self-hosting Next.js? It's first-class here →</a> &nbsp;·&nbsp; <a href="/blog/2026/07/07/you-probably-just-need-a-vps/">Is self-hosting right for you? →</a></p>
+        </div>
         <div class="hero-pillars" id="text03">
           <div class="pillar">
             <span class="pillar-icon" aria-hidden="true">🛡️</span>
@@ -492,12 +498,20 @@
             </span>
           </div>
         </div>
-        <div class="hero-cta">
-          <a class="md-button md-button--primary" href="/user-docs/quickstart/first-app/">Deploy your first app →</a>
-          <a class="md-button" href="/blog/2026/07/07/you-probably-just-need-a-vps/">Is self-hosting right for you?</a>
-          <p class="hero-ecosystem"><a href="/from-vercel/">Coming from Vercel? →</a></p>
+        <div class="nextjs-panel">
+          <p class="nextjs-panel-title">Next.js, first-class</p>
+          <p class="nextjs-panel-body">Vercel gives Next.js an invisible platform layer — and self-hosting is painful because it disappears. EasyRunner rebuilds that layer on your server: tag a service as Next.js and it's wired.</p>
+          <div class="nextjs-chips" aria-label="Next.js support details">
+            <span>ISR cache survives redeploys</span>
+            <span>immutable /_next/static</span>
+            <span>streaming &amp; RSC</span>
+            <span>next/image via sharp</span>
+            <span>NEXT_PUBLIC_ build args</span>
+            <span>graceful shutdown</span>
+          </div>
+          <p class="nextjs-panel-link"><a href="/from-vercel/">Self-host Next.js. Keep the DX, lose the Vercel bill →</a></p>
         </div>
-        <p class="logos-caption">If it runs in a container, it runs on your server.</p>
+        <p class="logos-caption">First-class Next.js — and anything else that runs in a container.</p>
         <div class="logos-grid">
           <div class="stack-logo react-logo">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 101 100">
@@ -576,13 +590,6 @@
         </div>
 
 
-        <!-- <form action="https://getlaunchlist.com/s/Lm0O45" method="POST" class="md-form launchlist-form-popup"
-          target="_blank">
-          <div class="md-form__group">
-            <input type="email" name="email" placeholder="Your email" required class="md-input">
-            <button type="submit" class="md-button md-button--primary">Join Waitlist</button>
-          </div>
-        </form> -->
         <img src="/images/demos/render1757870349861.gif" alt="EasyRunner CLI turning a server into a hardened HTTPS web host and deploying an app" class="demo-animations">
         <div class="newsletter-block">
           <p class="newsletter-label">Please subscribe to show your interest and get progress updates:</p>

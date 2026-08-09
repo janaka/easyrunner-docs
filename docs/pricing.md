@@ -9,6 +9,16 @@ EasyRunner pricing is simple: **you pay for the number of apps you host**, count
 
 <div class="grid cards" markdown>
 
+-   #### 1 app — free
+
+    ---
+
+    **$0** — limited first batch
+
+    1 app on **1 server**
+
+    [Details & availability →](download.md){ data-ga-event="download_cta_click" data-ga-source="pricing" }
+
 -   #### Up to 5 apps
 
     ---
@@ -41,7 +51,7 @@ EasyRunner pricing is simple: **you pay for the number of apps you host**, count
 
 </div>
 
-**Every tier includes all of EasyRunner's features.** The only thing that changes between tiers is how many apps you can host — nothing is locked behind a higher plan.
+**Every tier — including the free one — has all of EasyRunner's features.** The only thing that changes between tiers is scale: how many apps you can host (and the free tier runs on a single server). Nothing is locked behind a higher plan.
 
 Prices are in USD. You're **billed once a year, not monthly** — the per-month figure is just the annual price ÷ 12, shown so it's easy to compare. We use annual billing because EasyRunner is a [perpetual license](#perpetual-license-buy-once-own-it): one payment covers a full year of updates.
 

@@ -103,5 +103,6 @@ Self-hosting isn't the right answer for everyone, and pretending otherwise would
 ## Ready when you are
 
 [Deploy a Next.js app →](user-docs/recipes/nextjs.md){ .md-button .md-button--primary }
+[Download free](download.md){ .md-button data-ga-event="download_cta_click" data-ga-source="from_vercel" }
 [Still deciding? Is self-hosting right for you?](blog/posts/you-probably-just-need-a-vps.md){ .md-button }
 [See the full comparison](comparisons.md){ .md-button }

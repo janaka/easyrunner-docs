@@ -2,6 +2,9 @@
 
 EasyRunner requires a license file.
 
+!!! tip "Don't have a license yet?"
+    A limited batch of free licenses is on the way — [details & availability →](../../download.md){ data-ga-event="download_cta_click" data-ga-source="license_page" }
+
 ## Install
 
 ```bash
