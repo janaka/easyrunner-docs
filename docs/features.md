@@ -26,6 +26,15 @@
     Involves 100s of configurations to provide a solid server security foundation.
 
 
+-   #### AI Agent Sandboxes [Coming]
+
+    ---
+
+    Isolated, disposable environments for the model-generated code inside your product — created per session, destroyed when it ends, with egress allowed by exception rather than by default.
+
+    [Read the use cases](ai-agent-sandbox.md)
+
+
 -   #### Container Based App Hosting
 
     ---

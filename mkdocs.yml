@@ -137,6 +137,7 @@ nav:
       - Audit Trail: user-docs/reference/audit.md
       - Troubleshooting: user-docs/reference/troubleshooting.md
   - Features: features.md
+  - Agent Sandboxes: ai-agent-sandbox.md
   - Pricing: pricing.md
   - Comparison: comparisons.md
   - From Vercel: from-vercel.md
