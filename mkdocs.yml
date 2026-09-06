@@ -136,8 +136,9 @@ nav:
       - Compose-Format Files and Labels: user-docs/reference/compose-labels.md
       - Audit Trail: user-docs/reference/audit.md
       - Troubleshooting: user-docs/reference/troubleshooting.md
-  - Features: features.md
-  - Agent Sandboxes: ai-agent-sandbox.md
+  - Features:
+    - Web App Hosting: features.md
+    - AI Agent Sandboxes: ai-agent-sandbox.md
   - Pricing: pricing.md
   - Comparison: comparisons.md
   - From Vercel: from-vercel.md
