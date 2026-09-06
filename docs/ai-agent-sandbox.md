@@ -96,31 +96,45 @@ Four things matter. Everything else is detail — and whichever one you skip is 
 
 ### 1. Strong isolation
 
-The boundary *is* the product. A sandbox that leaks isn't a weak sandbox; it isn't a sandbox.
+The boundary *is* the product: a sandbox that leaks isn't a weak sandbox, it isn't a sandbox. It's also **the answer you want ready when a serious buyer asks how you keep tenants apart**.
 
-Its own filesystem, its own process space, its own position on the network — with none of your infrastructure reachable from inside it, and no path from one customer's session into another's. Not a convention the agent is asked to respect, but a boundary it cannot talk its way past. This is also **the answer you want ready when a serious buyer asks how you keep tenants apart**.
+??? note "What the boundary has to cover"
+
+    Its own filesystem, its own process space, its own position on the network — with none of your infrastructure reachable from inside it, and no path from one customer's session into another's.
+
+    Not a convention the agent is asked to respect, but a boundary it cannot talk its way past. Prompt injection stops being an incident and becomes a shrug when the worst an injected agent can do is make a mess of a container you were about to throw away.
 
 ### 2. Fast, resettable lifecycle
 
-Every session gets its own sandbox, and creating one has to be cheap enough that you never think twice about it.
+Every session gets its own sandbox, and creating one has to be cheap enough that you never think twice about it. **A sandbox that's expensive to create is a sandbox you'll be tempted to reuse.**
 
-That's what the speed is actually for. If starting a sandbox is slow — install the dependencies, clone the repo, warm the caches — you'll keep one running and hand it to the next user instead. Now one customer's leftover files and API tokens are sitting in front of the next customer. **A sandbox that's expensive to create is a sandbox you'll be tempted to reuse.** So a new session forks from a prepared snapshot, environment already built, rather than cold-starting from nothing every time.
+??? note "Why speed is a security property — and where forks come in"
 
-Forks earn their place mid-run too. Branch a sandbox before the agent tries something risky and run two or three attempts side by side from the same starting point, then keep the one that worked and throw the rest away. When a run goes bad, rewind to the last good point instead of restarting the whole task.
+    If starting a sandbox is slow — install the dependencies, clone the repo, warm the caches — you'll keep one running and hand it to the next user instead. Now one customer's leftover files and API tokens are sitting in front of the next customer. So a new session forks from a prepared snapshot, environment already built, rather than cold-starting from nothing every time.
 
-The other half of a lifecycle is knowing when to end it: a wall-clock ceiling on every run, and a bad run answered by destroying the sandbox rather than cleaning it up. The agent that never finishes still finishes.
+    Forks earn their place mid-run too. Branch a sandbox before the agent tries something risky and run two or three attempts side by side from the same starting point, then keep the one that worked and throw the rest away. When a run goes bad, rewind to the last good point instead of restarting the whole task.
+
+    The other half of a lifecycle is knowing when to end it: a wall-clock ceiling on every run, and a bad run answered by destroying the sandbox rather than cleaning it up. The agent that never finishes still finishes.
 
 ### 3. Capability control
 
-Least privilege, applied to a process whose next move you can't predict.
+Least privilege, applied to a process whose next move you can't predict — starting with **secrets available to the process at runtime but never to the model**.
 
-Network egress allowed **by exception, not by default**, so an injected agent reaches the destinations you named and nothing else. **Secrets available to the process at runtime but never to the model**, and never in the logs you'll later paste into an issue. Filesystem reach limited to what the task actually needs. And a resource budget — CPU, memory, disk — so one runaway run can't take the box down with it.
+??? note "Egress, filesystem, and resource budget"
+
+    Network egress allowed **by exception, not by default**, so an injected agent reaches the destinations you named and nothing else.
+
+    Secrets that never surface in the model's context, and never in the logs you'll later paste into an issue. Filesystem reach limited to what the task actually needs. And a resource budget — CPU, memory, disk — so one runaway run can't take the box down with it.
 
 ### 4. Observability
 
 Agents are non-deterministic, so *what just happened?* is a question you will ask, and the answer can't be a shrug.
 
-A record of what ran, what it reached, and when — the same audit trail you'd want for any production incident, and the thing you'll want in front of you when a customer asks whether their data was touched.
+??? note "What the record has to contain"
+
+    What ran, what it reached, and when — the same audit trail you'd want for any production incident, and the thing you'll want in front of you when a customer asks whether their data was touched.
+
+    It's also how you tell a badly behaved agent from a compromised one, which is a distinction you can't make from application logs alone.
 
 None of that is novel. It's just a week of security work per team, repeated by every team, before an agent feature can safely go in front of customers.
 
