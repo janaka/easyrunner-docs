@@ -92,16 +92,31 @@ Not just coding agents. Anywhere a model decides what actually runs:
 
 ## What a production sandbox has to get right
 
-The interesting part isn't "run something in a container". It's the half-dozen boring guarantees underneath, each of which is a bad week if you get it wrong.
+Four things matter. Everything else is detail — and whichever one you skip is the one that bites.
 
-| The failure | What the sandbox owes you |
-| --- | --- |
-| The agent reads or writes outside its own workspace | A filesystem boundary per session, with none of your infrastructure inside it |
-| A prompt-injected agent posts your data somewhere you've never heard of | Egress allowed **by exception, not by default** — the agent reaches the destinations you named, and nothing else |
-| The agent needs a credential, and a model transcript is a terrible place to keep one | Secrets available to the process at runtime, never to the model, and never in the logs you'll later paste into an issue |
-| A run spins forever, fills the disk, or eats the box | CPU, memory, disk, and wall-clock ceilings that kill the run rather than quietly degrading everything else |
-| Session two inherits session one's mess — or customer B's agent can see customer A's work | Created per session, destroyed when it ends, never recycled with state still in it. The answer you want ready when a serious buyer asks how you keep tenants apart |
-| Something happened and you need to know what | A record of what ran, what it reached, and when — the same audit trail you'd want for any production incident |
+### 1. Strong isolation
+
+The boundary *is* the product. A sandbox that leaks isn't a weak sandbox; it isn't a sandbox.
+
+Its own filesystem, its own process space, its own position on the network — with none of your infrastructure reachable from inside it, and no path from one customer's session into another's. Not a convention the agent is asked to respect, but a boundary it cannot talk its way past. This is also the answer you want ready when a serious buyer asks how you keep tenants apart.
+
+### 2. Fast, resettable lifecycle
+
+Created when the work starts, destroyed when it finishes, and quick enough at both ends that you're never tempted to keep one warm and reuse it. Reuse is where state leaks — session two inheriting session one's files, credentials, and half-finished mess.
+
+It also means a bad run is answered by throwing the sandbox away rather than cleaning it up, and that every run has a wall-clock ceiling, so the agent that never finishes still finishes.
+
+### 3. Capability control
+
+Least privilege, applied to a process whose next move you can't predict.
+
+Network egress allowed **by exception, not by default**, so an injected agent reaches the destinations you named and nothing else. Secrets available to the process at runtime but never to the model, and never in the logs you'll later paste into an issue. Filesystem reach limited to what the task actually needs. And a resource budget — CPU, memory, disk — so one runaway run can't take the box down with it.
+
+### 4. Observability
+
+Agents are non-deterministic, so *what just happened?* is a question you will ask, and the answer can't be a shrug.
+
+A record of what ran, what it reached, and when — the same audit trail you'd want for any production incident, and the thing you'll want in front of you when a customer asks whether their data was touched.
 
 None of that is novel. It's just a week of security work per team, repeated by every team, before an agent feature can safely go in front of customers.
 
@@ -154,7 +169,7 @@ EasyRunner started as one thing: turn a plain Ubuntu VPS into a hardened, HTTPS 
 
     ---
 
-    Somewhere safe for your product's agents to run, and for whatever they do while they're running: isolated per session, disposable, egress controlled, and priced like the rest of EasyRunner rather than metered by the second.
+    Somewhere safe for your product's agents to run, and for whatever they do while they're running: strongly isolated, fast to create and destroy, capability controlled, and auditable — priced like the rest of EasyRunner rather than metered by the second.
 
     [:octicons-arrow-right-24: Tell us what you'd run in one](mailto:janaka@easyrunner.xyz?subject=Agent%20sandboxes)
 
@@ -165,10 +180,12 @@ EasyRunner started as one thing: turn a plain Ubuntu VPS into a hardened, HTTPS 
 We'd rather publish this early and be corrected than ship a sandbox shaped by guesswork.
 
 !!! success "Settled"
-    - Isolated per session, destroyed when the session ends.
-    - Default-deny egress, allowed by exception — the same posture as the rest of EasyRunner.
-    - Secrets reach the process, never the model, never the transcript.
-    - Priced the way everything else here is priced. We are not building a metered sandbox product.
+    All four pillars above are non-negotiable. Specifically:
+
+    - **Isolation and lifecycle.** One sandbox per session, destroyed when the session ends. No reuse, no recycling.
+    - **Capability control.** Default-deny egress, allowed by exception — the same posture as the rest of EasyRunner. Secrets reach the process, never the model, never the transcript.
+    - **Observability.** What ran and what it reached, recorded the way EasyRunner already records [app operations](user-docs/reference/audit.md).
+    - **Pricing.** The way everything else here is priced. We are not building a metered sandbox product.
 
 ???+ question "Still open — this is where your answer actually changes what we build"
     - **What goes in it.** A language runtime we provide, or a container image you build yourself and hand us — your own agent, its own dependencies?
