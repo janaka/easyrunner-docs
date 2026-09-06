@@ -164,11 +164,6 @@ None of that is novel. It's just a week of security work per team, repeated by e
 
 </div>
 
-!!! info "To be fair: managed sandbox providers are good at what they do"
-    If you need to burst to thousands of concurrent sandboxes in seconds, want zero infrastructure responsibility, or are still finding out whether the agent feature has legs at all, a metered sandbox API earns its price and you should use one.
-
-    This is for teams who already run their own infrastructure — or want to — and would rather not hand the most sensitive part of their product to a second vendor.
-
 ## Two building blocks, one setup
 
 Your app and your agents run on the same infrastructure, driven by the same CLI from your terminal or your own coding agent. The security groundwork — hardening, firewall, isolation, secrets — is done once, at setup, and serves both.
@@ -206,8 +201,6 @@ We'd rather publish this early and be corrected than ship a sandbox shaped by gu
     - **Pricing.** The way everything else here is priced. We are not building a metered sandbox product.
 
 ### Want to be a design partner?
-
-I'm looking for a handful of teams putting agents into a product right now to design this with, rather than for.
 
 **What you get.** Early builds before general availability, a direct line to me when they break, and real influence over the decisions that get made once and are expensive to unmake later.
 
