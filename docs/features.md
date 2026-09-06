@@ -10,7 +10,7 @@ social:
 
 Your app and your agents run on the same infrastructure, driven by the same CLI from your terminal or your own coding agent. The security groundwork — hardening, firewall, isolation, secrets — is done once, at setup, and serves both.
 
-<div class="grid cards" markdown>
+<div class="grid cards link-cards" markdown>
 
 -   :material-server-network: **Web app hosting** — available now
 
