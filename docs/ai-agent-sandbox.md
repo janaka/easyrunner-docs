@@ -209,21 +209,11 @@ We'd rather publish this early and be corrected than ship a sandbox shaped by gu
 
 I'm looking for a handful of teams putting agents into a product right now to design this with, rather than for.
 
-**What you get.** Early builds before general availability, a direct line to me when they break, and real influence over the decisions below — the kind that get made once and are expensive to unmake later.
+**What you get.** Early builds before general availability, a direct line to me when they break, and real influence over the decisions that get made once and are expensive to unmake later.
 
 **What I'm asking.** An honest conversation about what you're actually running, and your reaction when there's something to try. No commitment to buy, no NDA theatre.
 
-**The decisions still open**, where your answer genuinely changes what gets built:
-
-- **What goes in it.** A language runtime we provide, or a container image you build yourself and hand us — your own agent, its own dependencies?
-- **Lifetime.** Do your runs finish in seconds, or do you need an agent that works for an hour on a background job?
-- **Forking.** Do you need to branch a running sandbox — parallel attempts, checkpoint and rewind — or is a fresh one per session enough?
-- **Runtimes.** Which matters first — Python, Node, or a full environment with a package manager and a git client?
-- **What it starts with.** A repo, a mounted volume, or just an empty working directory and a file or two?
-- **Concurrency.** One sandbox per user session, or dozens at once per customer?
-- **Where it runs.** Alongside your app, or somewhere deliberately kept apart from it?
-
-If reading those made you think *"well, in my case…"*, that's exactly the conversation worth having. Email [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz?subject=Agent%20sandbox%20design%20partner) or DM [@janaka_a](https://x.com/janaka_a) — it comes straight to me, and EasyRunner is early enough that what you say lands in the design rather than a backlog.
+Email [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz?subject=Agent%20sandbox%20design%20partner) or DM [@janaka_a](https://x.com/janaka_a) — it comes straight to me, and EasyRunner is early enough that what you say lands in the design rather than a backlog.
 
 ## Ready when you are
 
