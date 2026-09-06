@@ -3,10 +3,10 @@ title: AI agent sandboxes — somewhere safe for your product's AI agents to run
 description: EasyRunner is adding AI agent sandboxes — isolated, disposable environments for the AI agents inside your product, custom ones included, running on infrastructure you own.
 social:
   cards_layout_options:
-    title: Your AI agents need somewhere to run. Not next to your production app.
+    title: Your AI agents need somewhere isolated to run. Not next to your production app.
 ---
 
-# Your AI agents need somewhere to run. Not next to your production app.
+# Your AI agents need somewhere isolated to run. Not next to your production app.
 
 **AI agent sandboxes** are the second building block in EasyRunner: isolated, disposable environments for the agents inside your product — the custom ones you built as much as anything off the shelf — and for whatever those agents decide to do at runtime. On infrastructure you own, on the same predictable bill as everything else you run.
 
