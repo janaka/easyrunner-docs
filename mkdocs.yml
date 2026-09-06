@@ -137,7 +137,8 @@ nav:
       - Audit Trail: user-docs/reference/audit.md
       - Troubleshooting: user-docs/reference/troubleshooting.md
   - Features:
-    - Web App Hosting: features.md
+    - Overview: features.md
+    - Web App Hosting: web-app-hosting.md
     - AI Agent Sandboxes: ai-agent-sandbox.md
   - Pricing: pricing.md
   - Comparison: comparisons.md
