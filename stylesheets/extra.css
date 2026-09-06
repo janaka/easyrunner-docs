@@ -150,3 +150,39 @@ div.md-header__title > div > div:nth-child(1) > span {
   margin: 0;
   border-radius: 0;
 }
+/* ---------------------------------------------------------------------------
+   Fully clickable grid cards
+   Expands a card's single call-to-action link to cover the whole card, so the
+   card reads and behaves as one target rather than a box with a small link in
+   it.
+
+   Usage (needs md_in_html): add `link-cards` to the grid, and give each card
+   exactly one link, as its last line:
+
+     <div class="grid cards link-cards" markdown>
+
+     -   **Web app hosting**
+
+         ---
+
+         What it is.
+
+         [:octicons-arrow-right-24: What's in it](web-app-hosting.md)
+
+     </div>
+
+   The anchor stays a real anchor — keyboard focus, middle-click, and "copy
+   link address" all keep working, and Material's existing :hover/:focus-within
+   card styling supplies the affordance. Cards using this must not contain any
+   other link: the overlay sits above the card's content and would swallow it.
+   --------------------------------------------------------------------------- */
+.md-typeset .grid.cards.link-cards > ul > li {
+  position: relative;
+}
+
+.md-typeset .grid.cards.link-cards > ul > li > p:last-child > a:only-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
