@@ -1,5 +1,5 @@
 ---
-title: Web App Hosting
+title: Web app hosting features
 description: Everything EasyRunner does to turn a plain Ubuntu VPS into a hardened, HTTPS web host — server provisioning, CIS hardening, container-based app hosting, custom domains, HTTPS, encrypted secrets, and CI/CD.
 ---
 
@@ -8,7 +8,7 @@ description: Everything EasyRunner does to turn a plain Ubuntu VPS into a harden
 Everything EasyRunner does to turn a plain Ubuntu VPS into a hardened, HTTPS web host — and to keep your apps running on it.
 
 !!! tip "The other building block"
-    Putting AI agents inside your product? [AI agent sandboxes](ai-agent-sandbox.md) are where the code those agents generate actually runs. In development.
+    Putting AI agents inside your product? [AI agent sandboxes](ai-agent-sandbox.md) are where those agents — and everything they do at runtime — actually run. In development.
 
 <div class="grid cards" markdown>
 
