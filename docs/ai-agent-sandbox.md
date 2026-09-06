@@ -8,7 +8,7 @@ social:
 
 # Your AI agents need somewhere isolated to run. Not next to your production app.
 
-**AI agent sandboxes** are the second building block in EasyRunner: isolated, disposable environments for the agents inside your product — any agent, including the ones you built yourself. Every tool call, shell command, and line of generated code runs in there, not on your app server. And it's all on infrastructure you own, on the same predictable bill as everything else you run.
+**AI agent sandboxes** are isolated, disposable environments for the agents inside your product — any agent, including the ones you built yourself. Every tool call, shell command, and line of generated code runs in there, not on your app server. And it's all on infrastructure you own, on the same predictable bill as everything else you run.
 
 !!! warning "In development — not available yet"
     This page describes what we're building and why, ahead of shipping it, so you can tell us early if we're building the wrong thing. There's no release date yet, and nothing here is a feature you can use today.
@@ -153,7 +153,7 @@ None of that is novel. It's just a week of security work per team, repeated by e
 
 ## Two building blocks, one setup
 
-EasyRunner started as one thing: turn a plain Ubuntu VPS into a hardened, HTTPS web host and ship your app to it, from your terminal or your own coding agent. Sandboxes are that same idea applied one layer up — the security groundwork you'd otherwise do by hand before it's safe to let an agent act on your infrastructure, done once, at setup, by the same CLI.
+Your app and your agents run on the same infrastructure, driven by the same CLI from your terminal or your own coding agent. The security groundwork — hardening, firewall, isolation, secrets — is done once, at setup, and serves both.
 
 <div class="grid cards" markdown>
 
