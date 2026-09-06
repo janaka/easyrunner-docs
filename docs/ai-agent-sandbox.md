@@ -16,7 +16,7 @@ social:
     If you're putting agents into a product right now, there are [design partner slots open](#want-to-be-a-design-partner) — early builds, a direct line, and a say in what this becomes.
 
 [Tell us what you'd run in it →](mailto:janaka@easyrunner.xyz?subject=Agent%20sandboxes){ .md-button .md-button--primary }
-[The hosting side, available today](user-docs/quickstart/first-app.md){ .md-button }
+[The hosting side, available today](web-app-hosting.md){ .md-button }
 
 ## The moment your product grows an agent
 
@@ -161,30 +161,6 @@ None of that is novel. It's just a week of security work per team, repeated by e
     ---
 
     Standard containers on a server you own, not a proprietary runtime you can only reach through someone else's API. EasyRunner is closed source and paid — and deliberately avoids both traps: nothing holds your workloads hostage, and no capability is gated behind a higher tier.
-
-</div>
-
-## Two building blocks, one setup
-
-Your app and your agents run on the same infrastructure, driven by the same CLI from your terminal or your own coding agent. The security groundwork — hardening, firewall, isolation, secrets — is done once, at setup, and serves both.
-
-<div class="grid cards" markdown>
-
--   :material-server-network: **Web app hosting** — available now
-
-    ---
-
-    Your app on a server you own: CIS Level 1 hardening, default-deny firewall, per-app OS-user isolation, an encrypted secrets vault, custom domains, and automatic HTTPS.
-
-    [:octicons-arrow-right-24: Deploy your first app](user-docs/quickstart/first-app.md)
-
--   :material-robot-outline: **AI agent sandboxes** — in development
-
-    ---
-
-    Somewhere safe for your product's agents to run, and for whatever they do while they're running: strongly isolated, fast to create and destroy, capability controlled, and auditable — priced like the rest of EasyRunner rather than metered by the second.
-
-    [:octicons-arrow-right-24: Tell us what you'd run in one](mailto:janaka@easyrunner.xyz?subject=Agent%20sandboxes)
 
 </div>
 
