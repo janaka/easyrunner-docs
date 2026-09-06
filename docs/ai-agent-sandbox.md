@@ -98,7 +98,7 @@ Four things matter. Everything else is detail — and whichever one you skip is 
 
 The boundary *is* the product. A sandbox that leaks isn't a weak sandbox; it isn't a sandbox.
 
-Its own filesystem, its own process space, its own position on the network — with none of your infrastructure reachable from inside it, and no path from one customer's session into another's. Not a convention the agent is asked to respect, but a boundary it cannot talk its way past. This is also the answer you want ready when a serious buyer asks how you keep tenants apart.
+Its own filesystem, its own process space, its own position on the network — with none of your infrastructure reachable from inside it, and no path from one customer's session into another's. Not a convention the agent is asked to respect, but a boundary it cannot talk its way past. This is also **the answer you want ready when a serious buyer asks how you keep tenants apart**.
 
 ### 2. Fast, resettable lifecycle
 
