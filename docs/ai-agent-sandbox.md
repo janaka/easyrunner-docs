@@ -102,9 +102,13 @@ Its own filesystem, its own process space, its own position on the network — w
 
 ### 2. Fast, resettable lifecycle
 
-Created when the work starts, destroyed when it finishes, and quick enough at both ends that you're never tempted to keep one warm and reuse it. Reuse is where state leaks — session two inheriting session one's files, credentials, and half-finished mess.
+Every session gets its own sandbox, and creating one has to be cheap enough that you never think twice about it.
 
-It also means a bad run is answered by throwing the sandbox away rather than cleaning it up, and that every run has a wall-clock ceiling, so the agent that never finishes still finishes.
+That's what the speed is actually for. If starting a sandbox is slow — install the dependencies, clone the repo, warm the caches — you'll keep one running and hand it to the next user instead. Now one customer's leftover files and API tokens are sitting in front of the next customer. **A sandbox that's expensive to create is a sandbox you'll be tempted to reuse.** So a new session forks from a prepared snapshot, environment already built, rather than cold-starting from nothing every time.
+
+Forks earn their place mid-run too. Branch a sandbox before the agent tries something risky and run two or three attempts side by side from the same starting point, then keep the one that worked and throw the rest away. When a run goes bad, rewind to the last good point instead of restarting the whole task.
+
+The other half of a lifecycle is knowing when to end it: a wall-clock ceiling on every run, and a bad run answered by destroying the sandbox rather than cleaning it up. The agent that never finishes still finishes.
 
 ### 3. Capability control
 
@@ -190,6 +194,7 @@ We'd rather publish this early and be corrected than ship a sandbox shaped by gu
 ???+ question "Still open — this is where your answer actually changes what we build"
     - **What goes in it.** A language runtime we provide, or a container image you build yourself and hand us — your own agent, its own dependencies?
     - **Lifetime.** Do your runs finish in seconds, or do you need an agent that works for an hour on a background job?
+    - **Forking.** Do you need to branch a running sandbox — parallel attempts, checkpoint and rewind — or is a fresh one per session enough?
     - **Runtimes.** Which matters first — Python, Node, or a full environment with a package manager and a git client?
     - **What it starts with.** A repo, a mounted volume, or just an empty working directory and a file or two?
     - **Concurrency.** One sandbox per user session, or dozens at once per customer?
