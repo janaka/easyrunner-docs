@@ -114,7 +114,7 @@ The other half of a lifecycle is knowing when to end it: a wall-clock ceiling on
 
 Least privilege, applied to a process whose next move you can't predict.
 
-Network egress allowed **by exception, not by default**, so an injected agent reaches the destinations you named and nothing else. Secrets available to the process at runtime but never to the model, and never in the logs you'll later paste into an issue. Filesystem reach limited to what the task actually needs. And a resource budget — CPU, memory, disk — so one runaway run can't take the box down with it.
+Network egress allowed **by exception, not by default**, so an injected agent reaches the destinations you named and nothing else. **Secrets available to the process at runtime but never to the model**, and never in the logs you'll later paste into an issue. Filesystem reach limited to what the task actually needs. And a resource budget — CPU, memory, disk — so one runaway run can't take the box down with it.
 
 ### 4. Observability
 
