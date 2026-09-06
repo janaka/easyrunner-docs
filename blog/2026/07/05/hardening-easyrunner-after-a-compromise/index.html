@@ -307,17 +307,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../../../../features/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../features/" class="md-tabs__link">
+          
+  
   
   Features
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -1921,9 +1922,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../../../features/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -1937,7 +1954,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web App Hosting
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ai-agent-sandbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agent Sandboxes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -2805,10 +2894,10 @@
 <li><strong>Pinned it to one container.</strong> That PID was an app's own <code>node server.js</code>, and its cgroup and network namespace mapped straight to one container out of several. The scanner wasn't loose on the host — it was running <em>inside</em> an app. Not the one I'd suspected.</li>
 <li><strong>Named the payload and the way in.</strong> That process was dropping rotating-named ELF binaries into <code>/tmp</code> and executing them, matching documented in-the-wild payloads for a Next.js Server Action RCE — and the Caddy access logs showed the matching entry probe: a <code>POST /</code> with a <code>Next-Action: x</code> header and a crafted <code>multipart/form-data</code> body against that app's domain. (The specific CVE has a name; more on that below.)</li>
 </ul>
-<div class="language-bash highlight"><span class="filename">the same er CLI a human uses — driven by an agent, read-only</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>list<span class="w"> </span>my-server<span class="w">                        </span><span class="c1"># what&#39;s actually deployed here?</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>shoutrrr<span class="w"> </span>my-server<span class="w">       </span><span class="c1"># clear the app I&#39;d blamed</span>
+<div class="language-bash highlight"><span class="filename">the same er CLI a human uses — driven by an agent, read-only</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>app<span class="w"> </span>list<span class="w"> </span>my-server<span class="w">                        </span><span class="c1"># what's actually deployed here?</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>app<span class="w"> </span>show-details<span class="w"> </span>shoutrrr<span class="w"> </span>my-server<span class="w">       </span><span class="c1"># clear the app I'd blamed</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>er<span class="w"> </span>server<span class="w"> </span>status<span class="w"> </span>my-server<span class="w">                   </span><span class="c1"># apps + run state at a glance</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>er<span class="w"> </span>server<span class="w"> </span>run-sudo<span class="w"> </span>my-server<span class="w"> </span><span class="s1">&#39;&lt;host recon&gt;&#39;</span><span class="w">  </span><span class="c1"># audited, presence-gated host forensics</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>er<span class="w"> </span>server<span class="w"> </span>run-sudo<span class="w"> </span>my-server<span class="w"> </span><span class="s1">'&lt;host recon&gt;'</span><span class="w">  </span><span class="c1"># audited, presence-gated host forensics</span>
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Why an agent could run the whole investigation</p>

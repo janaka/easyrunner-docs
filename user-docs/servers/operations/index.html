@@ -309,17 +309,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../../features/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../../features/" class="md-tabs__link">
+          
+  
   
   Features
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -2099,9 +2100,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../features/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -2115,7 +2132,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web App Hosting
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai-agent-sandbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agent Sandboxes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -2799,7 +2888,7 @@
 <p>These commands help inspect and operate an EasyRunner web host.</p>
 <h2 id="list-and-details">List and Details</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>er<span class="w"> </span>server<span class="w"> </span>list
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>server<span class="w"> </span>update-details<span class="w"> </span>my-server<span class="w"> </span>--description<span class="w"> </span><span class="s2">&quot;Production web host&quot;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>er<span class="w"> </span>server<span class="w"> </span>update-details<span class="w"> </span>my-server<span class="w"> </span>--description<span class="w"> </span><span class="s2">"Production web host"</span>
 </span></code></pre></div>
 <h2 id="health-and-status">Health and Status</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>er<span class="w"> </span>server<span class="w"> </span>doctor<span class="w"> </span>my-server<span class="w">   </span><span class="c1"># (1)!</span>
@@ -2860,7 +2949,7 @@ is not a full HTTP health check. Values: <code>listening</code>, <code>not liste
 <p>Use this when <code>er server init</code>, <code>er app deploy</code>, or logs commands cannot connect.</p>
 <h2 id="reverse-proxy-logs">Reverse Proxy Logs</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>er<span class="w"> </span>server<span class="w"> </span>logs<span class="w"> </span>my-server<span class="w"> </span>--since<span class="w"> </span><span class="s2">"1 hour ago"</span>
 </span></code></pre></div>
 <p>These logs come from the Caddy reverse proxy service on the web host.</p>
 <h2 id="intrusion-prevention">Intrusion Prevention</h2>
