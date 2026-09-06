@@ -13,7 +13,7 @@ social:
 !!! warning "In development — not available yet"
     This page describes what we're building and why, ahead of shipping it, so you can tell us early if we're building the wrong thing. There's no release date yet, and nothing here is a feature you can use today.
 
-    If you're putting agents into a product right now, we'd genuinely like to hear what you'd run in one: [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz).
+    If you're putting agents into a product right now, there are [design partner slots open](#design-partners-wanted) — early builds, a direct line, and a say in what this becomes.
 
 [Tell us what you'd run in it →](mailto:janaka@easyrunner.xyz?subject=Agent%20sandboxes){ .md-button .md-button--primary }
 [The hosting side, available today](user-docs/quickstart/first-app.md){ .md-button }
@@ -191,19 +191,28 @@ We'd rather publish this early and be corrected than ship a sandbox shaped by gu
     - **Observability.** What ran and what it reached, recorded the way EasyRunner already records [app operations](user-docs/reference/audit.md).
     - **Pricing.** The way everything else here is priced. We are not building a metered sandbox product.
 
-???+ question "Still open — this is where your answer actually changes what we build"
-    - **What goes in it.** A language runtime we provide, or a container image you build yourself and hand us — your own agent, its own dependencies?
-    - **Lifetime.** Do your runs finish in seconds, or do you need an agent that works for an hour on a background job?
-    - **Forking.** Do you need to branch a running sandbox — parallel attempts, checkpoint and rewind — or is a fresh one per session enough?
-    - **Runtimes.** Which matters first — Python, Node, or a full environment with a package manager and a git client?
-    - **What it starts with.** A repo, a mounted volume, or just an empty working directory and a file or two?
-    - **Concurrency.** One sandbox per user session, or dozens at once per customer?
-    - **Where it runs.** Alongside your app, or somewhere deliberately kept apart from it?
+### Design partners wanted
 
-    Answers to [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz) or [@janaka_a](https://x.com/janaka_a). EasyRunner is in alpha, so early input lands in the design rather than the backlog.
+I'm looking for a handful of teams putting agents into a product right now to design this with, rather than for.
+
+**What you get.** Early builds before general availability, a direct line to me when they break, and real influence over the decisions below — the kind that get made once and are expensive to unmake later.
+
+**What I'm asking.** An honest conversation about what you're actually running, and your reaction when there's something to try. No commitment to buy, no NDA theatre.
+
+**The decisions still open**, where your answer genuinely changes what gets built:
+
+- **What goes in it.** A language runtime we provide, or a container image you build yourself and hand us — your own agent, its own dependencies?
+- **Lifetime.** Do your runs finish in seconds, or do you need an agent that works for an hour on a background job?
+- **Forking.** Do you need to branch a running sandbox — parallel attempts, checkpoint and rewind — or is a fresh one per session enough?
+- **Runtimes.** Which matters first — Python, Node, or a full environment with a package manager and a git client?
+- **What it starts with.** A repo, a mounted volume, or just an empty working directory and a file or two?
+- **Concurrency.** One sandbox per user session, or dozens at once per customer?
+- **Where it runs.** Alongside your app, or somewhere deliberately kept apart from it?
+
+If reading those made you think *"well, in my case…"*, that's exactly the conversation worth having. Email [janaka@easyrunner.xyz](mailto:janaka@easyrunner.xyz?subject=Agent%20sandbox%20design%20partner) or DM [@janaka_a](https://x.com/janaka_a) — it comes straight to me, and EasyRunner is early enough that what you say lands in the design rather than a backlog.
 
 ## Ready when you are
 
-[Tell us what you'd run in it →](mailto:janaka@easyrunner.xyz?subject=Agent%20sandboxes){ .md-button .md-button--primary }
+[Become a design partner →](mailto:janaka@easyrunner.xyz?subject=Agent%20sandbox%20design%20partner){ .md-button .md-button--primary }
 [Get progress updates](blog/index.md){ .md-button }
 [Start with the hosting side](user-docs/quickstart/first-app.md){ .md-button }
