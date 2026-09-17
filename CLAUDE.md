@@ -53,4 +53,7 @@ Always run `.venv/bin/mkdocs build --strict` after changes and confirm the featu
 
 ## Content Authoring and Site Information Architecture
 
-The strategy is available in @STRATEGY.md
+Go-to-market working docs live in [gtm/](gtm/) (not published by MkDocs). Read
+[gtm/README.md](gtm/README.md) for the layout. Key files: @gtm/positioning.md (the segments / messaging
+contract, also consumed by the Talon Distribution agents) and @gtm/strategy.md (the reasoning). Status
+and open work are in [gtm/roadmap.md](gtm/roadmap.md); dated decisions in [gtm/decisions.md](gtm/decisions.md).

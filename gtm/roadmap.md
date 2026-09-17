@@ -1,49 +1,54 @@
-# EasyRunner Marketing Site — Implementation Plan
+# EasyRunner go-to-market roadmap
 
-> **Status:** ready to execute · **Owner:** Janaka · **Scope:** marketing/funnel pages + homepage hero
-> This document consolidates the strategy in [`STRATEGTY.md`](STRATEGTY.md) with the positioning
-> work from the value-prop session, and turns it into an executable plan. It supersedes
-> `STRATEGTY.md` as the working reference; the older brief is kept for provenance.
+> The **what and when**. Phases, status, page-by-page work, and the Distribution workstream. Changes
+> often. The reasoning is in [`strategy.md`](strategy.md); the segments, enemy, beliefs and
+> signal-to-page map are in [`positioning.md`](positioning.md); dated decisions are in
+> [`decisions.md`](decisions.md). **Owner:** Janaka.
 
-## Context
+## Status
 
-The current homepage hero under-sells the product:
+| Item | State | Notes |
+| --- | --- | --- |
+| 1.1 Homepage hero rewrite | ✅ shipped (July 2026) | Hero copy later extended with the AI Agent Sandbox pillar (Sept 2026) |
+| 1.2 `/from-vercel/` | ✅ shipped (July 2026) | In nav as "From Vercel" |
+| Download CTA demand test | 🔄 in flight | GA-tracked; activation proxy for Workstream D |
+| `/ai-agent-sandbox/` | ✅ shipped (Sept 2026) | Not in the original plan; `agent-sandbox` segment |
+| 2.1 `/from-lovable/` | ⬜ open | Ordering provisional, see Phase 2 note |
+| 2.2 `/is-self-hosting-right-for-you/` | ⬜ open | Fallback today: "you probably just need a VPS" post |
+| 2.3 "Switching" nav group | ⬜ open | Only "From Vercel" exists so far |
+| 3.1–3.3 Agent-native proof | ⬜ open | No agent tab on quickstart/Next.js recipe; skills page missing |
+| D.0 Positioning contract | ✅ done (Sept 2026) | `positioning.md` |
+| D.1–D.5 Talon Distribution module, phase 1 | ⬜ open | Reddit + HN only, humans post |
+
+## Context (historical, July 2026)
+
+The homepage hero at the time under-sold the product. Kept so the Phase 1 choices make sense:
 
 - It **leads with the mechanism** — *"Self-managed single server app hosting"* — which, to a skimming
   visitor, reads as *more work* and *less scale* (two cons), not a benefit.
 - It **names a persona with no payload** — *"SaaS Solopreneurs"* — narrowing the audience without
   adding a reason to care.
 - It **hides its best line in metadata** — *"Own your stack. No surprise bills."* lives only in the
-  page `<title>`/social card ([`docs/index.md`](docs/index.md)), never on the page.
+  page `<title>`/social card ([`docs/index.md`](../docs/index.md)), never on the page.
 - It **buries the real painkillers** (secure-by-default, no lock-in, agent-native) in an
   below-the-fold list.
 - It **names no villain**, so there is no pain for the cure to relieve.
 
-Two independent strands of strategy work — a sales-book lens (*Why Killer Products Don't Sell*,
-captured in `STRATEGTY.md`) and a painkiller/positioning first-principles session — converged on the
-**same conclusion**, which is the backbone of this plan.
+The reasoning that fixed this is in [`strategy.md`](strategy.md).
 
-## Strategy spine (the consolidated conclusion)
+## Rules this roadmap follows
 
-1. **Segment by buyer readiness × source ecosystem.** Readiness: *already decided to self-host* vs
-   *still deciding*. Ecosystem: *Vercel/Next.js/v0* and *Lovable/v0/Bolt*.
-2. **Convert the convinced, educate the uncertain.** The homepage targets the decided self-hoster;
-   uncertain visitors get a dedicated education/qualification page, not a hard sell.
-3. **Ecosystem pages are beachheads.** Each names the incumbent's pain (the *pull*) **and** dissolves
-   the fear that kept them there (the *counter-fear*) using stack-specific proof.
-4. **Priority order:** Vercel/Next.js **#1**, Lovable **#2**, education **#3**.
-5. **Positioning pillars:** ownership + predictable cost / no lock-in · **secure-by-default** ·
-   **CLI / AI-agent-native**. (The last two are additions the book-brief lacked; agent-native is
-   EasyRunner's most *ownable* claim per [`comparisons.md`](docs/comparisons.md).)
-6. **Guardrails:** no generic *"cheaper/better Vercel"*, no feature-list lead, respect the incumbent
-   (acknowledge why people chose it), don't over-target *"all developers"*.
-7. **Retire "own your stack"** as the literal tagline; keep ownership as a *concept*.
+Full reasoning in [`strategy.md`](strategy.md). The rules that shape sequencing:
 
-## Assumptions (adjustable — override any before we start)
+- **Convert the convinced, educate the uncertain.** Priority: Vercel/Next.js, then Lovable, then education.
+- **Ecosystem pages are beachheads.** Each names the incumbent's pain and dissolves the fear that kept people there, with stack-specific proof.
+- **Guardrails:** no "cheaper/better Vercel", no feature-list lead, respect the incumbent, don't target "all developers".
+- **Pages are endpoints of the distribution loop.** [`positioning.md`](positioning.md) is the contract; update its signal-to-page map in the same change as any page whose job changes. **Phase 2 ordering is provisional** and is re-ranked by what Workstream D observes.
+
+## Assumptions (adjustable)
 
 | Decision | Chosen default | Alternatives |
 | --- | --- | --- |
-| Root deliverable | **This combined doc**; `STRATEGTY.md` left intact, superseded | Merge into `STRATEGTY.md`; or two separate docs |
 | Sequencing | **Phased, beachhead first** (P1 → P2) | All pages at once |
 | Homepage depth | **Hero copy + funnel wiring** (dual CTA + ecosystem links) | Hero copy only; or fuller redesign with fit-filter section |
 | Nav placement | **Grouped under one "Switching" tab** | Three top-level tabs; or mostly out of nav |
@@ -51,11 +56,11 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 ## Site mechanics (confirmed)
 
 - New marketing pages are **flat markdown files in `docs/`** added to `nav:` in
-  [`mkdocs.yml`](mkdocs.yml) (lines 95–144). Rich layout works out of the box via grid cards
+  [`mkdocs.yml`](../mkdocs.yml) (the `nav:` block). Rich layout works out of the box via grid cards
   (`attr_list` + `md_in_html`), admonitions, and `tables` — **no custom templates needed**.
-- The homepage hero lives **only** in [`material/overrides/home.html`](material/overrides/home.html):
-  headline `#text01` (lines 386–389), value-prop list `#text03` (lines 490–501), CTA (lines 503–504).
-  [`docs/index.md`](docs/index.md) supplies only `title`/`description`/`social`.
+- The homepage hero lives **only** in [`material/overrides/home.html`](../material/overrides/home.html):
+  headline `#text01`, value-prop list `#text03`, and the CTA block below it.
+  [`docs/index.md`](../docs/index.md) supplies only `title`/`description`/`social`.
 - **No `mkdocs-redirects` plugin.** So we **only add** pages and edit the homepage **in place** — no
   renaming existing slugs (would break URLs). Add the plugin first if aliases are ever needed.
 - CTA syntax (match existing): primary `[Label →](path){ .md-button .md-button--primary }`,
@@ -75,15 +80,17 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 | OpenClaw end-to-end deploy walkthrough | `docs/blog/posts/deploying-openclaw-with-easyrunner.md` | `/from-lovable/` (proof) |
 | Secure network architecture / hardening posts | `docs/blog/posts/easyrunner-secure-network-architecture.md`, `.../hardening-easyrunner-after-a-compromise.md` | security pillars |
 | Deploy your first app (quickstart) | `docs/user-docs/quickstart/first-app.md` → `/user-docs/quickstart/first-app/` | primary CTA target |
+| AI Agent Sandbox landing page | `docs/ai-agent-sandbox.md` → `/ai-agent-sandbox/` | `agent-sandbox` segment; Workstream D dogfooding story |
+| Positioning contract (segments, enemy, beliefs, objections, signal→page map, UTM scheme) | [`positioning.md`](positioning.md) | every page, every Talon Distribution agent |
 
 ---
 
-## Phase 1 — Beachhead (highest value)
+## Phase 1 — Beachhead (shipped July 2026)
 
 ### 1.1 Homepage hero rewrite
 
-**Files:** [`material/overrides/home.html`](material/overrides/home.html) (`#text01` 386–389, `#text03`
-490–501, CTA 503–504) · [`docs/index.md`](docs/index.md) (front matter).
+**Files:** [`material/overrides/home.html`](../material/overrides/home.html) (`#text01`, `#text03`, CTA block) ·
+[`docs/index.md`](../docs/index.md) (front matter).
 
 **New hero copy:**
 
@@ -129,6 +136,10 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 
 ## Phase 2 — Expand
 
+> Ordering below (Lovable, then education) is the strategy's guess. Once Workstream D has two to
+> four weeks of classified signals, re-rank by observed segment volume: if most high-intent signals
+> are `undecided`, 2.2 moves ahead of 2.1.
+
 ### 2.1 `/from-lovable/` — graduate the prototype
 
 **Files:** new `docs/from-lovable.md` · nav entry.
@@ -152,7 +163,7 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 
 ### 2.3 Navigation / IA
 
-**File:** `mkdocs.yml` `nav:` block (lines 95–144).
+**File:** `mkdocs.yml` `nav:` block.
 
 - Add a grouped parent tab (e.g. **"Switching"**) containing **From Vercel**, **From Lovable**, and
   **Is self-hosting right for you?** — keeps the top tab bar lean while staying discoverable. Leave
@@ -162,8 +173,7 @@ captured in `STRATEGTY.md`) and a painkiller/positioning first-principles sessio
 
 ## Phase 3 — Prove the agent-native claim
 
-**Gap identified during Phase 1 QA** (see `STRATEGTY.md` → Content workstreams → 4. Agent-driven execution
-content): every instructional page on the site — the quickstart, the Next.js recipe, the CLI reference —
+**Gap** (see `strategy.md` → Content workstreams → 4): every instructional page on the site — the quickstart, the Next.js recipe, the CLI reference —
 is written exclusively as manual commands for a human to type. This undercuts the "CLI-first, so Claude
 Code / Cursor can take a raw repo to a live app" pillar now live on the homepage hero and the
 "agent-native by construction" claim in `comparisons.md`: the claim currently has no on-site proof.
@@ -194,6 +204,88 @@ page is the missing backing for that claim.
 
 ---
 
+## Workstream D — Distribution loop (parallel to Phases 2–3)
+
+**Why:** `strategy.md` → *Distribution as a system*; origin and rejected ideas in `decisions.md`. **Where it's built:** a **Distribution** module in
+[janaka/talon](https://github.com/janaka/talon), alongside the existing **Coding** module, reusing the
+agent runtime, persistence and the sandbox for unattended scheduled runs. (Talon internals were not
+inspected when this was written; map the names below onto whatever exists.)
+
+**Phase-1 rule:** automate research and preparation only. A human reads, edits and posts every public
+word. No auto-posting, no X/LinkedIn APIs, no ad tooling.
+
+### D.0 Positioning contract (do first)
+
+**File:** [`positioning.md`](positioning.md) — done. Keep it in this repo,
+next to the pages it governs, and feed it to every agent below as context. Segment and intent enums in
+Talon must match its tables.
+
+### D.1 Signal collector
+
+- Sources: **Reddit** (public JSON endpoints) and **Hacker News** (Algolia API). Nothing else yet.
+- 10–15 saved queries seeded from the positioning file and the FAQ: "Vercel alternative", "self-host
+  Next.js", "VPS deployment", "Railway pricing", "Lovable export", "Coolify vs", etc.
+- Scheduled run in the Talon sandbox. Target **20–50 signals/week**; dedupe by thread URL.
+
+### D.2 Classifier agent
+
+Input: one thread + `positioning.md`. Output (stored on the Signal):
+
+```text
+detected_problem · intent (learning|switching-pain|high-intent|evaluation|comparison|builder-signal)
+segment (from-vercel|from-lovable|undecided|vps-decided|agent-sandbox|not-a-fit)
+current_provider · stack · fit_score · routed_page · recommended_action
+```
+
+Drop `not-a-fit` and below-threshold scores before they reach the queue.
+
+### D.3 Review queue + drafting
+
+- One list in the Talon UI: signal, classification, drafted reply.
+- The draft is platform-native, helpful first, links to **one** page from the signal→page map with the
+  UTM scheme from `positioning.md`, and discloses affiliation.
+- Actions: **approve**, **edit**, **reject with reason**. Rejection reasons are the training data for
+  the classifier and drafting prompts.
+
+### D.4 Experiment memory
+
+Four entities, one table each: **Signal**, **Classification**, **Response** (the experiment), **Outcome**.
+A Response row records: signal, segment, message angle, page linked, UTM content id, date posted.
+Outcome fields are filled later: replies, tagged page visits (GA4), Download CTA clicks. Rejections
+are stored too. Headline/CTA variants for the site are rows here, not a list in the strategy doc.
+
+### D.5 Weekly report
+
+One scheduled agent run producing: signals by segment and intent, replies posted, tagged visits, CTA
+clicks, most common objection, one recommendation. It is also the Monday raw material for the
+personal-brand posts (see `strategy.md` → *Personal brand as top of funnel*).
+
+### D.6 Personal brand cadence (manual, fed by D.3/D.5)
+
+Two LinkedIn posts + three to five X posts per week, one source asset every one to two weeks, drawn
+only from queue signals or the build log. The build of Workstream D itself is pillar 3 and the
+proof point for `/ai-agent-sandbox/`.
+
+### Success criteria (review after four weeks)
+
+- Classifier segment agrees with the human on most queued signals.
+- A handful of human-approved replies posted per week.
+- At least one reply produced a tagged page visit **and** a Download CTA click.
+- The weekly report surfaced at least one objection not already in `positioning.md`.
+
+If none of this happens, the fault is positioning or sources, not automation. Fix that before adding
+channels.
+
+### Deferred (Phase 2 of D)
+
+- X search and GitHub issues as sources (X API cost is unjustified until Reddit proves the loop).
+- Content-adapter agent: one source asset → X thread, LinkedIn post, docs improvement.
+- Experiment-analyst agent ("which angle produced CTA clicks from Vercel users?").
+- Product-led loops: starter templates, a "deployed with EasyRunner" page, a showcase. Need users first.
+- Any auto-posting.
+
+---
+
 ## Cross-cutting conventions
 
 - Match existing **CTA syntax** and **root-relative** link paths (see Site mechanics).
@@ -217,5 +309,9 @@ page is the missing backing for that claim.
 
 - `mkdocs-redirects` / URL aliases (e.g. `/vercel-alternative/`).
 - Paid-ad landing pages and the remaining 2×2 quadrants beyond Vercel/Lovable.
-- New long-form blog content (this plan **reuses** existing posts).
+- Discord, referral credits, feature voting, badges, auto-posting, ad/Figma automation (rejected; see
+  `decisions.md`, Sept 2026).
+- Speculative long-form blog content. Blog posts are now written only as **source assets** for
+  Workstream D: one every one to two weeks, on a problem observed in the signal queue, never on an
+  imagined topic. Existing posts are still reused as proof on the funnel pages.
 - A full homepage visual redesign (fit-filter section is optional under "fuller redesign").
