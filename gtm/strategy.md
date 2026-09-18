@@ -4,7 +4,7 @@
 
 The durable reasoning behind how EasyRunner is marketed: who we target, why the site is split the way it is, and how distribution is run. It changes rarely. What it does **not** hold:
 
-- The concrete segments, enemy, beliefs, objections and signal-to-page map. Those live in [`positioning.md`](positioning.md), the single source of truth that both humans and the Talon Distribution agents read.
+- The concrete segments, enemy, beliefs, objections and signal-to-page map. Those live in [`positioning.md`](positioning.md), the single source of truth that both humans and the [Distribution agents](README.md#glossary) read.
 - Phases, status and page-by-page work. Those live in [`roadmap.md`](roadmap.md).
 - Dated decisions and what was rejected. Those live in [`decisions.md`](decisions.md).
 
@@ -255,7 +255,7 @@ Download CTA click → first deployment
 Experiment memory → better targeting and messages
 ```
 
-The loop is built as a **Distribution** module in Talon (alongside the existing Coding module), so it reuses the agent runtime and the sandbox for unattended runs. Scope, data model and phasing are in [`roadmap.md`](roadmap.md) → Workstream D. What was adopted and rejected from the source discussion is in [`decisions.md`](decisions.md).
+The loop is built as a **Distribution** module in [Talon](README.md#glossary), Janaka's own AI-agent app, alongside its existing Coding module. Talon already has the agent runtime, persistence and a sandbox for unattended runs, and building software and distributing it are the same loop at different stages. Scope, data model and phasing are in [`roadmap.md`](roadmap.md) → Workstream D. What was adopted and rejected from the source discussion is in [`decisions.md`](decisions.md).
 
 ### Operating rules
 

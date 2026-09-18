@@ -6,8 +6,9 @@
 
 ## What the file is for
 
-`positioning.md` is the **contract** between the marketing pages in this repo and the Talon
-Distribution module. It has two readers with different needs:
+`positioning.md` is the **contract** between the marketing pages in this repo and the Distribution
+module of [Talon](README.md#glossary) (Janaka's AI-agent app, which will run the distribution loop —
+see the glossary). It has two readers with different needs:
 
 - **Humans** editing pages and writing content. They need the one-line positioning, the enemy,
   beliefs, and vocabulary.
@@ -48,7 +49,7 @@ signal fields. It contributed no positioning; its ICP and enemy were rejected.
 **Segments table**
 - A segment exists only if it has a distinct *who*, *trigger*, *fear*, and *landing page*.
 - Every segment has a landing page. If the page is not live, name a fallback that is.
-- Keys are enums (`from-vercel`, `agent-sandbox`, …) consumed by Talon. **Never rename a key**; add a
+- Keys are enums (`from-vercel`, `agent-sandbox`, …) consumed by [Talon](README.md#glossary). **Never rename a key**; add a
   new one and retire the old one in a comment, otherwise stored classifications break.
 - Always keep `not-a-fit` with "Do not respond". The honest exclusion is part of the positioning.
 - State the priority order under the table. Volume segments and invite-only segments are labelled.

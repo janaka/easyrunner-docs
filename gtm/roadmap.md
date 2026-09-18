@@ -18,7 +18,7 @@
 | 2.3 "Switching" nav group | ⬜ open | Only "From Vercel" exists so far |
 | 3.1–3.3 Agent-native proof | ⬜ open | No agent tab on quickstart/Next.js recipe; skills page missing |
 | D.0 Positioning contract | ✅ done (Sept 2026) | `positioning.md` |
-| D.1–D.5 Talon Distribution module, phase 1 | ⬜ open | Reddit + HN only, humans post |
+| D.1–D.5 [Distribution module](README.md#glossary) in Talon, phase 1 | ⬜ open | Reddit + HN only, humans post |
 
 ## Context (historical, July 2026)
 
@@ -81,7 +81,7 @@ Full reasoning in [`strategy.md`](strategy.md). The rules that shape sequencing:
 | Secure network architecture / hardening posts | `docs/blog/posts/easyrunner-secure-network-architecture.md`, `.../hardening-easyrunner-after-a-compromise.md` | security pillars |
 | Deploy your first app (quickstart) | `docs/user-docs/quickstart/first-app.md` → `/user-docs/quickstart/first-app/` | primary CTA target |
 | AI Agent Sandbox landing page | `docs/ai-agent-sandbox.md` → `/ai-agent-sandbox/` | `agent-sandbox` segment; Workstream D dogfooding story |
-| Positioning contract (segments, enemy, beliefs, objections, signal→page map, UTM scheme) | [`positioning.md`](positioning.md) | every page, every Talon Distribution agent |
+| Positioning contract (segments, enemy, beliefs, objections, signal→page map, UTM scheme) | [`positioning.md`](positioning.md) | every page, every [Distribution agent](README.md#glossary) |
 
 ---
 
@@ -207,8 +207,9 @@ page is the missing backing for that claim.
 ## Workstream D — Distribution loop (parallel to Phases 2–3)
 
 **Why:** `strategy.md` → *Distribution as a system*; origin and rejected ideas in `decisions.md`. **Where it's built:** a **Distribution** module in
-[janaka/talon](https://github.com/janaka/talon), alongside the existing **Coding** module, reusing the
-agent runtime, persistence and the sandbox for unattended scheduled runs. (Talon internals were not
+[janaka/talon](https://github.com/janaka/talon) (Janaka's AI-agent app — see the
+[glossary](README.md#glossary)), alongside its existing **Coding** module, reusing the agent runtime,
+persistence and the sandbox for unattended scheduled runs. (Talon internals were not
 inspected when this was written; map the names below onto whatever exists.)
 
 **Phase-1 rule:** automate research and preparation only. A human reads, edits and posts every public
