@@ -20,10 +20,13 @@ already has a **Coding** module. Distribution work is being added as a second mo
 new app, because Talon already has the agent runtime, persistence and a sandbox that can run agents
 unattended, and because building software and distributing it are the same loop at different stages.
 
-**Distribution module** — the new section of Talon that runs the distribution loop. Its agents
-(signal collector, classifier, drafter, weekly report) read [`positioning.md`](positioning.md) as
-prompt context. Scope and phasing are in [`roadmap.md`](roadmap.md) → Workstream D. Nothing is built
-yet.
+**Distribution module** — **software**: the automation, written inside the Talon codebase, that runs
+the distribution loop. Concretely it is agents (signal collector, classifier, drafter, weekly report),
+their scheduled runs, and their stored data, sitting alongside Talon's Coding module. It is not part
+of this repo. The only link between the two is that its agents read
+[`positioning.md`](positioning.md) as prompt context, which is why that file is written for machines
+as well as people. Nothing is built yet; scope and phasing are in [`roadmap.md`](roadmap.md) →
+Workstream D.
 
 **Distribution loop** — the cycle the module automates: collect public **signals** → classify them →
 a human reviews and posts a reply → the reader lands on a marketing page → the outcome goes into
@@ -41,8 +44,8 @@ keys are added and retired, never renamed.
 **Experiment memory** — the record of what was sent, to whom, on which angle, and what happened.
 Replaces static lists of headline and CTA variants.
 
-**Workstream D** — the section of [`roadmap.md`](roadmap.md) that plans the build, running in
-parallel with the marketing-page phases.
+**Workstream D** — **a plan, not code**: the section of [`roadmap.md`](roadmap.md) specifying what to
+build in the Distribution module, running in parallel with the marketing-page phases.
 
 ## Reading order
 

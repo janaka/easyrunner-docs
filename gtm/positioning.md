@@ -1,8 +1,8 @@
 # EasyRunner positioning (machine-readable)
 
 > **Purpose:** the single source of truth for who we target, what we say, and where each kind of
-> prospect should land. Humans edit this file. The **Distribution** module of
-> [Talon](README.md#glossary) reads it as context for its classifier and drafting agents. Keep it short, concrete, and in sync with
+> prospect should land. Humans edit this file. The **Distribution** module — the automation code in
+> [Talon](README.md#glossary) — reads it as context for its classifier and drafting agents. Keep it short, concrete, and in sync with
 > [`strategy.md`](strategy.md) and [`roadmap.md`](roadmap.md).
 >
 > **Rule:** if a claim here is not backed by a live page or a shipped feature, remove it.

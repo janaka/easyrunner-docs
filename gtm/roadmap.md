@@ -206,7 +206,7 @@ page is the missing backing for that claim.
 
 ## Workstream D — Distribution loop (parallel to Phases 2–3)
 
-**Why:** `strategy.md` → *Distribution as a system*; origin and rejected ideas in `decisions.md`. **Where it's built:** a **Distribution** module in
+**Why:** `strategy.md` → *Distribution as a system*; origin and rejected ideas in `decisions.md`. **Where it's built:** not in this repo. The code is a **Distribution** module in
 [janaka/talon](https://github.com/janaka/talon) (Janaka's AI-agent app — see the
 [glossary](README.md#glossary)), alongside its existing **Coding** module, reusing the agent runtime,
 persistence and the sandbox for unattended scheduled runs. (Talon internals were not

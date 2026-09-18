@@ -7,8 +7,8 @@
 ## What the file is for
 
 `positioning.md` is the **contract** between the marketing pages in this repo and the Distribution
-module of [Talon](README.md#glossary) (Janaka's AI-agent app, which will run the distribution loop —
-see the glossary). It has two readers with different needs:
+module of [Talon](README.md#glossary) — the automation code in Janaka's AI-agent app that will run the
+distribution loop (see the glossary). It has two readers with different needs:
 
 - **Humans** editing pages and writing content. They need the one-line positioning, the enemy,
   beliefs, and vocabulary.
