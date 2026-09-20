@@ -1,14 +1,23 @@
-# EasyRunner go-to-market strategy
+# EasyRunner marketing site strategy
 
 ## Purpose
 
-The durable reasoning behind how EasyRunner is marketed: who we target, why the site is split the way it is, and how distribution is run. It changes rarely. What it does **not** hold:
+**Scope: the marketing website only.** How a visitor who has already arrived is met, qualified, and
+converted. Information architecture, messaging by audience, homepage job, and the page-level content
+plan.
 
-- The concrete segments, enemy, beliefs, objections and signal-to-page map. Those live in [`positioning.md`](positioning.md), the single source of truth that both humans and the [Distribution agents](README.md#glossary) read.
-- Phases, status and page-by-page work. Those live in [`roadmap.md`](roadmap.md).
-- Dated decisions and what was rejected. Those live in [`decisions.md`](decisions.md).
+**This document assumes traffic and credibility arrive from somewhere else, and that assumption is
+currently false.** Why nobody arrives, and why they have little reason to trust us, is the subject of
+its parent, [`distribution-strategy.md`](distribution-strategy.md). Read that first. Nothing here can
+succeed ahead of it.
 
-Two strands produced this document: a sales-motion lens from *Why Killer Products Don't Sell* (readiness segmentation), and a distribution-engineering lens (treat distribution as a system, Sept 2026). They converged on the same conclusion: **convert the convinced, educate the uncertain, and engineer the loop that brings the right people to the right page.**
+Also out of scope here:
+
+- Concrete segments, enemy, beliefs, objections and the signal-to-page map: [`positioning.md`](positioning.md).
+- Phases, status and the build plan: [`roadmap.md`](roadmap.md).
+- Dated decisions and what was rejected: [`decisions.md`](decisions.md).
+
+The governing rule for everything below: **convert the convinced, educate the uncertain.**
 
 ## Product context
 
@@ -27,36 +36,17 @@ The most important conclusion is that EasyRunner should not try to serve all pro
 - Prospects who are still deciding whether self-hosting is right should be treated as an education audience, not the default homepage audience.
 - Messaging should be segmented by both buyer readiness and source ecosystem, especially users coming from [Vercel](https://vercel.com/) and [Lovable Cloud](https://lovable.dev/cloud).
 - The main marketing site should optimize for conversion of VPS-decided users, while supporting ecosystem-specific and decision-support content through dedicated pages.
+- Pages are the endpoints of the distribution loop, not a channel in themselves. See [`distribution-strategy.md`](distribution-strategy.md).
 
-## Segmentation model
+## Audience
 
-### Axis 1: buyer readiness
+The readiness × source-ecosystem model and the current priority order are market-level decisions and
+live in [`distribution-strategy.md`](distribution-strategy.md#the-market-we-are-actually-addressing).
+The concrete segment table (who, trigger, fear, landing page) is in
+[`positioning.md`](positioning.md#segments), edited via [`AUTHORING.md`](AUTHORING.md).
 
-There are two primary readiness segments:
-
-1. **Already decided on VPS self-hosting.** These users already believe self-hosting is the right path. They are not looking for philosophical persuasion; they want a simpler way to execute on a decision they have already made. For this segment, the right motion is low-friction, product-led, and direct.
-2. **Still deciding whether self-hosting is right.** These users are comparing managed platforms with self-hosting and need help understanding trade-offs. For this segment, the right motion is education-first, trust-building, and qualification-oriented.
-
-This readiness split is more important than any single technical niche because it determines the sales and messaging motion.
-
-### Axis 2: source ecosystem
-
-Within those readiness segments, there are two promising ecosystem-specific niches:
-
-- **[Lovable Cloud](https://lovable.dev/cloud) users.** These users may have started with Lovable for speed and convenience, but some will later want portability, control, or infrastructure ownership.
-- **[Vercel](https://vercel.com/) / Next.js / v0 users.** These users are likely to care about excellent developer experience, but some will seek alternatives when cost predictability, infrastructure control, or platform fit becomes more important.
-
-The ecosystem dimension overlays the readiness dimension. In practice, this creates a 2 x 2 matrix: buyers can come from Lovable or Vercel, and they can be either already decided on self-hosting or still evaluating it.
-
-## Segments
-
-The concrete segment table (who, trigger, fear, landing page, priority) is in [`positioning.md`](positioning.md#segments) and is not duplicated here. Add or change a segment there, following [`AUTHORING.md`](AUTHORING.md).
-
-## Priority order
-
-The highest-priority ICP should be Vercel or Next.js-oriented builders who have already decided that self-hosting is worth it. This audience is closest to conversion because the decision about hosting philosophy is already made, and EasyRunner can position itself as the simpler execution path.
-
-The second-priority ICP should be Lovable users who are moving from fast prototyping into longer-term ownership and deployment needs. The third-priority audience is uncertain buyers in either ecosystem; these users are still valuable, but they should enter through educational content rather than the default conversion path.
+What matters for the site: each segment gets one page whose job is to serve that segment only, and the
+homepage converts the most-ready segment rather than trying to address all of them.
 
 ## Positioning
 
@@ -235,63 +225,22 @@ Recommended pages or additions:
 This content should not read as hype-only description; it should be the same kind of concrete walkthrough
 as the manual guides, just narrated as an agent transcript/prompt rather than a list of commands.
 
-## Distribution as a system
 
-### The loop
+## How to use this document
 
-The pages above are destinations. They only convert if the right people arrive. Distribution is therefore treated as an engineered loop, not a set of campaigns:
-
-```text
-Public signals (Reddit, HN; later X, GitHub)
-    ↓ collect
-Classify: problem, intent, segment, fit
-    ↓
-Human review queue → helpful reply or content idea
-    ↓
-Landing page / guide (UTM-tagged)
-    ↓
-Download CTA click → first deployment
-    ↓
-Experiment memory → better targeting and messages
-```
-
-The loop is built as a **Distribution** module in [Talon](README.md#glossary), Janaka's own AI-agent app, alongside its existing Coding module. Talon already has the agent runtime, persistence and a sandbox for unattended runs, and building software and distributing it are the same loop at different stages. Scope, data model and phasing are in [`roadmap.md`](roadmap.md) → Workstream D. What was adopted and rejected from the source discussion is in [`decisions.md`](decisions.md).
-
-### Operating rules
-
-- **Humans post; agents prepare.** Automation reduces research and drafting work. It does not publish public words until the loop has proven itself.
-- **Relevant density over reach.** Ten conversations with people actively leaving Vercel beat a viral post read by nobody who will deploy.
-- **Content is problem-led, not topic-led.** Blog posts and social posts come from observed signals in the queue or from the build log, never from an imagined editorial calendar.
-- **One source asset, many native pieces.** A guide, demo or build decision becomes an X thread, a LinkedIn post, a docs improvement and a call for testers. X and LinkedIn get different entry points, not copies.
-- **No fake crowd.** No manufactured urgency, testimonials or momentum. Technical audiences detect it.
-- **Every link carries a UTM** and every public reply discloses affiliation.
-
-### Personal brand as top of funnel
-
-The founder’s X and LinkedIn presence explores the problem space; EasyRunner is the concrete proof. Three recurring pillars, all derived from queue signals or build-log entries:
-
-1. Practical infrastructure for the missing middle (VPS vs managed, what a good deployment abstraction exposes, self-hosting without ideology).
-2. Building EasyRunner in public (decisions, failures, what users find confusing, features deliberately not built).
-3. Building the distribution engine itself (how switching intent is classified, why followers are a weak metric, what the experiment memory reveals). This is dogfooding, and it is a real use case for the AI Agent Sandbox story: the sandbox is what runs these agents unattended.
-
-Cadence: two LinkedIn posts and three to five X posts per week, plus one source asset every one to two weeks.
-
-### Metrics
-
-Track weekly, in this order of importance: first deployments (proxy: Download CTA clicks), docs and landing page visits from tagged links, quality replies and direct conversations, then impressions. The activation event is defined in [`positioning.md`](positioning.md#activation-event). Headline and CTA variants are rows in the experiment memory, not a list here.
-
-
-
-## How to use these documents
-
-1. Read [`positioning.md`](positioning.md) first. It is the contract between the pages and the distribution loop.
-2. Pick work from [`roadmap.md`](roadmap.md). Its status table says what is shipped, open, or deferred.
-3. Keep all writing aligned to the central rule: convert the convinced, educate the uncertain.
+1. Read [`distribution-strategy.md`](distribution-strategy.md) first. It states the binding constraint.
+2. Read [`positioning.md`](positioning.md). It is the contract between these pages and the loop.
+3. Pick work from [`roadmap.md`](roadmap.md); its status table says what is shipped, open or deferred.
 4. If a page changes its job, update the signal-to-page map in `positioning.md` in the same change.
-5. If a decision is made or reversed, add a dated line to [`decisions.md`](decisions.md) rather than annotating this file.
+5. If a decision is made or reversed, add a dated line to [`decisions.md`](decisions.md) rather than
+   annotating this file.
 
-## Final strategic summary
+## Summary
 
-EasyRunner should not market itself as a broad self-hosting tool for everyone. It should market itself first to builders who already want VPS ownership and need a simpler execution path. Around that core, the site should create dedicated messaging for Vercel and Lovable-origin users and add educational content for people still deciding whether self-hosting is a fit.
+One product, multiple entry points, with messaging shaped by readiness and source ecosystem rather
+than a single generic homepage story. Each page does one job for one segment; the homepage converts
+the most-ready segment and offers obvious side routes to the others.
 
-The key strategic principle is simple: one product, multiple entry points, with messaging shaped by readiness and source ecosystem rather than a single generic homepage story.
+That is a conversion strategy, and it is sound on its own terms. It is also downstream of a constraint
+it cannot fix: almost nobody arrives, and those who do have little reason to trust us. See
+[`distribution-strategy.md`](distribution-strategy.md).

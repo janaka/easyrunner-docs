@@ -1,7 +1,8 @@
 # EasyRunner go-to-market roadmap
 
 > The **what and when**. Phases, status, page-by-page work, and the Distribution workstream. Changes
-> often. The reasoning is in [`strategy.md`](strategy.md); the segments, enemy, beliefs and
+> often. The binding constraint is in [`distribution-strategy.md`](distribution-strategy.md) and the
+> website reasoning in [`site-strategy.md`](site-strategy.md); the segments, enemy, beliefs and
 > signal-to-page map are in [`positioning.md`](positioning.md); dated decisions are in
 > [`decisions.md`](decisions.md). **Owner:** Janaka.
 
@@ -34,11 +35,11 @@ The homepage hero at the time under-sold the product. Kept so the Phase 1 choice
   below-the-fold list.
 - It **names no villain**, so there is no pain for the cure to relieve.
 
-The reasoning that fixed this is in [`strategy.md`](strategy.md).
+The reasoning that fixed this is in [`site-strategy.md`](site-strategy.md).
 
 ## Rules this roadmap follows
 
-Full reasoning in [`strategy.md`](strategy.md). The rules that shape sequencing:
+Full reasoning in [`site-strategy.md`](site-strategy.md). The rules that shape sequencing:
 
 - **Convert the convinced, educate the uncertain.** Priority: Vercel/Next.js, then Lovable, then education.
 - **Ecosystem pages are beachheads.** Each names the incumbent's pain and dissolves the fear that kept people there, with stack-specific proof.
@@ -173,7 +174,7 @@ Full reasoning in [`strategy.md`](strategy.md). The rules that shape sequencing:
 
 ## Phase 3 — Prove the agent-native claim
 
-**Gap** (see `strategy.md` → Content workstreams → 4): every instructional page on the site — the quickstart, the Next.js recipe, the CLI reference —
+**Gap** (see `site-strategy.md` → Content workstreams → 4): every instructional page on the site — the quickstart, the Next.js recipe, the CLI reference —
 is written exclusively as manual commands for a human to type. This undercuts the "CLI-first, so Claude
 Code / Cursor can take a raw repo to a live app" pillar now live on the homepage hero and the
 "agent-native by construction" claim in `comparisons.md`: the claim currently has no on-site proof.
@@ -206,7 +207,7 @@ page is the missing backing for that claim.
 
 ## Workstream D — Distribution loop (parallel to Phases 2–3)
 
-**Why:** `strategy.md` → *Distribution as a system*; origin and rejected ideas in `decisions.md`. **Where it's built:** not in this repo. The code is a **Distribution** module in
+**Why:** `distribution-strategy.md` → action 5; origin and rejected ideas in `decisions.md`. **Where it's built:** not in this repo. The code is a **Distribution** module in
 [janaka/talon](https://github.com/janaka/talon) (Janaka's AI-agent app — see the
 [glossary](README.md#glossary)), alongside its existing **Coding** module, reusing the agent runtime,
 persistence and the sandbox for unattended scheduled runs. (Talon internals were not
@@ -259,7 +260,7 @@ are stored too. Headline/CTA variants for the site are rows here, not a list in 
 
 One scheduled agent run producing: signals by segment and intent, replies posted, tagged visits, CTA
 clicks, most common objection, one recommendation. It is also the Monday raw material for the
-personal-brand posts (see `strategy.md` → *Personal brand as top of funnel*).
+personal-brand posts (see `distribution-strategy.md` → action 4).
 
 ### D.6 Personal brand cadence (manual, fed by D.3/D.5)
 

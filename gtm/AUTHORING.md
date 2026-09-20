@@ -15,13 +15,14 @@ distribution loop (see the glossary). It has two readers with different needs:
 - **Agents** (classifier, drafter, weekly report) that receive the whole file as context. They need
   stable enum keys, the intent table, the signal-to-page map, objections, and the UTM scheme.
 
-Because agents consume it verbatim, keep it short and tabular. Prose belongs in `strategy.md`.
+Because agents consume it verbatim, keep it short and tabular. Prose belongs in the strategy files.
 
 ## Sources of truth, in precedence order
 
 1. **Shipped features and live pages.** Run `.venv/bin/mkdocs build --strict` and look at `docs/`.
    A claim without a live page or shipped feature behind it does not go in.
-2. [`strategy.md`](strategy.md) for segments, priority order, guardrails, beliefs.
+2. [`distribution-strategy.md`](distribution-strategy.md) for the audience model and priority order;
+   [`site-strategy.md`](site-strategy.md) for guardrails and messaging.
 3. [`roadmap.md`](roadmap.md) for which pages exist, are planned, or are
    fallbacks, and for the Workstream D data model the enums must match.
 4. `docs/faq.md` and `docs/comparisons.md` for objections and honest "not a fit" answers.
@@ -43,7 +44,7 @@ signal fields. It contributed no positioning; its ICP and enemy were rejected.
 - Pair it with the respect-the-incumbent line. Never "cheaper X" or "better X".
 
 **Beliefs**
-- Exactly the list in `strategy.md` → *Beliefs*. Edit both places together. Five is the cap; a new
+- Exactly the list referenced from `site-strategy.md` → *Beliefs*. Edit both places together. Five is the cap; a new
   belief must replace one, not extend the list.
 
 **Segments table**
@@ -89,7 +90,7 @@ Do not add a "features" section. A feature enters the file only through the ques
    only if the drafter's action differs.
 4. **Does it add a switching trigger?** Add the observable event.
 5. **Does it add or change an objection?** Add the honest answer, sourced from FAQ or comparisons.
-6. **Does it change the enemy or a belief?** Rarely. If so, edit `strategy.md` in the same change.
+6. **Does it change the enemy or a belief?** Rarely. If so, edit `site-strategy.md` in the same change.
 7. **Update the signal-to-page map** so the new segment or intent resolves to one page.
 8. **Update the one-liner** only if the core promise moved. Log the old line under retired taglines.
 9. **Mirror in the plan.** Add the page to the reuse table in `roadmap.md` if it is
@@ -100,4 +101,4 @@ Do not add a "features" section. A feature enters the file only through the ques
 ## Procedure: a page changes its job
 
 Update the segments table, the signal-to-page map, and the fallback in the same commit as the page
-change. `strategy.md` → *Instructions for the next agent*, item 7, makes this mandatory.
+change. `site-strategy.md` → *How to use this document*, item 4, makes this mandatory.
