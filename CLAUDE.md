@@ -6,6 +6,12 @@ Documentation site for EasyRunner, built with **MkDocs** + **Material for MkDocs
 - Content: [docs/](docs/)
 - Build locally: `.venv/bin/mkdocs build --strict` (use `serve` for live preview)
 
+## General Guidance
+
+- always give a tldr at the end.
+- explanations should be simple. explain terminology simply.
+
+
 ## Authoring with Material for MkDocs
 
 When formatting docs, **use the full range of Material for MkDocs formatting features** — don't fall back to plain paragraphs when a richer, clearer construct fits. Reach for admonitions, content tabs, grid cards, code annotations, buttons, icons/emoji, etc. where they improve scannability.
